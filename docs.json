@@ -7,7 +7,7 @@
     "light": "#F0F3FF",
     "dark": "#3061F2"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/qrtub-favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -84,8 +84,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/qrtub-logo-light.svg",
+    "dark": "/logo/qrtub-logo-dark.svg"
   },
   "navbar": {
     "links": [
