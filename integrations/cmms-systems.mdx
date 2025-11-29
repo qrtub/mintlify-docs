@@ -1,0 +1,130 @@
+---
+title: "CMMS Systems Integration"
+slug: "cmms-systems"
+sidebar_position: 2
+platform: "CMMS"
+featured: false
+---
+
+Connect qrtub to Computerized Maintenance Management Systems (CMMS) like UpKeep, Fiix, or Maintenance Connection.
+
+## Overview
+
+CMMS platforms track maintenance schedules, work orders, and asset history. Integrating with qrtub enables:
+
+- Scan equipment to open maintenance records
+- Create work orders from the field
+- Access service history on-site
+- Route users to different CMMS functions
+
+## Integration Approaches
+
+### Option 1: Direct Deep Links (If Supported)
+
+Some CMMS platforms provide deep link URLs that open the mobile app:
+
+```
+yourCMMS://asset/[ASSET_ID]
+yourCMMS://workorder/create?asset=[ASSET_ID]
+```
+
+Check your CMMS documentation for deep link support.
+
+### Option 2: Web-Based Access
+
+Most CMMS platforms have web interfaces accessible via standard URLs:
+
+```
+https://app.upkeep.com/assets/[ASSET_ID]
+https://app.fiix.io/web/wo/create?assetId=[ASSET_ID]
+```
+
+### Option 3: Dynamic URL Construction
+
+Use qrtub's dynamic URL feature to construct CMMS URLs with Item data:
+
+**In qrtub:**
+- Item field `cmmsAssetID`: "PUMP-042"
+- Destination URL: `https://app.yourcmms.com/assets/{cmmsAssetID}`
+
+**Generated URL:**
+`https://app.yourcmms.com/assets/PUMP-042`
+
+## Example Setup: UpKeep
+
+### Create Profile Page Destinations
+
+**View Asset Record**
+```
+https://app.upkeep.com/assets/{assetID}
+```
+
+**Create Work Order**
+```
+https://app.upkeep.com/work-orders/new?asset={assetID}
+```
+
+**View Maintenance History**
+```
+https://app.upkeep.com/assets/{assetID}/history
+```
+
+## Multi-System Profile Page
+
+Combine CMMS with other systems:
+
+**Destinations:**
+1. "Start Inspection" → SafetyCulture
+2. "View Maintenance" → CMMS
+3. "Log Issue" → Work order creation
+4. "Equipment Manual" → Documentation link
+
+One QR code, all systems accessible.
+
+## Common CMMS Platforms
+
+| Platform | Web Access | Deep Links | Notes |
+|----------|------------|------------|-------|
+| UpKeep | ✅ | Check docs | Mobile-first platform |
+| Fiix | ✅ | Check docs | Web and mobile apps |
+| Maintenance Connection | ✅ | ❌ | Web-based |
+| Hippo CMMS | ✅ | Check docs | Cloud-based |
+| eMaint | ✅ | ❌ | Enterprise platform |
+
+**Note:** Deep link availability changes. Check your CMMS documentation or contact support.
+
+## Best Practices
+
+**Field Mapping**
+Ensure your qrtub Item fields match your CMMS asset identifiers:
+- Use same asset ID format
+- Include all necessary parameters
+- Test URLs before mass deployment
+
+**User Testing**
+Before deploying 500 QR codes:
+1. Test on mobile devices (iOS and Android)
+2. Verify authentication works
+3. Confirm deep links open correctly
+4. Test from different network conditions
+
+**Vendor Lock-in Protection**
+This is qrtub's value: if you switch CMMS vendors, update Destinations in qrtub—don't reprint QR codes.
+
+## Troubleshooting
+
+**"Page not found" errors:**
+- Check asset IDs match between qrtub and CMMS
+- Verify URL structure with CMMS documentation
+- Test static URL first, then add dynamic parameters
+
+**Authentication issues:**
+- Ensure users are logged into CMMS app
+- Check if CMMS requires session tokens
+- Consider SSO if your CMMS supports it
+
+## Resources
+
+- [qrtub Dynamic URLs Guide](/help/dynamic-urls)
+- [Profile Pages Overview](/help/profile-pages-overview)
+- Contact your CMMS vendor for deep link documentation

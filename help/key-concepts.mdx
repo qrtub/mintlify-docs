@@ -1,0 +1,320 @@
+---
+title: "Key Concepts"
+slug: "key-concepts"
+sidebar_position: 1
+category: "fundamentals"
+---
+
+Understanding these core concepts will help you get the most out of qrtub.
+
+## The Three-Entity Model
+
+Most QR code systems treat everything as one thing. qrtub recognizes that physical QR code deployments involve three distinct entities, each with its own lifecycle:
+
+### Item
+**What it is:** The thing being represented or tracked.
+
+**Examples:**
+- An excavator
+- A fire extinguisher
+- A meeting room
+- A product
+- A building system
+- A rental tool
+
+**Key point:** Items are what you're actually managing—your equipment, products, locations, or assets. They have details like serial numbers, descriptions, status, and custom fields you define.
+
+---
+
+### Link
+**What it is:** The qrtub-managed URL that QR codes encode.
+
+**Examples:**
+- `qrtub.com/r/x5fgd` (Random)
+- `qrtub.com/exc001` (ID-based)
+- `qrtub.com/boardroom` (Custom)
+
+**Key point:** Links are digital patterns—the URLs that QR codes resolve to. They exist independently from Items, which means you can generate Links and print QR codes before you even have the Items in your system. This is the "print-before-link" workflow.
+
+**Why this matters:**
+- Generate Links for professional printing before systems are ready
+- Print QR codes in bulk without knowing final destinations
+- Reassign Links if you make mistakes—no reprinting needed
+- Change where Links point without touching physical QR codes
+
+---
+
+### Media
+**What it is:** The physical material the QR code is displayed on.
+
+**Examples:**
+- A vinyl sticker ($0.50 - $5)
+- A metal plaque ($20 - $100)
+- A billboard ($500 - $5,000+)
+- A real estate sign ($50 - $300)
+- A printed ad ($0.10 - $2)
+- An NFC chip ($1 - $10)
+- A rigid sign ($50 - $500)
+
+**Key point:** Most people think generating a QR code pattern is all there is. But qrtub recognizes that the QR code gets printed or displayed on something physical—and that physical material has real costs, durability characteristics, and lifecycle needs.
+
+**Why track Media separately:**
+- **Cost tracking** - A billboard costs $5,000. That's infrastructure worth managing.
+- **Durability** - Metal plaques last 10+ years. Vinyl stickers last 1-3 years. Different materials have different lifecycles.
+- **Replacement** - When Media is damaged, you can replace it with new Media linking to the same Link—preserving scan history and Item connections.
+- **Inventory** - Track what's been produced, what's installed, what's in stock.
+- **Production** - Manage Media Batches from different print partners or production runs.
+
+---
+
+## Visual Model
+
+```
+┌─────────────────────────────────────────────────────┐
+│ ITEM: Excavator #203                                │
+│ - Serial: EXC-2024-203                              │
+│ - Location: Site A                                  │
+│ - Status: Active                                    │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 │ assigned to
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│ LINK: qrtub.com/exc203                              │
+│ - Type: ID-based                                    │
+│ - Mode: Profile Page                                │
+│ - Created: Jan 2025                                 │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 │ encoded on
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│ MEDIA: Metal Plaque #4729                           │
+│ - Type: Stainless steel, engraved                   │
+│ - Cost: $75                                         │
+│ - Installed: March 2025, left cab door             │
+│ - Batch: #47 (500 pieces, PrintCo)                 │
+└─────────────────────────────────────────────────────┘
+```
+
+Each entity has its own lifecycle. The excavator might be sold. The Link persists and can be reassigned. The metal plaque might outlast the excavator and get moved to new equipment.
+
+---
+
+## Link Modes
+
+Links can operate in two modes:
+
+### Direct Mode
+**How it works:** Immediate redirect to a single Destination.
+
+**When to use:**
+- Simple redirects (QR code → one URL)
+- No need for user choice
+- Quick deployment
+
+**Example:** QR code on a poster → Event registration page
+
+---
+
+### Profile Mode
+**How it works:** Link opens a Profile Page—a mobile-friendly landing page where users select from multiple Destinations.
+
+**When to use:**
+- One QR code needs to serve multiple purposes
+- Different audiences need different information
+- Multi-system integration
+
+**Example:** QR code on equipment offers:
+- "Start Inspection" → SafetyCulture
+- "Log Maintenance" → Your CMMS
+- "Operator Manual" → PDF documentation
+- "Contact Support" → Support form
+
+**Key benefit:** One physical QR code, multiple systems. No code proliferation.
+
+---
+
+## Destinations
+
+**What they are:** Where users end up when they interact with a Link.
+
+**In Direct Mode:** The Link has one Destination and immediately redirects.
+
+**In Profile Mode:** The Profile Page displays multiple Destinations as buttons/cards that users tap.
+
+### Current Destination Types:
+- **External URLs** - Any web address (your systems, documentation, websites)
+
+### Planned Destination Types:
+- **qrtub Doc Libraries** - Built-in document hosting
+- **qrtub Forms** - Data collection forms
+- **Payment Flows** - Payment processing
+- **Future integrations**
+
+### Dynamic URLs
+Destinations can use placeholders to automatically pass data from your Items:
+
+**Example:**
+- Destination URL: `app.com/inspect?id={assetID}&name={itemName}`
+- When scanned, qrtub fills in: `app.com/inspect?id=EXC-203&name=Excavator%20203`
+
+This pre-fills information in your destination systems without manual entry.
+
+---
+
+## Tubs
+
+**What they are:** Category-based workspaces for organizing Items.
+
+**Think of Tubs as:** Folders, categories, or asset types—but with superpowers.
+
+### What Tubs Provide:
+- **Custom fields** - Define exactly what data each Item type needs
+- **Profile Page templates** - Design how Profile Pages look for this category
+- **Organized management** - Keep equipment separate from products, facilities separate from tools
+
+### Examples:
+- **Tub: "Heavy Equipment"**
+  Custom fields: Serial #, Make, Model, Service Hours, Site
+
+- **Tub: "Meeting Rooms"**
+  Custom fields: Room #, Floor, Capacity, AV Equipment
+
+- **Tub: "Fire Safety Equipment"**
+  Custom fields: Type, Location, Inspection Due, Certification #
+
+**Key point:** Items live inside Tubs. Links live at the account level and can be assigned to Items in any Tub.
+
+---
+
+## Media Templates (Planned)
+
+**What they are:** Reusable design templates for producing physical Media.
+
+### Types:
+- **System-provided** - Standard sizes (4x6" sticker, 24x36" sign, billboard formats)
+- **Custom templates** - Save your own designs for consistent production
+
+### Use cases:
+- Consistent branding across all your Media
+- Quick reordering from Media Partners
+- Multi-format production (same design, different sizes)
+
+---
+
+## Media Batches (Planned)
+
+**What they are:** Production runs of Media items produced together.
+
+### What they track:
+- Print/production date
+- Material type (vinyl, metal, etc.)
+- Quantity produced
+- Source/partner (PrintCo, SignWorks, etc.)
+- Total cost
+
+### Why they matter:
+- **Production tracking** - "Media Batch #47: 500 weatherproof vinyl stickers, March 2025, PrintCo, $1,250"
+- **Reprint management** - Same Links can appear across multiple Batches (reprints, different materials)
+- **Quality control** - Track which Batch a Media item came from
+- **Cost allocation** - Know exactly what each production run cost
+
+**Example:** You order 500 vinyl stickers in March (Batch #1), then 200 metal plaques in June (Batch #2), all encoding the same set of Links.
+
+---
+
+## Media Partners
+
+**Who they are:** Print shops, signage companies, engravers, and other producers who create physical Media for qrtub customers.
+
+### Certified Media Partners:
+- Understand qrtub workflows
+- Can work with Media Templates (planned)
+- Provide quality Media production
+
+**Industry-standard term:** The print and signage industry uses "media" to describe print materials, so "Media Partners" is familiar terminology.
+
+---
+
+## Print-Before-Link Workflow
+
+**The traditional problem:**
+1. You need professional QR codes printed
+2. Professional printing requires bulk orders and lead time
+3. But you don't have all your Item details finalized yet
+4. You're stuck: delay printing or print without knowing what codes connect to
+
+**The qrtub solution:**
+1. **Generate Links** - Create 100, 500, or however many you need
+2. **Professional printing** - Order quality Media (stickers, signs, plaques)
+3. **Field deployment** - Apply Media to Items as they arrive/deploy
+4. **Connect later** - Link codes to Items and Destinations when convenient
+
+**Why this works:** Links exist independently from Items. Print first, connect later. If you make mistakes, reassign Links—no reprinting needed.
+
+---
+
+## Update Without Reprinting
+
+**The core benefit:** Change where your QR codes point at any time without touching the physical codes.
+
+### Common scenarios:
+- **Vendor switching** - Switch from one inspection app to another → Update Destinations
+- **Adding systems** - Add a new Destination to Profile Pages → One QR code now serves another system
+- **Broken links** - URL changed or site migrated → Update the Destination
+- **Requirements evolution** - Your needs change over time → Update freely
+
+**Example:** 500 equipment QR codes point to "System A" for inspections. Two years later, you switch to "System B." With traditional QR codes, you reprint 500 codes. With qrtub, you update 500 Destinations. Physical codes unchanged.
+
+---
+
+## Integration Layer
+
+**What qrtub is:** A connection layer between your physical items and your digital systems.
+
+**What qrtub is NOT:**
+- ✗ Asset management software (connects to yours)
+- ✗ Inspection software (links to SafetyCulture, etc.)
+- ✗ Maintenance tracking (integrates with your CMMS)
+- ✗ Compliance platform (routes to your compliance tools)
+
+**What qrtub does:** Manages the QR code infrastructure that connects physical items to all your digital systems.
+
+**Think of it as:** The smart router between your physical world (equipment, products, locations) and your digital world (multiple software systems).
+
+---
+
+## Common Questions
+
+**Q: Why can't I just use a regular QR code generator?**
+A: Regular generators hardcode URLs into QR codes. Once printed, they can't be changed. qrtub decouples the physical code from its Destination, enabling updates without reprinting.
+
+**Q: What's the difference between a Link and a QR code?**
+A: A Link is the qrtub-managed URL (`qrtub.com/r/xxxxx`). A QR code is one way to encode that Link (the black/white pattern). You could also type the Link, embed it in NFC, or use RFID.
+
+**Q: Do I need Items to use Links?**
+A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Profile Pages, dynamic URLs, and organized management.
+
+**Q: Can one Link connect to multiple Items?**
+A: No. One Link connects to either one Item (Profile Mode) or one Destination (Direct Mode). But one Item can have multiple Links.
+
+**Q: What happens to my scan data if I replace damaged Media?**
+A: Link history is preserved. When you replace damaged Media with new Media, both link to the same Link. The Item connection and all scan history stay intact.
+
+---
+
+## Next Steps
+
+**Essential Reading:**
+- [Creating Your First Link](/help/creating-your-first-link)
+- [Profile Pages Overview](/help/profile-pages-overview)
+- [Physical Media Management Basics](/help/media-basics)
+
+**Get Started:**
+- [Getting Started Guide](/getting-started)
+- [How qrtub Works](/how-qrtub-works)
+
+**Connect Your Systems:**
+- [SafetyCulture Integration](/integrations/safetyculture)
+- [CMMS Systems Integration](/integrations/cmms-systems)

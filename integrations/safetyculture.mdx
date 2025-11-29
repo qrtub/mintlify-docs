@@ -1,0 +1,92 @@
+---
+title: "SafetyCulture (iAuditor) Integration"
+slug: "safetyculture"
+sidebar_position: 1
+platform: "SafetyCulture"
+featured: true
+---
+
+Connect your qrtub Links to SafetyCulture inspections, enabling staff to scan equipment and immediately open the right inspection template.
+
+## Overview
+
+SafetyCulture (formerly iAuditor) is a mobile inspection platform. By integrating with qrtub, you can:
+
+- Open specific inspection templates by scanning equipment
+- Pre-fill inspection data using dynamic URLs
+- Route different users to different inspection types
+- Maintain inspection access even if you switch platforms later
+
+## Integration Method
+
+qrtub integrates with SafetyCulture using **deep links** - special URLs that open the SafetyCulture app directly to a specific inspection or template.
+
+## Basic Setup
+
+### Step 1: Get Your SafetyCulture Template ID
+
+1. Open SafetyCulture web app
+2. Navigate to your inspection template
+3. Copy the Template ID from the URL
+4. Example: `template_abc123def456`
+
+### Step 2: Create a Destination in qrtub
+
+In your Item's Profile Page, add a new Destination:
+
+**Destination Name:** Start Inspection
+**Destination URL:** `iauditor://template/[YOUR_TEMPLATE_ID]`
+
+### Step 3: Test the Link
+
+Scan the QR code with your mobile device. The SafetyCulture app should open directly to the inspection template.
+
+## Advanced: Dynamic URLs
+
+Pre-fill inspection data using qrtub Item fields:
+
+```
+iauditor://template/template_abc123?asset_id={assetID}&location={location}
+```
+
+When someone scans, qrtub automatically inserts the Item's data into the SafetyCulture inspection.
+
+**Example:**
+- Item field `assetID`: "EXC-001"
+- Item field `location`: "Site A"
+- Generated URL: `iauditor://template/template_abc123?asset_id=EXC-001&location=Site%20A`
+
+## Use Cases
+
+**Equipment Inspections**
+- Excavators, forklifts, vehicles
+- Pre-start checklists
+- Daily safety inspections
+
+**Facility Inspections**
+- Fire extinguishers
+- Emergency equipment
+- Building systems
+
+**Multi-Audience Routing**
+- Operators see "Start Inspection"
+- Managers see "View Inspection History"
+- Maintenance see "Log Service"
+
+## Troubleshooting
+
+**App doesn't open:**
+- Ensure SafetyCulture app is installed
+- Check Template ID is correct
+- Verify URL format matches SafetyCulture's deep link spec
+
+**Data not pre-filling:**
+- Check field names match SafetyCulture's expected parameters
+- Ensure Item fields contain data
+- Test dynamic URL syntax
+
+## Resources
+
+- [SafetyCulture Deep Link Documentation](https://support.safetyculture.com/)
+- [qrtub Dynamic URLs Guide](/help/dynamic-urls)
+- [Profile Pages Overview](/help/profile-pages-overview)

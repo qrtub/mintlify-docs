@@ -10,70 +10,58 @@
   "favicon": "/qrtub-favicon.svg",
   "navigation": {
     "tabs": [
+
       {
-        "tab": "Guides",
+        "tab": "Blog",
+        "pages": [
+              "blog/announcing-qrtub-beta",
+              "blog/why-qr-codes-need-management"
+            ]
+      },
+      {
+        "tab": "Help",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "help/creating-your-first-link"
             ]
           },
-          {
-            "group": "Customization",
+                    {
+            "group": "Concepts",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "help/key-concepts",
+              "help/profile-pages-overview",
+              "help/media-basics"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Industries",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Industries",
             "pages": [
-              "api-reference/introduction"
+              "industries/civil-construction"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
           {
-            "group": "Endpoint examples",
+            "group": "Operations",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "integrations/safetyculture",
+              "integrations/cmms-systems"
+              
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/qrtub-logo-light.svg",
