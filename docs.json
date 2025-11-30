@@ -10,16 +10,11 @@
   "favicon": "/qrtub-favicon.svg",
   "navigation": {
     "tabs": [
-
-      {
-        "tab": "Blog",
-        "pages": [
-              "blog/announcing-qrtub-beta",
-              "blog/why-qr-codes-need-management"
-            ]
-      },
       {
         "tab": "Help",
+        "pages": [
+          "index"
+        ],
         "groups": [
           {
             "group": "Getting Started",
@@ -27,7 +22,7 @@
               "help/creating-your-first-link"
             ]
           },
-                    {
+          {
             "group": "Concepts",
             "pages": [
               "help/key-concepts",
@@ -56,9 +51,15 @@
             "pages": [
               "integrations/safetyculture",
               "integrations/cmms-systems"
-              
             ]
           }
+        ]
+      },
+      {
+        "tab": "Blog",
+        "pages": [
+          "blog/announcing-qrtub-beta",
+          "blog/why-qr-codes-need-management"
         ]
       }
     ]
