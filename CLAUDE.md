@@ -53,6 +53,10 @@
 **Primary Consumer:** Claude Code (and other LLMs)  
 **Status:** BETA Phase
 
+qrtub is a product built and owned by Australian company Teralis Pty Ltd
+
+qrtub only contact email is hi@qrtub.com
+
 ---
 
 # PART 1: SOURCE OF TRUTH
