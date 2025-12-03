@@ -141,14 +141,35 @@ Links can operate in two modes:
 ### Current Destination Types:
 - **External URLs** - Any web address (your systems, documentation, websites)
 
-### Templated Destination URLs
-Destinations can use placeholders to automatically pass data from your Items:
+### URL Templates
 
-**Example:**
-- Destination URL: `app.com/inspect?id={assetID}&name={itemName}`
-- When scanned, qrtub fills in: `app.com/inspect?id=EXC-203&name=Excavator%20203`
+**What they are:** Destination URLs that use field placeholders to automatically insert Item data.
 
-This pre-fills information in your destination systems without manual entry.
+**Example template:**
+```
+app.com/inspect?id={assetID}&name={itemName}
+```
+
+**What happens when scanned:**
+```
+app.com/inspect?id=EXC-203&name=Excavator%20203
+```
+
+**Why this matters for bulk deployment:**
+
+URL Templates are what make qrtub truly scalable. Instead of configuring each QR code individually, you:
+
+1. **Configure once** - Set up the URL template with placeholders
+2. **Deploy everywhere** - Apply to hundreds or thousands of Items
+3. **Automatic personalization** - Each QR code intelligently routes based on its Item's data
+
+Without URL Templates, deploying 500 equipment QR codes means manually configuring 500 different inspection URLs. With URL Templates, you configure the template once—every piece of equipment gets its own pre-filled inspection form automatically.
+
+**Common use cases:**
+- Pre-fill inspection forms with equipment IDs
+- Route to specific asset records in maintenance systems
+- Pass serial numbers to warranty lookup systems
+- Include location data in work order systems
 
 ---
 
@@ -234,7 +255,7 @@ A: Regular generators hardcode URLs into QR codes. Once printed, they can't be c
 A: A Link is the qrtub-managed URL (`qrtub.com/r/xxxxx`). A QR code is one way to encode that Link (the black/white pattern). You could also type the Link, embed it in NFC, or use RFID.
 
 **Q: Do I need Items to use Links?**
-A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Profile Pages, dynamic URLs, and organized management.
+A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Profile Pages, URL Templates, and organized management.
 
 **Q: Can one Link connect to multiple Items?**
 A: No. One Link connects to either one Item (Profile Mode) or one Destination (Direct Mode). But one Item can have multiple Links.

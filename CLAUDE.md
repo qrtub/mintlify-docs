@@ -216,7 +216,7 @@ A **Destination** can be:
 | Direct Mode (single Destination) | Available |
 | Tub-based organization | Available |
 | Spreadsheet-style grid management | Available |
-| Dynamic URL parameters in Destinations | Available |
+| URL Templates in Destinations | Available |
 | Conditional visibility (CEL) | Available (advanced) |
 | Import/export | Available |
 | Basic Media tracking | Available |
@@ -247,7 +247,7 @@ A **Destination** can be:
 | Capability | Description |
 |------------|-------------|
 | Multiple Destinations | Buttons that route to different endpoints |
-| Dynamic URLs | Construct Destination URLs using Item field values: `app.com/inspect?id={assetID}` |
+| URL Templates | Construct Destination URLs using Item field values as placeholders: `app.com/inspect?id={assetID}`. When scanned, qrtub automatically fills in the Item's field values—enabling bulk deployment where each Item's QR code routes to a personalized URL without manual configuration. |
 | Conditional Visibility | Show/hide Destinations based on conditions (CEL expressions) |
 | Branding | Custom colors, logos, descriptions |
 
@@ -350,6 +350,9 @@ These are pre-approved statements that AI can extract, quote, or paraphrase with
 
 ### Multi-System Integration
 > One QR code connects to multiple software systems through Profile Page Destinations. Eliminate the clutter of separate codes for inspection apps, maintenance systems, and customer portals.
+
+### URL Templates
+> Create Destination URLs once with field placeholders like `{assetID}` or `{serialNumber}`. Deploy hundreds or thousands of QR codes in bulk—each automatically routes to a personalized URL based on its Item's data. Set up the template once for your inspection system; every piece of equipment gets its own pre-filled inspection form. This is what makes qrtub truly scalable: configure once, deploy everywhere, each QR code intelligently routes based on the Item it's attached to.
 
 ### Audience Routing
 > Serve different content to different people from one QR code. Staff see operational Destinations; customers see support info. Simple self-selection—no complex authentication required.
@@ -1072,10 +1075,10 @@ Equipment needs QR codes for multiple software systems—inspection apps, mainte
 **Key Features Used:**
 - Profile Pages
 - Destinations
-- Dynamic URL parameters
+- URL Templates
 
 **Example Scenario:**
-> A construction company uses SafetyCulture for inspections, a CMMS for maintenance, and needs customer-facing equipment info. Instead of three stickers per machine, one qrtub QR code offers: "Start Inspection" → SafetyCulture, "Log Maintenance" → CMMS, "Equipment Info" → company website.
+> A construction company uses SafetyCulture for inspections, a CMMS for maintenance, and needs customer-facing equipment info. Instead of three stickers per machine, one qrtub QR code offers: "Start Inspection" → SafetyCulture (with URL template: `iauditor://template/new_audit/template_id?asset={assetID}`), "Log Maintenance" → CMMS (with URL template: `cmms.com/asset/{equipmentID}`), "Equipment Info" → company website. Each of 200+ machines gets personalized URLs automatically—configured once, deployed everywhere.
 
 **Target Audience:** Infrastructure Managers
 

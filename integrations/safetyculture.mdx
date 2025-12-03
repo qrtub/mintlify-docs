@@ -13,48 +13,137 @@ Connect your qrtub Links to SafetyCulture inspections, enabling staff to scan eq
 SafetyCulture (formerly iAuditor) is a mobile inspection platform. By integrating with qrtub, you can:
 
 - Open specific inspection templates by scanning equipment
-- Pre-fill inspection data using dynamic URLs
+- Pre-fill inspection data using URL Templates
 - Route different users to different inspection types
 - Maintain inspection access even if you switch platforms later
 
 ## Integration Method
 
-qrtub integrates with SafetyCulture using **deep links** - special URLs that open the SafetyCulture app directly to a specific inspection or template.
+qrtub integrates with SafetyCulture using **deep links** - special URLs that open SafetyCulture directly to a specific inspection, template, or report.
 
-## Basic Setup
+SafetyCulture supports two deep link formats:
+- **Mobile app** (`iauditor://`) - Opens the SafetyCulture mobile app
+- **Web app** (`https://app.safetyculture.com/`) - Opens in web browser
 
-### Step 1: Get Your SafetyCulture Template ID
+## Getting Your Template ID
+
+Before setting up deep links, you'll need your SafetyCulture Template ID:
 
 1. Open SafetyCulture web app
 2. Navigate to your inspection template
 3. Copy the Template ID from the URL
-4. Example: `template_abc123def456`
+4. Example: `template_fcbc86fd41a74180921347e4be53bdf2`
 
-### Step 2: Create a Destination in qrtub
+See [SafetyCulture's guide on getting entity IDs](https://help.safetyculture.com/en-US/000076/) for detailed instructions.
+
+## Basic Setup: Start Inspection
+
+### Mobile App Deep Link
 
 In your Item's Profile Page, add a new Destination:
 
 **Destination Name:** Start Inspection
-**Destination URL:** `iauditor://template/[YOUR_TEMPLATE_ID]`
-
-### Step 3: Test the Link
-
-Scan the QR code with your mobile device. The SafetyCulture app should open directly to the inspection template.
-
-## Advanced: Dynamic URLs
-
-Pre-fill inspection data using qrtub Item fields:
-
-```
-iauditor://template/template_abc123?asset_id={assetID}&location={location}
-```
-
-When someone scans, qrtub automatically inserts the Item's data into the SafetyCulture inspection.
+**Destination URL:** `iauditor://template/new_audit/<template_id>`
 
 **Example:**
-- Item field `assetID`: "EXC-001"
-- Item field `location`: "Site A"
-- Generated URL: `iauditor://template/template_abc123?asset_id=EXC-001&location=Site%20A`
+```
+iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2
+```
+
+### Web App Deep Link
+
+Alternatively, use a web app deep link for users who prefer desktop/browser access:
+
+**Destination Name:** Start Inspection (Web)
+**Destination URL:** `https://app.safetyculture.com/inspection/new?templateId=<template_id>`
+
+**Example:**
+```
+https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2
+```
+
+### Using qrtub URL Templates
+
+Use qrtub's URL Template feature to automatically insert template IDs from your Item data:
+
+**Destination URL:** `iauditor://template/new_audit/{templateID}`
+
+**Why this matters for bulk deployment:** Configure the Destination once with a template placeholder. Each Item in your Tub can have a different `templateID` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
+
+This allows different Items to use different SafetyCulture templates based on their Item data—no manual configuration per Item.
+
+## Advanced: Pre-Fill Inspection Questions
+
+SafetyCulture allows you to pre-fill specific inspection questions using question item IDs.
+
+### Mobile App Pre-Fill Format
+
+```
+iauditor://template/new_audit/<template_id>?<item_id>=<response>
+```
+
+**Example with qrtub URL Templates:**
+```
+iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e-be6e-470c-a2e2-a0fd8ab966ae={assetID}
+```
+
+Where:
+- `template_fcbc86fd41a74180921347e4be53bdf2` is your SafetyCulture template ID
+- `8f2f287e-be6e-470c-a2e2-a0fd8ab966ae` is the question item ID in your template
+- `{assetID}` is the qrtub Item field placeholder—automatically filled with each Item's actual asset ID
+
+**Bulk deployment benefit:** Configure this URL template once. Deploy to 500 pieces of equipment. Each QR code scan automatically pre-fills the inspection with that specific equipment's asset ID. No manual setup per Item.
+
+### Pre-Fill Multiple Questions
+
+Use `&` to pre-fill multiple questions:
+
+```
+iauditor://template/new_audit/<template_id>?<item_id_1>=<response_1>&<item_id_2>=<response_2>
+```
+
+**Example:**
+```
+iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e={assetID}&a2e2a0fd={location}
+```
+
+**Important notes:**
+- You need the specific **question item ID** from your SafetyCulture template (not arbitrary parameter names)
+- To get question item IDs, see [SafetyCulture's entity ID guide](https://help.safetyculture.com/en-US/000076/)
+- Responses may need URL encoding depending on content
+- Very long deep links may not work consistently
+
+## Additional Deep Link Options
+
+Beyond starting new inspections, you can create Destinations for other SafetyCulture actions:
+
+### View Inspection Report
+
+**Mobile:** `iauditor://audit/<inspection_id>`
+**Web:** `https://app.safetyculture.com/report/audit/<inspection_id>`
+
+**With qrtub URL Template:**
+```
+https://app.safetyculture.com/report/audit/{inspectionID}
+```
+
+Store the latest inspection ID in each Item's `inspectionID` field. When someone scans, they're automatically routed to that Item's most recent inspection report.
+
+### Edit Existing Inspection
+
+**Mobile:** `iauditor://audit/<inspection_id>`
+**Web:** `https://app.safetyculture.com/inspection/<inspection_id>`
+
+### Open Asset Profile
+
+**Mobile:** `iauditor://asset/profile/<asset_id>`
+**Web:** `https://app.safetyculture.com/assets/<asset_id>`
+
+**Example use case:** Link qrtub Items directly to their SafetyCulture asset profiles.
+
+### View Document/File
+
+**Web:** `https://app.safetyculture.com/documents/<document_id>`
 
 ## Use Cases
 
@@ -69,24 +158,35 @@ When someone scans, qrtub automatically inserts the Item's data into the SafetyC
 - Building systems
 
 **Multi-Audience Routing**
-- Operators see "Start Inspection"
-- Managers see "View Inspection History"
-- Maintenance see "Log Service"
+Create a Profile Page with multiple Destinations:
+- Operators see "Start Inspection" → Start new inspection
+- Managers see "View Report" → View latest report
+- Maintenance see "Asset History" → SafetyCulture asset profile
 
 ## Troubleshooting
 
-**App doesn't open:**
-- Ensure SafetyCulture app is installed
-- Check Template ID is correct
-- Verify URL format matches SafetyCulture's deep link spec
+**Mobile app doesn't open:**
+- Ensure SafetyCulture mobile app is installed on the device
+- Verify Template ID format is correct
+- Check that the user has access to the template in SafetyCulture
+
+**Web link doesn't work:**
+- Verify user is logged into SafetyCulture web app
+- Check that the user has permission to access the entity (template, inspection, asset)
+- Confirm the entity ID is correct
 
 **Data not pre-filling:**
-- Check field names match SafetyCulture's expected parameters
-- Ensure Item fields contain data
-- Test dynamic URL syntax
+- You need the specific **question item ID** from your SafetyCulture template (not arbitrary field names)
+- Ensure Item fields in qrtub contain data
+- Test that URL encoding is correct for special characters
+- Verify deep link isn't too long (keep it under ~2000 characters)
+
+**Users need access:**
+Deep links only work if users have permission to access the relevant entities in SafetyCulture. Ensure your team has appropriate access before deploying.
 
 ## Resources
 
-- [SafetyCulture Deep Link Documentation](https://support.safetyculture.com/)
-- [qrtub Dynamic URLs Guide](/help/dynamic-urls)
+- [SafetyCulture Deep Link Documentation](https://help.safetyculture.com/en-US/000149/)
+- [Get SafetyCulture Entity IDs](https://help.safetyculture.com/en-US/000076/)
+- [qrtub URL Templates Guide](/help/url-templates)
 - [Profile Pages Overview](/help/profile-pages-overview)

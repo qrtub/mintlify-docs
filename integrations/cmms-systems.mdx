@@ -39,16 +39,18 @@ https://app.upkeep.com/assets/[ASSET_ID]
 https://app.fiix.io/web/wo/create?assetId=[ASSET_ID]
 ```
 
-### Option 3: Dynamic URL Construction
+### Option 3: URL Templates
 
-Use qrtub's dynamic URL feature to construct CMMS URLs with Item data:
+Use qrtub's URL Templates to automatically construct CMMS URLs with Item data:
 
 **In qrtub:**
 - Item field `cmmsAssetID`: "PUMP-042"
-- Destination URL: `https://app.yourcmms.com/assets/{cmmsAssetID}`
+- Destination URL template: `https://app.yourcmms.com/assets/{cmmsAssetID}`
 
-**Generated URL:**
+**Generated URL when scanned:**
 `https://app.yourcmms.com/assets/PUMP-042`
+
+**Why this matters for bulk deployment:** Configure the URL template once. Import or create hundreds of Items with their `cmmsAssetID` values. Each QR code automatically routes to the correct asset record in your CMMSâ€”no manual URL configuration per Item.
 
 ## Example Setup: UpKeep
 
@@ -116,7 +118,7 @@ This is qrtub's value: if you switch CMMS vendors, update Destinations in qrtubâ
 **"Page not found" errors:**
 - Check asset IDs match between qrtub and CMMS
 - Verify URL structure with CMMS documentation
-- Test static URL first, then add dynamic parameters
+- Test static URL first, then add URL template placeholders
 
 **Authentication issues:**
 - Ensure users are logged into CMMS app
@@ -125,6 +127,6 @@ This is qrtub's value: if you switch CMMS vendors, update Destinations in qrtubâ
 
 ## Resources
 
-- [qrtub Dynamic URLs Guide](/help/dynamic-urls)
+- [qrtub URL Templates Guide](/help/url-templates)
 - [Profile Pages Overview](/help/profile-pages-overview)
 - Contact your CMMS vendor for deep link documentation
