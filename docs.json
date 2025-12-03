@@ -38,7 +38,11 @@
           {
             "group": "Industries",
             "pages": [
-              "industries/civil-construction"
+              "industries/civil-construction",
+              "industries/contract-cleaning",
+              "industries/arboriculture-tree-management",
+              "industries/electrical-test-and-tag",
+              "industries/local-government-councils"
             ]
           }
         ]

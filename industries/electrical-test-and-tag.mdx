@@ -1,0 +1,261 @@
+---
+title: "qrtub for Electrical Test and Tag"
+slug: "electrical-test-and-tag"
+sidebar_position: 4
+industry: "Electrical Testing"
+featured: true
+---
+
+Electrical test and tag serves two distinct users: companies managing their own equipment testing and compliance, and contract test and tag businesses serving multiple clients. qrtub provides one QR code per equipment item—technicians access test forms, staff check compliance status, safety officers view test history, and contract providers offer clients professional digital registers as a service differentiator.
+
+## The Challenge
+
+**For companies managing in-house testing:**
+- Equipment scattered across sites needs regular compliance testing
+- Staff need to check if equipment is safe to use
+- Safety officers need audit-ready compliance registers
+- Test due dates must be tracked across hundreds or thousands of items
+- Compliance audits require immediate access to test history
+
+**For contract test and tag providers:**
+- Technicians need efficient testing workflows across multiple client sites
+- Clients want access to their compliance registers without separate logins
+- Professional presentation differentiates you from competitors
+- Multiple clients with different equipment populations
+- Clients change, but you need to maintain test history
+
+Traditional approaches create problems:
+- Paper tags become illegible, fall off, get damaged
+- Spreadsheet registers require manual updates and aren't accessible on-site
+- Generic test apps don't provide client-facing registers
+- Clients can't easily check compliance status of their own equipment
+- No professional presentation when clients or auditors scan equipment
+
+## Two Use Cases, Same Solution
+
+### Use Case 1: In-House Testing (Company Manages Own Equipment)
+
+A manufacturing facility has 500+ electrical items requiring regular testing. Safety officer, technicians, and staff all need different access to compliance data.
+
+**One QR code per equipment item. Everyone sees the same Profile Page:**
+
+**Example Profile Page:**
+- Equipment details (type, location, serial)
+- Current test status and next due date (everyone sees this)
+- "Start Test" → Technicians tap this
+- "Log Visual Inspection" → Staff tap this
+- "View Test History" → Safety officers/auditors tap this
+- "Report Fault" → Anyone can tap this
+
+**Staff checking equipment:**
+- Scan code before using power tool
+- See test status: "Last tested: 15/02/2025, Next due: 15/08/2025, Status: PASS"
+- Confirm safe to use
+
+**Technician performing test:**
+- Tap "Start Test"
+- Pre-filled form with equipment ID, location, last test date
+- Complete test, apply new tag
+- Test record automatically updates in register
+
+**Safety officer preparing for audit:**
+- Access compliance register via any equipment scan
+- View test history across all equipment
+- Export compliance reports
+- Audit-ready documentation
+
+### Use Case 2: Contract Testing (Service Provider Offers Client Access)
+
+A contract test and tag company services 40 client sites. Each client wants access to their own equipment compliance register without managing separate systems.
+
+**The qrtub advantage for contractors:**
+
+Each client gets their own Tub (isolated equipment register). You manage all clients in one qrtub account. Clients access their equipment data by scanning QR codes at their own sites.
+
+**Example Profile Page (contractor-branded):**
+- "Your Company - Professional Test & Tag" branding
+- Equipment details and test status
+- "Start Test" → Your technicians tap this
+- "View Test History" → Client staff tap this
+- "Contact Test Provider" → Client taps this
+- "Request Retest" → Client requests service
+
+**Your technician workflow:**
+- Arrive at client site
+- Scan equipment
+- Tap "Start Test"
+- Pre-filled form with client name, equipment ID, location
+- Complete test, system updates client's register automatically
+
+**Client value:**
+- Scan any equipment to check compliance status
+- Access their complete test register without separate logins
+- Professional branded experience (your branding + their equipment data)
+- Audit-ready documentation on demand
+- Direct contact pathway to request retests
+
+**Your competitive advantage:**
+- "Digital compliance register included with our service"
+- Professional presentation when clients or auditors scan equipment
+- Client retention (they're dependent on your register)
+- Upsell opportunity (premium reporting, analytics, alerts)
+- When facilities managers at other sites see your professional system, they become leads
+
+## The Professional Compliance Register Effect
+
+Traditional thinking: Apply test tag sticker. Provide spreadsheet register.
+
+**qrtub approach:** Every equipment scan shows professional test tracking infrastructure.
+
+When anyone scans a test-tagged item, they see:
+- Current compliance status (test date, due date, pass/fail)
+- Complete test history (transparency)
+- Professional test tracking systems
+- Direct reporting and contact pathways
+
+**For in-house teams:** Demonstrates professional safety management to auditors, staff, and management.
+
+**For contract providers:** Every QR code is a branded touchpoint. Clients see your professional systems every day. Facilities managers visiting client sites become leads when they scan and see your infrastructure.
+
+**Paper tag only:** Shows test date. No context. No history. No engagement.
+
+**qrtub Profile Page:** Shows compliance status + professional infrastructure + register access + contact pathway.
+
+## Bulk Deployment and Ongoing Management
+
+**URL Templates example:**
+```
+yourtestapp.com/test?equipmentID={assetID}&type={equipmentType}&client={clientName}
+```
+
+Configure once. Tag 5,000 items across 40 clients. Each QR code automatically pre-fills test forms with that equipment's ID, type, and client—no per-item configuration needed.
+
+**Compliance deadline tracking:**
+- Item field: `nextTestDue: 2025-08-15`
+- Profile Page shows: "Next test due: 15 Aug 2025"
+- Safety officer views overdue equipment via filtered register
+- Contract provider sends proactive retest reminders to clients
+
+**Update without retagging:** Change test provider, update contact details, switch test platforms—physical tags stay unchanged for equipment's entire lifecycle.
+
+## Real-World Example: Contract Provider Serving Office Building
+
+A test and tag contractor services an office building with 300 electrical items. Every item has a QR code.
+
+**Contractor technician** (during scheduled testing):
+- Scan equipment
+- Tap "Start Test"
+- Pre-filled form with building name, equipment ID, location
+- Complete test, apply new tag sticker
+- System updates building's register automatically
+
+**Building facilities manager** (checking compliance):
+- Scan equipment
+- See test status: "PASS - Next due: 20/09/2025"
+- Tap "View Test History"
+- See complete test record for this item
+- See contractor branding and professional system
+
+**Office worker** (before using extension cord):
+- Scan code
+- See "PASS - Tested 20/03/2025"
+- Confirm safe to use
+- See "Report Fault" option if issues found
+
+**Auditor** (during OH&S inspection):
+- Scan any equipment
+- See current compliance status
+- Tap "View Test History"
+- Access complete test records
+- Impressed by professional system and easy access
+
+**Result:** Building manager sees professional compliance infrastructure daily. Renews contract. Recommends contractor to other building managers. One professional system generates retention and referrals.
+
+## Integration with Test and Tag Software
+
+qrtub connects to the tools you already use:
+
+**Test platforms:** Test & Tag Manager, Portable Appliance Testing (PAT) software, SafetyCulture, custom test apps
+**Asset management:** CMMS platforms, facility management systems
+**Compliance tracking:** OH&S systems, audit management platforms
+
+URL Templates auto-populate equipment data—configure once, deploy across equipment population.
+
+## Getting Started
+
+### For In-House Teams:
+
+1. **Generate Links** - Bulk generation for equipment population (`qrtub.com/drill-001`, etc.)
+2. **Order tags** - Durable vinyl or polyester test tag labels with QR codes
+3. **Create Tub** - Define equipment fields (Equipment ID, Type, Location, Next test due, Serial number)
+4. **Configure Profile Page** - Test status display, test form link, history access, fault reporting
+5. **Deploy** - Import equipment inventory, each item inherits compliance register access
+6. **Tag equipment** - Apply QR codes alongside test tag stickers
+
+### For Contract Providers:
+
+1. **Generate Links** - Bulk generation for each client's equipment
+2. **Create Tubs per client** - Separate Tub for each client (isolated registers)
+3. **Brand Profile Pages** - Your company branding + client equipment data
+4. **Configure test workflows** - Technician access + client access + reporting
+5. **Tag during testing** - Apply QR codes when performing tests
+6. **Offer as service differentiator** - "Digital compliance register included"
+
+Update as contracts evolve—new clients, changed platforms, updated contacts—without retagging equipment.
+
+## Why Test and Tag Operations Choose qrtub
+
+**For in-house teams:**
+
+**Audit-ready compliance:** Immediate access to test history for any equipment. No spreadsheet hunting during audits.
+
+**Staff empowerment:** Staff check compliance status themselves before using equipment. Safety culture.
+
+**Centralized register:** All equipment in one system. Filter by location, due date, test status. Export reports on demand.
+
+**For contract providers:**
+
+**Service differentiator:** "Digital compliance register included with our service" beats competitors still using paper tags and spreadsheets.
+
+**Client retention:** Clients dependent on your professional register system. Switching providers means losing access.
+
+**Professional presentation:** Every QR code shows your branding and professional infrastructure. Daily touchpoints with clients.
+
+**Operational efficiency:** URL Templates pre-fill test forms. Technicians work faster. Register updates automatically.
+
+**Business development:** Facilities managers at other sites scan equipment, see your professional system, become leads.
+
+**Scalability:** Manage 5, 50, or 500 clients in one account. Each client sees only their equipment. You see everything.
+
+## Use Cases
+
+**Manufacturing facilities:** 1,000+ tools and equipment across factory floor. Safety officers track compliance. Workers check test status. Auditors access records instantly.
+
+**Construction sites:** Equipment moves between sites. QR codes provide compliance access regardless of location. Site managers verify test status of hired equipment.
+
+**Office buildings:** Contract provider tags all building equipment. Facilities manager accesses compliance register. Tenants see professional building management. Auditors get instant access.
+
+**Schools/universities:** Hundreds of electrical items across campus. Maintenance team tracks testing. Teachers check equipment before use. Compliance officers prepare for inspections.
+
+**Healthcare facilities:** Critical equipment testing compliance. Test history required for accreditation. Staff verify test status. Biomedical engineers track equipment lifecycle.
+
+**Rental equipment:** Hire companies tag rental equipment. Customers see current test status. Professional presentation. Equipment returns with test history intact.
+
+## Ready to Deploy?
+
+qrtub is currently in BETA with companies and test providers already using it for compliance register management.
+
+**Core features available:**
+- Bulk Link generation for equipment populations
+- Client-isolated Tubs for contract providers
+- Professional branded Profile Pages with test status display
+- Integration with test platforms and asset management systems
+- URL Templates for equipment-specific data pre-fill
+- Compliance deadline tracking and reporting
+- Track your physical test tags
+
+[Join the BETA Program →](/beta)
+
+---
+
+**Questions?** Contact us at [hi@qrtub.com](mailto:hi@qrtub.com)
