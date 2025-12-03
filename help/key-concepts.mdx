@@ -48,13 +48,13 @@ Most QR code systems treat everything as one thing. qrtub recognizes that physic
 **What it is:** The physical material the QR code is displayed on.
 
 **Examples:**
-- A vinyl sticker ($0.50 - $5)
-- A metal plaque ($20 - $100)
-- A billboard ($500 - $5,000+)
-- A real estate sign ($50 - $300)
-- A printed ad ($0.10 - $2)
-- An NFC chip ($1 - $10)
-- A rigid sign ($50 - $500)
+- A vinyl sticker
+- A metal plaque
+- A billboard
+- A real estate sign
+- A printed ad
+- An NFC chip
+- A rigid sign
 
 **Key point:** Most people think generating a QR code pattern is all there is. But qrtub recognizes that the QR code gets printed or displayed on something physical—and that physical material has real costs, durability characteristics, and lifecycle needs.
 
@@ -67,34 +67,29 @@ Most QR code systems treat everything as one thing. qrtub recognizes that physic
 
 ---
 
-## Visual Model
+## Example
 
 ```
-┌─────────────────────────────────────────────────────┐
-│ ITEM: Excavator #203                                │
-│ - Serial: EXC-2024-203                              │
-│ - Location: Site A                                  │
-│ - Status: Active                                    │
-└────────────────┬────────────────────────────────────┘
-                 │
-                 │ assigned to
-                 ▼
-┌─────────────────────────────────────────────────────┐
-│ LINK: qrtub.com/exc203                              │
-│ - Type: ID-based                                    │
-│ - Mode: Profile Page                                │
-│ - Created: Jan 2025                                 │
-└────────────────┬────────────────────────────────────┘
-                 │
-                 │ encoded on
-                 ▼
-┌─────────────────────────────────────────────────────┐
-│ MEDIA: Metal Plaque #4729                           │
-│ - Type: Stainless steel, engraved                   │
-│ - Cost: $75                                         │
-│ - Installed: March 2025, left cab door             │
-│ - Batch: #47 (500 pieces, PrintCo)                 │
-└─────────────────────────────────────────────────────┘
+ITEM: Excavator #203 
+- Serial: EXC-2024-203  
+- Location: Site A    
+- Status: Active  
+▼
+is assigned to
+▼                 
+LINK: qrtub.com/exc203 
+- Type: ID-based           
+- Mode: Profile Page       
+- Created: Jan 2025        
+▼
+is encoded on
+▼
+MEDIA: Metal Plaque #4729 
+- Type: Stainless steel, engraved      
+- Cost: $75                            
+- Installed: March 2025, left cab door 
+- Batch: #47 (500 pieces, PrintCo)
+
 ```
 
 Each entity has its own lifecycle. The excavator might be sold. The Link persists and can be reassigned. The metal plaque might outlast the excavator and get moved to new equipment.
@@ -146,13 +141,7 @@ Links can operate in two modes:
 ### Current Destination Types:
 - **External URLs** - Any web address (your systems, documentation, websites)
 
-### Planned Destination Types:
-- **qrtub Doc Libraries** - Built-in document hosting
-- **qrtub Forms** - Data collection forms
-- **Payment Flows** - Payment processing
-- **Future integrations**
-
-### Dynamic URLs
+### Templated Destination URLs
 Destinations can use placeholders to automatically pass data from your Items:
 
 **Example:**
@@ -185,55 +174,6 @@ This pre-fills information in your destination systems without manual entry.
   Custom fields: Type, Location, Inspection Due, Certification #
 
 **Key point:** Items live inside Tubs. Links live at the account level and can be assigned to Items in any Tub.
-
----
-
-## Media Templates (Planned)
-
-**What they are:** Reusable design templates for producing physical Media.
-
-### Types:
-- **System-provided** - Standard sizes (4x6" sticker, 24x36" sign, billboard formats)
-- **Custom templates** - Save your own designs for consistent production
-
-### Use cases:
-- Consistent branding across all your Media
-- Quick reordering from Media Partners
-- Multi-format production (same design, different sizes)
-
----
-
-## Media Batches (Planned)
-
-**What they are:** Production runs of Media items produced together.
-
-### What they track:
-- Print/production date
-- Material type (vinyl, metal, etc.)
-- Quantity produced
-- Source/partner (PrintCo, SignWorks, etc.)
-- Total cost
-
-### Why they matter:
-- **Production tracking** - "Media Batch #47: 500 weatherproof vinyl stickers, March 2025, PrintCo, $1,250"
-- **Reprint management** - Same Links can appear across multiple Batches (reprints, different materials)
-- **Quality control** - Track which Batch a Media item came from
-- **Cost allocation** - Know exactly what each production run cost
-
-**Example:** You order 500 vinyl stickers in March (Batch #1), then 200 metal plaques in June (Batch #2), all encoding the same set of Links.
-
----
-
-## Media Partners
-
-**Who they are:** Print shops, signage companies, engravers, and other producers who create physical Media for qrtub customers.
-
-### Certified Media Partners:
-- Understand qrtub workflows
-- Can work with Media Templates (planned)
-- Provide quality Media production
-
-**Industry-standard term:** The print and signage industry uses "media" to describe print materials, so "Media Partners" is familiar terminology.
 
 ---
 
