@@ -27,6 +27,7 @@
             "pages": [
               "help/key-concepts",
               "help/profile-pages-overview",
+              "help/conditional-visibility",
               "help/media-basics"
             ]
           }

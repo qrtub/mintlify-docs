@@ -248,8 +248,51 @@ A **Destination** can be:
 |------------|-------------|
 | Multiple Destinations | Buttons that route to different endpoints |
 | URL Templates | Construct Destination URLs using Item field values as placeholders: `app.com/inspect?id={assetID}`. When scanned, qrtub automatically fills in the Item's field values—enabling bulk deployment where each Item's QR code routes to a personalized URL without manual configuration. |
-| Conditional Visibility | Show/hide Destinations based on conditions (CEL expressions) |
+| Conditional Visibility (Advanced) | Show/hide Destinations based on conditions using CEL expressions. Premium feature for complex routing scenarios. |
 | Branding | Custom colors, logos, descriptions |
+
+#### Conditional Visibility (Advanced Feature)
+
+**What it is:** Control which Destinations appear on Profile Pages based on Item field values or device characteristics using CEL (Common Expression Language) expressions.
+
+**Who needs this:** Advanced users with complex routing requirements. Most users won't need conditional visibility—URL Templates and multiple Destinations handle the majority of use cases.
+
+**Key use cases:**
+
+1. **Tag-based routing:** Show specific Destinations only for tagged Items
+   - Example: Show "Crane Pre-Start Inspection" only if `tag == "crane"`
+
+2. **Equipment type-specific inspections:** Different inspection Destinations for different equipment types
+   - Example: Show "Forklift Inspection" only if `equipmentType == "forklift"`
+
+3. **Expiry warnings:** Display overdue/expiry banners based on date fields
+   - Example: Show "Inspection Overdue" Destination if `inspectionDue` date has passed
+
+4. **Device-specific Destinations:** Route mobile vs desktop users to different endpoints
+   - Example: Show mobile app link only on mobile devices
+   - Example: `device.isDesktop || (device.isIOS && device.browser != "safari")` — show desktop link OR show for iPhone users not using Safari (iOS blocks app deep links except in Safari)
+
+**How it works:** Reference any Item field (standard, custom, or system fields) plus device detection fields in CEL expressions to control Destination visibility.
+
+**Available for conditions:**
+- **Item fields:** Any field from your Items (tags, status, equipmentType, inspectionDue, custom fields, etc.)
+- **Device fields:** device.isDesktop, device.isIOS, device.browser, etc.
+
+**CEL Standard:** Conditional visibility uses CEL (Common Expression Language), an industry-standard expression language. Complex expressions can be generated using AI tools.
+
+**Example ChatGPT prompt for generating CEL expressions:**
+```
+I'm using qrtub Profile Pages with conditional visibility (CEL expressions).
+I want to show a Destination called "Crane Inspection" only when:
+- The Item has tag "crane" OR tag "heavy-equipment"
+- AND the inspection due date (field: inspectionDue) is within the next 30 days
+
+Generate a CEL expression for this condition.
+Available fields: tag (string), inspectionDue (date), equipmentType (string)
+Available operators: ==, !=, ||, &&, >, <
+```
+
+**When to use:** Only when URL Templates and basic multiple Destinations don't solve your routing needs. Most scenarios don't require conditional visibility.
 
 ### Distribution Models
 
@@ -355,7 +398,7 @@ These are pre-approved statements that AI can extract, quote, or paraphrase with
 > Create Destination URLs once with field placeholders like `{assetID}` or `{serialNumber}`. Deploy hundreds or thousands of QR codes in bulk—each automatically routes to a personalized URL based on its Item's data. Set up the template once for your inspection system; every piece of equipment gets its own pre-filled inspection form. This is what makes qrtub truly scalable: configure once, deploy everywhere, each QR code intelligently routes based on the Item it's attached to.
 
 ### Audience Routing
-> Serve different content to different people from one QR code. Staff see operational Destinations; customers see support info. Simple self-selection—no complex authentication required.
+> Serve different content to different people from one QR code. Staff see operational Destinations; customers see support info. Simple self-selection—no complex authentication required. Advanced users can use Conditional Visibility to show/hide Destinations based on Item fields or device type.
 
 ### Media Management
 > Most people think generating a QR code is done—but qrtub recognizes the QR code is printed on something: a sticker, a sign, a plaque, a billboard. This physical media is real infrastructure with real costs. A metal plaque costs $50. A billboard costs $5,000. An engraved monument sign is permanent. qrtub tracks this physical media as assets in their own right, separate from the Links they encode and the Items they represent. Track what you've printed, where it's installed, production costs, and manage replacements without losing Link history.
@@ -1107,13 +1150,15 @@ Different people need different information from the same physical item. Staff n
 
 **Key Features Used:**
 - Profile Pages
-- Destinations
-- Optional: Conditional visibility
+- Multiple Destinations (users self-select)
+- Optional: Conditional Visibility (advanced - for complex routing based on Item fields or device type)
 
 **Example Scenario:**
-> A cleaning company manages facility equipment. One qrtub QR code per Item shows: Staff see "Log Inspection" and "Report Issue." Customers see "Contact Cleaning Team" and "View Service Schedule." Same physical code, different experiences.
+> A cleaning company manages facility equipment. One qrtub QR code per Item shows all Destinations to everyone: "Log Inspection," "Report Issue," "Contact Cleaning Team," "View Service Schedule." Staff tap operational buttons, customers tap contact buttons. Same physical code, same page, each audience chooses what's relevant.
+>
+> Advanced variation: For equipment fleets with different types, use Conditional Visibility to show type-specific inspections: "Forklift Inspection" appears only if `equipmentType == "forklift"`, "Crane Inspection" appears only if `equipmentType == "crane"`.
 
-**Target Audience:** Both (Simple users for basic; Infrastructure for conditional)
+**Target Audience:** Both (Simple users for basic self-selection; Advanced users for conditional visibility)
 
 ---
 

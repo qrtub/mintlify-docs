@@ -1,0 +1,242 @@
+---
+title: "Conditional Visibility"
+description: "Show or hide Destinations on Profile Pages based on conditions"
+sidebar_position: 4
+category: "profile-pages"
+---
+
+Conditional Visibility lets you control which Destinations appear on Profile Pages based on Item data or the device someone is using. This is an advanced feature for complex routing scenarios—most users won't need it.
+
+## When You Need This
+
+**You probably don't need conditional visibility if:**
+- You want different people to see different Destinations (just show all Destinations—people tap what's relevant)
+- You want to route to different URLs based on Item data (use URL Templates instead)
+
+**You DO need conditional visibility if:**
+- You want to show completely different Destinations for different equipment types
+- You need to display warnings only when dates are expired
+- You need different Destinations for mobile vs desktop users
+- You have complex routing requirements where showing all Destinations would confuse users
+
+## Common Use Cases
+
+### 1. Equipment Type-Specific Inspections
+
+**Scenario:** You manage forklifts and cranes. Each type needs a different inspection form. You don't want forklift operators seeing the crane inspection button.
+
+**Solution:** Show "Forklift Inspection" Destination only for forklifts, "Crane Inspection" only for cranes.
+
+**Condition for "Forklift Inspection" Destination:**
+```
+equipmentType == "forklift"
+```
+
+**Condition for "Crane Inspection" Destination:**
+```
+equipmentType == "crane"
+```
+
+**How to set this up:**
+1. Add an `equipmentType` field to your Tub
+2. Set each Item's `equipmentType` value ("forklift", "crane", etc.)
+3. Create separate Destinations for each inspection type
+4. Add the condition to each Destination
+
+### 2. Tag-Based Routing
+
+**Scenario:** Some equipment is tagged as "heavy-equipment" and needs specialized inspections. Other equipment uses standard inspections.
+
+**Condition to show "Heavy Equipment Inspection":**
+```
+tag == "heavy-equipment"
+```
+
+**How to set this up:**
+1. Tag relevant Items with "heavy-equipment"
+2. Create a "Heavy Equipment Inspection" Destination
+3. Add the condition `tag == "heavy-equipment"`
+4. Tagged equipment shows this Destination; others don't
+
+### 3. Overdue Inspection Warnings
+
+**Scenario:** You want to show a prominent "INSPECTION OVERDUE" Destination when equipment inspection is past due.
+
+**Condition to show "INSPECTION OVERDUE" banner:**
+```
+inspectionDue < today
+```
+
+**How to set this up:**
+1. Add an `inspectionDue` field (date type) to your Tub
+2. Set each Item's next inspection due date
+3. Create an "INSPECTION OVERDUE" Destination (bright red, urgent styling)
+4. Add the condition so it only appears when overdue
+
+### 4. Test Status-Based Routing
+
+**Scenario:** Electrical test and tag equipment. You want to show "RETEST REQUIRED" only when the test has expired.
+
+**Condition to show "RETEST REQUIRED":**
+```
+testStatus == "expired"
+```
+
+**How to set this up:**
+1. Add a `testStatus` field to your Tub
+2. Set values: "current", "expired", "pending"
+3. Create "RETEST REQUIRED" Destination
+4. Add the condition `testStatus == "expired"`
+
+## Using AI to Generate Conditions
+
+For more complex conditions, use AI tools like ChatGPT to generate the expressions for you.
+
+### Example Prompt Template
+
+```
+I'm using qrtub Profile Pages with conditional visibility (CEL expressions).
+I want to show a Destination called "[DESTINATION NAME]" only when:
+- [Describe your first condition]
+- [Describe your second condition]
+- [Additional conditions]
+
+Generate a CEL expression for this condition.
+
+Available Item fields: [list your field names and types]
+Available operators: ==, !=, ||, &&, >, <, >=, <=
+```
+
+### Example 1: Multiple Tags
+
+**Your prompt:**
+```
+I'm using qrtub Profile Pages with conditional visibility (CEL expressions).
+I want to show a Destination called "Crane Safety Inspection" only when:
+- The Item has tag "crane" OR tag "heavy-equipment"
+- AND the status is "active"
+
+Generate a CEL expression for this condition.
+
+Available Item fields: tag (string), status (string), equipmentType (string)
+Available operators: ==, !=, ||, &&
+```
+
+**ChatGPT response:**
+```
+(tag == "crane" || tag == "heavy-equipment") && status == "active"
+```
+
+### Example 2: Date-Based with Grace Period
+
+**Your prompt:**
+```
+I'm using qrtub Profile Pages with conditional visibility (CEL expressions).
+I want to show a Destination called "Inspection Due Soon" only when:
+- The inspection due date is within the next 7 days
+- AND the inspection is not already overdue
+
+Generate a CEL expression for this condition.
+
+Available Item fields: inspectionDue (date)
+Available operators: ==, !=, ||, &&, >, <, >=, <=
+```
+
+**ChatGPT response:**
+```
+inspectionDue >= today && inspectionDue <= today + 7
+```
+
+## Advanced: Device-Specific Destinations
+
+You can also show/hide Destinations based on what device someone is using.
+
+### Mobile App vs Desktop Links
+
+**Scenario:** You have a mobile app with deep links, but also want desktop users to access a web version.
+
+**Condition for mobile app Destination:**
+```
+device.isMobile
+```
+
+**Condition for desktop Destination:**
+```
+device.isDesktop
+```
+
+### iOS Safari Workaround
+
+**Scenario:** iOS blocks app deep links unless the user is in Safari browser. You want to show the mobile app link only when it will work.
+
+**Condition to show mobile app link:**
+```
+!device.isIOS || (device.isIOS && device.browser == "safari")
+```
+
+This shows the mobile app link IF:
+- User is NOT on iOS (app links work fine)
+- OR user IS on iOS AND using Safari browser
+
+**Condition to show web link as fallback:**
+```
+device.isIOS && device.browser != "safari"
+```
+
+## Available Fields
+
+### Item Fields
+You can reference ANY field from your Items:
+- **Standard fields:** Number, Name, Description, Group, Status, Tags, Date, Image
+- **Custom fields:** Any fields you've defined in your Tub
+- **System fields:** created_at, updated_at, created_by, updated_by
+
+### Device Fields
+- `device.isDesktop` - User is on desktop computer
+- `device.isMobile` - User is on mobile phone
+- `device.isIOS` - User is on iPhone/iPad
+- `device.isAndroid` - User is on Android device
+- `device.browser` - Browser name (safari, chrome, firefox, etc.)
+
+### Special Values
+- `today` - Current date (for date comparisons)
+
+## Tips
+
+**Start simple:** Test with one field and one condition first. Get comfortable before combining multiple conditions.
+
+**Use descriptive field names:** `equipmentType` is clearer than `type`. Future you will thank you.
+
+**Test your conditions:** Create test Items with different field values to verify Destinations appear/disappear correctly.
+
+**Consider showing all instead:** Before adding conditional visibility, ask: "Would showing all Destinations and letting users self-select be simpler?" Often yes.
+
+**Use URL Templates first:** If you're routing to different URLs based on Item data, URL Templates are usually simpler than conditional visibility.
+
+## When NOT to Use This
+
+**Don't use conditional visibility for:**
+- Different audiences seeing different content (just show all Destinations—people tap what's relevant)
+- Constructing different URLs per Item (use URL Templates instead)
+- Simple scenarios (you're probably overcomplicating)
+
+**DO use conditional visibility for:**
+- Completely different Destinations for different equipment types
+- Warning/alert Destinations that only appear when conditions are met
+- Device-specific routing (mobile app vs web)
+- Complex scenarios where showing all Destinations would confuse users
+
+## Getting Help
+
+Conditional visibility uses CEL (Common Expression Language), an industry standard. For complex conditions:
+
+1. **Use the prompt template above** with ChatGPT, Claude, or similar AI tools
+2. **Describe what you want** in plain language—let AI translate to CEL syntax
+3. **Test the expression** with your Items before deploying widely
+
+Need help? Contact [hi@qrtub.com](mailto:hi@qrtub.com) with your use case and we can help you construct the right condition.
+
+## Related
+
+- [Profile Pages Overview](/help/profile-pages-overview)
+- [Key Concepts](/help/key-concepts)
