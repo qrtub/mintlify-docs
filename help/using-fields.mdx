@@ -1,0 +1,359 @@
+---
+title: "Using Fields in Profile Pages"
+description: "Reference Item data, Tub information, user session, and device details in URLs and conditions"
+sidebar_position: 3
+category: "profile-pages"
+---
+
+qrtub Profile Pages can dynamically use data from your Items, Tubs, user sessions, and device information. This guide shows you how to reference fields in URL Templates and conditional visibility expressions.
+
+## Two Ways to Use Fields
+
+### 1. URL Templates (Double Curly Braces)
+
+Use `{{field.name}}` syntax to insert field values into Destination URLs.
+
+**Example:**
+```
+https://app.example.com/inspection/new?assetId={{item.serial_number}}
+```
+
+When someone scans the QR code for Item "EXC-203" with serial number "SN-2024-203", they're routed to:
+```
+https://app.example.com/inspection/new?assetId=SN-2024-203
+```
+
+### 2. Conditional Visibility (Direct References)
+
+Use direct field references in conditions to show/hide Destinations.
+
+**Example:**
+```
+item.status == "operational"
+```
+
+This Destination only appears when the Item's status field equals "operational".
+
+## Available Fields
+
+### Item Fields
+
+Items have **standard fields** (built-in) and **custom fields** (you define them).
+
+#### Standard Item Fields
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `item.id` | string | Unique identifier | `"item-456"` |
+| `item.name` | string | Display name | `"Excavator #203"` |
+| `item.description` | string | Description text | `"CAT 320 Hydraulic Excavator"` |
+| `item.image` | string | Image URL | `"/uploads/exc203.jpg"` |
+| `item.item_number` | string | Item number/SKU | `"EXC-203"` |
+| `item.type` | string | Type/category | `"Heavy Equipment"` |
+| `item.subtype` | string | Subtype | `"Excavator"` |
+| `item.status` | string | Current status | `"operational"` |
+| `item.tags` | array | Tags array | `["construction", "rental"]` |
+| `item.serial_number` | string | Serial number | `"SN-2024-203"` |
+| `item.location` | string | Physical location | `"Site A"` |
+| `item.owner` | string | Owner/assignee | `"John Smith"` |
+| `item.created_at` | date | Creation date | `"2024-01-15T00:00:00Z"` |
+| `item.updated_at` | date | Last update date | `"2024-01-20T00:00:00Z"` |
+
+**Important:** The field is `item.item_number`, not `item.number`.
+
+#### Custom Item Fields
+
+Any custom fields you define in your Tub are accessible as `item.{fieldName}`.
+
+**Example:**
+If you add a custom field called `inspectionDue` to your Tub, reference it as:
+- URL Template: `{{item.inspectionDue}}`
+- Condition: `item.inspectionDue < today`
+
+### Tub Fields
+
+Access information about the Tub (category/workspace) containing the Item.
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `tub.id` | string | Tub unique identifier | `"tub-123"` |
+| `tub.name` | string | Tub display name | `"Heavy Equipment"` |
+| `tub.description` | string | Tub description | `"Construction equipment fleet"` |
+| `tub.image_url` | string | Tub image URL | `"/images/equipment-icon.png"` |
+| `tub.items_name` | string | Items collection name | `"Machines"` |
+| `tub.created_at` | date | Tub creation date | `"2024-01-01T00:00:00Z"` |
+| `tub.metadata.page.is_public` | boolean | Public accessibility | `true` |
+| `tub.metadata.organizationName` | string | Organization name | `"BuildCo Inc."` |
+
+**Nested metadata example:**
+```
+tub.metadata.page.is_public == true
+```
+
+### Session Fields
+
+Access information about the logged-in user (if authenticated).
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `session.user` | object | User object (null if not logged in) | `{...}` |
+| `session.user.id` | string | User ID | `"user-123"` |
+| `session.user.email` | string | User email | `"john@example.com"` |
+| `session.user.name` | string | User name | `"John Smith"` |
+
+**Check if user is logged in:**
+```
+session.user != null
+```
+
+### Device Fields
+
+Automatically detected when someone scans the QR code.
+
+| Field | Type | Description | Example Values |
+|-------|------|-------------|----------------|
+| `device.type` | string | Device type | `'mobile'`, `'tablet'`, `'desktop'` |
+| `device.os` | string | Operating system | `'ios'`, `'android'`, `'windows'`, `'macos'`, `'linux'`, `'unknown'` |
+| `device.browser` | string | Browser | `'chrome'`, `'safari'`, `'firefox'`, `'edge'`, `'opera'`, `'unknown'` |
+| `device.isMobile` | boolean | True if mobile phone | `true` / `false` |
+| `device.isTablet` | boolean | True if tablet | `true` / `false` |
+| `device.isDesktop` | boolean | True if desktop | `true` / `false` |
+| `device.isIOS` | boolean | True if iOS device | `true` / `false` |
+| `device.isAndroid` | boolean | True if Android | `true` / `false` |
+
+See [Device Detection](/help/device-detection) for detailed device routing examples.
+
+### Theme Fields
+
+Access Profile Page theme configuration.
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `theme.accent` | string | Accent color | `"sky"` |
+| `theme.radius` | string | Border radius | `"xl"` |
+
+## URL Template Examples
+
+### Basic Field Insertion
+
+**Insert serial number into URL:**
+```
+https://api.example.com/assets/{{item.serial_number}}
+```
+
+**Multiple fields in one URL:**
+```
+https://api.example.com/inspect?id={{item.item_number}}&location={{item.location}}
+```
+
+### Inspection App Integration
+
+**Pre-fill asset ID in inspection:**
+```
+https://app.inspectionapp.com/new?assetId={{item.serial_number}}
+```
+
+**Pre-fill multiple fields:**
+```
+https://app.inspectionapp.com/new?assetId={{item.serial_number}}&location={{item.location}}&type={{item.type}}
+```
+
+### CMMS Integration
+
+**Open asset record:**
+```
+https://app.yourcmms.com/assets/{{item.item_number}}
+```
+
+**Create work order with context:**
+```
+https://app.yourcmms.com/workorders/new?asset={{item.item_number}}&site={{item.location}}
+```
+
+### Custom Application
+
+**Pass all relevant data:**
+```
+https://yourapp.com/equipment/{{item.id}}?name={{item.name}}&status={{item.status}}
+```
+
+## Conditional Visibility Examples
+
+### Item Status
+
+**Show "Start Inspection" only for operational equipment:**
+```
+item.status == "operational"
+```
+
+**Show "MAINTENANCE REQUIRED" only when not operational:**
+```
+item.status != "operational"
+```
+
+### Tags
+
+**Show Destination if Item has specific tag:**
+```
+"crane" in item.tags
+```
+
+**Show if Item has any of multiple tags:**
+```
+"heavy-equipment" in item.tags || "construction" in item.tags
+```
+
+**Check if tags array is not empty:**
+```
+size(item.tags) > 0
+```
+
+### Equipment Type
+
+**Show only for forklifts:**
+```
+item.type == "forklift"
+```
+
+**Show for multiple types:**
+```
+item.type == "forklift" || item.type == "crane"
+```
+
+### Dates and Expiry
+
+**Show if inspection is overdue:**
+```
+item.inspectionDue < today
+```
+
+**Show if expiring soon (within 7 days):**
+```
+item.inspectionDue >= today && item.inspectionDue <= today + 7
+```
+
+### Combining Multiple Conditions
+
+**Heavy equipment that's operational:**
+```
+item.type == "heavy-equipment" && item.status == "operational"
+```
+
+**Crane OR forklift, AND operational:**
+```
+(item.type == "crane" || item.type == "forklift") && item.status == "operational"
+```
+
+### Device-Based Conditions
+
+**Show only on mobile devices:**
+```
+device.isMobile
+```
+
+**Show for iOS Safari only:**
+```
+device.isIOS && device.browser == "safari"
+```
+
+**Show for desktop OR iOS users:**
+```
+device.isDesktop || device.isIOS
+```
+
+See [Conditional Visibility](/help/conditional-visibility) for more complex condition examples.
+
+## Common Patterns
+
+### Pattern 1: Equipment-Specific Inspections
+
+Different equipment types route to different inspection templates.
+
+**Destination: "Forklift Inspection"**
+- URL: `https://app.inspectionapp.com/new?template=forklift&asset={{item.serial_number}}`
+- Condition: `item.type == "forklift"`
+
+**Destination: "Crane Inspection"**
+- URL: `https://app.inspectionapp.com/new?template=crane&asset={{item.serial_number}}`
+- Condition: `item.type == "crane"`
+
+### Pattern 2: Location-Based Routing
+
+Route to different systems based on Item location.
+
+**Destination: "Site A Work Orders"**
+- URL: `https://sitea.cmms.com/workorders/new?asset={{item.item_number}}`
+- Condition: `item.location == "Site A"`
+
+**Destination: "Site B Work Orders"**
+- URL: `https://siteb.cmms.com/workorders/new?asset={{item.item_number}}`
+- Condition: `item.location == "Site B"`
+
+### Pattern 3: Status-Dependent Actions
+
+Show different Destinations based on Item status.
+
+**Destination: "Start Inspection" (operational only)**
+- Condition: `item.status == "operational"`
+
+**Destination: "Report for Repair" (non-operational only)**
+- Condition: `item.status != "operational"`
+
+**Destination: "Schedule Maintenance" (always visible)**
+- Condition: (none)
+
+### Pattern 4: Device + Item Type Routing
+
+Combine device detection with Item data.
+
+**Destination: "Mobile App Inspection" (mobile + forklifts)**
+- URL: `app://inspect?id={{item.serial_number}}`
+- Condition: `device.isMobile && item.type == "forklift"`
+
+**Destination: "Desktop Portal" (desktop + any type)**
+- URL: `https://portal.com/equipment/{{item.id}}`
+- Condition: `device.isDesktop`
+
+## Important Notes
+
+**Field Names:**
+- Use exact field names: `item.item_number` NOT `item.number`
+- Custom fields: Whatever name you gave them in Tub configuration
+- Case-sensitive: `item.Status` will NOT work, use `item.status`
+
+**URL Encoding:**
+- qrtub automatically URL-encodes field values
+- Spaces become `%20`, special characters are escaped
+- You don't need to manually encode
+
+**Missing Fields:**
+- If a field is empty/null, URL templates insert empty string
+- Conditions with missing fields evaluate to `false`
+- Check for existence: `item.owner != null`
+
+**Arrays (Tags):**
+- Use `in` operator: `"tag-name" in item.tags`
+- Check size: `size(item.tags) > 0`
+- Cannot directly insert arrays in URL templates (convert to string first)
+
+**Dates:**
+- Compare with `<`, `>`, `<=`, `>=`, `==`
+- Use `today` for current date: `item.inspectionDue < today`
+- Cannot perform date arithmetic beyond simple comparisons
+
+## Getting Help
+
+For complex field usage:
+
+1. **Use AI to generate expressions** - See [Conditional Visibility](/help/conditional-visibility#using-ai-to-generate-conditions)
+2. **Test with sample Items** - Create test Items with different field values
+3. **Check field names** - Verify exact field names in your Tub configuration
+4. **Contact support** - Email [hi@qrtub.com](mailto:hi@qrtub.com) with your use case
+
+## Related
+
+- [Conditional Visibility](/help/conditional-visibility) - Show/hide Destinations based on conditions
+- [Device Detection](/help/device-detection) - Device-based routing
+- [SafetyCulture Integration](/integrations/safetyculture) - Using fields with SafetyCulture
+- [CMMS Integration](/integrations/cmms-systems) - Using fields with maintenance systems
+- [Profile Pages Overview](/help/profile-pages-overview) - Understanding Profile Pages and Destinations

@@ -1,0 +1,251 @@
+---
+title: "Device Detection & Routing"
+description: "Route users to different Destinations based on their device type, operating system, or browser"
+sidebar_position: 5
+category: "profile-pages"
+---
+
+qrtub automatically detects what device someone is using when they scan your QR code. You can use this information to show device-specific Destinations or route users to apps that work best on their platform.
+
+## Why Device Detection Matters
+
+Different devices need different experiences:
+
+- **Mobile users** might have your app installed—send them to the app with deep links
+- **Desktop users** can't install mobile apps—send them to your web app instead
+- **iOS users** have different app stores than Android users
+- **Tablet users** might need a different layout than phone users
+
+One QR code can serve the right experience for everyone.
+
+## Common Use Cases
+
+### 1. Mobile App vs Web App
+
+**Scenario:** You have a mobile app for field staff and a web app for office staff.
+
+**Setup:**
+- Create a "Mobile App" Destination with your app's deep link
+  - Set condition: `device.isMobile`
+- Create a "Web Portal" Destination with your web app URL
+  - Set condition: `device.isDesktop`
+
+**Result:** Field staff see "Mobile App" button. Office staff see "Web Portal" button. Same QR code.
+
+### 2. Platform-Specific App Downloads
+
+**Scenario:** You want people to download your app from the right app store.
+
+**Setup:**
+- Create "Download on App Store" Destination
+  - URL: `https://apps.apple.com/app/yourapp`
+  - Condition: `device.isIOS`
+- Create "Get it on Google Play" Destination
+  - URL: `https://play.google.com/store/apps/details?id=com.yourapp`
+  - Condition: `device.isAndroid`
+
+**Result:** iPhone users see App Store link. Android users see Google Play link.
+
+### 3. iOS Safari Deep Link Workaround (SafetyCulture Example)
+
+**Scenario:** SafetyCulture mobile app deep links (`iauditor://`) only work in Safari on iOS. Users on iOS in Chrome or other browsers need the web version instead.
+
+**Setup - Create Two Destinations:**
+
+**Destination 1: "Start Inspection (Mobile App)"**
+- URL: `iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2`
+- Condition: `device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")`
+
+**Destination 2: "Start Inspection (Web)"**
+- URL: `https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
+- Condition: `device.isIOS && device.browser != "safari"`
+
+**Breaking down the conditions:**
+
+Destination 1 shows for:
+- `device.isDesktop` - Desktop users (app links won't work anyway, but SafetyCulture handles this)
+- `!device.isIOS` - Non-iOS mobile users (Android, etc. - app links work fine)
+- `device.isIOS && device.browser == "safari"` - iOS users in Safari (app links work here)
+
+Destination 2 shows for:
+- `device.isIOS && device.browser != "safari"` - iOS users NOT in Safari (app links blocked, use web)
+
+**Result:**
+- Desktop users: See mobile app Destination (SafetyCulture redirects appropriately)
+- Android users: See mobile app Destination (opens SafetyCulture app)
+- iOS Safari users: See mobile app Destination (opens SafetyCulture app)
+- iOS Chrome/Firefox users: See web Destination (opens in browser, avoiding iOS restriction)
+
+### 4. Tablet-Optimized Experience
+
+**Scenario:** You have a special interface optimized for tablets.
+
+**Setup:**
+- Create "Tablet Interface" Destination
+  - Condition: `device.isTablet`
+- Create "Standard Interface" Destination
+  - Condition: `!device.isTablet`
+
+**Result:** Tablet users get the optimized experience automatically.
+
+### 5. Browser-Specific Features
+
+**Scenario:** A feature only works in certain browsers.
+
+**Setup:**
+- Create "Use Advanced Feature" Destination
+  - Condition: `device.browser == "chrome" || device.browser == "firefox"`
+- Create "Standard Version" Destination
+  - Condition: `device.browser != "chrome" && device.browser != "firefox"`
+
+**Result:** Chrome and Firefox users see the advanced feature. Others see the standard version.
+
+## Available Device Information
+
+### Device Type
+
+**Field:** `device.type`
+
+**Values:**
+- `'mobile'` - Smartphone
+- `'tablet'` - Tablet device
+- `'desktop'` - Desktop or laptop computer
+
+**Convenience flags:**
+- `device.isMobile` - True if smartphone
+- `device.isTablet` - True if tablet
+- `device.isDesktop` - True if desktop/laptop
+
+**Examples:**
+```
+device.type == "mobile"
+device.isTablet
+device.isDesktop
+```
+
+### Operating System
+
+**Field:** `device.os`
+
+**Values:**
+- `'ios'` - iPhone or iPad
+- `'android'` - Android device
+- `'windows'` - Windows PC
+- `'macos'` - Mac computer
+- `'linux'` - Linux system
+- `'unknown'` - Could not detect OS
+
+**Convenience flags:**
+- `device.isIOS` - True if iPhone/iPad
+- `device.isAndroid` - True if Android
+
+**Examples:**
+```
+device.os == "ios"
+device.isAndroid
+device.os == "windows" || device.os == "macos"
+```
+
+### Browser
+
+**Field:** `device.browser`
+
+**Values:**
+- `'chrome'` - Google Chrome
+- `'safari'` - Apple Safari
+- `'firefox'` - Mozilla Firefox
+- `'edge'` - Microsoft Edge
+- `'opera'` - Opera browser
+- `'unknown'` - Could not detect browser
+
+**Examples:**
+```
+device.browser == "safari"
+device.browser == "chrome" || device.browser == "edge"
+device.browser != "unknown"
+```
+
+## How to Set Up Device Routing
+
+1. **Create your Destinations** - One for each device scenario
+2. **Add conditions** - Use device fields in each Destination's visibility condition
+3. **Test on multiple devices** - Scan your QR code from phone, tablet, desktop to verify
+
+**Example Profile Page:**
+```
+Profile Page: Equipment Inspector
+├── "Open Mobile App"
+│   └── Condition: device.isMobile
+├── "Open Web Portal"
+│   └── Condition: device.isDesktop
+└── "Equipment Manual" (PDF)
+    └── Condition: (none - always visible)
+```
+
+## Combining Device Detection with Item Data
+
+You can combine device detection with Item fields for powerful routing:
+
+**Example:** Mobile crane operators get the mobile app. Desktop users get web portal. But both only see these if the equipment type is "crane".
+
+**Mobile App Destination condition:**
+```
+device.isMobile && item.type == "crane"
+```
+
+**Web Portal Destination condition:**
+```
+device.isDesktop && item.type == "crane"
+```
+
+## Important Notes
+
+**User-Agent Detection:**
+Device detection uses browser User-Agent strings. These are generally reliable but:
+- Users can modify their User-Agent (rare)
+- Some privacy browsers mask device info
+- New devices/browsers might be detected as "unknown"
+
+**Not for Security:**
+Device detection is for routing and user experience, NOT security. Don't rely on it to restrict access to sensitive data—use proper authentication instead.
+
+**Fallback Behavior:**
+If device can't be detected, qrtub assumes:
+- Type: `desktop`
+- OS: `unknown`
+- Browser: `unknown`
+
+**Always Provide Options:**
+Consider having at least one Destination without device conditions—a fallback that everyone can access regardless of device.
+
+## Testing Your Setup
+
+Before deploying QR codes with device routing:
+
+1. **Test on iPhone** - Verify iOS-specific Destinations appear
+2. **Test on Android** - Verify Android-specific Destinations appear
+3. **Test on Desktop** - Verify desktop Destinations appear
+4. **Test different browsers** - Safari, Chrome, Firefox if you're using browser conditions
+5. **Test tablets** - If you have tablet-specific routing
+
+Scan the same QR code from each device. Verify you see the Destinations you expect.
+
+## When NOT to Use Device Detection
+
+**Don't use device detection for:**
+- Restricting access to sensitive information (use proper authentication)
+- Forcing users into one specific app (let them choose)
+- Scenarios where showing all options is simpler
+
+**DO use device detection for:**
+- App store routing (right store for each platform)
+- Mobile app vs web app routing
+- Platform-specific deep links
+- Optimized experiences per device type
+
+## Related
+
+- [Using Fields](/help/using-fields) - Complete field reference including device fields
+- [Conditional Visibility](/help/conditional-visibility) - Using device detection in visibility conditions
+- [Profile Pages Overview](/help/profile-pages-overview) - Setting up Profile Pages with multiple Destinations
+- [Key Concepts](/help/key-concepts) - Understanding Destinations and Links

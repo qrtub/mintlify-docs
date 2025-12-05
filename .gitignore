@@ -1,0 +1,14 @@
+# Reference materials not for git
+_references_no_git/
+references_no_git/
+
+# Node modules (if any)
+node_modules/
+
+# Build output
+.mintlify/
+_site/
+
+# OS files
+.DS_Store
+Thumbs.db

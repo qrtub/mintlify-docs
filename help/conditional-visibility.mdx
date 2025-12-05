@@ -29,17 +29,17 @@ Conditional Visibility lets you control which Destinations appear on Profile Pag
 
 **Condition for "Forklift Inspection" Destination:**
 ```
-equipmentType == "forklift"
+item.type == "forklift"
 ```
 
 **Condition for "Crane Inspection" Destination:**
 ```
-equipmentType == "crane"
+item.type == "crane"
 ```
 
 **How to set this up:**
-1. Add an `equipmentType` field to your Tub
-2. Set each Item's `equipmentType` value ("forklift", "crane", etc.)
+1. Use the standard `type` field or add a custom field (e.g., `equipmentType`) to your Tub
+2. Set each Item's type value ("forklift", "crane", etc.)
 3. Create separate Destinations for each inspection type
 4. Add the condition to each Destination
 
@@ -49,13 +49,13 @@ equipmentType == "crane"
 
 **Condition to show "Heavy Equipment Inspection":**
 ```
-tag == "heavy-equipment"
+"heavy-equipment" in item.tags
 ```
 
 **How to set this up:**
-1. Tag relevant Items with "heavy-equipment"
+1. Tag relevant Items with "heavy-equipment" (using the standard tags field)
 2. Create a "Heavy Equipment Inspection" Destination
-3. Add the condition `tag == "heavy-equipment"`
+3. Add the condition `"heavy-equipment" in item.tags`
 4. Tagged equipment shows this Destination; others don't
 
 ### 3. Overdue Inspection Warnings
@@ -64,7 +64,7 @@ tag == "heavy-equipment"
 
 **Condition to show "INSPECTION OVERDUE" banner:**
 ```
-inspectionDue < today
+item.inspectionDue < today
 ```
 
 **How to set this up:**
@@ -79,14 +79,14 @@ inspectionDue < today
 
 **Condition to show "RETEST REQUIRED":**
 ```
-testStatus == "expired"
+item.testStatus == "expired"
 ```
 
 **How to set this up:**
 1. Add a `testStatus` field to your Tub
 2. Set values: "current", "expired", "pending"
 3. Create "RETEST REQUIRED" Destination
-4. Add the condition `testStatus == "expired"`
+4. Add the condition `item.testStatus == "expired"`
 
 ## Using AI to Generate Conditions
 
@@ -118,13 +118,13 @@ I want to show a Destination called "Crane Safety Inspection" only when:
 
 Generate a CEL expression for this condition.
 
-Available Item fields: tag (string), status (string), equipmentType (string)
-Available operators: ==, !=, ||, &&
+Available Item fields: item.tags (array), item.status (string), item.type (string)
+Available operators: ==, !=, ||, &&, in
 ```
 
 **ChatGPT response:**
 ```
-(tag == "crane" || tag == "heavy-equipment") && status == "active"
+("crane" in item.tags || "heavy-equipment" in item.tags) && item.status == "active"
 ```
 
 ### Example 2: Date-Based with Grace Period
@@ -138,13 +138,14 @@ I want to show a Destination called "Inspection Due Soon" only when:
 
 Generate a CEL expression for this condition.
 
-Available Item fields: inspectionDue (date)
+Available Item fields: item.inspectionDue (date)
 Available operators: ==, !=, ||, &&, >, <, >=, <=
+Special values: today (current date)
 ```
 
 **ChatGPT response:**
 ```
-inspectionDue >= today && inspectionDue <= today + 7
+item.inspectionDue >= today && item.inspectionDue <= today + 7
 ```
 
 ## Advanced: Device-Specific Destinations
@@ -165,41 +166,68 @@ device.isMobile
 device.isDesktop
 ```
 
-### iOS Safari Workaround
+### iOS Safari Workaround (SafetyCulture Example)
 
-**Scenario:** iOS blocks app deep links unless the user is in Safari browser. You want to show the mobile app link only when it will work.
+**Scenario:** SafetyCulture mobile app deep links (`iauditor://`) only work in Safari on iOS. You need to show the web version for iOS users in other browsers.
 
-**Condition to show mobile app link:**
+**Destination 1: "Start Inspection (Mobile App)"**
+- URL: `iauditor://template/new_audit/template_id`
+- Condition:
 ```
-!device.isIOS || (device.isIOS && device.browser == "safari")
+device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")
 ```
 
-This shows the mobile app link IF:
-- User is NOT on iOS (app links work fine)
-- OR user IS on iOS AND using Safari browser
+This shows the mobile app link for:
+- Desktop users (SafetyCulture handles redirect)
+- Non-iOS mobile users (Android, etc.)
+- iOS users in Safari (where app links work)
 
-**Condition to show web link as fallback:**
+**Destination 2: "Start Inspection (Web)"**
+- URL: `https://app.safetyculture.com/inspection/new?templateId=template_id`
+- Condition:
 ```
 device.isIOS && device.browser != "safari"
 ```
 
+This shows the web link for iOS users in Chrome, Firefox, or other browsers where app deep links are blocked.
+
 ## Available Fields
 
-### Item Fields
-You can reference ANY field from your Items:
-- **Standard fields:** Number, Name, Description, Group, Status, Tags, Date, Image
-- **Custom fields:** Any fields you've defined in your Tub
-- **System fields:** created_at, updated_at, created_by, updated_by
+You have access to:
+- **Item fields** - `item.name`, `item.status`, `item.tags`, `item.serial_number`, etc.
+- **Custom fields** - Any fields you've defined in your Tub: `item.{yourFieldName}`
+- **Tub fields** - `tub.name`, `tub.metadata.organizationName`, etc.
+- **Device fields** - `device.isMobile`, `device.isIOS`, `device.browser`, etc.
+- **Session fields** - `session.user.id`, `session.user.email` (if logged in)
+- **Special values** - `today` (current date)
 
-### Device Fields
-- `device.isDesktop` - User is on desktop computer
-- `device.isMobile` - User is on mobile phone
-- `device.isIOS` - User is on iPhone/iPad
-- `device.isAndroid` - User is on Android device
-- `device.browser` - Browser name (safari, chrome, firefox, etc.)
+**See [Using Fields](/help/using-fields) for complete field reference with all available fields, types, and examples.**
 
-### Special Values
-- `today` - Current date (for date comparisons)
+### Quick Device Field Reference
+
+**Device Type:**
+- `device.type` - Returns `'mobile'`, `'tablet'`, or `'desktop'`
+- `device.isMobile` - True if mobile phone
+- `device.isTablet` - True if tablet
+- `device.isDesktop` - True if desktop computer
+
+**Operating System:**
+- `device.os` - Returns `'ios'`, `'android'`, `'windows'`, `'macos'`, `'linux'`, or `'unknown'`
+- `device.isIOS` - True if iPhone or iPad
+- `device.isAndroid` - True if Android device
+
+**Browser:**
+- `device.browser` - Returns `'chrome'`, `'safari'`, `'firefox'`, `'edge'`, `'opera'`, or `'unknown'`
+
+**Examples:**
+```
+device.type == "mobile"
+device.os == "ios"
+device.browser == "safari"
+device.isTablet && device.os == "android"
+```
+
+See [Device Detection](/help/device-detection) for device routing patterns and examples.
 
 ## Tips
 
@@ -238,5 +266,7 @@ Need help? Contact [hi@qrtub.com](mailto:hi@qrtub.com) with your use case and we
 
 ## Related
 
+- [Using Fields](/help/using-fields) - Complete field reference with all available fields
+- [Device Detection](/help/device-detection) - Device-based routing and available device fields
 - [Profile Pages Overview](/help/profile-pages-overview)
 - [Key Concepts](/help/key-concepts)

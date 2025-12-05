@@ -26,9 +26,16 @@
             "group": "Concepts",
             "pages": [
               "help/key-concepts",
-              "help/profile-pages-overview",
-              "help/conditional-visibility",
               "help/media-basics"
+            ]
+          },
+          {
+            "group": "Profile Pages",
+            "pages": [
+              "help/profile-pages-overview",
+              "help/using-fields",
+              "help/conditional-visibility",
+              "help/device-detection"
             ]
           }
         ]
