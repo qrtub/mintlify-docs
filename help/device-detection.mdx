@@ -50,10 +50,13 @@ One QR code can serve the right experience for everyone.
 
 **Scenario:** SafetyCulture mobile app deep links (`iauditor://`) only work in Safari on iOS. Users on iOS in Chrome or other browsers need the web version instead.
 
+**Note:** If your concern is simply "what if the app isn't installed?", the [Fallback URL feature](/help/app-links) handles that automatically — no device routing needed. Device routing is for the specific case where the app is installed but the browser blocks deep links (iOS Chrome/Firefox).
+
 **Setup - Create Two Destinations:**
 
 **Destination 1: "Start Inspection (Mobile App)"**
 - URL: `iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2`
+- Fallback URL: `https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
 - Condition: `device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")`
 
 **Destination 2: "Start Inspection (Web)"**
@@ -64,7 +67,7 @@ One QR code can serve the right experience for everyone.
 
 Destination 1 shows for:
 - `device.isDesktop` - Desktop users (app links won't work anyway, but SafetyCulture handles this)
-- `!device.isIOS` - Non-iOS mobile users (Android, etc. - app links work fine)
+- `!device.isIOS` - Non-iOS mobile users (Android, etc. — app links work fine)
 - `device.isIOS && device.browser == "safari"` - iOS users in Safari (app links work here)
 
 Destination 2 shows for:
@@ -245,6 +248,7 @@ Scan the same QR code from each device. Verify you see the Destinations you expe
 
 ## Related
 
+- [App Links & Fallback URLs](/help/app-links) - Automatic fallback when a mobile app isn't installed
 - [Using Fields](/help/using-fields) - Complete field reference including device fields
 - [Conditional Visibility](/help/conditional-visibility) - Using device detection in visibility conditions
 - [Profile Pages Overview](/help/profile-pages-overview) - Setting up Profile Pages with multiple Destinations
