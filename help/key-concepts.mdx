@@ -5,11 +5,11 @@ sidebar_position: 1
 category: "fundamentals"
 ---
 
-Understanding these core concepts will help you get the most out of qrtub.
+Understanding these core concepts will help you get the most out of QRtub.
 
 ## The Three-Entity Model
 
-Most QR code systems treat everything as one thing. qrtub recognizes that physical QR code deployments involve three distinct entities, each with its own lifecycle:
+Most QR code systems treat everything as one thing. QRtub recognizes that physical QR code deployments involve three distinct entities, each with its own lifecycle:
 
 ### Item
 **What it is:** The thing being represented or tracked.
@@ -27,7 +27,7 @@ Most QR code systems treat everything as one thing. qrtub recognizes that physic
 ---
 
 ### Link
-**What it is:** The qrtub-managed URL that QR codes encode.
+**What it is:** The QRtub-managed URL that QR codes encode.
 
 **Examples:**
 - `qrtub.com/r/x5fgd` (Random)
@@ -56,7 +56,7 @@ Most QR code systems treat everything as one thing. qrtub recognizes that physic
 - An NFC chip
 - A rigid sign
 
-**Key point:** Most people think generating a QR code pattern is all there is. But qrtub recognizes that the QR code gets printed or displayed on something physical—and that physical material has real costs, durability characteristics, and lifecycle needs.
+**Key point:** Most people think generating a QR code pattern is all there is. But QRtub recognizes that the QR code gets printed or displayed on something physical—and that physical material has real costs, durability characteristics, and lifecycle needs.
 
 **Why track Media separately:**
 - **Cost tracking** - A billboard costs $5,000. That's infrastructure worth managing.
@@ -157,7 +157,7 @@ app.com/inspect?id=EXC-203&name=Excavator%20203
 
 **Why this matters for bulk deployment:**
 
-URL Templates are what make qrtub truly scalable. Instead of configuring each QR code individually, you:
+URL Templates are what make QRtub truly scalable. Instead of configuring each QR code individually, you:
 
 1. **Configure once** - Set up the URL template with placeholders
 2. **Deploy everywhere** - Apply to hundreds or thousands of Items
@@ -206,7 +206,7 @@ Without URL Templates, deploying 500 equipment QR codes means manually configuri
 3. But you don't have all your Item details finalized yet
 4. You're stuck: delay printing or print without knowing what codes connect to
 
-**The qrtub solution:**
+**The QRtub solution:**
 1. **Generate Links** - Create 100, 500, or however many you need
 2. **Professional printing** - Order quality Media (stickers, signs, plaques)
 3. **Field deployment** - Apply Media to Items as they arrive/deploy
@@ -226,21 +226,21 @@ Without URL Templates, deploying 500 equipment QR codes means manually configuri
 - **Broken links** - URL changed or site migrated → Update the Destination
 - **Requirements evolution** - Your needs change over time → Update freely
 
-**Example:** 500 equipment QR codes point to "System A" for inspections. Two years later, you switch to "System B." With traditional QR codes, you reprint 500 codes. With qrtub, you update 500 Destinations. Physical codes unchanged.
+**Example:** 500 equipment QR codes point to "System A" for inspections. Two years later, you switch to "System B." With traditional QR codes, you reprint 500 codes. With QRtub, you update 500 Destinations. Physical codes unchanged.
 
 ---
 
 ## Integration Layer
 
-**What qrtub is:** A connection layer between your physical items and your digital systems.
+**What QRtub is:** A connection layer between your physical items and your digital systems.
 
-**What qrtub is NOT:**
+**What QRtub is NOT:**
 - ✗ Asset management software (connects to yours)
 - ✗ Inspection software (links to SafetyCulture, etc.)
 - ✗ Maintenance tracking (integrates with your CMMS)
 - ✗ Compliance platform (routes to your compliance tools)
 
-**What qrtub does:** Manages the QR code infrastructure that connects physical items to all your digital systems.
+**What QRtub does:** Manages the QR code infrastructure that connects physical items to all your digital systems.
 
 **Think of it as:** The smart router between your physical world (equipment, products, locations) and your digital world (multiple software systems).
 
@@ -249,10 +249,10 @@ Without URL Templates, deploying 500 equipment QR codes means manually configuri
 ## Common Questions
 
 **Q: Why can't I just use a regular QR code generator?**
-A: Regular generators hardcode URLs into QR codes. Once printed, they can't be changed. qrtub decouples the physical code from its Destination, enabling updates without reprinting.
+A: Regular generators hardcode URLs into QR codes. Once printed, they can't be changed. QRtub decouples the physical code from its Destination, enabling updates without reprinting.
 
 **Q: What's the difference between a Link and a QR code?**
-A: A Link is the qrtub-managed URL (`qrtub.com/r/xxxxx`). A QR code is one way to encode that Link (the black/white pattern). You could also type the Link, embed it in NFC, or use RFID.
+A: A Link is the QRtub-managed URL (`qrtub.com/r/xxxxx`). A QR code is one way to encode that Link (the black/white pattern). You could also type the Link, embed it in NFC, or use RFID.
 
 **Q: Do I need Items to use Links?**
 A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Profile Pages, URL Templates, and organized management.
