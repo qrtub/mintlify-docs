@@ -9,23 +9,25 @@
   },
   "favicon": "/qrtub-favicon.svg",
   "navigation": {
-    "anchors": [
-      {
-        "anchor": "qrtub.com",
-        "icon": "house",
-        "href": "https://qrtub.com"
-      },
-      {
-        "anchor": "Pricing",
-        "icon": "credit-card",
-        "href": "https://qrtub.com/pricing"
-      },
-      {
-        "anchor": "Contact Us",
-        "icon": "envelope",
-        "href": "mailto:hi@qrtub.com"
-      }
-    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "qrtub.com",
+          "icon": "house",
+          "href": "https://qrtub.com"
+        },
+        {
+          "anchor": "Pricing",
+          "icon": "credit-card",
+          "href": "https://qrtub.com/pricing"
+        },
+        {
+          "anchor": "Contact Us",
+          "icon": "envelope",
+          "href": "mailto:hi@qrtub.com"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Help",
