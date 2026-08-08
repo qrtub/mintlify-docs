@@ -9,25 +9,6 @@
   },
   "favicon": "/qrtub-favicon.svg",
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "qrtub.com",
-          "icon": "house",
-          "href": "https://qrtub.com"
-        },
-        {
-          "anchor": "Pricing",
-          "icon": "credit-card",
-          "href": "https://qrtub.com/pricing"
-        },
-        {
-          "anchor": "Contact Us",
-          "icon": "envelope",
-          "href": "https://qrtub.com/contact"
-        }
-      ]
-    },
     "tabs": [
       {
         "tab": "Help",
@@ -104,6 +85,10 @@
       {
         "label": "Sign In",
         "href": "https://app.qrtub.com/login"
+      },
+      {
+        "label": "Contact Us",
+        "href": "https://qrtub.com/contact"
       }
     ],
     "primary": {
