@@ -1,5 +1,6 @@
 ---
 title: "QRtub for Electrical Test and Tag"
+description: "QR codes on tested equipment, linking to your test platform and compliance records"
 slug: "electrical-test-and-tag"
 sidebar_position: 4
 industry: "Electrical Testing"
@@ -37,9 +38,9 @@ Traditional approaches create problems:
 
 A manufacturing facility has 500+ electrical items requiring regular testing. Safety officer, technicians, and staff all need different access to compliance data.
 
-**One QR code per equipment item. Everyone sees the same Profile Page:**
+**One QR code per equipment item. Everyone sees the same Page:**
 
-**Example Profile Page:**
+**Example Page:**
 - Equipment details (type, location, serial)
 - Current test status and next due date (everyone sees this)
 - "Start Test" → Technicians tap this
@@ -70,7 +71,7 @@ A contract test and tag company services 40 client sites. Each client wants acce
 
 Each client gets their own Tub (isolated equipment register). You manage all clients in one QRtub account. Clients access their equipment data by scanning QR codes at their own sites.
 
-**Example Profile Page (contractor-branded):**
+**Example Page (contractor-branded):**
 - "Your Company - Professional Test & Tag" branding
 - Equipment details and test status
 - "Start Test" → Your technicians tap this
@@ -117,7 +118,7 @@ When anyone scans a test-tagged item, they see:
 
 **Paper tag only:** Shows test date. No context. No history. No engagement.
 
-**QRtub Profile Page:** Shows compliance status + professional infrastructure + register access + contact pathway.
+**QRtub Page:** Shows compliance status + professional infrastructure + register access + contact pathway.
 
 ## Bulk Deployment and Ongoing Management
 
@@ -130,7 +131,7 @@ Configure once. Tag 5,000 items across 40 clients. Each QR code automatically pr
 
 **Compliance deadline tracking:**
 - Item field: `nextTestDue: 2025-08-15`
-- Profile Page shows: "Next test due: 15 Aug 2025"
+- Page shows: "Next test due: 15 Aug 2025"
 
 **Update without retagging:** Change test provider, update contact details, switch test platforms—physical tags stay unchanged for equipment's entire lifecycle.
 
@@ -184,7 +185,7 @@ URL Templates auto-populate equipment data—configure once, deploy across equip
 1. **Generate Links** - Bulk generation for equipment population (`qrtub.com/drill-001`, etc.)
 2. **Order tags** - Durable vinyl or polyester test tag labels with QR codes
 3. **Create Tub** - Define equipment fields (Equipment ID, Type, Location, Next test due, Serial number)
-4. **Configure Profile Page** - Test status display, test form link, history access, fault reporting
+4. **Configure Page** - Test status display, test form link, history access, fault reporting
 5. **Deploy** - Import equipment inventory, each item inherits compliance register access
 6. **Tag equipment** - Apply QR codes alongside test tag stickers
 
@@ -192,7 +193,7 @@ URL Templates auto-populate equipment data—configure once, deploy across equip
 
 1. **Generate Links** - Bulk generation for each client's equipment
 2. **Create Tubs per client** - Separate Tub for each client (isolated registers)
-3. **Brand Profile Pages** - Your company branding + client equipment data
+3. **Brand Pages** - Your company branding + client equipment data
 4. **Configure test workflows** - Technician access + client access + reporting
 5. **Tag during testing** - Apply QR codes when performing tests
 6. **Offer as service differentiator** - "Digital compliance register included"
@@ -239,12 +240,10 @@ Update as contracts evolve—new clients, changed platforms, updated contacts—
 
 ## Ready to Deploy?
 
-QRtub is currently in BETA with companies and test providers already using it for compliance register management.
-
 **Core features available:**
 - Bulk Link generation for equipment populations
 - Client-isolated Tubs for contract providers
-- Professional branded Profile Pages with test status display
+- Professional branded Pages with test status display
 - Deep links into your test platform and asset management systems
 - URL Templates for equipment-specific data pre-fill
 

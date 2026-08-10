@@ -2,7 +2,6 @@
 title: "Device Detection & Routing"
 description: "Route users to different Destinations based on their device type, operating system, or browser"
 sidebar_position: 5
-category: "profile-pages"
 ---
 
 QRtub automatically detects what device someone is using when they scan your QR code. You can use this information to show device-specific Destinations or route users to apps that work best on their platform.
@@ -174,9 +173,9 @@ device.browser != "unknown"
 2. **Add conditions** - Use device fields in each Destination's visibility condition
 3. **Test on multiple devices** - Scan your QR code from phone, tablet, desktop to verify
 
-**Example Profile Page:**
+**Example Page:**
 ```
-Profile Page: Equipment Inspector
+Page: Equipment Inspector
 ├── "Open Mobile App"
 │   └── Condition: device.isMobile
 ├── "Open Web Portal"
@@ -251,7 +250,7 @@ Scan the same QR code from each device. Verify you see the Destinations you expe
 - [App Links & Fallback URLs](/help/app-links) - Automatic fallback when a mobile app isn't installed
 - [Using Fields](/help/using-fields) - Complete field reference including device fields
 - [Conditional Visibility](/help/conditional-visibility) - Using device detection in visibility conditions
-- [Profile Pages Overview](/help/profile-pages-overview) - Setting up Profile Pages with multiple Destinations
+- [Pages Overview](/help/pages-overview) - Setting up Pages with multiple Destinations
 - [Key Concepts](/help/key-concepts) - Understanding Destinations and Links
 
 ---

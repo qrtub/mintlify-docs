@@ -1,7 +1,13 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "qrtub documentation",
+  "name": "QRtub documentation",
+  "redirects": [
+    {
+      "source": "/help/profile-pages-overview",
+      "destination": "/help/pages-overview"
+    }
+  ],
   "colors": {
     "primary": "#F25830",
     "light": "#F0F3FF",
@@ -30,9 +36,9 @@
             ]
           },
           {
-            "group": "Profile Pages",
+            "group": "Pages",
             "pages": [
-              "help/profile-pages-overview",
+              "help/pages-overview",
               "help/using-fields",
               "help/conditional-visibility",
               "help/device-detection",
@@ -66,13 +72,6 @@
               "integrations/cmms-systems"
             ]
           }
-        ]
-      },
-      {
-        "tab": "Blog",
-        "pages": [
-          "blog/announcing-qrtub-beta",
-          "blog/why-qr-codes-need-management"
         ]
       }
     ]

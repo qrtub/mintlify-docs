@@ -1,5 +1,6 @@
 ---
 title: "Key Concepts"
+description: "The three-entity model, Link modes, Tubs, and the print-before-link workflow"
 slug: "key-concepts"
 sidebar_position: 1
 category: "fundamentals"
@@ -79,7 +80,7 @@ is assigned to
 ▼                 
 LINK: qrtub.com/exc203 
 - Type: ID-based           
-- Mode: Profile Page       
+- Mode: Page       
 - Created: Jan 2025        
 ▼
 is encoded on
@@ -112,8 +113,8 @@ Links can operate in two modes:
 
 ---
 
-### Profile Mode
-**How it works:** Link opens a Profile Page—a mobile-friendly landing page where users select from multiple Destinations.
+### Page Mode
+**How it works:** Link opens a Page—a mobile-friendly landing page where users select from multiple Destinations.
 
 **When to use:**
 - One QR code needs to serve multiple purposes
@@ -136,7 +137,7 @@ Links can operate in two modes:
 
 **In Direct Mode:** The Link has one Destination and immediately redirects.
 
-**In Profile Mode:** The Profile Page displays multiple Destinations as buttons/cards that users tap.
+**In Page Mode:** The Page displays multiple Destinations as buttons/cards that users tap.
 
 ### Current Destination Types:
 - **External URLs** - Any web address (your systems, documentation, websites)
@@ -181,7 +182,7 @@ Without URL Templates, deploying 500 equipment QR codes means manually configuri
 
 ### What Tubs Provide:
 - **Custom fields** - Define exactly what data each Item type needs
-- **Profile Page templates** - Design how Profile Pages look for this category
+- **Page templates** - Design how Pages look for this category
 - **Organized management** - Keep equipment separate from products, facilities separate from tools
 
 ### Examples:
@@ -222,7 +223,7 @@ Without URL Templates, deploying 500 equipment QR codes means manually configuri
 
 ### Common scenarios:
 - **Vendor switching** - Switch from one inspection app to another → Update Destinations
-- **Adding systems** - Add a new Destination to Profile Pages → One QR code now serves another system
+- **Adding systems** - Add a new Destination to Pages → One QR code now serves another system
 - **Broken links** - URL changed or site migrated → Update the Destination
 - **Requirements evolution** - Your needs change over time → Update freely
 
@@ -255,10 +256,10 @@ A: Regular generators hardcode URLs into QR codes. Once printed, they can't be c
 A: A Link is the QRtub-managed URL (`qrtub.com/r/xxxxx`). A QR code is one way to encode that Link (the black/white pattern). You could also type the Link, embed it in NFC, or use RFID.
 
 **Q: Do I need Items to use Links?**
-A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Profile Pages, URL Templates, and organized management.
+A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Pages, URL Templates, and organized management.
 
 **Q: Can one Link connect to multiple Items?**
-A: No. One Link connects to either one Item (Profile Mode) or one Destination (Direct Mode). But one Item can have multiple Links.
+A: No. One Link connects to either one Item (Page Mode) or one Destination (Direct Mode). But one Item can have multiple Links.
 
 **Q: What happens to my scan data if I replace damaged Media?**
 A: When you replace damaged Media with new Media, both encode the same Link. The Item connection stays intact, so the new Media resolves exactly as the old one did.
@@ -269,7 +270,7 @@ A: When you replace damaged Media with new Media, both encode the same Link. The
 
 **Related Help Pages:**
 - [Creating Your First Link](/help/creating-your-first-link)
-- [Profile Pages Overview](/help/profile-pages-overview)
+- [Pages Overview](/help/pages-overview)
 - [Conditional Visibility](/help/conditional-visibility)
 - [Physical Media Management Basics](/help/media-basics)
 

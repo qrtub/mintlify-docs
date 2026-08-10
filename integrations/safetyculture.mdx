@@ -1,5 +1,6 @@
 ---
 title: "SafetyCulture (iAuditor) Integration"
+description: "Open SafetyCulture inspections straight from a scan, pre-filled with the item's data"
 slug: "safetyculture"
 sidebar_position: 1
 platform: "SafetyCulture"
@@ -40,7 +41,7 @@ See [SafetyCulture's guide on getting entity IDs](https://help.safetyculture.com
 
 ### Mobile App Deep Link
 
-In your Item's Profile Page, add a new Destination:
+In your Item's Page, add a new Destination:
 
 **Destination Name:** Start Inspection
 **Destination URL:** `iauditor://template/new_audit/<template_id>`
@@ -181,7 +182,7 @@ Store the latest inspection ID in each Item's `inspectionID` field. When someone
 - Building systems
 
 **Multi-Audience Routing**
-Create a Profile Page with multiple Destinations:
+Create a Page with multiple Destinations:
 - Operators see "Start Inspection" → Start new inspection
 - Managers see "View Report" → View latest report
 - Maintenance see "Asset History" → SafetyCulture asset profile
@@ -212,7 +213,7 @@ Deep links only work if users have permission to access the relevant entities in
 - [SafetyCulture Deep Link Documentation](https://help.safetyculture.com/en-US/000149/)
 - [Get SafetyCulture Entity IDs](https://help.safetyculture.com/en-US/000076/)
 - [App Links & Fallback URLs](/help/app-links)
-- [Profile Pages Overview](/help/profile-pages-overview)
+- [Pages Overview](/help/pages-overview)
 - [Key Concepts](/help/key-concepts)
 
 ---
