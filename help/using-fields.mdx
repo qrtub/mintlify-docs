@@ -68,7 +68,7 @@ Any custom fields you define in your Tub are accessible as `item.{fieldName}`.
 **Example:**
 If you add a custom field called `inspectionDue` to your Tub, reference it as:
 - URL Template: `{{item.inspectionDue}}`
-- Condition: `item.inspectionDue < today`
+- Condition: `item.inspectionDue != ""`
 
 ### Tub Fields
 
@@ -220,18 +220,6 @@ item.type == "forklift"
 item.type == "forklift" || item.type == "crane"
 ```
 
-### Dates and Expiry
-
-**Show if inspection is overdue:**
-```
-item.inspectionDue < today
-```
-
-**Show if expiring soon (within 7 days):**
-```
-item.inspectionDue >= today && item.inspectionDue <= today + 7
-```
-
 ### Combining Multiple Conditions
 
 **Heavy equipment that's operational:**
@@ -322,9 +310,8 @@ Combine device detection with Item data.
 - Case-sensitive: `item.Status` will NOT work, use `item.status`
 
 **URL Encoding:**
-- QRtub automatically URL-encodes field values
-- Spaces become `%20`, special characters are escaped
-- You don't need to manually encode
+- Field values are inserted into URL templates exactly as stored
+- If a value may contain spaces or characters such as `&`, `?` or `/`, make sure the receiving system accepts them
 
 **Missing Fields:**
 - If a field is empty/null, URL templates insert empty string
@@ -335,11 +322,6 @@ Combine device detection with Item data.
 - Use `in` operator: `"tag-name" in item.tags`
 - Check size: `size(item.tags) > 0`
 - Cannot directly insert arrays in URL templates (convert to string first)
-
-**Dates:**
-- Compare with `<`, `>`, `<=`, `>=`, `==`
-- Use `today` for current date: `item.inspectionDue < today`
-- Cannot perform date arithmetic beyond simple comparisons
 
 ## Getting Help
 

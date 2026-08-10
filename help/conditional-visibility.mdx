@@ -58,22 +58,7 @@ item.type == "crane"
 3. Add the condition `"heavy-equipment" in item.tags`
 4. Tagged equipment shows this Destination; others don't
 
-### 3. Overdue Inspection Warnings
-
-**Scenario:** You want to show a prominent "INSPECTION OVERDUE" Destination when equipment inspection is past due.
-
-**Condition to show "INSPECTION OVERDUE" banner:**
-```
-item.inspectionDue < today
-```
-
-**How to set this up:**
-1. Add an `inspectionDue` field (date type) to your Tub
-2. Set each Item's next inspection due date
-3. Create an "INSPECTION OVERDUE" Destination (bright red, urgent styling)
-4. Add the condition so it only appears when overdue
-
-### 4. Test Status-Based Routing
+### 3. Test Status-Based Routing
 
 **Scenario:** Electrical test and tag equipment. You want to show "RETEST REQUIRED" only when the test has expired.
 
@@ -107,7 +92,7 @@ Available Item fields: [list your field names and types]
 Available operators: ==, !=, ||, &&, >, <, >=, <=
 ```
 
-### Example 1: Multiple Tags
+### Example: Multiple Tags
 
 **Your prompt:**
 ```
@@ -125,27 +110,6 @@ Available operators: ==, !=, ||, &&, in
 **ChatGPT response:**
 ```
 ("crane" in item.tags || "heavy-equipment" in item.tags) && item.status == "active"
-```
-
-### Example 2: Date-Based with Grace Period
-
-**Your prompt:**
-```
-I'm using QRtub Profile Pages with conditional visibility (CEL expressions).
-I want to show a Destination called "Inspection Due Soon" only when:
-- The inspection due date is within the next 7 days
-- AND the inspection is not already overdue
-
-Generate a CEL expression for this condition.
-
-Available Item fields: item.inspectionDue (date)
-Available operators: ==, !=, ||, &&, >, <, >=, <=
-Special values: today (current date)
-```
-
-**ChatGPT response:**
-```
-item.inspectionDue >= today && item.inspectionDue <= today + 7
 ```
 
 ## Advanced: Device-Specific Destinations
@@ -199,7 +163,6 @@ You have access to:
 - **Tub fields** - `tub.name`, `tub.metadata.organizationName`, etc.
 - **Device fields** - `device.isMobile`, `device.isIOS`, `device.browser`, etc.
 - **Session fields** - `session.user.id`, `session.user.email` (if logged in)
-- **Special values** - `today` (current date)
 
 **See [Using Fields](/help/using-fields) for complete field reference with all available fields, types, and examples.**
 
