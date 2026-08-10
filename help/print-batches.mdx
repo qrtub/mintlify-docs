@@ -1,0 +1,99 @@
+---
+title: "Print Batches"
+description: "Track a production run from export to installation, and see which codes are actually deployed"
+---
+
+When you send QR codes to a printer, QRtub records the run as a batch. A batch keeps the
+list that was printed, how far along it is, and which individual codes have been installed —
+so months later you can still answer "what was in that order, and where did it go?"
+
+## Creating a batch
+
+Open a Tub, select the Items you want, and choose **Print list** from the menu. Pick the
+columns your printer needs — Item fields, link fields, or both — and export.
+
+The export downloads a CSV **and creates a batch**. This is worth knowing: exporting is what
+marks those links as printed. It is not a neutral download.
+
+## Finding your batches
+
+Batches live under **Access Media** in the main navigation. Each row shows the batch name,
+status, when it was printed and how many Items and links it contains.
+
+## Batch details
+
+Open a batch to add:
+
+- a **name** that means something later, like "Depot 2 replacements, March"
+- **notes** — the supplier, the material, anything you will want to recall
+- **tags** for grouping runs
+- a **photo** of the finished media
+
+## Status
+
+A batch moves through four stages:
+
+| Status | Meaning |
+|--------|---------|
+| **Draft** | Prepared, not yet sent to the printer |
+| **Printing** | With the printer |
+| **Printed** | Received, not yet installed |
+| **Deployed** | Installed in the field |
+
+You can step back one stage while a run is in progress — Printing back to Draft, Printed back
+to Printing — but **Deployed is final**.
+
+## Tracking what is actually installed
+
+A batch being "Printed" does not mean all 500 stickers are on equipment. Each code inside a
+batch carries its own deployment status:
+
+- **Printed** — produced, not yet installed
+- **Deployed** — installed
+- **Retired** — no longer in service
+
+Update them one at a time or in bulk, and the batch shows aggregate progress. This is what
+lets you find the sixty codes from a run of five hundred that never made it out of the box.
+
+## The CSV is kept
+
+The exported file stays with the batch, so a reprint uses exactly the same list rather than a
+regenerated one that might have drifted. While a batch is still a draft you can change which
+columns it contains, and the stored file is regenerated to match.
+
+## Filtering Items by batch
+
+Back in the Tub, you can filter Items by the batch they were printed in — useful when a run
+needs replacing, or when you want to know what a particular delivery covered.
+
+## Why some links cannot be deleted
+
+Once a batch moves past Draft, the links in it are protected from deletion. A code may
+already be printed and stuck to something, so removing it from the system would strand the
+physical item.
+
+Links in a **draft** batch can still be deleted freely. If you need to discard a run you
+never sent, leave it as a draft.
+
+## Archiving
+
+Completed batches can be archived. They stay available for reference but drop out of the
+default view.
+
+## What is not tracked
+
+Batches record production runs, not individual pieces of media. There is no per-code record
+of material, cost, durability or installation location. See
+[Media Basics](/help/media-basics) for what is planned.
+
+## Related
+
+- [Media Basics](/help/media-basics)
+- [Creating Your First Link](/help/creating-your-first-link)
+- [Key Concepts](/help/key-concepts)
+
+---
+
+**Ready to get started with QRtub?** [See plans and pricing →](https://qrtub.com/pricing)
+
+Questions? Email us at [hi@qrtub.com](mailto:hi@qrtub.com)

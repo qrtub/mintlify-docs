@@ -30,16 +30,24 @@ Physical QR code media is infrastructure with real costs and lifecycle needs:
 - **Inventory** - Track what's been produced, what's installed, or what's in stock
 - **Production tracking** - Manage Media Batches from different print partners or production runs
 
-## Media Features
+## What you can track today
 
-Media is a way of thinking about your physical QR code infrastructure. QRtub does not
-track Media yet — the capabilities below are planned:
+**Print batches.** When you export a print list from a Tub, QRtub records it as a batch you
+can follow in the Media section. Each batch has a name, notes, tags and a photo, and moves
+through **Draft → Printing → Printed → Deployed** (you can also step back a stage). It keeps
+the item and link counts, the CSV that went to your printer, and a deployment status for
+individual links, so you can tell what has actually been installed. Finished batches can be
+archived.
 
-- Full Media lifecycle management
+## Not tracked yet
+
+There is no record of what an individual QR code is printed *on* — no material type, cost,
+durability or installation location per piece. These remain planned:
+
+- Media as a distinct entity, with type and material per item
 - Media Templates (reusable design templates)
 - Media inventory tracking
 - Replacement workflows
-- Media Batch management (track production runs)
 - Cost tracking and reporting
 
 ## Media Types
@@ -97,14 +105,20 @@ Future functionality will include reusable design templates:
 - **Multi-format** - One design, multiple Media types (sticker, sign, billboard)
 - **Partner integration** - Send directly to Media Partners for production
 
-## Media Batches (Planned Feature)
+## Print Batches
 
-Track production runs of Media:
+Every print list you export becomes a batch, so you can see what was sent to the printer and
+what has been installed since.
 
-- **Production tracking** - "Media Batch #47: 500 weatherproof vinyl stickers, printed March 2025 by PrintCo"
-- **Cost allocation** - Track costs per Batch
-- **Reprint management** - Same Links printed across multiple Batches over time
-- **Quality control** - Track which Batch a Media item came from
+- **Production tracking** - name the run, add notes, tags and a photo of the finished Media
+- **Status** - Draft, Printing, Printed, Deployed. You can step back one stage while a batch
+  is in progress, but Deployed is final
+- **Deployment** - mark individual links as deployed, so a part-installed run is visible
+- **The original CSV** - kept with the batch, so a reprint uses exactly the same list
+- **Filtering** - filter a Tub's items by the batch they were printed in
+- **Archiving** - retire completed batches without deleting them
+
+Cost allocation per batch is not available.
 
 ## Media Partners (Planned Feature)
 

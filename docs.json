@@ -36,13 +36,26 @@
             ]
           },
           {
+            "group": "Items & Data",
+            "pages": [
+              "help/custom-fields"
+            ]
+          },
+          {
             "group": "Pages",
             "pages": [
               "help/pages-overview",
+              "help/building-a-page",
               "help/using-fields",
               "help/conditional-visibility",
               "help/device-detection",
               "help/app-links"
+            ]
+          },
+          {
+            "group": "Printing",
+            "pages": [
+              "help/print-batches"
             ]
           }
         ]
