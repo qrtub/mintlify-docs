@@ -206,9 +206,11 @@ qrtub.com
 ├── /                     (homepage)
 ├── /help/*               How-to guides for QRtub features
 ├── /industries/*         Vertical landing pages
-├── /integrations/*       Guides for connecting QRtub to third-party tools
-└── /blog/*               Content marketing, SEO
+└── /integrations/*       Guides for connecting QRtub to third-party tools
 ```
+
+There is no blog. Two stale posts were removed in August 2026; do not reintroduce the
+section without a decision to maintain it.
 
 Navigation is defined in `docs.json`. A new page is not live until it is added there.
 
@@ -217,10 +219,10 @@ Navigation is defined in `docs.json`. A new page is not live until it is added t
 | Help | Enable successful usage | Technical, clear, utility |
 | Industry | Speak to a specific vertical | Industry-aware, practical |
 | Integration | Connect QRtub to a third-party tool | Precise, honest about mechanism |
-| Blog | Educate, build authority, SEO | Educational, soft CTA |
 
-**CTAs:** primary "Join the BETA Program"; secondary "See How It Works"; tertiary
-"Read the Guide" / "Learn More".
+**CTAs:** pages close with "See plans and pricing" linking to `qrtub.com/pricing`, and the
+support address. BETA language was removed from the site in August 2026 — do not reintroduce
+it without checking whether the product is still described that way.
 
 ---
 
@@ -288,20 +290,6 @@ CONSTRAINTS:
 - Verify against ../qrtub/BRAND.md feature status
 ```
 
-### Blog post
-
-```
-TASK: Write a blog post titled "[TITLE]".
-
-STRUCTURE: hook → context → 3–5 sections → QRtub connection (subtle) → takeaway → soft CTA
-
-CONSTRAINTS:
-- Educational, not promotional
-- 800–1200 words
-- No invented customer quotes or case studies
-- Avoid dated claims that will expire
-```
-
 ---
 
 ## Use cases library
@@ -348,10 +336,19 @@ the buyer who connects them to their own systems. Requires cross-account transfe
 **UC-008 · Media as infrastructure** — *"What the code is printed on is infrastructure too"*
 A metal plaque costs $50 and outlasts the equipment; a billboard costs $5,000. These are
 assets with their own lifecycle, distinct from the Link they encode and the Item they
-represent. **Planned in full. QRtub does not track Media today** — there is no Media type
-field, no notes field, and no inventory. The three-entity model (Item, Link, Media) is a way
-of thinking that the product has not yet implemented. Write about it as a concept, never as
-a feature.
+represent.
+
+Be precise about what exists, because this page has been wrong in both directions:
+
+- **Print batches are shipped.** Exporting a print list creates a tracked batch with a name,
+  notes, tags and a photo, a Draft → Printing → Printed → Deployed lifecycle, per-code
+  deployment status, the stored CSV, and archiving. See `help/print-batches.mdx`.
+- **Per-item Media is not.** There is no record of what an individual code is printed on —
+  no material type, cost, durability or installation location, and no inventory.
+
+So production runs are tracked; individual pieces of media are not. Do not write "QRtub does
+not track Media" as a blanket statement — an earlier version of this brief said exactly that
+and the docs went on to deny a shipped feature.
 
 ---
 
