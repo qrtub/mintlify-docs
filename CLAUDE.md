@@ -221,8 +221,12 @@ Navigation is defined in `docs.json`. A new page is not live until it is added t
 | Integration | Connect QRtub to a third-party tool | Precise, honest about mechanism |
 
 **CTAs:** pages close with "See plans and pricing" linking to `qrtub.com/pricing`, and the
-support address. BETA language was removed from the site in August 2026 — do not reintroduce
-it without checking whether the product is still described that way.
+support address.
+
+**Do not describe QRtub as being in BETA.** The word was retired across every surface in
+August 2026 — docs, marketing and the founder's LinkedIn. On a reference site it reads as a
+caveat about stability; on a pitch surface it invites the reader to wait. If something is
+genuinely not built, say what it is rather than reaching for the word.
 
 ---
 
