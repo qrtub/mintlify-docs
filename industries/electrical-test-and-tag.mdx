@@ -124,7 +124,7 @@ When anyone scans a test-tagged item, they see:
 
 **URL Templates example:**
 ```
-yourtestapp.com/test?equipmentID={assetID}&type={equipmentType}&client={clientName}
+yourtestapp.com/test?equipmentID={{item.assetID}}&type={{item.equipmentType}}&client={{item.clientName}}
 ```
 
 Configure once. Tag 5,000 items across 40 clients. Each QR code automatically pre-fills test forms with that equipment's ID, type, and client—no per-item configuration needed.

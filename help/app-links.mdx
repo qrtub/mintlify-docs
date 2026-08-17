@@ -58,7 +58,7 @@ Users with Mitti installed go straight to the app. Users without it land on the 
 If there's no web equivalent to fall back to, set a **Fallback Message** instead of a URL.
 
 **Example:**
-- App link: `myapp://asset/{assetID}`
+- App link: `myapp://asset/{{item.assetID}}`
 - Fallback Message: `"Please install the Asset Manager app from the App Store to access this equipment record."`
 
 When someone without the app scans, they see your message rather than a confusing blank screen.
@@ -99,8 +99,8 @@ The most specific setting wins. Destination-level fallback takes priority over L
 
 ### Mitti (iAuditor)
 
-**App link:** `iauditor://template/new_audit/{templateID}`
-**Fallback URL:** `https://app.mitti.com/inspection/new?templateId={templateID}`
+**App link:** `iauditor://template/new_audit/{{item.templateID}}`
+**Fallback URL:** `https://app.mitti.com/inspection/new?templateId={{item.templateID}}`
 
 See the [Mitti Integration guide](/integrations/safetyculture) for full setup instructions.
 

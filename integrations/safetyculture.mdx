@@ -26,7 +26,7 @@ Nothing you have already set up stops working:
 Mitti (formerly SafetyCulture) is a mobile inspection platform. Used with QRtub, you can:
 
 - Open specific inspection templates by scanning equipment
-- Pre-fill inspection data using URL Templates
+- Carry each Item's own data into the inspection link, which Mitti uses to pre-fill answers
 - Route different users to different inspection types
 - Maintain inspection access even if you switch platforms later
 
@@ -81,7 +81,7 @@ https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e
 
 Use QRtub's URL Template feature to automatically insert template IDs from your Item data:
 
-**Destination URL:** `iauditor://template/new_audit/{templateID}`
+**Destination URL:** `iauditor://template/new_audit/{{item.templateID}}`
 
 **Why this matters for bulk deployment:** Configure the Destination once with a template placeholder. Each Item in your Tub can have a different `templateID` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
 
@@ -99,15 +99,15 @@ iauditor://template/new_audit/<template_id>?<item_id>=<response>
 
 **Example with QRtub URL Templates:**
 ```
-iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e-be6e-470c-a2e2-a0fd8ab966ae={assetID}
+iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e-be6e-470c-a2e2-a0fd8ab966ae={{item.assetID}}
 ```
 
 Where:
 - `template_fcbc86fd41a74180921347e4be53bdf2` is your Mitti template ID
 - `8f2f287e-be6e-470c-a2e2-a0fd8ab966ae` is the question item ID in your template
-- `{assetID}` is the QRtub Item field placeholder—automatically filled with each Item's actual asset ID
+- `{{item.assetID}}` is the QRtub field binding — replaced with that Item's own asset ID before the link opens
 
-**Bulk deployment benefit:** Configure this URL template once. Deploy to 500 pieces of equipment. Each QR code scan automatically pre-fills the inspection with that specific equipment's asset ID. No manual setup per Item.
+**Bulk deployment benefit:** Configure this URL once. Deploy to 500 pieces of equipment. Each scan substitutes that Item's own asset ID into the link, and Mitti reads the parameter and pre-fills the matching question. No manual setup per Item.
 
 ### Pre-Fill Multiple Questions
 
@@ -119,13 +119,13 @@ iauditor://template/new_audit/<template_id>?<item_id_1>=<response_1>&<item_id_2>
 
 **Example:**
 ```
-iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e={assetID}&a2e2a0fd={location}
+iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e={{item.assetID}}&a2e2a0fd={{item.location}}
 ```
 
 **Important notes:**
 - You need the specific **question item ID** from your Mitti template (not arbitrary parameter names)
 - To get question item IDs, see [Mitti's entity ID guide](https://help.mitti.com/en-US/000076/)
-- Responses may need URL encoding depending on content
+- QRtub inserts field values exactly as stored and never URL-encodes them. A value containing a space, `&` or `#` will break the deep link — store it pre-encoded in the Item field
 - Very long deep links may not work consistently
 
 ## App Not Installed? Set a Fallback URL
@@ -138,8 +138,8 @@ QRtub handles this automatically. When you enter an `iauditor://` URL as a Desti
 
 | Field | Value |
 |-------|-------|
-| App link (Destination URL) | `iauditor://template/new_audit/{templateID}` |
-| Fallback URL | `https://app.mitti.com/inspection/new?templateId={templateID}` |
+| App link (Destination URL) | `iauditor://template/new_audit/{{item.templateID}}` |
+| Fallback URL | `https://app.mitti.com/inspection/new?templateId={{item.templateID}}` |
 
 **What happens at scan time:**
 - Mitti installed → app opens directly to the inspection template
@@ -162,7 +162,7 @@ Beyond starting new inspections, you can create Destinations for other Mitti act
 
 **With QRtub URL Template:**
 ```
-https://app.mitti.com/report/audit/{inspectionID}
+https://app.mitti.com/report/audit/{{item.inspectionID}}
 ```
 
 Store the latest inspection ID in each Item's `inspectionID` field. When someone scans, they're automatically routed to that Item's most recent inspection report.

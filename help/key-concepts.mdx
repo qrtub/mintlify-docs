@@ -148,13 +148,18 @@ Links can operate in two modes:
 
 **Example template:**
 ```
-app.com/inspect?id={assetID}&name={itemName}
+app.com/inspect?id={{item.assetID}}&name={{item.name}}
 ```
 
 **What happens when scanned:**
 ```
-app.com/inspect?id=EXC-203&name=Excavator%20203
+app.com/inspect?id=EXC-203&name=Excavator 203
 ```
+
+Values are inserted **exactly as stored**. QRtub does not URL-encode them, so a field
+containing a space, `&`, `?` or `#` will produce a broken link — as the space in
+`Excavator 203` would above. Keep the fields you use inside URLs free of those characters,
+or store a pre-encoded version alongside the display name.
 
 **Why this matters for bulk deployment:**
 

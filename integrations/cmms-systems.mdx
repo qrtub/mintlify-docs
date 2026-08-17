@@ -46,7 +46,7 @@ Use QRtub's URL Templates to automatically construct CMMS URLs with Item data:
 
 **In QRtub:**
 - Item field `cmmsAssetID`: "PUMP-042"
-- Destination URL template: `https://app.yourcmms.com/assets/{cmmsAssetID}`
+- Destination URL template: `https://app.yourcmms.com/assets/{{item.cmmsAssetID}}`
 
 **Generated URL when scanned:**
 `https://app.yourcmms.com/assets/PUMP-042`
@@ -59,17 +59,17 @@ Use QRtub's URL Templates to automatically construct CMMS URLs with Item data:
 
 **View Asset Record**
 ```
-https://app.upkeep.com/assets/{assetID}
+https://app.upkeep.com/assets/{{item.assetID}}
 ```
 
 **Create Work Order**
 ```
-https://app.upkeep.com/work-orders/new?asset={assetID}
+https://app.upkeep.com/work-orders/new?asset={{item.assetID}}
 ```
 
 **View Maintenance History**
 ```
-https://app.upkeep.com/assets/{assetID}/history
+https://app.upkeep.com/assets/{{item.assetID}}/history
 ```
 
 ## Multi-System Page
