@@ -45,9 +45,9 @@ One QR code can serve the right experience for everyone.
 
 **Result:** iPhone users see App Store link. Android users see Google Play link.
 
-### 3. iOS Safari Deep Link Workaround (SafetyCulture Example)
+### 3. iOS Safari Deep Link Workaround (Mitti Example)
 
-**Scenario:** SafetyCulture mobile app deep links (`iauditor://`) only work in Safari on iOS. Users on iOS in Chrome or other browsers need the web version instead.
+**Scenario:** Mitti (formerly SafetyCulture) app deep links (`iauditor://`) only work in Safari on iOS. Users on iOS in Chrome or other browsers need the web version instead.
 
 **Note:** If your concern is simply "what if the app isn't installed?", the [Fallback URL feature](/help/app-links) handles that automatically — no device routing needed. Device routing is for the specific case where the app is installed but the browser blocks deep links (iOS Chrome/Firefox).
 
@@ -55,17 +55,17 @@ One QR code can serve the right experience for everyone.
 
 **Destination 1: "Start Inspection (Mobile App)"**
 - URL: `iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2`
-- Fallback URL: `https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
+- Fallback URL: `https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
 - Condition: `device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")`
 
 **Destination 2: "Start Inspection (Web)"**
-- URL: `https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
+- URL: `https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
 - Condition: `device.isIOS && device.browser != "safari"`
 
 **Breaking down the conditions:**
 
 Destination 1 shows for:
-- `device.isDesktop` - Desktop users (app links won't work anyway, but SafetyCulture handles this)
+- `device.isDesktop` - Desktop users (app links won't work anyway, but Mitti handles this)
 - `!device.isIOS` - Non-iOS mobile users (Android, etc. — app links work fine)
 - `device.isIOS && device.browser == "safari"` - iOS users in Safari (app links work here)
 
@@ -73,9 +73,9 @@ Destination 2 shows for:
 - `device.isIOS && device.browser != "safari"` - iOS users NOT in Safari (app links blocked, use web)
 
 **Result:**
-- Desktop users: See mobile app Destination (SafetyCulture redirects appropriately)
-- Android users: See mobile app Destination (opens SafetyCulture app)
-- iOS Safari users: See mobile app Destination (opens SafetyCulture app)
+- Desktop users: See mobile app Destination (Mitti redirects appropriately)
+- Android users: See mobile app Destination (opens Mitti app)
+- iOS Safari users: See mobile app Destination (opens Mitti app)
 - iOS Chrome/Firefox users: See web Destination (opens in browser, avoiding iOS restriction)
 
 ### 4. Tablet-Optimized Experience

@@ -129,9 +129,9 @@ device.isMobile
 device.isDesktop
 ```
 
-### iOS Safari Workaround (SafetyCulture Example)
+### iOS Safari Workaround (Mitti Example)
 
-**Scenario:** SafetyCulture mobile app deep links (`iauditor://`) only work in Safari on iOS. You need to show the web version for iOS users in other browsers.
+**Scenario:** Mitti (formerly SafetyCulture) app deep links (`iauditor://`) only work in Safari on iOS. You need to show the web version for iOS users in other browsers.
 
 **Destination 1: "Start Inspection (Mobile App)"**
 - URL: `iauditor://template/new_audit/template_id`
@@ -141,12 +141,12 @@ device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari"
 ```
 
 This shows the mobile app link for:
-- Desktop users (SafetyCulture handles redirect)
+- Desktop users (Mitti handles redirect)
 - Non-iOS mobile users (Android, etc.)
 - iOS users in Safari (where app links work)
 
 **Destination 2: "Start Inspection (Web)"**
-- URL: `https://app.safetyculture.com/inspection/new?templateId=template_id`
+- URL: `https://app.mitti.com/inspection/new?templateId=template_id`
 - Condition:
 ```
 device.isIOS && device.browser != "safari"

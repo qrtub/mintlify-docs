@@ -11,7 +11,7 @@ QRtub Destinations support app deep links — special URLs that open a mobile ap
 App links are URLs that use a custom scheme instead of `https://`. When a device recognises the scheme, it opens the corresponding app.
 
 **Examples:**
-- `iauditor://template/new_audit/<template_id>` — opens SafetyCulture to a specific template
+- `iauditor://template/new_audit/<template_id>` — opens Mitti (formerly SafetyCulture) to a specific template
 - `myapp://asset/EXC-203` — opens a custom app to an asset record
 - `spotify://track/3n3Ppam7vgaVa1iaRUIOKE` — opens Spotify to a track
 
@@ -47,11 +47,11 @@ When you add or edit a Destination with an app link URL, QRtub automatically sho
 2. An amber notice appears: "This is an app link — set a fallback for users without the app installed"
 3. Enter a **Fallback URL** — the web page to open if the app isn't available
 
-**Example (SafetyCulture):**
+**Example (Mitti):**
 - App link: `iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2`
-- Fallback URL: `https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
+- Fallback URL: `https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
 
-Users with SafetyCulture installed go straight to the app. Users without it land on the web version — same form, different delivery.
+Users with Mitti installed go straight to the app. Users without it land on the web version — same form, different delivery.
 
 ## Setting a Custom Fallback Message
 
@@ -78,7 +78,7 @@ iauditor://template/new_audit/template_abc123?8f2f287e={{item.assetID}}
 
 Fallback URL:
 ```
-https://app.safetyculture.com/inspection/new?templateId=template_abc123&asset={{item.assetID}}
+https://app.mitti.com/inspection/new?templateId=template_abc123&asset={{item.assetID}}
 ```
 
 Configure both once. Deploy to 500 items. Each scan routes to the right app screen (or web equivalent) for that specific item — no per-item configuration.
@@ -97,12 +97,12 @@ The most specific setting wins. Destination-level fallback takes priority over L
 
 ## Common Examples
 
-### SafetyCulture (iAuditor)
+### Mitti (iAuditor)
 
 **App link:** `iauditor://template/new_audit/{templateID}`
-**Fallback URL:** `https://app.safetyculture.com/inspection/new?templateId={templateID}`
+**Fallback URL:** `https://app.mitti.com/inspection/new?templateId={templateID}`
 
-See the [SafetyCulture Integration guide](/integrations/safetyculture) for full setup instructions.
+See the [Mitti Integration guide](/integrations/safetyculture) for full setup instructions.
 
 ### Generic Enterprise App
 
@@ -130,11 +130,11 @@ These two features are complementary, not alternatives:
 | Wrong browser on iOS (app links blocked) | [Device Detection routing](/help/device-detection) |
 | Different platforms need different app stores | [Device Detection routing](/help/device-detection) |
 
-For SafetyCulture specifically: iOS Safari works with `iauditor://` deep links, but Chrome on iOS blocks them. If your team uses mixed browsers, consider combining both approaches — device routing to serve the web link on iOS Chrome, and fallback URL to catch anyone without the app installed on other devices.
+For Mitti specifically: iOS Safari works with `iauditor://` deep links, but Chrome on iOS blocks them. If your team uses mixed browsers, consider combining both approaches — device routing to serve the web link on iOS Chrome, and fallback URL to catch anyone without the app installed on other devices.
 
 ## Related
 
-- [SafetyCulture Integration](/integrations/safetyculture) — full deep link and fallback setup for iAuditor
+- [Mitti Integration](/integrations/safetyculture) — full deep link and fallback setup for iAuditor
 - [Device Detection](/help/device-detection) — route users based on device, OS, and browser
 - [Conditional Visibility](/help/conditional-visibility) — show Destinations to specific audiences
 - [Pages Overview](/help/pages-overview) — setting up multi-Destination Pages

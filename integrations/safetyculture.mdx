@@ -1,17 +1,29 @@
 ---
-title: "SafetyCulture (iAuditor) Integration"
-description: "Open SafetyCulture inspections straight from a scan, pre-filled with the item's data"
+title: "Mitti (formerly SafetyCulture / iAuditor)"
+description: "Open Mitti inspections straight from a scan, pre-filled with the item's data. Mitti was called SafetyCulture, and iAuditor before that."
 slug: "safetyculture"
 sidebar_position: 1
-platform: "SafetyCulture"
+platform: "Mitti"
 featured: true
 ---
 
-Connect your QRtub Links to SafetyCulture inspections, enabling staff to scan equipment and immediately open the right inspection template.
+Connect your QRtub Links to Mitti inspections, so staff can scan an item and land straight on the right inspection template.
+
+## If you know it as SafetyCulture or iAuditor
+
+Same product, three names. It launched as **iAuditor**, was renamed **SafetyCulture**, and became
+**Mitti** in August 2026. SafetyCulture remains the company; Mitti is the platform.
+
+Nothing you have already set up stops working:
+
+- The mobile app kept its identifiers, so the **`iauditor://` deep link scheme still works**. You
+  will see it throughout this page, and it is correct — not a leftover.
+- **`app.safetyculture.com` URLs still resolve.** Examples below use `app.mitti.com`, but you do
+  not need to go back and change anything.
 
 ## Overview
 
-SafetyCulture (formerly iAuditor) is a mobile inspection platform. By integrating with QRtub, you can:
+Mitti (formerly SafetyCulture) is a mobile inspection platform. Used with QRtub, you can:
 
 - Open specific inspection templates by scanning equipment
 - Pre-fill inspection data using URL Templates
@@ -20,22 +32,24 @@ SafetyCulture (formerly iAuditor) is a mobile inspection platform. By integratin
 
 ## Integration Method
 
-QRtub integrates with SafetyCulture using **deep links** - special URLs that open SafetyCulture directly to a specific inspection, template, or report.
+QRtub connects to Mitti using **deep links** — URLs that open Mitti directly at a specific
+inspection, template or report. No data is exchanged between the two systems; QRtub builds the
+URL and Mitti handles the rest.
 
-SafetyCulture supports two deep link formats:
-- **Mobile app** (`iauditor://`) - Opens the SafetyCulture mobile app
-- **Web app** (`https://app.safetyculture.com/`) - Opens in web browser
+Mitti supports two deep link formats:
+- **Mobile app** (`iauditor://`) — opens the Mitti app. The scheme still carries the old name
+- **Web app** (`https://app.mitti.com/`) — opens in a browser. `app.mitti.com` also works
 
 ## Getting Your Template ID
 
-Before setting up deep links, you'll need your SafetyCulture Template ID:
+Before setting up deep links, you'll need your Mitti Template ID:
 
-1. Open SafetyCulture web app
+1. Open the Mitti web app
 2. Navigate to your inspection template
 3. Copy the Template ID from the URL
 4. Example: `template_fcbc86fd41a74180921347e4be53bdf2`
 
-See [SafetyCulture's guide on getting entity IDs](https://help.safetyculture.com/en-US/000076/) for detailed instructions.
+See [Mitti's guide on getting entity IDs](https://help.mitti.com/en-US/000076/) for detailed instructions.
 
 ## Basic Setup: Start Inspection
 
@@ -56,11 +70,11 @@ iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2
 Alternatively, use a web app deep link for users who prefer desktop/browser access:
 
 **Destination Name:** Start Inspection (Web)
-**Destination URL:** `https://app.safetyculture.com/inspection/new?templateId=<template_id>`
+**Destination URL:** `https://app.mitti.com/inspection/new?templateId=<template_id>`
 
 **Example:**
 ```
-https://app.safetyculture.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2
+https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2
 ```
 
 ### Using QRtub URL Templates
@@ -71,11 +85,11 @@ Use QRtub's URL Template feature to automatically insert template IDs from your 
 
 **Why this matters for bulk deployment:** Configure the Destination once with a template placeholder. Each Item in your Tub can have a different `templateID` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
 
-This allows different Items to use different SafetyCulture templates based on their Item data—no manual configuration per Item.
+This allows different Items to use different Mitti templates based on their Item data—no manual configuration per Item.
 
 ## Advanced: Pre-Fill Inspection Questions
 
-SafetyCulture allows you to pre-fill specific inspection questions using question item IDs.
+Mitti allows you to pre-fill specific inspection questions using question item IDs.
 
 ### Mobile App Pre-Fill Format
 
@@ -89,7 +103,7 @@ iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e
 ```
 
 Where:
-- `template_fcbc86fd41a74180921347e4be53bdf2` is your SafetyCulture template ID
+- `template_fcbc86fd41a74180921347e4be53bdf2` is your Mitti template ID
 - `8f2f287e-be6e-470c-a2e2-a0fd8ab966ae` is the question item ID in your template
 - `{assetID}` is the QRtub Item field placeholder—automatically filled with each Item's actual asset ID
 
@@ -109,14 +123,14 @@ iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2?8f2f287e
 ```
 
 **Important notes:**
-- You need the specific **question item ID** from your SafetyCulture template (not arbitrary parameter names)
-- To get question item IDs, see [SafetyCulture's entity ID guide](https://help.safetyculture.com/en-US/000076/)
+- You need the specific **question item ID** from your Mitti template (not arbitrary parameter names)
+- To get question item IDs, see [Mitti's entity ID guide](https://help.mitti.com/en-US/000076/)
 - Responses may need URL encoding depending on content
 - Very long deep links may not work consistently
 
 ## App Not Installed? Set a Fallback URL
 
-`iauditor://` deep links only work if SafetyCulture is installed on the device. If someone scans and doesn't have the app, the link does nothing.
+`iauditor://` deep links only work if Mitti is installed on the device. If someone scans and doesn't have the app, the link does nothing.
 
 QRtub handles this automatically. When you enter an `iauditor://` URL as a Destination, an amber notice appears in the editor prompting you to configure a fallback.
 
@@ -125,30 +139,30 @@ QRtub handles this automatically. When you enter an `iauditor://` URL as a Desti
 | Field | Value |
 |-------|-------|
 | App link (Destination URL) | `iauditor://template/new_audit/{templateID}` |
-| Fallback URL | `https://app.safetyculture.com/inspection/new?templateId={templateID}` |
+| Fallback URL | `https://app.mitti.com/inspection/new?templateId={templateID}` |
 
 **What happens at scan time:**
-- SafetyCulture installed → app opens directly to the inspection template
-- SafetyCulture not installed → after 2.5 seconds, QRtub redirects to the web version
+- Mitti installed → app opens directly to the inspection template
+- Mitti not installed → after 2.5 seconds, QRtub redirects to the web version
 
 The Fallback URL supports `{{item.field}}` bindings, so you configure it once and it adapts to each Item automatically — just like the app link itself.
 
-You can also set a **Fallback Message** instead of a URL if there's no web equivalent (e.g. "Please install SafetyCulture to access this inspection template").
+You can also set a **Fallback Message** instead of a URL if there's no web equivalent (e.g. "Please install Mitti to access this inspection template").
 
 See [App Links & Fallback URLs](/help/app-links) for full details on how fallbacks work.
 
 ## Additional Deep Link Options
 
-Beyond starting new inspections, you can create Destinations for other SafetyCulture actions:
+Beyond starting new inspections, you can create Destinations for other Mitti actions:
 
 ### View Inspection Report
 
 **Mobile:** `iauditor://audit/<inspection_id>`
-**Web:** `https://app.safetyculture.com/report/audit/<inspection_id>`
+**Web:** `https://app.mitti.com/report/audit/<inspection_id>`
 
 **With QRtub URL Template:**
 ```
-https://app.safetyculture.com/report/audit/{inspectionID}
+https://app.mitti.com/report/audit/{inspectionID}
 ```
 
 Store the latest inspection ID in each Item's `inspectionID` field. When someone scans, they're automatically routed to that Item's most recent inspection report.
@@ -156,18 +170,18 @@ Store the latest inspection ID in each Item's `inspectionID` field. When someone
 ### Edit Existing Inspection
 
 **Mobile:** `iauditor://audit/<inspection_id>`
-**Web:** `https://app.safetyculture.com/inspection/<inspection_id>`
+**Web:** `https://app.mitti.com/inspection/<inspection_id>`
 
 ### Open Asset Profile
 
 **Mobile:** `iauditor://asset/profile/<asset_id>`
-**Web:** `https://app.safetyculture.com/assets/<asset_id>`
+**Web:** `https://app.mitti.com/assets/<asset_id>`
 
-**Example use case:** Link QRtub Items directly to their SafetyCulture asset profiles.
+**Example use case:** Link QRtub Items directly to their Mitti asset profiles.
 
 ### View Document/File
 
-**Web:** `https://app.safetyculture.com/documents/<document_id>`
+**Web:** `https://app.mitti.com/documents/<document_id>`
 
 ## Use Cases
 
@@ -185,33 +199,33 @@ Store the latest inspection ID in each Item's `inspectionID` field. When someone
 Create a Page with multiple Destinations:
 - Operators see "Start Inspection" → Start new inspection
 - Managers see "View Report" → View latest report
-- Maintenance see "Asset History" → SafetyCulture asset profile
+- Maintenance see "Asset History" → Mitti asset profile
 
 ## Troubleshooting
 
 **Mobile app doesn't open:**
-- Ensure SafetyCulture mobile app is installed on the device
+- Ensure Mitti app is installed on the device
 - Verify Template ID format is correct
-- Check that the user has access to the template in SafetyCulture
+- Check that the user has access to the template in Mitti
 
 **Web link doesn't work:**
-- Verify user is logged into SafetyCulture web app
+- Verify user is logged into Mitti web app
 - Check that the user has permission to access the entity (template, inspection, asset)
 - Confirm the entity ID is correct
 
 **Data not pre-filling:**
-- You need the specific **question item ID** from your SafetyCulture template (not arbitrary field names)
+- You need the specific **question item ID** from your Mitti template (not arbitrary field names)
 - Ensure Item fields in QRtub contain data
 - Test that URL encoding is correct for special characters
 - Verify deep link isn't too long (keep it under ~2000 characters)
 
 **Users need access:**
-Deep links only work if users have permission to access the relevant entities in SafetyCulture. Ensure your team has appropriate access before deploying.
+Deep links only work if users have permission to access the relevant entities in Mitti. Ensure your team has appropriate access before deploying.
 
 ## Resources
 
-- [SafetyCulture Deep Link Documentation](https://help.safetyculture.com/en-US/000149/)
-- [Get SafetyCulture Entity IDs](https://help.safetyculture.com/en-US/000076/)
+- [Mitti deep link documentation](https://help.mitti.com/en-US/000149/)
+- [Get Mitti entity IDs](https://help.mitti.com/en-US/000076/)
 - [App Links & Fallback URLs](/help/app-links)
 - [Pages Overview](/help/pages-overview)
 - [Key Concepts](/help/key-concepts)
