@@ -77,9 +77,9 @@ Destination 2 shows for:
 - iOS Safari users: See mobile app Destination (opens Mitti app)
 - iOS Chrome/Firefox users: See web Destination (opens in browser, avoiding iOS restriction)
 
-### 4. Tablet-Optimised Experience
+### 4. Tablet-Optimized Experience
 
-**Scenario:** You have a special interface optimised for tablets.
+**Scenario:** You have a special interface optimized for tablets.
 
 **Setup:**
 - Create "Tablet Interface" Destination
@@ -87,7 +87,7 @@ Destination 2 shows for:
 - Create "Standard Interface" Destination
   - Condition: `!device.isTablet`
 
-**Result:** Tablet users get the optimised experience automatically.
+**Result:** Tablet users get the optimized experience automatically.
 
 ### 5. Browser-Specific Features
 
@@ -210,7 +210,7 @@ Device detection uses browser User-Agent strings. These are generally reliable b
 **Not for Security:**
 Device detection is for routing and user experience, NOT security. Don't rely on it to restrict access to sensitive data—use proper authentication instead.
 
-**Fallback Behaviour:**
+**Fallback Behavior:**
 If device can't be detected, QRtub assumes:
 - Type: `desktop`
 - OS: `unknown`
@@ -242,7 +242,7 @@ Scan the same QR code from each device. Verify you see the Destinations you expe
 - App store routing (right store for each platform)
 - Mobile app vs web app routing
 - Platform-specific deep links
-- Optimised experiences per device type
+- Optimized experiences per device type
 
 ## Related
 
