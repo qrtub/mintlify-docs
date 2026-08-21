@@ -118,7 +118,7 @@ Set both Fallback URL and Fallback Message — QRtub uses the URL if set, otherw
 **Fallback URL:** `https://apps.apple.com/app/myapp` *(or Google Play)*
 **Fallback Message:** `"This feature requires the MyApp mobile app."`
 
-Alternatively, combine with [Device Detection](/help/device-detection) to route iOS users to the App Store and Android users to Google Play.
+Alternatively, combine with [Device Detection](/device-detection) to route iOS users to the App Store and Android users to Google Play.
 
 ## App Links vs Device Detection
 
@@ -127,17 +127,17 @@ These two features are complementary, not alternatives:
 | Problem | Solution |
 |---------|----------|
 | App not installed | Fallback URL (this page) |
-| Wrong browser on iOS (app links blocked) | [Device Detection routing](/help/device-detection) |
-| Different platforms need different app stores | [Device Detection routing](/help/device-detection) |
+| Wrong browser on iOS (app links blocked) | [Device Detection routing](/device-detection) |
+| Different platforms need different app stores | [Device Detection routing](/device-detection) |
 
 For Mitti specifically: iOS Safari works with `iauditor://` deep links, but Chrome on iOS blocks them. If your team uses mixed browsers, consider combining both approaches — device routing to serve the web link on iOS Chrome, and fallback URL to catch anyone without the app installed on other devices.
 
 ## Related
 
 - [Mitti Integration](/integrations/safetyculture) — full deep link and fallback setup for iAuditor
-- [Device Detection](/help/device-detection) — route users based on device, OS, and browser
-- [Conditional Visibility](/help/conditional-visibility) — show Destinations to specific audiences
-- [Pages Overview](/help/pages-overview) — setting up multi-Destination Pages
+- [Device Detection](/device-detection) — route users based on device, OS, and browser
+- [Conditional Visibility](/conditional-visibility) — show Destinations to specific audiences
+- [Pages Overview](/pages-overview) — setting up multi-Destination Pages
 
 ---
 

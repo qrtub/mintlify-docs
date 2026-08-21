@@ -5,8 +5,20 @@
   "redirects": [
     {
       "source": "/help/profile-pages-overview",
-      "destination": "/help/pages-overview"
-    }
+      "destination": "/pages-overview"
+    },
+    { "source": "/help/creating-your-first-link", "destination": "/creating-your-first-link" },
+    { "source": "/help/key-concepts", "destination": "/key-concepts" },
+    { "source": "/help/print-first-workflow", "destination": "/print-first-workflow" },
+    { "source": "/help/media-basics", "destination": "/media-basics" },
+    { "source": "/help/custom-fields", "destination": "/custom-fields" },
+    { "source": "/help/pages-overview", "destination": "/pages-overview" },
+    { "source": "/help/building-a-page", "destination": "/building-a-page" },
+    { "source": "/help/using-fields", "destination": "/using-fields" },
+    { "source": "/help/conditional-visibility", "destination": "/conditional-visibility" },
+    { "source": "/help/device-detection", "destination": "/device-detection" },
+    { "source": "/help/app-links", "destination": "/app-links" },
+    { "source": "/help/print-batches", "destination": "/print-batches" }
   ],
   "colors": {
     "primary": "#F25830",
@@ -25,38 +37,38 @@
           {
             "group": "Getting Started",
             "pages": [
-              "help/creating-your-first-link"
+              "creating-your-first-link"
             ]
           },
           {
             "group": "Concepts",
             "pages": [
-              "help/key-concepts",
-              "help/print-first-workflow",
-              "help/media-basics"
+              "key-concepts",
+              "print-first-workflow",
+              "media-basics"
             ]
           },
           {
             "group": "Items & Data",
             "pages": [
-              "help/custom-fields"
+              "custom-fields"
             ]
           },
           {
             "group": "Pages",
             "pages": [
-              "help/pages-overview",
-              "help/building-a-page",
-              "help/using-fields",
-              "help/conditional-visibility",
-              "help/device-detection",
-              "help/app-links"
+              "pages-overview",
+              "building-a-page",
+              "using-fields",
+              "conditional-visibility",
+              "device-detection",
+              "app-links"
             ]
           },
           {
             "group": "Printing",
             "pages": [
-              "help/print-batches"
+              "print-batches"
             ]
           }
         ]

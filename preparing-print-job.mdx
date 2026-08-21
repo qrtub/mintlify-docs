@@ -1,0 +1,52 @@
+---
+title: "Preparing Your Print Job: Artwork, Data and QR Codes"
+description: "What to hand a print shop for a batch of unique QR codes — the design spec, the data file, and the codes themselves"
+---
+
+<!-- DRAFT: written ahead of the SVG export feature described in
+     ../../qrtub-ops/briefs/qr-format-and-error-correction.md. Do not add to docs.json nav
+     until that ships — this page currently describes it as already available. -->
+
+A print shop running your QR code batch needs four things from you: a visual and spec of the design, a data file, the QR codes themselves, and a way to match one to the other. This page covers all four, plus what actually happens when you hand them over.
+
+## The visual and spec
+
+Give the shop a reference image of the finished piece and the technical details they can't get from a picture alone: final dimensions, bleed, and — specific to a QR code — the minimum size and clear space it needs.
+
+A QR code needs a quiet zone: blank space on all four sides, at least 4 modules wide (a module is one of the small squares the code is built from). Nothing — no logo, no border, no mounting hole, no laminate edge — can cross into it, or the code can fail to scan even though it looks fine. As a rule of thumb, don't print a code smaller than about 20–25mm (roughly 1 inch) square if it needs to be reliably scanned by a phone camera.
+
+Mark this on your spec. A shop redrawing your design in their own software (see [What actually happens to your file](#what-actually-happens-to-your-file) below) needs to know where that boundary is, not just where the code sits.
+
+## The data file
+
+Export a print list from QRtub: open the Links you want to print, select **Print List**, choose the columns you need, and download the CSV. Include at minimum the **Full URL** column — a shop with live variable-data software can render the QR code directly from that text, and it's also the source data if you or your designer are building a composite sheet by hand (see [Working with a Print Shop](/print-shop-basics) for which of those two applies to your job). Add any Item fields (name, description, tags) you want printed alongside the code.
+
+One row in this file is one physical piece. That's the whole convention — it's what every print shop's software expects, whether it's dedicated VDP tooling or a spreadsheet-driven script.
+
+## The QR codes themselves
+
+Download the matching QR codes as a ZIP from the same Links view. Choose **SVG** if you can — it's a vector format, so it stays sharp at any size, which matters once a code gets scaled up to sign or plaque size. PNG is fine for anything staying small or going on screen, but avoid enlarging a PNG QR code much past its original size; it can blur enough to stop scanning.
+
+Set the error-correction level while you're there. The default (M) is fine for most jobs. Choose a higher level (Q or H) for anything that'll be outdoor, laminated, or otherwise likely to get scratched or dirty — a higher level survives more damage before the code stops scanning, at the cost of a slightly denser code for the same physical size.
+
+## Matching a code to a data row
+
+Right now, matching is manual: each downloaded code is named after its link's code — for example, a code at `qrtub.com/r/aBc12` downloads as `aBc12.svg`. In your data file, that same code appears at the end of the **Short URL** or **Full URL** column. Match on that.
+
+If your shop's software can render the QR code itself from the **Full URL** column, you don't need the image files at all — hand over the data file alone.
+
+## What actually happens to your file
+
+Expect the shop to redraw your design in their own software rather than use your file as-is, even if you built it in Illustrator or a similar tool. This is normal, not a sign something went wrong: they need to convert your colors to what their specific press uses, and they'll often want to regenerate the QR code itself from your data rather than trust a pasted-in image, so it renders at exactly the right size and quiet zone for their process.
+
+**A worked example.** One QRtub customer designed a plaque in Illustrator, then sent it to a print shop for a batch of unique codes. The shop rebuilt the design in their own software. What they actually needed from the customer was the visual and spec (to rebuild from), the data file with one row per plaque, the QR code or URL for each, and confirmation of which column was which. They sent back a proof before running the full batch — and it's worth actually scanning the codes on that proof, not just looking at it. A code pointing at the wrong item looks identical to a correct one until you scan it.
+
+## Get a proof, and scan it
+
+Before the full run, ask for a proof of a handful of real records — not just the blank template. Confirm the right destination landed on the right piece, and that the codes still scan at the actual print size and quiet zone. This is the point where a data-column mismatch (a genuinely well-documented failure mode in variable data printing generally) is cheap to catch. Once the batch is printed, it isn't.
+
+## Related
+
+- [Working with a Print Shop](/print-shop-basics) — the two ways a shop can produce unique codes, and which one yours needs
+- [Print Batches](/print-batches) — tracking the run once it's sent to print
+- [The Print-First Workflow](/print-first-workflow) — ordering and applying tags before the equipment exists

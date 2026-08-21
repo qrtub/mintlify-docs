@@ -1,0 +1,56 @@
+---
+title: "Working with a Print Shop"
+description: "The two real ways a shop produces a batch of unique QR codes, and which questions tell you which one you've got"
+---
+
+<!-- DRAFT: written ahead of the SVG export feature described in
+     ../../qrtub-ops/briefs/qr-format-and-error-correction.md. Do not add to docs.json nav
+     until that ships — this page currently describes it as already available. -->
+
+A batch where every code is different can be produced two genuinely different ways — variable data printing, or a composite sheet that's cut, routed, or engraved apart afterward. Neither is a workaround; each suits different materials and quality goals. Knowing which one your shop and material actually need saves a wasted quote.
+
+## Flow 1: Variable data printing (VDP)
+
+Digital presses (laser or inkjet) image each piece individually, so the shop's software can pull a different value from a data file for every unit as the run goes — the code changes from one piece to the next without stopping. This is the flow for stickers, labels, and anything printed on paper or vinyl at volume.
+
+Every VDP job is two things merged live, at print time:
+
+- **A template** — your design, with the parts that stay the same on every piece and a marked region for the part that changes.
+- **A data file** — one row per piece, one column per thing that varies: at minimum the destination, and a reference to the matching code image.
+
+## Flow 2: One composite sheet, cut or engraved apart afterward
+
+Some of the best materials for durable signage — photo-anodized aluminum, laser-engraved metal, UV printing on rigid panels, screen printing on boards — can only reproduce **one static image per pass**. There's no live merge happening in the machine at all. So to get a different code on every piece, every unique code has to already be laid out in its final position inside **one file** before that pass ever runs. The shop (or you, in your own design software) builds that file first — a "gang sheet" in trade terms, or "nesting" the designs onto it — then the whole sheet is exposed, printed, or engraved in a single high-quality pass, and only afterward cut, routed, or laser-cut into individual pieces.
+
+This is exactly how photo-anodized aluminum plates work: the manufacturer's own guidance is explicit that plates are "imaged first," with every serial number, barcode, or QR code already baked into the exposure — cutting is a separate, later step, and the artwork needs its own registration marks so the cutting tool lines up with an image that's already permanent. The same shape applies to laser engraving run in batch mode, UV flatbed printing on metal or acrylic, and screen printing on rigid boards.
+
+**Building that one composite file** is usually done in ordinary design software, not anything specialized: Adobe InDesign's Data Merge has a "Multiple Records" mode built for exactly this — it tiles a merge-field placeholder into a grid across one page until it's full, using your data file the same way a VDP job would, except it produces one flattened file instead of a live merge. A print shop running dedicated VDP software has an equivalent ("N-up" or imposition) step. Either way, the merge still happens — it just happens once, ahead of time, in a design tool, rather than live on press.
+
+One nuance worth checking with your shop: laser engraving specifically can also run the *other* way — some laser software pulls the next serial or code live from a database as each piece is marked, one machine cycle at a time, closer to Flow 1 in spirit even though nothing is printed on a press. Ask which mode your engraver is actually running.
+
+## Which one do you have — ask this
+
+**"Does your equipment image or print each piece individually and merge live from a data file, or do you need one flattened file with everything already laid out, that gets cut or engraved apart afterward?"**
+
+That single question tells you which flow you're in, and therefore what you need to prepare:
+
+- **Flow 1 (live merge):** hand over a data file and let their software do the rest — see [Preparing Your Print Job](/preparing-print-job).
+- **Flow 2 (composite sheet):** you (or your designer) need to build the full sheet yourself before it goes anywhere near the press, engraver, or anodizer — plan for that step, and confirm what registration or cut marks the shop needs on the artwork so the cutting or routing step lines up correctly afterward. Also worth asking early: how many pieces fit on one sheet or bed, since that flow is bounded by physical sheet size in a way a live VDP job isn't.
+
+Either way, what you export from QRtub is the same — a data file and the QR codes themselves. The difference is only *who* does the merging, and *when*.
+
+## Vocabulary worth getting right
+
+- **Variable data printing (VDP)** — a live, per-unit merge as the press runs (Flow 1).
+- **Static element** — anything identical on every piece.
+- **Variable field** — the part that changes per piece.
+- **Data source / data file** — the spreadsheet supplying the variable values, one row per piece.
+- **Merge** — combining a template and a data file into unique-per-piece output, whether that happens live on press or once, ahead of time, in a design tool.
+- **Gang sheet / nesting** — arranging many different designs onto one sheet so they can be produced in a single pass and separated afterward (Flow 2).
+- **Fabrication / route-and-cut** — the mechanical step, after imaging, that separates a composite sheet into individual pieces (die cutting, CNC routing, laser cutting, depending on material).
+
+## Related
+
+- [Preparing Your Print Job](/preparing-print-job) — the practical handoff: what to export from QRtub, and a worked example
+- [Print Batches](/print-batches) — tracking a production run after you've sent it to print
+- [The Print-First Workflow](/print-first-workflow) — ordering and applying tags before the equipment exists

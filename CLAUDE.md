@@ -202,9 +202,11 @@ publishing one, check every capability sentence against the app source.
 ## Site structure
 
 ```
-qrtub.com
+help.qrtub.com
 ├── /                     (homepage)
-├── /help/*               How-to guides for QRtub features
+├── /<page>               How-to guides for QRtub features — root-level, no /help/ prefix
+│                         (the subdomain already says "help"; repeating it in every path
+│                         was redundant, dropped August 2026 — old /help/* links redirect)
 ├── /industries/*         Vertical landing pages
 └── /integrations/*       Guides for connecting QRtub to third-party tools
 ```
