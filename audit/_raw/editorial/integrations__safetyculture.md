@@ -1,0 +1,116 @@
+# Editorial Audit: Mitti (formerly SafetyCulture / iAuditor)
+
+**File:** `/workspace/mintlify-docs/integrations/safetyculture.mdx`
+**Live:** https://help.qrtub.com/integrations/safetyculture
+**Nav group:** Integrations tab → "Operations" (`docs.json` lines 79-90: `integrations/safetyculture`, `integrations/cmms-systems`)
+**Siblings skimmed:** `integrations/cmms-systems.mdx`, `help/app-links.mdx`, `help/key-concepts.mdx`
+
+Source verified against: `qrtub/src/lib/page/bindings.ts` (`resolveBindings`, `resolveBindingsForUrl`), `qrtub/src/lib/page/destination-resolver.ts`, `qrtub/src/components/blocks/AppLinkOpener/AppLinkOpener.tsx`, `qrtub/src/lib/stripe-plans.ts`, `qrtub/src/lib/templates/safetyculture-asset.ts`, and the already-verified content of `help/app-links.mdx`.
+
+---
+
+## 1. SELF-CONTAINMENT
+
+A cold reader who lands on this page cold, unable to follow any link, can get through the **basic** "start an inspection" case but stalls or is left guessing on several other parts of the page:
+
+- **Undefined core vocabulary.** The page instructs "In your Item's Page, add a new Destination:" (Basic Setup → Mobile App Deep Link) and later "Configure the Destination once with a template placeholder. Each Item in your Tub can have a different `templateID` field value" (Using QRtub URL Templates) without ever defining Item, Page, Destination, or Tub. `help/key-concepts.mdx` defines all of these, but it is linked only once, in the **Resources** section at the very bottom of the page — after the reader has already been asked to act on all four terms. A reader who has never opened Key Concepts cannot locate "the Destination" UI from this page alone.
+- **Template ID discovery is fully outsourced.** "Getting Your Template ID" gives three generic steps ("Open the Mitti web app / Navigate to your inspection template / Copy the Template ID from the URL") and then says "See [Mitti's guide on getting entity IDs](https://help.mitti.com/en-US/000076/) for detailed instructions." That's adequate for the basic case, but:
+- **Question item IDs — required for the entire "Advanced: Pre-Fill" section — are never explained on this page at all.** The page states twice that you need "the specific **question item ID** from your Mitti template (not arbitrary parameter names)" and twice more links out to the same external Mitti guide ("Pre-Fill Multiple Questions" note; "Data not pre-filling" troubleshooting bullet). A reader who cannot follow links has no way to complete the single task this section promises — pre-filling inspection answers — because the one piece of information the whole section depends on (where a question item ID comes from) is never shown, only pointed at.
+- **No definition of "URL Template" as a QRtub feature.** "Using QRtub URL Templates" and "Using Bindings in Fallback URLs"-style content assume familiarity with `{{item.field}}` binding syntax. The mechanics (double braces, exact-as-stored insertion, no URL-encoding) are stated correctly and completely *for this specific case* — that part is genuinely self-contained — but the general feature is defined only in `help/key-concepts.mdx § URL Templates`, unlinked from anywhere except the bottom Resources list.
+- **No path back to "how do I even add a Destination."** The page assumes the reader already has a Tub with Items and knows how to open an Item's Page and add a Destination rule. `help/pages-overview.mdx` covers this, but again only surfaces in the final Resources list, not inline where the instruction first appears ("In your Item's Page, add a new Destination:").
+- **A Mitti-side dependency is left completely unstated.** The page never says whether Template pre-fill, question-item IDs, or Asset Profile links require a specific Mitti/SafetyCulture *subscription tier* on the reader's own Mitti account (SafetyCulture has historically gated its Assets module and custom question configuration behind paid plans). This isn't verifiable from the QRtub source since it concerns a third party's plans, but the page's silence here is exactly the kind of gap that produces a wrong AI-agent answer if a reader asks "why can't I see my asset ID in Mitti to set up the destination" — the correct diagnosis might be "your Mitti plan" and the page gives no hint to check that.
+- **No QRtub plan/tier statement.** Checked `qrtub/src/lib/stripe-plans.ts` — no gating is tied to Destinations, deep links, or URL Templates. This looks like a base capability available on every QRtub plan, but the page never says so; a reader (or an AI support agent) has no way to confirm this without independently checking, and could easily invent a wrong "this needs the Professional plan" answer.
+
+**Concrete missing pieces:** inline links (not just bottom-of-page) to `/help/key-concepts` and `/help/pages-overview` at first use of Item/Page/Destination/Tub/URL Template; an explicit statement that question item IDs cannot be found within QRtub and must come from Mitti's own guide; an explicit "this works on every QRtub plan" statement or equivalent.
+
+---
+
+## 2. ANSWER-FIRST
+
+Every H2 (and H3s that carry the section's only content), opening sentence(s) quoted verbatim, word count included where relevant to judge whether a first-sentence-only retrieval would be useful:
+
+| Heading | Opening as written | Words | Verdict |
+|---|---|---|---|
+| ## If you know it as SafetyCulture or iAuditor | "Same product, three names. It launched as **iAuditor**, was renamed **SafetyCulture**, and became **Mitti** in August 2026. SafetyCulture remains the company; Mitti is the platform." | 25 | **Answer-first.** Direct, complete thought, no throat-clearing. Short of the 40-60 target but nothing is lost if truncated here. |
+| ## Overview | "Mitti (formerly SafetyCulture) is a mobile inspection platform. Used with QRtub, you can:" *(then a 4-item bullet list)* | 14 (before the colon) | **Partial.** The definition sentence is answer-first (8 words) but the section's real payload — what the integration lets you do — sits entirely in the bulleted list after a colon fragment. A retrieval system stopping at sentence one learns only "Mitti is a mobile inspection platform," not what the integration does. |
+| ## Integration Method | "QRtub connects to Mitti using **deep links** — URLs that open Mitti directly at a specific inspection, template or report. No data is exchanged between the two systems; QRtub builds the URL and Mitti handles the rest." | 36 | **Answer-first.** Complete, direct, close to the target length, correctly states the no-data-exchange fact up front. Best-opening H2 on the page. |
+| ## Getting Your Template ID | "Before setting up deep links, you'll need your Mitti Template ID:" *(then a 4-step numbered list)* | 12 | **Preamble.** States a prerequisite, not an answer — the heading implies "how do I get it," and the opener just announces that you need it, then defers to a list. |
+| ## Basic Setup: Start Inspection | *(no prose — drops straight into `### Mobile App Deep Link`)* | 0 | **N/A / preamble by omission.** The H2 itself answers nothing if retrieved alone. |
+| &nbsp;&nbsp;### Mobile App Deep Link | "In your Item's Page, add a new Destination:" *(then a Name/URL field pair and a code example)* | 8 | **Preamble/label**, not a sentence-level answer. |
+| &nbsp;&nbsp;### Web App Deep Link | "Alternatively, use a web app deep link for users who prefer desktop/browser access:" | 12 | **Answer-first** for its short scope — states the alternative and who it's for. |
+| &nbsp;&nbsp;### Using QRtub URL Templates | "Use QRtub's URL Template feature to automatically insert template IDs from your Item data:" | 14 | **Answer-first**, direct, though again colon-terminated into an example. |
+| ## Advanced: Pre-Fill Inspection Questions | "Mitti allows you to pre-fill specific inspection questions using question item IDs." | 12 | **Answer-first**, direct statement of the capability. |
+| &nbsp;&nbsp;### Mobile App Pre-Fill Format | *(no prose — opens directly with a fenced code block)* | 0 | **N/A / preamble by omission.** |
+| &nbsp;&nbsp;### Pre-Fill Multiple Questions | "Use `&` to pre-fill multiple questions:" | 6 | **Answer-first** but minimal — acceptable given the section is inherently a syntax note. |
+| ## App Not Installed? Set a Fallback URL | "\`iauditor://\` deep links only work if Mitti is installed on the device. If someone scans and doesn't have the app, the link does nothing." | 24 | **Answer-first.** Direct statement of the failure condition — also the one H2 on the page already phrased as a question, and it delivers on that phrasing. |
+| ## Additional Deep Link Options | "Beyond starting new inspections, you can create Destinations for other Mitti actions:" | 12 | **Borderline/label.** States the topic but the real content (which actions, which URLs) is entirely in the H3s below; colon fragment into a list. |
+| &nbsp;&nbsp;### View Inspection Report / Edit Existing Inspection / Open Asset Profile / View Document/File | Each opens directly with **Mobile:**/**Web:** code lines — no lead sentence at all | 0 | **N/A / preamble by omission**, four times over. Explanatory prose (where present, e.g. "Store the latest inspection ID in each Item's `inspectionID` field...") comes *after* the code, not before it. |
+| ## Use Cases | "**Equipment Inspections**" *(bold sub-label, then a bullet list of examples — no sentence at all)* | 0 | **N/A.** Pure catalog section; there's no implied question to answer, so this is a structural observation rather than a defect. |
+| ## Troubleshooting | "**Mobile app doesn't open:**" *(bold sub-label, then a bullet list — no lead sentence)* | 0 | **Acceptable pattern despite 0-word opener.** Each bold sub-label is itself a mini-question ("Mobile app doesn't open," "Data not pre-filling," "Users need access") immediately followed by direct bullets — this is a reasonable FAQ-style structure even without a framing sentence for the H2 as a whole. |
+| ## Resources | *(pure link list, no prose)* | 0 | **N/A.** Link index; not expected to answer anything. |
+
+**Summary:** 6 of 17 heading-levels evaluated open with a genuine direct-answer sentence (If you know it as..., Integration Method, Web App Deep Link, Using QRtub URL Templates, Advanced: Pre-Fill Inspection Questions, App Not Installed?...). None hit the 40-60 word target — most are considerably shorter, which is fine when the sentence is still complete, but seven sections (Basic Setup: Start Inspection, Mobile App Deep Link, Mobile App Pre-Fill Format, and all four "Additional Deep Link Options" H3s) have **zero lead sentence** and open directly on a label or code block, meaning a chunk-retrieval system grabbing "the section" gets a fragment with no framing prose at all.
+
+---
+
+## 3. ONE QUESTION PER PAGE
+
+The page's core scope — "how do I wire a QRtub Destination to open Mitti at the right screen with the right data" — is a single, appropriately-scoped task, and it's covered end to end in one place the same way the sibling `integrations/cmms-systems.mdx` covers its own single scope. **No structural split of the core content is recommended.**
+
+Two things are still worth naming:
+
+- **The rename explainer ("If you know it as SafetyCulture or iAuditor") is a genuinely separate question** — "is this the same product as SafetyCulture/iAuditor, and do my existing setups still work?" — bundled into what is otherwise a setup guide. It is not duplicated anywhere else in the docs (checked: `grep` across every `.mdx` file for the rename language returns only this page), so there's no cross-page redundancy to fix, but if rename confusion turns out to be a common support question independent of Mitti setup, it's a natural candidate to promote to its own short FAQ entry (or a note in `help/key-concepts.mdx`) that this page links to, rather than being the sole place the explanation lives.
+- **The page is not too thin to stand alone** — at ~200 lines with multiple worked examples (start inspection, pre-fill, fallback, four "additional" deep link types, use cases, troubleshooting) it's a substantial, legitimate single chunk. It should not be merged into `cmms-systems.mdx` or any other page.
+
+---
+
+## 4. HEADINGS AS QUESTIONS
+
+| Current heading | Proposed question form | Why (or why not) |
+|---|---|---|
+| If you know it as SafetyCulture or iAuditor | **Is Mitti the same as SafetyCulture or iAuditor?** | The current heading is a conditional clause; the question form matches how a confused reader (or a search query) would actually phrase it. |
+| Overview | **What can I do by connecting QRtub to Mitti?** | "Overview" is a content-free label; the question form tells a retrieval system and a scanning reader exactly what's inside. |
+| Integration Method | **How does QRtub connect to Mitti?** | Minor clarity gain — "Method" is already fairly precise, but the question form matches "how does this actually work" search intent, and reinforces the important no-data-exchange fact that follows. |
+| Getting Your Template ID | **How do I find my Mitti Template ID?** | Direct match to the implied task; "Getting" reads slightly like a gerund label. |
+| Basic Setup: Start Inspection | **How do I set up a Destination that starts a new Mitti inspection?** | Converts a colon-separated label into the actual question the section answers. |
+| Advanced: Pre-Fill Inspection Questions | **How do I pre-fill Mitti inspection answers with Item data?** | Same reasoning — "Advanced:" is a difficulty label, not a question; readers search by task, not by difficulty tier. |
+| App Not Installed? Set a Fallback URL | *(keep as-is)* | Already a question and already answers it directly — the strongest heading on the page. |
+| Additional Deep Link Options | **What other Mitti destinations can a QR code link to?** | "Additional...Options" is a catalog label; the question form matches how someone would search ("can I link to an asset profile instead of an inspection"). |
+| Use Cases | *(leave as noun phrase)* | This is a scenario catalog, not an implicit question — forcing a question form here would be artificial, matching the sibling audit's treatment of the same pattern. |
+| Troubleshooting | *(leave as noun phrase)* | Conventional, well-understood heading; the bold sub-labels underneath already function as the questions. |
+| Resources | *(leave as noun phrase)* | Pure link list — no question to convert. |
+
+---
+
+## 5. EDGE CASES / LIMITS / FAILURE MODES
+
+Concrete, source-verified gaps — each is a place an AI support agent would have to guess:
+
+1. **Binding-failure behavior is completely unstated, and it's the single biggest gap on the page.** The page's central pitch, repeated three times almost verbatim — "Configure the Destination once with a template placeholder... One Destination configuration serves all equipment types" (Using QRtub URL Templates); "Configure this URL once. Deploy to 500 pieces of equipment. Each scan substitutes that Item's own asset ID" (Pre-Fill Multiple Questions); "Configure both once. Deploy to 500 items" (implied via the fallback section) — never states what happens for the one Item in that batch of 500 whose `templateID` or `assetID` field is empty. Verified directly in `qrtub/src/lib/page/bindings.ts` (`resolveBindingsForUrl`, lines 404-430) and `qrtub/src/lib/page/destination-resolver.ts` (lines 55-61, 107-110): if a bound field evaluates to `undefined`, `null`, or `""`, the **entire URL** is marked unresolved, the whole rule is logged as `Skipped - unresolved`, and destination-resolver falls through to the next rule (or shows nothing / the default "App not available" state) rather than producing a URL with a blank segment. The Troubleshooting section's "Data not pre-filling → Ensure Item fields in QRtub contain data" bullet hints at the *symptom* but never explains the *mechanism* — that a missing field doesn't degrade gracefully to a partial link, it silently drops the whole Destination.
+2. **No plan/tier statement for QRtub itself.** Checked `qrtub/src/lib/stripe-plans.ts` — no feature gating exists for Destinations, deep links, or URL Templates. This is very likely a base capability on every plan, but the page never says so explicitly, leaving the door open for an invented "this is a premium feature" answer.
+3. **No caveat about Mitti/SafetyCulture-side plan requirements.** Not verifiable from the QRtub source (third-party product), but the page's silence here is a defect in the same spirit as #2 — a reader whose Template ID or question item ID lookup fails inside Mitti has no signal from this page that the cause might be their Mitti subscription tier rather than anything QRtub-side.
+4. **The iOS-Chrome deep-link failure mode is documented on a *different* page but omitted here, on the actual Mitti page.** `help/app-links.mdx` states explicitly: "For Mitti specifically: iOS Safari works with `iauditor://` deep links, but Chrome on iOS blocks them." That sentence names Mitti by name and is exactly the kind of platform-specific gotcha a reader configuring *this* integration needs — but it does not appear anywhere on `integrations/safetyculture.mdx`, and the only link from this page to `app-links.mdx` is a generic "See App Links & Fallback URLs for full details on how fallbacks work," giving no hint that Mitti-specific browser behavior is the reason to click through.
+5. **The "keep it under ~2000 characters" limit's origin is unstated.** Troubleshooting says "Verify deep link isn't too long (keep it under ~2000 characters)" and the Pre-Fill section separately warns "Very long deep links may not work consistently." No constant matching this figure was found in `qrtub/src/` (only an unrelated 500-character CEL *expression* length cap in `bindings.ts`, which governs conditional-visibility rules, not destination URLs). As written, a reader can't tell whether ~2000 characters is a QRtub-enforced ceiling (it isn't, as far as the source shows) or a mobile OS/browser URL-length convention — the vagueness itself is the defect, since "may not work consistently" gives no actionable threshold or explanation of whose limit it is.
+6. **The Fallback UX difference (styled panel vs. native browser `alert()`) is inherited from the duplicated fallback section but not disclosed here either.** This page's own "What happens at scan time" bullets ("Mitti installed → app opens directly..." / "Mitti not installed → after 2.5 seconds, QRtub redirects to the web version") describe only one of two real code paths. Confirmed via `qrtub/src/components/blocks/AppLinkOpener/AppLinkOpener.tsx`: a single-Destination Item redirect shows a full styled page with "Try Again"/"Go Back" buttons, but a Destination used as a button on a multi-Destination Page follows a different component path that (per the already-verified `help/app-links.mdx` audit) surfaces the Fallback Message via a plain `alert()` instead. Since this page's own "Use Cases → Multi-Audience Routing" section explicitly recommends multi-Destination Pages, this gap directly affects the scenario the page itself promotes.
+7. **A possible content inconsistency worth flagging for verification against Mitti's own docs:** "View Inspection Report" lists **Mobile:** `iauditor://audit/<inspection_id>` and **Web:** `https://app.mitti.com/report/audit/<inspection_id>`. "Edit Existing Inspection," directly below it, lists the *identical* **Mobile:** `iauditor://audit/<inspection_id>` but a *different* **Web:** `https://app.mitti.com/inspection/<inspection_id>`. If the mobile deep link genuinely opens the same editable view for both "viewing" and "editing" an inspection, the page should say so (view/edit are the same action on mobile); if it's a copy-paste artifact, the mobile URL for one of the two is wrong. Either way, a reader retrieving "Edit Existing Inspection" in isolation has no way to know why its mobile link matches "View Inspection Report" and its web link doesn't.
+8. **No word/character ceiling stated for Item field values used in bindings** (e.g., how long can `templateID` or `assetID` be before it contributes to the "~2000 character" deep link problem above) — related to #5, the page has no guidance on keeping field values short, only a vague warning about the resulting URL.
+
+---
+
+## 6. CHUNK INTEGRITY
+
+Each H2 (and any H3 carrying unique content) evaluated as if it were the only thing retrieved:
+
+- **If you know it as SafetyCulture or iAuditor** — Self-contained. No dependency on surrounding text.
+- **Overview** — Self-contained.
+- **Integration Method** — Self-contained.
+- **Getting Your Template ID** — Self-contained; the example Template ID is clearly marked "Example:" so it reads correctly without the rest of the page.
+- **Basic Setup: Start Inspection** (and its H3s) — **Depends on prior content.** The H3s "Mobile App Deep Link" and "Web App Deep Link" use `<template_id>` as a bare placeholder with no inline explanation — a reader who retrieves only this H2 (without "Getting Your Template ID" just above it) has no way to know what `<template_id>` refers to or where to get one. This is the page's clearest chunk-integrity failure: the section is not self-sufficient without its predecessor.
+  - "Using QRtub URL Templates" H3 is somewhat better off — it explains its own placeholder inline ("{{item.templateID}}... Each Item in your Tub can have a different `templateID` field value") — but still assumes "URL Template," "Destination," "Item," and "Tub" are already known terms (see §1).
+- **Advanced: Pre-Fill Inspection Questions** — Better than the section above: its own example includes an inline "Where:" glossary ("`template_fcbc86fd41a74180921347e4be53bdf2` is your Mitti template ID / `8f2f287e-be6e-470c-a2e2-a0fd8ab966ae` is the question item ID in your template / `{{item.assetID}}` is the QRtub field binding") that re-establishes context locally. This is a good pattern and makes the section largely self-sufficient even in isolation — it doesn't lean on "the above example" the way "Basic Setup" implicitly does.
+  - "Pre-Fill Multiple Questions" H3 reuses the same good "Where:"-style habit is absent here, but the example is short enough (two bindings, both already-familiar `assetID`/`location` pattern) that it reads fine alone.
+- **App Not Installed? Set a Fallback URL** — Self-contained; restates the `iauditor://` example inline rather than pointing back to "Basic Setup."
+- **Additional Deep Link Options** — Each H3 (View Inspection Report, Edit Existing Inspection, Open Asset Profile, View Document/File) pairs its own Mobile/Web URLs, so none of them require the reader to have read "Basic Setup" first — good isolation, aside from the View/Edit inconsistency noted in §5.7.
+- **Use Cases** — Self-contained; a generic scenario list that doesn't reference any other section.
+- **Troubleshooting** — Mostly self-contained. One soft dependency: "the entity ID is correct" (under "Web link doesn't work") uses "entity ID" as an umbrella term for template/inspection/asset IDs that is only ever named as a phrase in the linked-out Mitti guide title ("Get Mitti entity IDs") — the term itself is never defined anywhere in this page's own prose.
+- **Resources** — Self-contained by nature (a link list needs no surrounding context).
