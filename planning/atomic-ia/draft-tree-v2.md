@@ -28,23 +28,23 @@ Decision 6.
 
 ## Decisions
 
-### 1. Tubs vs. Items separability
+### 1. Collections vs. Items separability
 
 **Resolved: they split cleanly, and custom-field schema goes with neither — it's a third
 sibling, "Fields."** Adopting `tubs.md`'s verdict, which is well-evidenced rather than
 asserted: the existing `custom-fields.mdx` already achieves the split unassisted (119 lines
 that fully explain defining a field and never once explain filling one in), and the code
 backs it structurally — `FieldConfig` lives exclusively in `tub.metadata.fieldConfig`, is
-read/written only through Tub API routes, and no code path for defining a field touches an
-Item, or vice versa. The one connection point (`defaultValue`, a Tub-level fallback used when
+read/written only through Collection API routes, and no code path for defining a field touches an
+Item, or vice versa. The one connection point (`defaultValue`, a Collection-level fallback used when
 an Item is created blank) is a one-sentence cross-reference, not a shared page — the same
 shape as Linear referencing sort order from `priority.md` without merging the pages.
 
 Because the field-schema domain is large enough to be its own group (10 pages, see below),
-it becomes a **third sibling top-level group, not a subsection of Tubs or Items** — mirroring
+it becomes a **third sibling top-level group, not a subsection of Collections or Items** — mirroring
 Linear's own precedent of "Issues" and "Issue properties" as adjacent sidebar groups even
-though issue properties are edited from inside an issue. Final shape: **Tubs** (12 pages,
-tub-level settings), **Fields** (10 pages, the custom-field schema mechanism), **Items** (5
+though issue properties are edited from inside an issue. Final shape: **Collections** (12 pages,
+collection-level settings), **Fields** (10 pages, the custom-field schema mechanism), **Items** (5
 pages, the Item entity itself) — three siblings, none nested inside another.
 
 ### 2. App Links / Conditional Visibility / Device Detection: Pages vs. Destinations
@@ -100,12 +100,12 @@ Every flagged candidate, confirmed or overridden with reasoning:
 
 | Flagged concept | Inventory | Recommendation | Call |
 |---|---|---|---|
-| Item ID Mask Conflicts | tubs.md row 7 | fold into row 6 if <150 words | **Confirmed merge** → subsection of `tubs/item-id-mask` ("Mask conflicts"). The free-form-vs-numbered-pattern asymmetry is real and worth a heading, not a URL. |
-| The Tub's Page Template | tubs.md row 10 | fold into row 2 if too thin | **Confirmed merge** → subsection of `tubs/creating-a-tub` ("Where the page template comes from"). It's a one-`page_templates`-row-per-Tub ownership fact plus a hand-off link to the Page Editor — real, but not enough distinct mechanism to justify its own URL once the starter-template gallery (which is where a reader actually encounters this) already exists as a sibling page. |
+| Item ID Mask Conflicts | tubs.md row 7 | fold into row 6 if <150 words | **Confirmed merge** → subsection of `collections/item-id-mask` ("Mask conflicts"). The free-form-vs-numbered-pattern asymmetry is real and worth a heading, not a URL. |
+| The Collection's Page Template | tubs.md row 10 | fold into row 2 if too thin | **Confirmed merge** → subsection of `collections/creating-a-collection` ("Where the page template comes from"). It's a one-`page_templates`-row-per-Collection ownership fact plus a hand-off link to the Page Editor — real, but not enough distinct mechanism to justify its own URL once the starter-template gallery (which is where a reader actually encounters this) already exists as a sibling page. |
 | Item image | items.md row 5 | fold into row 1 if too thin once drafted | **Confirmed merge** → subsection of `items/overview` ("The Item image"). It's a fixed system field with one real cross-feature fact (feeds reference-field previews) — a paragraph, not a page; Linear has no per-entity "avatar" page either. |
 | Multiple values (List fields) | items.md row 12 | fold into row 9 (Custom field types) if <150 words | **Confirmed merge** → subsection of `fields/field-types` ("Multiple values"). It's one checkbox with one gating rule (enabled only when type is List) — genuinely thinner than Linear's own 243-word floor once isolated. |
 | Page metadata & social previews | pages-destinations.md A32 | fold into Pages Overview if <150 words | **Overridden — kept standalone** (`pages/page-metadata`). Once drafted this has real, specific content: auto-generated OG/Twitter tags from Item data, the deliberate `noindex, follow` split (thin per-item pages shouldn't dilute search, but link equity should still flow), and a distinct minimal-metadata path for private Pages. That's three non-obvious, verifiable facts — comfortably past Linear's 243-word floor, not a footnote on an orientation page. |
-| Item ID Mask Conflicts / Tub's Page Template / Item image / Multiple values | — | — | Each merge target above gets a **named heading** for the merged concept (not a silent paragraph), so it's still individually findable in search/retrieval even without its own URL — per the brief's own instruction. |
+| Item ID Mask Conflicts / Collection's Page Template / Item image / Multiple values | — | — | Each merge target above gets a **named heading** for the merged concept (not a silent paragraph), so it's still individually findable in search/retrieval even without its own URL — per the brief's own instruction. |
 
 No other flagged-thin concept from the inventories survived independent review as
 standalone; the ones above are the complete set.
@@ -117,9 +117,9 @@ inventoried twice from two different angles. Resolving each to one canonical pag
 publishing both:
 
 1. **Starter templates** (tub-field-schema + page-sections + sample-items, seeded together at
-   Tub creation) — inventoried in both `tubs.md` (row 3) and `pages-destinations.md` (A31),
+   Collection creation) — inventoried in both `tubs.md` (row 3) and `pages-destinations.md` (A31),
    and *also* orphaned once in `account-team-billing.md`'s "Workspace" section. **Canonical
-   home: `tubs/starter-templates`.** It's a Tub-creation-time feature before it's a Pages
+   home: `collections/starter-templates`.** It's a Collection-creation-time feature before it's a Pages
    feature; the Pages and Account/Team/Billing inventories both cross-link to it instead of
    duplicating.
 2. **Per-item Page overrides** (the Override toggle: sparse-diff save vs. base-template save,
@@ -128,11 +128,11 @@ publishing both:
    mechanism from two angles. **Canonical home: `pages/page-overrides`**, since the mechanism
    is fundamentally about what the Page Editor decides to save and where — `items/overview`
    cross-links out to it rather than Items getting its own copy.
-3. **Default Destination Pattern for Direct-Mode tubs** (a Tub-level URL template stamped onto
+3. **Default Destination Pattern for Direct-Mode tubs** (a Collection-level URL template stamped onto
    every new Item at creation, frozen thereafter) — inventoried in both `tubs.md` (row 9) and
    `pages-destinations.md` (B16), again describing the same Scan-tab feature. **Canonical
-   home: `tubs/default-destination`**, since it's authored from Tub Settings alongside the
-   other Tub-level scan defaults; Destinations cross-links to it instead of repeating it as a
+   home: `collections/default-destination`**, since it's authored from Collection Settings alongside the
+   other Collection-level scan defaults; Destinations cross-links to it instead of repeating it as a
    thirteenth Destinations page.
 4. **Downloading QR code images (PNG, single + bulk zip)** — inventoried in both `links.md`
    (row 12) and `media-printing.md` (row 12b), verbatim the same feature reached from the same
@@ -147,10 +147,10 @@ publishing both:
    (the "Create & open" button, the optional photo capture) and defers to the first page for
    the mechanism instead of re-deriving it.
 6. **Page Template Versioning** (`pages-destinations.md` A30) — flagged with an open boundary
-   question (Pages domain or Tub-settings domain?). **Resolved to Pages**
+   question (Pages domain or Collection-settings domain?). **Resolved to Pages**
    (`pages/page-template-versions`): version history, restore, and clone are Page Editor
-   actions reached from inside that tool, not a Tub Settings control — the same reasoning that
-   keeps "Fields" a sibling of "Tubs" rather than a subsection of it also argues for keeping
+   actions reached from inside that tool, not a Collection Settings control — the same reasoning that
+   keeps "Fields" a sibling of "Collections" rather than a subsection of it also argues for keeping
    version history with the tool that produces the versions.
 
 ### 6. v2: Fixing the 10 ambiguous/gap findings from the 45-question retrieval test
@@ -175,8 +175,8 @@ both directions. No slugs changed, no pages moved.
 - **Rescope + rename** (`links/deleting-and-releasing-links` → retitled "Deleting,
   Unassigning, and Releasing Links," widened to state the manual single-Link unassign action
   explicitly, and made the single canonical home for *every* trigger of Link release,
-  including the Tub-deletion cascade previously half-claimed by `tubs/deleting-a-tub`).
-  `tubs/deleting-a-tub` narrows to defer to it instead of restating the release mechanism.
+  including the Collection-deletion cascade previously half-claimed by `collections/deleting-a-collection`).
+  `collections/deleting-a-collection` narrows to defer to it instead of restating the release mechanism.
 - **New page** (`links/choosing-a-link-type`) — the tree had three atomic type pages and no
   comparison page, which is exactly the shape Linear avoids (it always pairs atomic pages with
   one page that puts them side by side, e.g. `print-shop/choosing-a-method` for VDP vs. Gang
@@ -216,56 +216,56 @@ at the end of this document.
 #### Group: Getting Started
 
 - **Creating Your First Link** — `creating-your-first-link` — The fastest path end to end:
-  create a Tub, get a Link, connect it to an Item — kept as the one tutorial-shaped page in
+  create a Collection, get a Link, connect it to an Item — kept as the one tutorial-shaped page in
   this group, distinct from the conceptual orientation below it.
-- **Key Concepts** — `key-concepts` — A short, cross-entity orientation tying Tub, Item, Link,
+- **Key Concepts** — `key-concepts` — A short, cross-entity orientation tying Collection, Item, Link,
   Page, and Media together in one sentence each — the same role Linear's own "Concepts" page
   plays above "Priority," "Due dates," etc. Deliberately trimmed once the atomic pages below
   exist; it points outward rather than re-explaining any of them.
 
-#### Group: Tubs
+#### Group: Collections
 
-- **What Is a Tub?** — `tubs/overview` — Orientation: the entity that groups Items under one
+- **What Is a Collection?** — `collections/overview` — Orientation: the entity that groups Items under one
   schema, link-generation rule, scan behavior, and page template.
-- **Creating a Tub** — `tubs/creating-a-tub` — The single-step creation fork (one destination
-  vs. a page of several, or a starter template), the auto-generated `Tub<N>` name, and where
-  the page template a new Tub gets actually comes from — including a named subsection,
+- **Creating a Collection** — `collections/creating-a-collection` — The single-step creation fork (one destination
+  vs. a page of several, or a starter template), the auto-generated `Collection<N>` name, and where
+  the page template a new Collection gets actually comes from — including a named subsection,
   "Starter template vs. page template versions," explaining why those are different
   timelines: a starter template is a one-time seed applied only at creation, while Page
   Template Versions (Pages group) is the ongoing save history that runs from then on
-  regardless of how the Tub started. *(v2: strengthened per Decision 6 — resolves the
+  regardless of how the Collection started. *(v2: strengthened per Decision 6 — resolves the
   Page-Template-Versions-vs-Starter-Templates ambiguity.)*
-- **Starter Templates** — `tubs/starter-templates` — The 8-template gallery that seeds a new
-  Tub's field schema, page sections, and sample Items in one step, applied once at creation
+- **Starter Templates** — `collections/starter-templates` — The 8-template gallery that seeds a new
+  Collection's field schema, page sections, and sample Items in one step, applied once at creation
   only — canonical home for this feature (see Decision 5.1). What happens to the page template
   afterward is Page Template Versions' job, not this page's. *(v2: added the "once, at
   creation only" scoping.)*
-- **Tub Details** — `tubs/tub-details` — The four display-only general settings: name,
+- **Collection Details** — `collections/collection-details` — The four display-only general settings: name,
   description, custom Items label, and cover image.
-- **Link Generation for New Items** — `tubs/link-generation-modes` — The Tub-level setting
+- **Link Generation for New Items** — `collections/link-generation-modes` — The Collection-level setting
   deciding whether a Link is minted automatically when a new Item is created, and which of the
   three modes (Random / ID-based / None) it uses.
-- **Building an Item ID Mask** — `tubs/item-id-mask` — The prefix/suffix/digit-count editor for
+- **Building an Item ID Mask** — `collections/item-id-mask` — The prefix/suffix/digit-count editor for
   ID-based link generation, including the free-form-vs.-numbered-pattern conflict rules (see
   Decision 4).
-- **Scan Behavior for New Items** — `tubs/scan-behavior-default` — The Tub-level default
+- **Scan Behavior for New Items** — `collections/scan-behavior-default` — The Collection-level default
   deciding whether a brand-new Item starts as Direct Mode or Page Mode.
-- **Default Destination for New Items** — `tubs/default-destination` — The Scan-tab
+- **Default Destination for New Items** — `collections/default-destination` — The Scan-tab
   CEL-expression builder for a default destination URL template stamped onto new Items at
   creation, plus the live "missing field value" warning (canonical home for this feature, see
   Decision 5.3).
-- **Exporting a Tub Backup** — `tubs/export-backup` — Downloading a JSON snapshot of a Tub's
+- **Exporting a Collection Backup** — `collections/export-backup` — Downloading a JSON snapshot of a Collection's
   settings, fields, and page template — Items are explicitly excluded.
-- **Importing a Tub Backup** — `tubs/import-backup` — Restoring a backup into an *existing*
-  Tub in Merge mode (additive) or Replace mode (destructive, typed confirmation required).
-- **Creating a New Tub From a Backup** — `tubs/new-tub-from-backup` — Using a backup file to
-  spin up a brand-new Tub instead of an existing one, QRtub's closest equivalent to "duplicate
-  a Tub."
-- **Deleting a Tub** — `tubs/deleting-a-tub` — What's hard-deleted at the Tub level (Items, the
-  page template, the Tub record itself) and the one thing that's deliberately not included:
-  Links are never part of a Tub delete — they're released, a Links-domain mechanism this page
+- **Importing a Collection Backup** — `collections/import-backup` — Restoring a backup into an *existing*
+  Collection in Merge mode (additive) or Replace mode (destructive, typed confirmation required).
+- **Creating a New Collection From a Backup** — `collections/new-collection-from-backup` — Using a backup file to
+  spin up a brand-new Collection instead of an existing one, QRtub's closest equivalent to "duplicate
+  a Collection."
+- **Deleting a Collection** — `collections/deleting-a-collection` — What's hard-deleted at the Collection level (Items, the
+  page template, the Collection record itself) and the one thing that's deliberately not included:
+  Links are never part of a Collection delete — they're released, a Links-domain mechanism this page
   defers to rather than restates; see "Deleting, Unassigning, and Releasing Links" in the
-  Links group for the full mechanism and every trigger of it, Tub-deletion included. *(v2:
+  Links group for the full mechanism and every trigger of it, Collection-deletion included. *(v2:
   narrowed per Decision 6 — resolves the ambiguity with `links/deleting-and-releasing-links`
   over which page owns the "printed codes keep working" fact.)*
 
@@ -288,10 +288,10 @@ at the end of this document.
 - **Allow New Values** — `fields/allow-new-values` — The per-field toggle controlling whether a
   value outside the Allowed Values list can be typed in or imported via CSV.
 - **Reference Fields** — `fields/reference-fields` — The field type that holds no value of its
-  own — it's a live pointer to another Item, Tub, or team member, resolved at render/scan
+  own — it's a live pointer to another Item, Collection, or team member, resolved at render/scan
   time, so no Allowed Values list ever applies to it. *(v2: added the explicit boundary
   against Allowed Values.)*
-- **Field Defaults** — `fields/field-defaults` — The Tub-level fallback applied when an Item is
+- **Field Defaults** — `fields/field-defaults` — The Collection-level fallback applied when an Item is
   created with a field left blank, including the destination-URL field's "stamped at
   creation, never retroactive" exception.
 - **Required Fields** — `fields/required-fields` — The "Required" checkbox and its one
@@ -313,11 +313,11 @@ at the end of this document.
 
 #### Group: Items
 
-- **What Is an Item?** — `items/overview` — Orientation: the individual record a Tub tracks,
+- **What Is an Item?** — `items/overview` — Orientation: the individual record a Collection tracks,
   including the Item image system field (see Decision 4).
 - **Name and Description** — `items/name-and-description` — The two free-text core fields
   every Item ships with.
-- **Item ID** — `items/item-id` — The per-Tub-unique identifier field, its blank/whitespace
+- **Item ID** — `items/item-id` — The per-Collection-unique identifier field, its blank/whitespace
   normalization, and its role in ID-based Link generation.
 - **Tags** — `items/tags` — The core `tags` array field, its default free-form-addition
   behavior, and its colored-chip rendering.
@@ -327,7 +327,7 @@ at the end of this document.
 #### Group: Import & Export
 
 - **Importing Items from CSV** — `import-export/importing-items` — Bulk create/update by
-  matching `id`, per-row validation against the Tub's field config, dry-run preview, and the
+  matching `id`, per-row validation against the Collection's field config, dry-run preview, and the
   10 MB / 10,000-row limits.
 - **Exporting Items to CSV** — `import-export/exporting-items` — Downloading visible-columns
   vs. full-field CSV, scoped by the current search/filter/sort.
@@ -367,12 +367,12 @@ at the end of this document.
   a non-draft print batch) vs. release (the Link survives, becomes Unallocated, and keeps
   resolving). Covers both paths to release: the manual action (unassigning a Link from an Item
   that still exists, from the Links grid) and the two automatic triggers (deleting the Item a
-  Link is attached to, or deleting its whole Tub). Canonical home for the Tub-deletion cascade
-  fact as well as the Item-deletion one — `tubs/deleting-a-tub` defers here instead of
+  Link is attached to, or deleting its whole Collection). Canonical home for the Collection-deletion cascade
+  fact as well as the Item-deletion one — `collections/deleting-a-collection` defers here instead of
   restating it, and `bulk-links/assign-unassign-delete` defers here for what unassign actually
   does to the Link/Item relationship, keeping its own page scoped to bulk-operation mechanics.
-  *(v2: retitled and widened per Decision 6 — resolves both the Tub-deletion-cascade ambiguity
-  with `tubs/deleting-a-tub` and the delete-vs-unassign ambiguity with
+  *(v2: retitled and widened per Decision 6 — resolves both the Collection-deletion-cascade ambiguity
+  with `collections/deleting-a-collection` and the delete-vs-unassign ambiguity with
   `bulk-links/assign-unassign-delete`.)*
 
 #### Group: Bulk Link Operations
@@ -393,10 +393,10 @@ at the end of this document.
 #### Group: Pages
 
 - **Pages Overview** — `pages/pages-overview` — Orientation: what a Page is, and the 4-step
-  flow to turn one on for a Tub (enable, create an Item, assign a Link, add Destinations).
-- **Direct Mode vs. Page Mode** — `pages/direct-mode-vs-page-mode` — The per-Tub default /
+  flow to turn one on for a Collection (enable, create an Item, assign a Link, add Destinations).
+- **Direct Mode vs. Page Mode** — `pages/direct-mode-vs-page-mode` — The per-Collection default /
   per-Item override choice between an immediate redirect and a multi-destination Page.
-- **Page Privacy: Public vs. Private** — `pages/page-privacy` — The Tub-level and Item-level
+- **Page Privacy: Public vs. Private** — `pages/page-privacy` — The Collection-level and Item-level
   gates that require a signed-in team member to view a Page, and their effect on `noindex`.
 - **The Page Editor Layout** — `pages/page-editor-layout` — The three-tab component/data/
   structure panel, the Properties panel, and the "switching Item clears undo history" gotcha.
@@ -418,11 +418,11 @@ at the end of this document.
   Item only (a sparse diff), off updates every Item sharing the base template; canonical home
   for this mechanism (see Decision 5.2).
 - **Page Template Versions** — `pages/page-template-versions` — Every save creates a new
-  version, regardless of whether the Tub started from a Starter Template or from blank;
-  viewing history, restoring an old version, cloning a template to another Tub (placed here,
-  not under Tubs — see Decision 5.6). Starter Templates seeds this history once at creation;
+  version, regardless of whether the Collection started from a Starter Template or from blank;
+  viewing history, restoring an old version, cloning a template to another Collection (placed here,
+  not under Collections — see Decision 5.6). Starter Templates seeds this history once at creation;
   this page is what runs from then on. *(v2: added the reciprocal framing against Starter
-  Templates — resolves the ambiguity with `tubs/starter-templates`.)*
+  Templates — resolves the ambiguity with `collections/starter-templates`.)*
 - **Page Metadata & Social Previews** — `pages/page-metadata` — Auto-generated OG/Twitter tags
   from Item data, the `noindex, follow` split, and the reduced metadata a private Page shows
   instead (kept standalone — see Decision 4).
@@ -441,8 +441,8 @@ at the end of this document.
   *(v2: narrowed to syntax-only with an explicit pointer, so this page stops competing with
   the namespace reference pages on a query about what a specific namespace can do.)*
 - **Item Fields Reference** — `destinations/item-fields` — The catalog of `item.*` bindings:
-  standard fields plus whatever custom fields a Tub defines.
-- **Tub Fields Reference** — `destinations/tub-fields` — The catalog of `tub.*` bindings.
+  standard fields plus whatever custom fields a Collection defines.
+- **Collection Fields Reference** — `destinations/collection-fields` — The catalog of `tub.*` bindings.
 - **Time Fields Reference** — `destinations/time-fields` — `time.hour`/`dayOfWeek`/etc.,
   computed fresh per scan in UTC — and, as a named subsection, "Why you can't check if
   something is overdue": there is no `time.today` and no absolute date value or date math, so
@@ -456,7 +456,7 @@ at the end of this document.
   etc. sourced from CDN geo headers, with the privacy consequence of using them stated plainly.
 - **Conditional Visibility** — `destinations/conditional-visibility` — Hiding a section with a
   CEL `condition`; the silent-`false` behavior of any undefined identifier (a typo, or a field
-  that doesn't exist on this Tub). For the specific case of an invented date-like value such as
+  that doesn't exist on this Collection). For the specific case of an invented date-like value such as
   `today`, see Time Fields Reference, which owns that fact and explains why no such value
   exists at all. *(v2: replaced the "today" example with a pointer to Time Fields Reference —
   resolves the ambiguity that example created; see Decision 6.)*
@@ -585,7 +585,7 @@ at the end of this document.
 
 #### Group: Team
 
-- **Team Overview** — `team/overview` — Orientation: the shared workspace that owns Tubs,
+- **Team Overview** — `team/overview` — Orientation: the shared workspace that owns Collections,
   holds members, and optionally carries one subscription.
 - **Switching Between Teams** — `team/switching-teams` — The Team Switcher, its `localStorage`
   persistence, and the dashboard-reset side effect of switching.
@@ -631,7 +631,7 @@ at the end of this document.
 #### Group: Workspace
 
 - **Search Everything** — `workspace/search-everything` — The global search panel across
-  Tubs, Items, Links, and Pages at once, its category filter, and its local recent-searches
+  Collections, Items, Links, and Pages at once, its category filter, and its local recent-searches
   history.
 
 ---
@@ -722,12 +722,12 @@ at the end of this document.
 Every fix below resolves one specific finding from the 45-question retrieval test (verdicts
 quoted from that test's output).
 
-1. **"If I delete a whole Tub, do the physical QR codes already stuck on my equipment stop
-   working?" (ambiguous: `tubs/deleting-a-tub` vs. `links/deleting-and-releasing-links`)** —
+1. **"If I delete a whole Collection, do the physical QR codes already stuck on my equipment stop
+   working?" (ambiguous: `collections/deleting-a-collection` vs. `links/deleting-and-releasing-links`)** —
    **Structural rescope.** `links/deleting-and-releasing-links` (retitled "Deleting,
    Unassigning, and Releasing Links") is now the sole canonical home for the release mechanism
-   and *every* trigger of it, Tub-deletion included. `tubs/deleting-a-tub`'s description was
-   narrowed to state only what's hard-deleted at the Tub level and explicitly defer to the
+   and *every* trigger of it, Collection-deletion included. `collections/deleting-a-collection`'s description was
+   narrowed to state only what's hard-deleted at the Collection level and explicitly defer to the
    Links page for what survives — it no longer makes its own competing claim about printed
    codes.
 
@@ -759,9 +759,9 @@ quoted from that test's output).
    page that names both mechanisms together, matching the comparative shape of the question.
 
 5. **"What's the difference between a Page Template Version and a Starter Template?"
-   (ambiguous: `pages/page-template-versions` vs. `tubs/starter-templates` vs.
-   `tubs/creating-a-tub`)** — **Description fix + subsection.** Added a named subsection to
-   `tubs/creating-a-tub` ("Starter template vs. page template versions") stating the timeline
+   (ambiguous: `pages/page-template-versions` vs. `collections/starter-templates` vs.
+   `collections/creating-a-collection`)** — **Description fix + subsection.** Added a named subsection to
+   `collections/creating-a-collection` ("Starter template vs. page template versions") stating the timeline
    distinction directly, and added reciprocal one-line framing to the other two pages ("seeded
    once" vs. "runs from then on") so any one of the three pages, read alone, states where the
    other two fit.

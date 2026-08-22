@@ -24,39 +24,39 @@ path prefixes, shown per tab).
 - **QRtub Documentation** — `help.qrtub.com/` — Homepage: what QRtub is, one screen, links into everything below.
 
 **Getting Started**
-- **Creating Your First Link** — `help.qrtub.com/creating-your-first-link` — End-to-end tutorial: create a Tub, get a Link, connect it to an Item.
-- **Key Concepts** — `help.qrtub.com/key-concepts` — One sentence each on Tub, Item, Link, Page, Media — points outward, doesn't re-explain.
+- **Creating Your First Link** — `help.qrtub.com/creating-your-first-link` — End-to-end tutorial: create a Collection, get a Link, connect it to an Item.
+- **Key Concepts** — `help.qrtub.com/key-concepts` — One sentence each on Collection, Item, Link, Page, Media — points outward, doesn't re-explain.
 
-**Tubs**
-- **What Is a Tub?** — `help.qrtub.com/tubs/overview` — The entity grouping Items under one schema, link rule, scan behavior, page template.
-- **Creating a Tub** — `help.qrtub.com/tubs/creating-a-tub` — The creation fork, auto-generated name, where the page template comes from.
-- **Starter Templates** — `help.qrtub.com/tubs/starter-templates` — The 8-template gallery seeding a new Tub's fields, page, and sample Items at creation only.
-- **Tub Details** — `help.qrtub.com/tubs/tub-details` — Name, description, custom Items label, cover image — display-only.
-- **Link Generation for New Items** — `help.qrtub.com/tubs/link-generation-modes` — Tub-level setting: auto-mint a Link on Item creation, and which of 3 modes.
-- **Building an Item ID Mask** — `help.qrtub.com/tubs/item-id-mask` — Prefix/suffix/digit-count editor for ID-based links, plus mask-conflict rules.
-- **Scan Behavior for New Items** — `help.qrtub.com/tubs/scan-behavior-default` — Tub-level default: new Item starts as Direct Mode or Page Mode.
-- **Default Destination for New Items** — `help.qrtub.com/tubs/default-destination` — CEL-expression builder for the URL template stamped onto new Items at creation.
-- **Exporting a Tub Backup** — `help.qrtub.com/tubs/export-backup` — JSON snapshot of settings, fields, page template — Items excluded.
-- **Importing a Tub Backup** — `help.qrtub.com/tubs/import-backup` — Restoring into an existing Tub: Merge (additive) vs. Replace (destructive).
-- **Creating a New Tub From a Backup** — `help.qrtub.com/tubs/new-tub-from-backup` — Spin up a brand-new Tub from a backup file — the closest thing to "duplicate."
-- **Deleting a Tub** — `help.qrtub.com/tubs/deleting-a-tub` — What's hard-deleted at the Tub level; defers to Links for what survives.
+**Collections**
+- **What Is a Collection?** — `help.qrtub.com/collections/overview` — The entity grouping Items under one schema, link rule, scan behavior, page template.
+- **Creating a Collection** — `help.qrtub.com/collections/creating-a-collection` — The creation fork, auto-generated name, where the page template comes from.
+- **Starter Templates** — `help.qrtub.com/collections/starter-templates` — The 8-template gallery seeding a new Collection's fields, page, and sample Items at creation only.
+- **Collection Details** — `help.qrtub.com/collections/collection-details` — Name, description, custom Items label, cover image — display-only.
+- **Link Generation for New Items** — `help.qrtub.com/collections/link-generation-modes` — Collection-level setting: auto-mint a Link on Item creation, and which of 3 modes.
+- **Building an Item ID Mask** — `help.qrtub.com/collections/item-id-mask` — Prefix/suffix/digit-count editor for ID-based links, plus mask-conflict rules.
+- **Scan Behavior for New Items** — `help.qrtub.com/collections/scan-behavior-default` — Collection-level default: new Item starts as Direct Mode or Page Mode.
+- **Default Destination for New Items** — `help.qrtub.com/collections/default-destination` — CEL-expression builder for the URL template stamped onto new Items at creation.
+- **Exporting a Collection Backup** — `help.qrtub.com/collections/export-backup` — JSON snapshot of settings, fields, page template — Items excluded.
+- **Importing a Collection Backup** — `help.qrtub.com/collections/import-backup` — Restoring into an existing Collection: Merge (additive) vs. Replace (destructive).
+- **Creating a New Collection From a Backup** — `help.qrtub.com/collections/new-collection-from-backup` — Spin up a brand-new Collection from a backup file — the closest thing to "duplicate."
+- **Deleting a Collection** — `help.qrtub.com/collections/deleting-a-collection` — What's hard-deleted at the Collection level; defers to Links for what survives.
 
 **Fields**
 - **Core Fields vs. Custom Fields** — `help.qrtub.com/fields/core-vs-custom` — 4 fixed core columns vs. everything else stored by stable ID.
 - **Custom Field Types** — `help.qrtub.com/fields/field-types` — The six types side by side, what each gates, and the "which type do I need" decision.
 - **Allowed Values** — `help.qrtub.com/fields/allowed-values` — The `{value, label, color}` list authored on the field itself; drives chip color everywhere.
 - **Allow New Values** — `help.qrtub.com/fields/allow-new-values` — Toggle: can a value outside the Allowed Values list be typed or CSV-imported.
-- **Reference Fields** — `help.qrtub.com/fields/reference-fields` — Field type holding no value of its own — a live pointer to another Item, Tub, or member.
-- **Field Defaults** — `help.qrtub.com/fields/field-defaults` — Tub-level fallback for a blank field on Item creation; destination-URL exception noted.
+- **Reference Fields** — `help.qrtub.com/fields/reference-fields` — Field type holding no value of its own — a live pointer to another Item, Collection, or member.
+- **Field Defaults** — `help.qrtub.com/fields/field-defaults` — Collection-level fallback for a blank field on Item creation; destination-URL exception noted.
 - **Required Fields** — `help.qrtub.com/fields/required-fields` — The "Required" checkbox and the partial-CSV-update carve-out.
 - **Creating a Custom Field** — `help.qrtub.com/fields/creating-a-field` — Label, auto-slugged key, type, validation rules.
 - **Renaming a Field** — `help.qrtub.com/fields/renaming-a-field` — Why it's safe (stable ID never changes), and what auto-updates: page bindings, Destinations, CSV/filters.
 - **Deleting and Disabling Fields** — `help.qrtub.com/fields/deleting-and-disabling` — Core fields can only be disabled; custom fields can be permanently deleted.
 
 **Items**
-- **What Is an Item?** — `help.qrtub.com/items/overview` — The individual record a Tub tracks, including the Item image system field.
+- **What Is an Item?** — `help.qrtub.com/items/overview` — The individual record a Collection tracks, including the Item image system field.
 - **Name and Description** — `help.qrtub.com/items/name-and-description` — The two free-text core fields every Item ships with.
-- **Item ID** — `help.qrtub.com/items/item-id` — The per-Tub-unique identifier field, blank/whitespace normalization, role in ID-based links.
+- **Item ID** — `help.qrtub.com/items/item-id` — The per-Collection-unique identifier field, blank/whitespace normalization, role in ID-based links.
 - **Tags** — `help.qrtub.com/items/tags` — The core `tags` array field, default free-form additions, colored-chip rendering.
 - **Duplicating an Item** — `help.qrtub.com/items/duplicating` — What "Copy" carries over vs. drops (Item ID, the source's page override).
 
@@ -73,7 +73,7 @@ path prefixes, shown per tab).
 - **Custom Links** — `help.qrtub.com/links/custom-links` — User-chosen slugs, charset rules, reserved-word blacklist.
 - **Unallocated Links** — `help.qrtub.com/links/unallocated-links` — A real, printable Link with nothing attached yet — why that's a deliberate feature.
 - **Claim-on-Scan** — `help.qrtub.com/links/claim-on-scan` — Scanning an unrecognized third-party code mints a Link bound to a hash, idempotently.
-- **Deleting, Unassigning, and Releasing Links** — `help.qrtub.com/links/deleting-and-releasing-links` — Hard delete vs. manual unassign vs. automatic release (Item or Tub deletion) — the single canonical page for all three.
+- **Deleting, Unassigning, and Releasing Links** — `help.qrtub.com/links/deleting-and-releasing-links` — Hard delete vs. manual unassign vs. automatic release (Item or Collection deletion) — the single canonical page for all three.
 
 **Bulk Link Operations**
 - **Bulk Link Import via CSV** — `help.qrtub.com/bulk-links/csv-import` — Column schema, per-type create rules, dry-run preview.
@@ -81,9 +81,9 @@ path prefixes, shown per tab).
 - **Downloading QR Codes** — `help.qrtub.com/bulk-links/downloading-qr-codes` — Single PNG vs. zipped bundle; states plainly there's no SVG export or configurable error correction today.
 
 **Pages**
-- **Pages Overview** — `help.qrtub.com/pages/pages-overview` — What a Page is, the 4-step flow to turn one on for a Tub.
-- **Direct Mode vs. Page Mode** — `help.qrtub.com/pages/direct-mode-vs-page-mode` — Per-Tub default / per-Item override between an immediate redirect and a multi-destination Page.
-- **Page Privacy: Public vs. Private** — `help.qrtub.com/pages/page-privacy` — Tub- and Item-level gates requiring sign-in to view; effect on `noindex`.
+- **Pages Overview** — `help.qrtub.com/pages/pages-overview` — What a Page is, the 4-step flow to turn one on for a Collection.
+- **Direct Mode vs. Page Mode** — `help.qrtub.com/pages/direct-mode-vs-page-mode` — Per-Collection default / per-Item override between an immediate redirect and a multi-destination Page.
+- **Page Privacy: Public vs. Private** — `help.qrtub.com/pages/page-privacy` — Collection- and Item-level gates requiring sign-in to view; effect on `noindex`.
 - **The Page Editor Layout** — `help.qrtub.com/pages/page-editor-layout` — The three-tab panel, the Properties panel, the undo-history gotcha.
 - **Section Types** — `help.qrtub.com/pages/section-types` — The catalog of all 17 section types by category — a map, not a page-per-section.
 - **ActionLink: The Destination Button** — `help.qrtub.com/pages/action-link` — The one section that *is* a Destination button; auto-hides, groups visually.
@@ -92,14 +92,14 @@ path prefixes, shown per tab).
 - **Theming a Page** — `help.qrtub.com/pages/page-theming` — 7 theme presets, accent color, radius, typography scale.
 - **Previewing a Page** — `help.qrtub.com/pages/previewing-a-page` — Item selector, 5 responsive widths, chrome-hiding Preview toggle.
 - **Per-Item Page Overrides** — `help.qrtub.com/pages/page-overrides` — Override toggle: sparse diff on one Item vs. updating every Item on the base template.
-- **Page Template Versions** — `help.qrtub.com/pages/page-template-versions` — Every save creates a version; history, restore, clone to another Tub.
+- **Page Template Versions** — `help.qrtub.com/pages/page-template-versions` — Every save creates a version; history, restore, clone to another Collection.
 - **Page Metadata & Social Previews** — `help.qrtub.com/pages/page-metadata` — Auto-generated OG/Twitter tags, the `noindex, follow` split, private-Page minimal metadata.
 
 **Destinations**
 - **What Is a Destination?** — `help.qrtub.com/destinations/what-is-a-destination` — Where a scan is routed, real resolution order, safety filter, "not ready yet" state.
 - **Field Bindings & URL Templates** — `help.qrtub.com/destinations/field-bindings` — The `{{ }}` syntax itself, the namespace directory, the no-auto-encoding rule.
-- **Item Fields Reference** — `help.qrtub.com/destinations/item-fields` — Catalog of `item.*` bindings: standard fields plus any Tub's custom fields.
-- **Tub Fields Reference** — `help.qrtub.com/destinations/tub-fields` — Catalog of `tub.*` bindings.
+- **Item Fields Reference** — `help.qrtub.com/destinations/item-fields` — Catalog of `item.*` bindings: standard fields plus any Collection's custom fields.
+- **Collection Fields Reference** — `help.qrtub.com/destinations/collection-fields` — Catalog of `tub.*` bindings.
 - **Time Fields Reference** — `help.qrtub.com/destinations/time-fields` — `time.hour`/`dayOfWeek`/etc., computed per scan in UTC — and why "overdue" can't be expressed.
 - **Request Fields Reference** — `help.qrtub.com/destinations/request-fields` — `request.ip`/`country`/`city`/etc. from CDN geo headers; the privacy consequence stated plainly.
 - **Conditional Visibility** — `help.qrtub.com/destinations/conditional-visibility` — Hiding a section with a CEL `condition`; undefined identifiers silently evaluate false.
@@ -147,7 +147,7 @@ path prefixes, shown per tab).
 - **Change Your Password** — `help.qrtub.com/account/change-password` — The password-change form and why it's server-routed.
 
 **Team**
-- **Team Overview** — `help.qrtub.com/team/overview` — The shared workspace that owns Tubs, holds members, optionally carries one subscription.
+- **Team Overview** — `help.qrtub.com/team/overview` — The shared workspace that owns Collections, holds members, optionally carries one subscription.
 - **Switching Between Teams** — `help.qrtub.com/team/switching-teams` — The Team Switcher, its `localStorage` persistence, the dashboard-reset effect.
 - **Creating a Team** — `help.qrtub.com/team/create-a-team` — Name, auto-generated slug, optional logo, immediate ownership.
 - **Team Settings** — `help.qrtub.com/team/team-settings` — Renaming, URL slug, logo — owner-only.
@@ -168,7 +168,7 @@ path prefixes, shown per tab).
 - **Plan Limits & Quotas** — `help.qrtub.com/billing/plan-limits` — What varies by plan, as categories — no hardcoded numbers.
 
 **Workspace**
-- **Search Everything** — `help.qrtub.com/workspace/search-everything` — Global search across Tubs, Items, Links, Pages; category filter; recent-searches history.
+- **Search Everything** — `help.qrtub.com/workspace/search-everything` — Global search across Collections, Items, Links, Pages; category filter; recent-searches history.
 
 ### Tab: Use Cases — `help.qrtub.com/use-cases/`
 
@@ -208,37 +208,37 @@ real exists to write about.
 
 ## 2. The three decisions you asked for
 
-### Can Tub settings stand alone from Items, or are they conflated?
+### Can Collection settings stand alone from Items, or are they conflated?
 
-**Decision: they split cleanly into three siblings — Tubs, Fields, Items — none nested
+**Decision: they split cleanly into three siblings — Collections, Fields, Items — none nested
 inside another.**
 
-The instinct to worry about this was right — a Tub's custom-field *schema* (what fields
+The instinct to worry about this was right — a Collection's custom-field *schema* (what fields
 exist, what type, what's required) sits right next to Item *data* (what's actually typed
 into those fields) in most people's mental model, and it would have been easy to conflate
-them into one bloated "Tub settings" group.
+them into one bloated "Collection settings" group.
 
 They don't conflate, for a reason stronger than "it felt cleaner": the code enforces the
 separation. `FieldConfig` (the schema) lives exclusively in `tub.metadata.fieldConfig`, is
-read and written only through Tub API routes, and no code path for *defining* a field ever
+read and written only through Collection API routes, and no code path for *defining* a field ever
 touches an Item, and vice versa. The existing (unpublished) `custom-fields.mdx` proves this
 in practice too — 119 lines that fully explain defining a field and never once explain
 filling one in.
 
 So the schema domain — which turned out to be big enough on its own (10 pages: types,
 allowed values, allow-new-values, reference fields, defaults, required, create/rename/delete)
-— became its own sibling, "Fields," rather than a subsection of either Tubs or Items. That
+— became its own sibling, "Fields," rather than a subsection of either Collections or Items. That
 mirrors how Linear itself keeps "Issues" and "Issue properties" as separate, adjacent sidebar
 groups even though you edit an issue's properties from inside the issue.
 
-The one real connection point — a Tub-level default value that fills in a blank field when
+The one real connection point — a Collection-level default value that fills in a blank field when
 an Item is created — is handled as a one-sentence cross-reference between `fields/field-defaults`
-and `tubs/default-destination`, not a shared page. Everything else Tub-level (link
+and `collections/default-destination`, not a shared page. Everything else Collection-level (link
 generation, the item-ID mask, scan-behavior default, backup/restore, deletion) is even more
-clearly Tub-only — none of it requires explaining a specific Item's data to describe
+clearly Collection-only — none of it requires explaining a specific Item's data to describe
 completely.
 
-**Final shape:** Tubs (12 pages) · Fields (10 pages) · Items (5 pages).
+**Final shape:** Collections (12 pages) · Fields (10 pages) · Items (5 pages).
 
 ### Which pages moved into the new "Destinations" category, and which stayed in "Pages"?
 
@@ -323,7 +323,7 @@ plus what each one actually owns:
 | Custom Links | `links/custom-links` | User-chosen slugs; charset rules; the reserved-word and reserved-pattern blacklist. |
 | Unallocated Links | `links/unallocated-links` | A real, printable Link with nothing attached — the deliberate print-before-link and spares use case. |
 | Claim-on-Scan | `links/claim-on-scan` | The general mechanism: an unrecognized third-party code mints a Link bound to a hash of its decoded text, idempotently. |
-| Deleting, Unassigning, and Releasing Links | `links/deleting-and-releasing-links` | The full single-Link picture: hard delete, manual unassign, and both automatic release triggers (Item deletion, Tub deletion). |
+| Deleting, Unassigning, and Releasing Links | `links/deleting-and-releasing-links` | The full single-Link picture: hard delete, manual unassign, and both automatic release triggers (Item deletion, Collection deletion). |
 | Bulk Link Import via CSV | `bulk-links/csv-import` | Column schema, per-type create rules, dry-run preview, at scale. |
 | Bulk Assigning, Unassigning, and Deleting Links | `bulk-links/assign-unassign-delete` | Bulk-operation mechanics only (explicit ID list vs. filtered scope) — defers to the page above for what unassign *means*. |
 | Downloading QR Codes | `bulk-links/downloading-qr-codes` | Single PNG vs. zipped bundle; states plainly there's no SVG export and no configurable error-correction level today. |
@@ -361,7 +361,7 @@ description covered the question at all (gap). The other 35 resolved cleanly to 
 
 **The 10 findings, and what each one exposed:**
 
-1. Tub deletion vs. Link survival — `tubs/deleting-a-tub` and `links/deleting-and-releasing-links` both half-claimed the "printed codes keep working" fact.
+1. Collection deletion vs. Link survival — `collections/deleting-a-collection` and `links/deleting-and-releasing-links` both half-claimed the "printed codes keep working" fact.
 2. Delete vs. unassign a Link — `links/deleting-and-releasing-links` never stated the manual single-Link unassign action existed at all; `bulk-links/assign-unassign-delete` competed on the same word.
 3. Field rename safety — `fields/renaming-a-field` and `destinations/field-renames-and-destinations` were fully duplicate content from two angles.
 4. Reference field vs. Allowed Values — three pages (`fields/reference-fields`, `fields/allowed-values`, `fields/field-types`) each answered part of "which type do I need" with no page naming the actual axis.
@@ -484,11 +484,11 @@ process, decisions that need a person, not another pass of this exercise.
    Ownership" is merged into "Leaving a Team" in Part 1 above, not a sibling page — one real
    feature, one page.
 
-5. **Does a Tub-level Page privacy toggle exist, or not?** `TubLandingPageDefaults.privacy` is
+5. **Does a Collection-level Page privacy toggle exist, or not?** `TubLandingPageDefaults.privacy` is
    set once at creation (always `'public'`) and read back, but there's no UI control for it in
-   Tub Settings — only per-Item privacy exists today. Deliberately left undocumented as a
-   Tub-level control rather than describing a setting that isn't there. If a Tub-level toggle
-   ships later, it's a small addition to `tubs/scan-behavior-default`'s territory.
+   Collection Settings — only per-Item privacy exists today. Deliberately left undocumented as a
+   Collection-level control rather than describing a setting that isn't there. If a Collection-level toggle
+   ships later, it's a small addition to `collections/scan-behavior-default`'s territory.
 
 6. **The manual single-Link "unassign" action's exact UI surface needs verification before
    drafting `links/deleting-and-releasing-links`.** v2 widened this page to assert a manual
@@ -517,8 +517,8 @@ process, decisions that need a person, not another pass of this exercise.
    above the IA and should go back to whoever owns BRAND.md.
 
 10. **Word-count checks on two "confirmed merge" candidates were made from the *inventory's*
-    estimate, not a drafted page.** `tubs/item-id-mask`'s "Mask conflicts" subsection and
-    `tubs/creating-a-tub`'s "Where the page template comes from" subsection were folded in on
+    estimate, not a drafted page.** `collections/item-id-mask`'s "Mask conflicts" subsection and
+    `collections/creating-a-collection`'s "Where the page template comes from" subsection were folded in on
     the strength of a word-count prediction. If either turns out to have more real content
     than expected once actually written, it's fine to split it back out — the merge call was a
     prediction, not a permanent constraint.

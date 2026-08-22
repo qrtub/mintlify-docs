@@ -4,18 +4,18 @@ description: "Use the Page Editor to lay out sections, bind Item data, and theme
 ---
 
 The Page Editor is where you decide what someone sees when they scan a QR code. You build
-one layout for a Tub, and every Item in that Tub renders it with its own data.
+one layout for a Collection, and every Item in that Collection renders it with its own data.
 
 ## Before you start
 
-Pages must be switched on for the Tub. Open the Tub's settings and turn on the page option
+Pages must be switched on for the Collection. Open the Collection's settings and turn on the page option
 (labelled **Show a profile page** in the current app). If it is off, scans go straight to a
 single Destination and there is no page to edit. See
 [Pages Overview](/pages-overview).
 
 ## Opening the editor
 
-From the Tub's settings, open the **Profile page** tab and choose **Edit profile page**. The
+From the Collection's settings, open the **Profile page** tab and choose **Edit profile page**. The
 editor opens in a new tab.
 
 ## The layout
@@ -78,8 +78,10 @@ braces and a namespace:
 ```
 
 Rather than typing them, open the **Data** tab in the left panel and drag a field straight
-onto the setting you want it in. Beyond Item and Tub fields, you can bind device and time
+onto the setting you want it in. Beyond Item and Collection fields, you can bind device and time
 information — see [Using Fields](/using-fields) for the full reference.
+
+Note the Collection prefix is `tub.`, not `collection.` — Collections were formerly called Tubs, and the binding names kept the original term.
 
 If a binding cannot be resolved, it renders as empty rather than showing an error, and most
 sections hide themselves when their content is empty.
@@ -102,7 +104,7 @@ Conditions use the same expression language as Destination visibility. See
 The item selector in the top bar switches what the canvas renders against:
 
 - **Base Template** uses placeholder data
-- Any real Item in the Tub uses that Item's actual field values
+- Any real Item in the Collection uses that Item's actual field values
 
 This is the fastest way to catch a layout that works for a short name and breaks for a long
 one. Search the selector by name, Item ID or description, or step through Items with the
@@ -125,7 +127,7 @@ With no section selected, **Properties** shows **Page Settings**:
 Choosing a preset replaces the whole theme rather than merging with your current settings, so
 pick the preset first and adjust afterwards.
 
-## Saving: the whole Tub, or one Item
+## Saving: the whole Collection, or one Item
 
 This is the part worth understanding before you save.
 
@@ -134,7 +136,7 @@ When you are previewing a real Item, the top bar shows an **Override** toggle:
 - **Override: ON** — saving stores changes for **that Item only**, leaving everything else
   on the base template
 - **Override: OFF** — saving updates the **base template**, changing the page for *every*
-  Item in the Tub
+  Item in the Collection
 
 **Selecting a real Item turns Override on automatically.** That is the safe default — it
 means an experiment on one machine cannot silently reshape the other four hundred. To change

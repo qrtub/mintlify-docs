@@ -112,7 +112,11 @@ The syntax is **double braces with a namespace**:
 https://app.example.com/inspect?id={{item.assetID}}&site={{tub.name}}
 ```
 
-- `{{item.fieldName}}` for Item fields, `{{tub.fieldName}}` for Tub fields
+- `{{item.fieldName}}` for Item fields, `{{tub.fieldName}}` for Collection fields
+- **The Collection binding prefix is `tub.`, not `collection.`.** Collections were renamed
+  from Tubs in August 2026; the binding namespace still uses the original term. Write the
+  prose as "Collection" and the binding as `tub.` — and say so on any page that shows one,
+  or readers will try `collection.name` and get an empty string with no error
 - **Single braces do not work.** `{assetID}` is not a binding and will be sent literally
 - Values are inserted **exactly as stored** — there is no automatic URL encoding
 - A missing or empty field inserts an empty string
@@ -124,7 +128,7 @@ Source: `../qrtub/src/lib/page/bindings.ts`
 Conditions use CEL (Common Expression Language). What is available in an expression:
 
 - **Item fields** — `item.name`, `item.status`, `item.tags`, custom fields
-- **Tub fields** — `tub.name`
+- **Collection fields** — `tub.name` (prefix is `tub.`, see above)
 - **Device fields** — `device.isMobile`, `device.isIOS`, `device.browser`
 - **Time fields** — `time.hour`, `time.dayOfWeek`, `time.dayOfMonth`, `time.month`,
   `time.year`, `time.isWeekend`

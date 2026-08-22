@@ -37,7 +37,7 @@ item.type == "crane"
 ```
 
 **How to set this up:**
-1. Use the standard `type` field or add a custom field (e.g., `equipmentType`) to your Tub
+1. Use the standard `type` field or add a custom field (e.g., `equipmentType`) to your Collection
 2. Set each Item's type value ("forklift", "crane", etc.)
 3. Create separate Destinations for each inspection type
 4. Add the condition to each Destination
@@ -67,7 +67,7 @@ item.testStatus == "expired"
 ```
 
 **How to set this up:**
-1. Add a `testStatus` field to your Tub
+1. Add a `testStatus` field to your Collection
 2. Set values: "current", "expired", "pending"
 3. Create "RETEST REQUIRED" Destination
 4. Add the condition `item.testStatus == "expired"`
@@ -158,8 +158,8 @@ This shows the web link for iOS users in Chrome, Firefox, or other browsers wher
 
 You have access to:
 - **Item fields** - `item.name`, `item.status`, `item.tags`, `item.serial_number`, etc.
-- **Custom fields** - Any fields you've defined in your Tub: `item.{yourFieldName}`
-- **Tub fields** - `tub.name`, `tub.metadata.organizationName`, etc.
+- **Custom fields** - Any fields you've defined in your Collection: `item.{yourFieldName}`
+- **Collection fields** - `tub.name`, `tub.metadata.organizationName`, etc. (the prefix is `tub.`, not `collection.` — Collections were formerly called Tubs)
 - **Device fields** - `device.isMobile`, `device.isIOS`, `device.browser`, etc.
 - **Session fields** - `session.user.id`, `session.user.email` (if logged in)
 

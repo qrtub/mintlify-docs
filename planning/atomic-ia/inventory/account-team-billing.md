@@ -28,7 +28,7 @@ its own; fold into sibling page X as a subsection.
 
 | Concept | Definition | Nav category | Page title | Slug | Standalone or merge |
 | --- | --- | --- | --- | --- | --- |
-| Team overview | The shared workspace: a team owns Tubs, holds members, and optionally carries one subscription. A user can belong to — and own — more than one team. | Team | Team overview | `team/overview` | **Standalone.** Orientation page, deliberately short (like Linear's "Concepts"), establishing the entity before the narrower pages below. |
+| Team overview | The shared workspace: a team owns Collections, holds members, and optionally carries one subscription. A user can belong to — and own — more than one team. | Team | Team overview | `team/overview` | **Standalone.** Orientation page, deliberately short (like Linear's "Concepts"), establishing the entity before the narrower pages below. |
 | Switching between teams | The Team Switcher dropdown (sidebar, collapsed or expanded) that changes which team's data the dashboard shows. The active team is remembered in `localStorage` and restored on next login; switching to a different team navigates you back to the dashboard root. | Team | Switching between teams | `team/switching-teams` | **Standalone.** Explains a real, otherwise-confusing side effect (why the page reloads/navigates on switch) and the persistence behavior — enough distinct mechanism for its own short page. |
 | Creating a team | The "Create Team" modal: name, an auto-generated (but editable) URL slug, and an optional logo. You become the new team's owner immediately and are switched into it. | Team | Creating a team | `team/create-a-team` | **Standalone.** Distinct task with its own form, validation, and side effects (auto-slug generation, immediate switch-and-refresh). |
 | Team settings: name, slug & logo | The owner-only edit panel on the Team page for renaming a team, changing its URL slug (lowercase letters, numbers, hyphens only), and uploading a logo. | Team | Team settings | `team/team-settings` | **Standalone.** Same fields as team creation but a distinct, recurring task (editing an existing team) with its own entry point and owner-only gating — worth documenting on its own rather than only inside the creation flow. |
@@ -56,15 +56,15 @@ its own; fold into sibling page X as a subsection.
 
 | Concept | Definition | Nav category | Page title | Slug | Standalone or merge |
 | --- | --- | --- | --- | --- | --- |
-| Search Everything | The global `⌘`-style search panel: searches Tubs, Items, Access Links, and Pages at once; supports a category filter, remembers recent searches (locally, clearable), and opens external results (Links/Pages) on the main domain rather than the app subdomain. | Workspace | Search Everything | `workspace/search-everything` | **Standalone.** Four searchable categories, a filter, a recents mechanism with its own storage/clearing behavior, and a same-tab-vs-new-tab navigation rule — genuinely more content than Linear's own 243-word "Priority" page, and no sibling page it naturally belongs inside. |
-| Tub template gallery | The template picker at `/app/templates` (reached via "Browse all" from Tub creation): a searchable grid of pre-built field-configuration starter kits (e.g. Equipment Inspections, IT Assets, Medical Equipment) that pre-populate a new Tub's fields. Distinct from Page Templates and Media Templates — this gallery configures a Tub's *data schema*, not a Page's layout. | Workspace | Tub template gallery | `workspace/tub-templates` | **Standalone.** Worth flagging precisely *because* of the naming collision with "Page Template" and "Media Template" elsewhere in the product — a page that exists mainly to disambiguate needs to be findable on its own, not buried as a subsection of Tub creation. |
+| Search Everything | The global `⌘`-style search panel: searches Collections, Items, Access Links, and Pages at once; supports a category filter, remembers recent searches (locally, clearable), and opens external results (Links/Pages) on the main domain rather than the app subdomain. | Workspace | Search Everything | `workspace/search-everything` | **Standalone.** Four searchable categories, a filter, a recents mechanism with its own storage/clearing behavior, and a same-tab-vs-new-tab navigation rule — genuinely more content than Linear's own 243-word "Priority" page, and no sibling page it naturally belongs inside. |
+| Collection template gallery | The template picker at `/app/templates` (reached via "Browse all" from Collection creation): a searchable grid of pre-built field-configuration starter kits (e.g. Equipment Inspections, IT Assets, Medical Equipment) that pre-populate a new Collection's fields. Distinct from Page Templates and Media Templates — this gallery configures a Collection's *data schema*, not a Page's layout. | Workspace | Collection template gallery | `workspace/collection-templates` | **Standalone.** Worth flagging precisely *because* of the naming collision with "Page Template" and "Media Template" elsewhere in the product — a page that exists mainly to disambiguate needs to be findable on its own, not buried as a subsection of Collection creation. |
 
 ---
 
 ## Notes on categorization
 
 - **Nav categories used:** `Account`, `Team`, `Billing` map directly to the domain brief. `Workspace` is
-  a placeholder category for the two orphan features (Search Everything, Tub template gallery) that this
+  a placeholder category for the two orphan features (Search Everything, Collection template gallery) that this
   task explicitly assigned to this domain but that don't semantically belong under Account/Team/Billing —
   see Open Questions.
 - Every "Standalone" call above was checked against real, verified code paths (not assumed from the UI
@@ -87,7 +87,7 @@ its own; fold into sibling page X as a subsection.
 
 ## Open questions for the drafting phase
 
-1. **Where do "Search Everything" and "Tub template gallery" actually live in the final top-level nav?**
+1. **Where do "Search Everything" and "Collection template gallery" actually live in the final top-level nav?**
    Neither is an Account/Team/Billing concept; they were assigned to this domain only because they were
    otherwise undocumented and small. A `Workspace` (or similar) top-level category may already exist from
    another domain's inventory — reconcile rather than creating a duplicate category with one page each.

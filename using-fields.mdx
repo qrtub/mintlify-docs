@@ -1,10 +1,10 @@
 ---
 title: "Using Fields in Pages"
-description: "Reference Item data, Tub information, user session, and device details in URLs and conditions"
+description: "Reference Item data, Collection information, user session, and device details in URLs and conditions"
 sidebar_position: 3
 ---
 
-QRtub Pages can dynamically use data from your Items, Tubs, user sessions, and device information. This guide shows you how to reference fields in URL Templates and conditional visibility expressions.
+QRtub Pages can dynamically use data from your Items, Collections, user sessions, and device information. This guide shows you how to reference fields in URL Templates and conditional visibility expressions.
 
 ## Two Ways to Use Fields
 
@@ -62,25 +62,27 @@ Items have **standard fields** (built-in) and **custom fields** (you define them
 
 #### Custom Item Fields
 
-Any custom fields you define in your Tub are accessible as `item.{fieldName}`.
+Any custom fields you define in your Collection are accessible as `item.{fieldName}`.
 
 **Example:**
-If you add a custom field called `inspectionDue` to your Tub, reference it as:
+If you add a custom field called `inspectionDue` to your Collection, reference it as:
 - URL Template: `{{item.inspectionDue}}`
 - Condition: `item.inspectionDue != ""`
 
-### Tub Fields
+### Collection Fields
 
-Access information about the Tub (category/workspace) containing the Item.
+Access information about the Collection containing the Item.
+
+**The binding prefix is `tub.`, not `collection.`** — Collections were previously called Tubs, and the binding names still use the original term. Write `tub.name`, not `collection.name`. Everything else about them works exactly as documented here.
 
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
-| `tub.id` | string | Tub unique identifier | `"tub-123"` |
-| `tub.name` | string | Tub display name | `"Heavy Equipment"` |
-| `tub.description` | string | Tub description | `"Construction equipment fleet"` |
-| `tub.image_url` | string | Tub image URL | `"/images/equipment-icon.png"` |
-| `tub.items_name` | string | Items collection name | `"Machines"` |
-| `tub.created_at` | date | Tub creation date | `"2024-01-01T00:00:00Z"` |
+| `tub.id` | string | Collection unique identifier | `"tub-123"` |
+| `tub.name` | string | Collection display name | `"Heavy Equipment"` |
+| `tub.description` | string | Collection description | `"Construction equipment fleet"` |
+| `tub.image_url` | string | Collection image URL | `"/images/equipment-icon.png"` |
+| `tub.items_name` | string | Custom label for this Collection's Items | `"Machines"` |
+| `tub.created_at` | date | Collection creation date | `"2024-01-01T00:00:00Z"` |
 | `tub.metadata.page.is_public` | boolean | Public accessibility | `true` |
 | `tub.metadata.organizationName` | string | Organization name | `"BuildCo Inc."` |
 
@@ -305,7 +307,7 @@ Combine device detection with Item data.
 
 **Field Names:**
 - Use exact field names: `item.item_number` NOT `item.number`
-- Custom fields: Whatever name you gave them in Tub configuration
+- Custom fields: Whatever name you gave them in Collection configuration
 - Case-sensitive: `item.Status` will NOT work, use `item.status`
 
 **URL Encoding:**
@@ -328,7 +330,7 @@ For complex field usage:
 
 1. **Use AI to generate expressions** - See [Conditional Visibility](/conditional-visibility#using-ai-to-generate-conditions)
 2. **Test with sample Items** - Create test Items with different field values
-3. **Check field names** - Verify exact field names in your Tub configuration
+3. **Check field names** - Verify exact field names in your Collection configuration
 4. **Contact support** - Email [hi@qrtub.com](mailto:hi@qrtub.com) with your use case
 
 ## Related

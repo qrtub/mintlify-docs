@@ -3,13 +3,13 @@ title: "Custom Fields"
 description: "Define the fields your Items need, set allowed values and defaults, and link Items to other records"
 ---
 
-A Tub defines what data its Items hold. Beyond the built-in fields, you add your own — a
+A Collection defines what data its Items hold. Beyond the built-in fields, you add your own — a
 serial number, an inspection date, a responsible person — and those fields then feed your
 pages, your Destination URLs and your conditions.
 
 ## Where fields are configured
 
-Open the Tub, go to its settings, and choose the **Fields** tab.
+Open the Collection, go to its settings, and choose the **Fields** tab.
 
 ## Core fields and custom fields
 
@@ -61,12 +61,12 @@ Two settings control how strict the list is:
 
 ## Defaults
 
-A field can have a Tub-level default, applied when an Item is created with that field left
+A field can have a Collection-level default, applied when an Item is created with that field left
 blank. An explicit value on the Item always wins; the default never overwrites what someone
 typed.
 
 The **destination URL** field's default behaves slightly differently: it is stamped onto the
-Item when the Item is created. Changing the Tub default later does not retroactively change
+Item when the Item is created. Changing the Collection default later does not retroactively change
 Items that already exist.
 
 ## Reference fields
@@ -79,8 +79,8 @@ Choose what the field references:
 | References | Choices offered |
 |------------|-----------------|
 | **A team member** | Anyone on the team |
-| **Another Item** | Items in the same Tub, or Items in any Tub on the team |
-| **A Tub** | Any Tub on the team |
+| **Another Item** | Items in the same Collection, or Items in any Collection on the team |
+| **A Collection** | Any Collection on the team |
 
 Reference fields render as a dropdown, which can be made searchable for long lists. When a
 page or grid shows a reference, it displays the referenced record's name and image rather
