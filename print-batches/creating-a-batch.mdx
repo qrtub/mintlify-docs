@@ -1,0 +1,84 @@
+---
+title: "Creating a Print Batch"
+description: "Export a print list from a Collection or the Access Links page — and choose between a tracked draft batch and a plain CSV download that records nothing."
+---
+
+You create a batch by exporting a print list. The export screen offers two outcomes, and the
+choice matters: one creates a tracked batch, the other just hands you a CSV file and keeps no
+record.
+
+## Before you start
+
+You need links to print. Every Item with a Link already has one; unassigned links work too, and
+are the normal starting point for a print-first run where the codes are made before the
+equipment arrives.
+
+## Exporting from a Collection
+
+1. Open the Collection and select the Items you want. If you select nothing, the export uses
+   whatever your current search, filters and sort produce.
+2. Open the **Print Media** menu and choose **Print list**.
+3. Pick your columns (below).
+4. Choose **Create draft batch** or **CSV**.
+
+## Exporting from the Access Links page
+
+The Access Links page has a **Print List** button in the toolbar and in the row-actions menu.
+It stays disabled until you select links — this path always works from a selection, or from
+"select all pages", which hands the server your current filters instead of a list of IDs.
+
+On either path, an export built from ticked rows is capped at **5,000 selected rows** — Items from
+a Collection, links from the Access Links page. Past that, exporting from the current filters
+instead (leave the Collection selection empty, or use "select all pages" on Access Links) has no
+such cap, because the server does the selecting.
+
+## Choosing columns
+
+The column picker has two groups:
+
+- **Item Fields** — the fields defined on the Collection, so a printer can put a serial number
+  or a location on the label next to the code.
+- **Link Fields** — **Full URL** (the complete `qrtub.com/...` address), **Short URL** (the path
+  only) and **Active**.
+
+Toggle a column with the eye icon, drag to reorder, or use **Show all** / **Hide all**. Full URL
+is included by default, and it is the one column a print shop genuinely needs — most shops
+generate the QR image themselves from that value rather than working from image files.
+
+One row equals one link, which in practice means one physical piece. Keep that convention and
+the shop's data merge lines up with your order quantity.
+
+## The two export buttons
+
+| Button | What happens | Record kept |
+|---|---|---|
+| **Create draft batch** | The CSV is generated and stored server-side, a batch is created in Draft, and you land on **Access Media** with the new batch open | Yes |
+| **CSV** | The file downloads to your computer immediately | No |
+
+**Create draft batch** does not download anything at that moment. The file is kept with the
+batch, and you download it whenever you need it — see
+[The Batch CSV: Downloading and Reprinting](/print-batches/csv-download).
+
+**CSV** — labeled "Download CSV without creating a batch" — is a genuinely neutral download.
+Nothing is tracked, no batch appears in Access Media, and there is no later record that those
+codes were ever printed. Use it for a quick look at the data; use the draft batch for anything
+you are actually sending to a printer.
+
+New batches are named automatically as `Print list — Aug 18, 2026`. Rename it to something you
+will recognize later, like "Depot 2 replacements, March" — see
+[Naming, Tagging and Photographing a Batch](/print-batches/batch-details).
+
+## Failure modes worth knowing
+
+- **An empty export is rejected.** Exporting with no links selected returns an error rather than
+  an empty batch.
+- **Tracking can fail silently.** If batch creation fails after the CSV is built, you still get
+  the file — as a download, with a success message. If you asked for a draft batch and got a
+  file download instead of landing on Access Media, nothing was recorded. Re-export.
+
+## Related
+
+- [Batch Status: Draft to Deployed](/print-batches/batch-status)
+- [Editing a Batch's Columns](/print-batches/editing-columns)
+- [Adding and Removing Links in a Batch](/print-batches/editing-links)
+- [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download)

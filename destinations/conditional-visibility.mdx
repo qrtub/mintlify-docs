@@ -1,0 +1,100 @@
+---
+title: "Conditional Visibility"
+description: "Show or hide one section on a Page with a CEL condition — including why a typo silently hides the section instead of raising an error."
+---
+
+Conditional Visibility decides whether a single section on a Page renders at all. You write one CEL expression on the section; it is evaluated at scan time against that Item, that visitor's device, and the current time. True renders the section, false leaves it out entirely.
+
+This is a show/hide decision about one thing on a Page. It is not how you choose between two URLs — that is a different mechanism — the [Destination's own conditional routing rules](/destinations/what-is-a-destination) — and it works even when there is no Page at all.
+
+## Where the condition lives
+
+In the Page Editor, select a section, then open the **Visibility** group in the Properties panel on the right. The field is labeled **Show When (CEL Expression)**.
+
+Any section type can carry a condition — not just Destination buttons. A Text block, a Banner, a whole Container (which hides its children with it), an ImageSection: all of them accept one. Leaving the field empty means the section is always visible.
+
+As you type, a **Preview** badge next to the field reads **Visible** or **Hidden**, evaluated against whichever Item you have selected in the editor. Switch the previewed Item to check the condition against real data instead of your base template.
+
+## What a condition can look at
+
+Everything the Page itself can bind to is available in a condition:
+
+| Namespace | Holds |
+|-----------|-------|
+| `item.*` | This Item's fields, standard and custom |
+| `tub.*` | The Collection's name, description, and metadata |
+| `device.*` | Device type, OS, and browser of the person scanning |
+| `time.*` | Hour, day of week, day of month, month, year, weekend flag — all UTC |
+| `request.*` | Path, referrer, language, and CDN-derived country and city |
+| `session.*` | The signed-in viewer, when there is one — null for anonymous scans |
+| `theme.*` | The Page's accent color and radius |
+
+Note the Collection namespace is `tub.`, not `collection.` — Collections were renamed from Tubs, and the binding prefix still uses the original word. `collection.name` does not raise an error; it simply never resolves, which by the rule below means your condition never fires.
+
+## Working examples
+
+Show a section only for one equipment type:
+
+```text
+item.type == "forklift"
+```
+
+Show a section only for Items carrying a tag:
+
+```text
+"heavy-equipment" in item.tags
+```
+
+Show a warning banner only when a status field says so:
+
+```text
+item.testStatus == "expired"
+```
+
+Combine conditions with `&&`, `||`, and `!`, and group with parentheses:
+
+```text
+("crane" in item.tags || "heavy-equipment" in item.tags) && item.status == "active"
+```
+
+Restrict a section to one Collection when the Page template is shared:
+
+```text
+tub.name == "Sydney Depot"
+```
+
+## A wrong condition and an unmet condition look identical
+
+If a condition references something that does not exist, the whole expression evaluates to **false** — silently. The visitor sees no error; the section simply is not there. Even in the editor, the Preview badge reads **Hidden** rather than **Error**, because a failed lookup is treated as a false result rather than as a failure.
+
+That makes these three situations indistinguishable at a glance:
+
+- A genuine miss — this Item really is not a forklift.
+- A typo — `item.tpye == "forklift"`, or a field name whose capitalization does not match (field names are case-sensitive).
+- An invented value — `today > item.dueDate`. There is no `today`. **`time` exposes only the parts listed above — no absolute date and no date arithmetic**, so "show this when the inspection is overdue" cannot be expressed. Use a status field you maintain (`item.testStatus == "expired"`) instead of comparing dates.
+
+The practical defense is to build conditions by picking fields from the editor's suggestions rather than typing them, and to verify against a real Item that you know should match before deploying.
+
+## Expression limits
+
+Every condition is validated before it is evaluated, and a condition that breaks a limit is rejected in the editor rather than silently ignored:
+
+- Maximum 500 characters
+- Maximum nesting depth of 10 for brackets and parentheses
+- Maximum 20 operators
+- Parentheses and brackets must balance
+
+If you are anywhere near these ceilings, the logic almost certainly belongs in a field on the Item rather than in an expression on the Page.
+
+## Before you add a condition
+
+Ask whether showing everything is simpler. A Page with four buttons where people tap the one they need is easier to build, easier to debug, and easier for a contractor to understand than four conditions. Conditional Visibility earns its place when the wrong button is actively harmful — a crane inspection form on a forklift, for example.
+
+Also note that an ActionLink already hides itself when its own URL binding cannot resolve, with no condition needed — see [ActionLink: The Destination Button](/pages/action-link). You do not need a condition to suppress a button that has nowhere to go.
+
+## Related
+
+- [What Is a Destination?](/destinations/what-is-a-destination) — the other CEL mechanism: conditional routing rules choosing which URL a scan uses
+- [Device Detection & Routing](/destinations/device-detection) — the `device.*` fields you can test in a condition
+- [Section Types](/pages/section-types) — every section that can carry a condition
+- [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax and full namespace reference

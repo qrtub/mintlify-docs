@@ -1,0 +1,61 @@
+---
+title: "The In-App QR Scanner"
+description: "Scan a code with the camera, a paste, or a USB gun scanner to jump straight to the Link it belongs to — including what it cannot resolve"
+---
+
+QRtub has a built-in scanner that takes a QR code and tells you which of your Links it is, so you can open that Link's details or follow it to its destination without typing a slug into a search box. It is the tool for the moment you are standing in front of a tag and need to know what it is attached to.
+
+**Availability:** the scanner is built, but its button is currently hidden in the interface — there is no visible way to open it yet, in either the top navigation bar or global search. The rest of this page describes how it behaves once that button is switched on, and is accurate to what is built. Nothing here requires a change to your data.
+
+## The three ways it takes input
+
+All three converge on the same lookup, so the result screen is identical whichever you use.
+
+- **The camera.** A live camera view using the rear-facing camera, decoding QR codes only — not barcodes. It reads continuously with a short delay between attempts, and pauses itself as soon as a code resolves, so holding a tag up to the lens does not fire the same lookup over and over.
+- **A paste or typed entry.** A text field under the camera view accepts a code pasted or typed in. Useful when you have a URL from an email and no tag in front of you.
+- **A USB "gun" scanner.** A hardware barcode/QR gun that behaves as a keyboard (HID) types its decoded value plus Enter. The text field is focused automatically, so a gun scan lands in it and submits itself with nothing to click. On a phone the on-screen keyboard is deliberately suppressed for that field, so it does not cover the camera view — the field still accepts paste and gun input.
+
+## What it can resolve
+
+The scanner reduces whatever was decoded down to a slug and matches it against your team's Links. It handles:
+
+- a full Link URL, for example `https://qrtub.com/r/aBc123` or `https://qrtub.com/ITEM-001`
+- a bare path, `/r/aBc123`
+- a bare slug on its own, `aBc123`
+- a code you have previously adopted from the scanner, matched by a stored hash of its decoded text rather than by slug
+
+The lookup runs as you, scoped to your team, so it can only ever return one of your own Links — never another team's.
+
+**One known false positive.** For a code that is not a QRtub URL at all, the scanner tries the last segment of its path as a slug. If a third-party code happens to end in a segment that matches one of your custom slugs — a foreign URL ending in `/menu` against your own custom Link `menu` — it will resolve to your Link. The consequence is only ever opening one of your own Links, so it is benign, but it explains an occasional surprising match.
+
+The scanner does not keep a scan log. It looks a code up and shows you the result; nothing is recorded about who scanned what or when.
+
+## What you get back
+
+When a code resolves, you choose:
+
+- **Go to destination** — opens the Link's public URL in a new tab, so the server resolves it exactly as a real scan from a phone would: any conditional rules, device routing and Page or Direct Mode behavior all apply.
+- **Open access link** — opens that Link's details panel in the app, where you can see and change what it points at, or which Item it belongs to.
+
+**Scan another** returns to the live camera without closing the window.
+
+When a code resolves to nothing, you get "That code isn't linked yet" and the option to adopt it — see [Adopting an Unknown Code From the Scanner](/print-first/claim-on-scan).
+
+## When the camera will not start
+
+The camera path has its own failure modes, each of which shows a specific message rather than a blank view:
+
+- **Permission denied** — allow camera access in the browser, then try again.
+- **No camera found** on the device.
+- **Camera in use** by another app — close that app first.
+- **Insecure connection** — camera scanning needs HTTPS.
+- **Unsupported browser** — the browser cannot do camera scanning at all.
+
+In every one of these cases the paste field and a USB gun scanner still work, because neither goes through the camera.
+
+## Related
+
+- [Adopting an Unknown Code From the Scanner](/print-first/claim-on-scan) — the "Create & open" action for a code QRtub doesn't recognize
+- [Claim-on-Scan](/links/claim-on-scan) — the underlying mechanism that binds a third-party code to a Link
+- [The Print-First Workflow](/print-first/overview) — applying tags before the Items exist
+- [Unallocated Links](/links/unallocated-links) — what a scan of a not-yet-connected code does

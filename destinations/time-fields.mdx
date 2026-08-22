@@ -1,0 +1,83 @@
+---
+title: "Time Fields Reference"
+description: "The time.* values — hour, dayOfWeek, dayOfMonth, month, year, isWeekend — computed in UTC at every scan, and why they cannot express whether something is overdue"
+---
+
+The `time` namespace exposes the current moment as a handful of separate numbers, so a Destination
+can behave differently during business hours or at the weekend. It is always available, in both
+Destination routing and Page rendering, and it is recomputed every single time a code is scanned —
+there is nothing to refresh or schedule.
+
+## Available fields
+
+| Binding | Type | Range | Notes |
+|---|---|---|---|
+| `time.hour` | number | 0–23 | Hour of day |
+| `time.dayOfWeek` | number | 0–6 | 0 is Sunday, 6 is Saturday |
+| `time.dayOfMonth` | number | 1–31 | Day of the month |
+| `time.month` | number | 1–12 | 1 is January |
+| `time.year` | number | — | Four-digit year, for example `2026` |
+| `time.isWeekend` | boolean | — | `true` on Saturday and Sunday |
+
+**Every value is UTC.** There is no timezone setting, and QRtub does not adjust for the scanner's
+location or your account's country.
+
+Typical conditions:
+
+```text
+time.hour >= 9 && time.hour < 17
+time.isWeekend == true
+time.dayOfWeek == 1
+```
+
+These are conditions, not URL material. The values are plain numbers, so `{{time.year}}` will
+insert `2026` into a URL if you need it, but the reason `time` exists is to decide *which*
+Destination fires — an after-hours emergency number instead of the daytime service desk, for
+example.
+
+## Working around UTC
+
+Because the values are UTC, a "business hours" rule written as `time.hour >= 9 && time.hour < 17`
+describes 9am to 5pm in London in winter, not in your city. Convert your local hours to UTC and
+write those numbers instead. For a site on UTC+10, 9am local is `23` and 5pm local is `7`, so the
+window wraps past midnight and has to be written as two ranges joined with `||` rather than one.
+
+The same wrap affects `dayOfWeek` and `isWeekend`: for anywhere far enough east or west, the UTC
+day rolls over part-way through the local working day, so a weekday rule can misfire in the early
+morning or late evening. If exact local-time accuracy matters, treat `time` as a rough
+convenience rather than a scheduling engine.
+
+## Why you can't check if something is overdue
+
+**You cannot.** This is the most common thing people try to build with `time`, and it is not
+possible today.
+
+`time` exposes only the parts listed above. There is no full date value — no `time.today`, no
+`time.date`, no `time.now` — and there is no date arithmetic, no way to subtract one date from
+another, and no way to compare a stored date field against the current date. A condition like
+`item.inspection_due < time.today` refers to something that does not exist.
+
+It also fails quietly. An undefined identifier makes the entire condition evaluate to `false`, with
+no error raised at scan time — so the rule simply never fires, and the Destination you attached it
+to never appears. Nothing in the scan itself tells you the expression was invalid rather than
+merely unmatched.
+
+**Do this instead: keep a status field that you maintain.** Add a field to the Collection such as
+`inspection_status` with allowed values like `current` and `expired`, and write the condition
+against that:
+
+```text
+item.inspection_status == "expired"
+```
+
+Whatever already tells you an inspection has lapsed — your inspection software, a spreadsheet, a
+scheduled review — is what sets that field, in bulk via CSV import or one Item at a time. QRtub
+then routes on a value it can actually read. It is a small amount of upkeep in exchange for a rule
+that works.
+
+## Related
+
+- [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax and the namespaces available
+- [What Is a Destination?](/destinations/what-is-a-destination) — where time-based conditional routing rules are ordered
+- [Conditional Visibility](/destinations/conditional-visibility) — hiding a section with a condition, and other silent-`false` causes
+- [Allowed Values](/fields/allowed-values) — setting up the status field this page recommends

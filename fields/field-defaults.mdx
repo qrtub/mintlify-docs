@@ -1,0 +1,66 @@
+---
+title: "Field Defaults"
+description: "The Collection-level value that fills a field left blank when an Item is created — never retroactive, never overwriting what someone typed."
+---
+
+A field can carry a default value, set once on the Collection and applied to Items as they are
+created. If the new Item leaves that field blank, the default fills it in. If the Item has a
+value of its own, the default is ignored.
+
+Set it in the Collection's settings, on the **Fields** tab: click the field's chip and fill in
+**Default value**. Press **Save changes** to store it.
+
+## What "blank" means
+
+The default only fills a genuine gap. These all count as blank:
+
+- nothing entered at all,
+- an empty text box,
+- a list field with no values selected.
+
+Anything else is a real value and wins. A `0` in a number field or a deliberately cleared
+field is a value, not a gap.
+
+## Defaults apply at creation only
+
+This is the part that surprises people: a default is stamped in when the Item is created and
+never revisited.
+
+- Changing the Collection's default later does **not** update Items that already exist. Their
+  values were written at creation and stay as they were.
+- A CSV import applies defaults to rows that create a new Item, and **not** to rows that
+  update an existing one. Otherwise a partial update — a file with only two columns in it —
+  would quietly overwrite everything it omitted with Collection defaults.
+- A disabled field's default is skipped entirely.
+
+If you need existing Items brought in line with a new default, that is an edit to those
+Items: change them in the table, or export, edit, and re-import them.
+
+## Two fields that never take a default
+
+**Item ID** cannot have one. It has to be unique within the Collection, so a shared default
+would collide on the second Item created.
+
+**The Destination URL** has a default, but it belongs to the Scan tab rather than the Fields
+tab, and it behaves slightly differently: when a new Item arrives without a destination of
+its own, the template is copied onto that Item, so each Item ends up owning its own copy. Editing the Collection's default afterward
+changes what new Items get and leaves existing ones alone. Field bindings inside that template
+— `{{item.item_id}}` and the like — are not frozen: they are resolved fresh on every scan
+against whatever the Item holds at that moment. See
+[Default Destination for New Items](/collections/default-destination) for how to author it.
+
+## A worked example
+
+A Collection tracking rental plant sets the default on its `status` field to `available`.
+
+- Add an Item and leave status blank: it saves as `available`.
+- Add an Item and set status to `in_repair`: it stays `in_repair`.
+- Change the Collection default to `off_hire` next month: the two Items above do not move.
+  The next Item created blank gets `off_hire`.
+
+## Related
+
+- [Required Fields](/fields/required-fields)
+- [Allowed Values](/fields/allowed-values)
+- [Default Destination for New Items](/collections/default-destination)
+- [Importing Items from CSV](/import-export/importing-items)

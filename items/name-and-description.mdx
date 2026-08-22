@@ -1,0 +1,52 @@
+---
+title: "Name and Description"
+description: "The two free-text core fields on every Item: what Name is used for, where Description shows up, and why neither one has to be unique"
+---
+
+Name and Description are the two free-text core fields every Item ships with. Both accept any
+text, neither has to be unique, and both live in fixed database columns that can be relabeled
+but never renamed.
+
+## Name
+
+Name is the Item's primary label — it is what you see in the items table, in the item picker,
+and in the preview another Item shows when it references this one. On a Page, the ItemHeader
+section's title defaults to the `{{item.name}}` binding, so an Item's name is usually the
+heading someone sees after scanning its code.
+
+Name is **not required by default**. You can mark it Required in the Collection's Fields tab, at
+which point it is enforced when an Item is created, when it is edited, and on CSV import.
+
+Names are not unique. Two Items in the same Collection can both be called "Generator", and
+QRtub will not warn you. If you need to tell same-named Items apart, that is what
+[Item ID](/items/item-id) is for — it is unique within the Collection.
+
+One small behavior worth knowing: duplicating an Item appends `(Copy)` to the name, so
+"Generator" becomes "Generator (Copy)". If the source Item has no name at all, the copy is
+simply called "Copy".
+
+## Description
+
+Description is the longer free-text field — the place for a sentence or a paragraph rather than
+a label. It is optional unless you mark it Required.
+
+Description earns its keep on Pages. The Text section's content defaults to
+`{{item.description}}`, and several of the starter page templates already bind it, so dropping a
+Text section onto a page shows the Item's description without you typing a binding. The item
+picker inside the item form also searches Description alongside Name and Item ID.
+
+## Relabeling, requiring, and turning them off
+
+Both fields are configured on the Collection, in its Fields tab. You can change the label a
+field shows in forms and as its CSV column header, tick Required, or turn the field off.
+
+Because these are core fields, they can only be **disabled**, never deleted — the stored values
+are untouched and come back if you re-enable the field. Note that a disabled core field still
+resolves in Page bindings: turning Description off hides it from the item form and the items
+table, but `{{item.description}}` on a Page keeps rendering whatever was already stored.
+
+## Related
+
+- [What Is an Item?](/items/overview)
+- [Item ID](/items/item-id)
+- [Duplicating an Item](/items/duplicating)

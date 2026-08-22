@@ -1,0 +1,65 @@
+---
+title: "Core Fields vs. Custom Fields"
+description: "The four fixed core fields every Item ships with, versus the custom fields you add — where each is stored, and why only custom fields can be renamed or deleted."
+---
+
+Every Item in a Collection carries four core fields, plus any custom fields you add to that
+Collection. The difference is not cosmetic: core fields and custom fields are stored
+differently, and that decides what you are allowed to change later.
+
+## The four core fields
+
+Every Collection has these four, always, and they cannot be removed:
+
+| Field | Key | Type |
+|-------|-----|------|
+| Name | `name` | Text |
+| Item ID | `item_id` | Text |
+| Description | `description` | Text |
+| Tags | `tags` | List |
+
+Each one has its own dedicated column in the database, which is why their keys are fixed
+forever. In the Fields tab, a core field's label and key are both locked — you can mark it
+required, and you can disable it to hide it from forms and tables, but you can never rename
+or delete it.
+
+## Everything else is a custom field
+
+A custom field's values live together in one metadata block on the Item, keyed by a stable
+8-character ID that QRtub generates when the field is created — something like `Xk9mPq7z`.
+You never see that ID. What you see and type is the field's key, such as `serial_number`,
+and the key is only a pointer to the ID.
+
+That indirection is the entire reason renaming a custom field is safe: the label and key
+change, the storage ID does not, so no data has to move. See
+[Renaming a Field](/fields/renaming-a-field) for what else follows the rename automatically.
+
+## What the split actually changes
+
+| | Core field | Custom field |
+|---|---|---|
+| Change the key | Never | Any time |
+| Change the label | Locked | Any time (the key follows it) |
+| Remove it | Disable only — data untouched | Delete permanently |
+| Stored as | Its own database column | A stable ID inside the Item's metadata |
+| Present in | Every Collection, always | Only the Collections you add it to |
+
+## Where fields are configured
+
+Open the Collection, go to its settings, and choose the **Fields** tab. Fields appear as a
+row of chips under **Item fields**: click a chip to edit that field, drag it to reorder,
+and use the icon on the chip to disable a core field or delete a custom one.
+
+Nothing on this tab takes effect until you press **Save changes**. That includes adding a
+field, renaming one, editing its allowed values, and deleting one.
+
+One thing worth being clear about: a field's *definition* belongs to the Collection, while
+the *value* belongs to the Item. Add a field and it appears on every Item in that Collection
+at once, empty until someone fills it in. Delete it and it disappears from all of them.
+
+## Related
+
+- [Creating a Custom Field](/fields/creating-a-field)
+- [Custom Field Types](/fields/field-types)
+- [Deleting and Disabling Fields](/fields/deleting-and-disabling)
+- [What Is a Collection?](/collections/overview)

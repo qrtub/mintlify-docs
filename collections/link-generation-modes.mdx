@@ -1,0 +1,69 @@
+---
+title: "Link Generation for New Items"
+description: "The Collection setting that decides whether a Link is minted automatically when an Item is created — random, built from the Item ID, or none at all"
+---
+
+Every Collection has one rule for what happens the moment you add an Item: mint a Link and
+attach it automatically, build the Link's address from the Item's own Item ID, or create no Link
+at all. Set it in **Settings → Link generation**, under **When a new item is created**.
+
+Items and Links are separate records. This setting is only about convenience at creation time —
+it never restricts what you can attach to an Item later.
+
+## The three modes
+
+### Create a random link
+
+A fresh Link like `qrtub.com/r/x5fgd` is minted and attached to the Item automatically. You do
+not choose the address, and there is nothing to configure.
+
+This is the default for Collections created through the current flow, and the right choice when
+you are adding Items first and printing codes afterward.
+
+### Create an ID-based link
+
+The Link's address is built from the Item's own Item ID, wrapped in a prefix and suffix you
+define — so an Item ID of `CRA0042TL` becomes `qrtub.com/cra0042tl`. If that address already
+exists but is unattached (a pre-printed code, for instance), the existing Link is adopted rather
+than a duplicate minted.
+
+This mode has its own editor, including an option to fix the digit count so the whole team shares
+one numbered format. See [Building an Item ID Mask](/collections/item-id-mask) for how to set it
+up and what it then requires of every Item ID you type.
+
+### Don't create a link
+
+Items start with no Link. Attach one later from the Item, or scan a pre-printed code in the field
+and match it up then.
+
+This is the sensible setting while you are still building out a Collection, and it is the default
+for Collections created before this setting existed — so an older Collection that mints nothing
+is behaving correctly, not broken.
+
+## What the setting does not do
+
+**It is not retroactive.** Changing the mode affects Items created from that point on. Items that
+already exist keep whatever Link they have, or keep having none.
+
+**It does not govern deletion.** Deletion behavior is fixed and not configurable: deleting an Item
+(or a whole Collection) releases its Link back to your unassigned pool instead of destroying it,
+so printed codes keep working and can be reused. See
+[Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links).
+
+## When minting fails
+
+Random mode has nothing to fail on. ID-based mode does — an Item with a blank Item ID, an Item ID
+that does not match the Collection's required format, or an address already attached to a
+different Item all stop the Link from being created.
+
+**The Item is still created.** QRtub saves the Item and reports the reason the Link could not be
+built; it does not roll the Item back. Fix the Item ID or attach a Link by hand, then carry on.
+It is worth reading that message rather than dismissing it, because an Item with no Link looks
+completely normal in the grid.
+
+## Related
+
+- [Building an Item ID Mask](/collections/item-id-mask)
+- [Item ID](/items/item-id)
+- [Random Links](/links/random-links)
+- [Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links)

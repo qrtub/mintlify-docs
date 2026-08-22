@@ -1,0 +1,52 @@
+---
+title: "Choosing a Link Type"
+description: "Random, Numbered and Custom Links compared side by side — who picks the slug, how many you can create at once, and which one fits a print run, a fleet numbering scheme or a memorable address"
+---
+
+QRtub has three ways to create a Link, and they differ in exactly one thing: who chooses the slug. Random slugs are drawn by QRtub, numbered slugs come from a pattern you reserve, and custom slugs are typed by you. Everything downstream — destinations, Items, Pages, printing — works identically whichever you pick.
+
+Pick **Random** unless you have a reason not to. Pick **Numbered** when the tag needs a human-readable number that matches an asset scheme. Pick **Custom** when a person will read the address out loud or type it from memory.
+
+## The three types side by side
+
+| | Random | Numbered | Custom |
+|---|---|---|---|
+| Who picks the slug | QRtub | You define the pattern; QRtub fills in the number | You, exactly |
+| Example address | `qrtub.com/r/x5fgd` | `qrtub.com/cra0042tl` | `qrtub.com/boardroom` |
+| Slug shape | 5 characters, letters and digits | `prefix` + zero-padded number + `suffix` | 3–50 characters, lowercase letters, digits, `-` and `_` |
+| Typing it by hand | Must match lowercase exactly | Case doesn't matter | Case doesn't matter |
+| Setup needed | None | Claim a pattern first (QRtub can claim it for you on first use) | None |
+| How many at once | Up to 100 per request in the create form | Up to 1,000 numbers in one range request | One at a time |
+| Can fail because it's taken | No — QRtub retries | Yes, if another team already owns the pattern | Yes, if the slug is in use or reserved |
+| Included in | Every plan | Professional and Scale | Every plan |
+
+## When Random is right
+
+Anything that is scanned rather than read. Codes on a sheet of stickers, spares in a drawer, a batch going out for print where nobody cares what the address says. It is the fastest route — nothing to configure, nothing that can collide, and it is the mode QRtub uses when a new Collection mints a Link automatically for each new Item.
+
+The trade-off is that a random slug carries no meaning and is unforgiving to type: it is matched case-sensitively, so someone entering it by hand has to get it exactly right.
+
+## When Numbered is right
+
+When the physical tag already has a number, or should have one. A plate that reads `CRA0042TL` and resolves at `qrtub.com/cra0042tl` gives your crew one identifier instead of two — no mapping back to a spreadsheet, nothing to mistype twice. It is also the only type that mints in real bulk: one range request can create up to a thousand sequential codes.
+
+The cost is that a pattern is a commitment. A prefix, digit count and suffix combination is claimed exclusively, and once Links exist against it you cannot delete the pattern without deleting those Links first.
+
+## When Custom is right
+
+When a human is the interface. A meeting-room sign, a poster, a business card, anything where someone might say "go to qrtub.com/boardroom". Custom slugs are the only type you fully control, and the only type validated against a reserved-word list — QRtub blocks slugs that would collide with its own routes and brand terms.
+
+They are also the slowest: one at a time, each one checked for availability, so they are a poor fit for a print run of five hundred.
+
+## Mixing types is normal
+
+A team routinely runs all three: numbered plates on the equipment fleet, random codes for the spares box, a handful of custom slugs for the front-of-house signage. Types are chosen per Link at creation, not per team or per Collection, and nothing about a Link's type restricts what it can point at.
+
+One constraint worth knowing before you commit: a Link's slug is fixed after creation. You can repoint it, reassign it, or delete it, but you cannot convert a random Link into a custom one — you create the Link you want and retire the other.
+
+## Related
+
+- [Random Links](/links/random-links) — how the automatic slug is generated
+- [Numbered Links](/links/numbered-links) — claiming a pattern and minting against it
+- [Custom Links](/links/custom-links) — charset rules and the reserved-word list
+- [What a Slug Is](/links/what-a-slug-is) — address shapes and case rules

@@ -1,0 +1,68 @@
+---
+title: "Collection Details"
+description: "The four general settings — name, what one Item is called, description and cover image — where each one shows up, and their tub.* bindings"
+---
+
+Four settings identify a Collection: its name, a word for what one of its Items is called, a
+free-text description, and a cover image. They are all in **Settings → General**, under
+**Collection details**.
+
+None of them change how anything behaves. They are display values — but they are also
+*bindable*, which is the part people miss (see below).
+
+## Name
+
+The only required one. It appears in the Collections list, in the sidebar, and as the heading
+above the Item grid, and it is used to name the file when you export a backup
+(`heavy-equipment-2026-08-22.json`).
+
+**Renaming is free.** Nothing is derived from the name — no URL, no Item data, no Link address —
+so you can rename a Collection at any time without consequence. You can rename inline from the
+grid heading as well as from settings.
+
+## What is one Item called?
+
+An optional singular word for one Item in this Collection — "Machine", "Vehicle", "Room". Use
+the singular, not the plural.
+
+It shows on the Collection's card in the Collections list and dashboard, and it feeds the
+`{{tub.items_name}}` binding used as the subtitle on the built-in default page. Leaving it blank
+is fine; nothing falls back to a broken label.
+
+## Description
+
+Free text describing what the Collection is for. It shows in the Collections list, is searchable
+there, and is bindable on pages. Nobody outside your team sees it unless you put it on a page.
+
+## Cover image
+
+An image file, up to **2 MB**. It shows beside the Collection's name in the sidebar, so it is
+read at roughly icon size — a simple, high-contrast image works better than a detailed photo.
+Uploading a new image replaces the old one when you save; if the upload fails, the previous
+image is kept and the rest of your changes still save.
+
+## Using these in bindings
+
+All four are available to page sections and Destination URLs:
+
+| Binding | Value |
+|---------|-------|
+| `{{tub.name}}` | The Collection name |
+| `{{tub.description}}` | The description |
+| `{{tub.items_name}}` | The "what is one Item called" word |
+| `{{tub.image_url}}` | The cover image URL |
+
+**The namespace is `tub.`, not `collection.`.** Collections were renamed from Tubs and the
+binding prefix still uses the original word. `{{collection.name}}` is not an error — it resolves
+to an empty string, silently, which is exactly why it is worth stating.
+
+One caution if you put `{{tub.name}}` inside a Destination URL: values are inserted exactly as
+stored, with **no URL encoding**. A Collection named `Site A & B` will break the link it is
+inserted into. Keep names you intend to use in URLs free of spaces, `&`, `?` and `#`.
+
+## Related
+
+- [What Is a Collection?](/collections/overview)
+- [Creating a Collection](/collections/creating-a-collection)
+- [Default Destination for New Items](/collections/default-destination)
+- [Exporting a Collection Backup](/collections/export-backup)

@@ -1,0 +1,75 @@
+---
+title: "Reference Fields"
+description: "The field that holds no value of its own — it stores a pointer to another Item, Collection, or team member and shows that record's current name and image."
+---
+
+A reference field holds no value of its own. It stores the ID of another record in QRtub, and
+displays that record's current name and image. This is how you model a relationship: an Item
+that belongs to a site, or has an assigned owner.
+
+That is what separates it from [Allowed Values](/fields/allowed-values), which is a fixed list
+of literal values you author on the field itself. A reference field has no list to author —
+its options are whatever records exist, and it never copies their data. Rename the referenced
+record and every Item pointing at it shows the new name, because the name was never stored on
+the Item.
+
+## Setting one up
+
+A reference field is a **UUID** field with a reference type set. When you create a custom
+field, choose UUID as the type and the reference configuration appears.
+
+Pick what the field points at:
+
+| Points at | Options offered in the dropdown |
+|-----------|---------------------------------|
+| **A team member** | Everyone on the team |
+| **Another Item** | Items in this Collection, or Items in any Collection on the team |
+| **A Collection** | Any Collection on the team |
+
+For an Item reference, that second choice is the **Scope** setting: same Collection only, or
+any Collection in the team. Member and Collection references are always team-wide.
+
+**Searchable Dropdown** turns the picker into a search box instead of a plain list. Worth
+switching on for anything with more than a screenful of records, since the list is loaded in
+full and sorted alphabetically.
+
+## What it looks like once it is set
+
+The picker and the Items table both show the referenced record rather than an ID:
+
+- a team member shows their avatar, name, and email,
+- an Item shows its image, its name, and its Item ID,
+- a Collection shows its image and name.
+
+If the referenced record can no longer be resolved — it was deleted, or it sits outside the
+field's scope — the cell falls back to a placeholder circle and the first characters of the
+stored ID. Nothing is cleared automatically, so that is your signal that a pointer has gone
+stale.
+
+## Limits worth knowing before you commit
+
+**A binding inserts the ID, not the name.** `{{item.parent_item}}` in a Destination URL
+resolves to the stored record ID, because reference lookup happens in the app's own screens,
+not in the binding resolver. If you need a human-readable value in a URL, put it in a Text
+field. And remember that values are inserted into a URL exactly as stored, with no
+URL-encoding — a value containing a space or an `&` will break the link.
+
+If what you actually want in the URL is the Collection the Item belongs to, that is a
+Collection binding rather than a reference field: `{{tub.name}}`. **The Collection binding
+prefix is still `tub.`, not `collection.`** — Collections were renamed, the binding namespace
+was not. `{{collection.name}}` returns an empty string with no error.
+
+**CSV import cannot fill a reference field.** A UUID field's CSV cell has to be a JSON
+object, so a bare record ID in that column is rejected as invalid. Set reference fields from
+the Item form.
+
+**A UUID field with no reference type is just a text box.** It has nothing to point at, so
+the form falls back to plain text input. If the dropdown never appears, the reference type is
+unset.
+
+## Related
+
+- [Allowed Values](/fields/allowed-values)
+- [Custom Field Types](/fields/field-types)
+- [Creating a Custom Field](/fields/creating-a-field)
+- [Field Bindings](/destinations/field-bindings)

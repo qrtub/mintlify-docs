@@ -1,0 +1,51 @@
+---
+title: "Custom Links"
+description: "Choosing your own slug: the exact character rules QRtub enforces, the reserved words it blocks, and why a slug can be refused even when nothing appears to be using it"
+---
+
+A Custom Link is one where you type the slug yourself: `qrtub.com/boardroom`, `qrtub.com/site-office`, `qrtub.com/menu_2026`. Use it when a person will read the address aloud or type it from memory — a room sign, a poster, a card — rather than scan it.
+
+Custom Links are created one at a time. Each one is checked for availability as it is created, so they are the wrong tool for a print run of hundreds; use Random or Numbered for that.
+
+## The character rules
+
+A custom slug must:
+
+- be **3 to 50 characters** long
+- contain only **lowercase letters, digits, hyphens and underscores**
+- **start** with a letter, a digit or an underscore
+- **end** with a letter or a digit
+- contain no **two hyphens in a row**
+
+Anything you type is lowercased and trimmed first, so entering `My-Product` gives you `my-product` rather than an error. Everything else is a hard rejection: `ab` is too short, `site office` contains a space, `crane-` ends with a hyphen, `red--crane` has a double hyphen. Consecutive underscores are fine.
+
+These rules are enforced when the Link is written, not only in the form, so the same limits apply to slugs created through a CSV import.
+
+## Reserved words
+
+QRtub blocks a list of slugs outright, because handing them out would collide with its own addresses or mislead the people scanning them. The list covers:
+
+- **App and system paths** — `app`, `api`, `r`, `login`, `signup`, `auth`, `account`, `checkout`, `static`, `assets`
+- **Marketing and public pages** — `pricing`, `about`, `contact`, `features`, `docs`, `help`, `support`, `faq`, `blog`, `terms`, `privacy`, `security`, `status`
+- **Brand terms** — `qrtub`, `qr`, `qrcode`, `link`, `thing`
+- **Dashboard and identity words** — `admin`, `dashboard`, `settings`, `console`, `user`, `users`, `me`, `team`, `teams`, `org`
+- **Plan and platform words** — `pro`, `plus`, `premium`, `enterprise`, `ios`, `android`, `download`, `mobile`
+
+The check ignores case, so `Admin` is blocked for the same reason `admin` is. The practical consequence: short, generic, single-word slugs are the ones most likely to be refused. Add something specific — `qrtub.com/acme-support` instead of `qrtub.com/support` — and you are almost always clear.
+
+## Two other reasons a slug can be refused
+
+**It is already in use.** Slugs are unique across every team in QRtub, compared without regard to case. If someone else holds `boardroom`, you cannot have it, and QRtub says so rather than quietly giving you a variant.
+
+**It falls inside a numbered pattern your team owns.** This is the one that looks like a bug and is not. If your team has claimed the pattern `cra` + 4 digits, then `cra0042` is reserved for that pattern's use — even though no Link has been minted at that number yet, and nothing appears in your Links list using it. QRtub rejects the custom slug because minting it would let a hand-typed address hijack a slot the numbering scheme is counting on. Pick a slug outside the pattern's shape, or use a Numbered Link if that number is genuinely what you want.
+
+## The slug is permanent
+
+Once created, a custom slug cannot be edited. You can change where it points as often as you like, turn it off, or delete it, but the address itself is fixed — a printed sign has to keep resolving. Get the spelling right before you commit, and where a mistake has already been printed, create the corrected Link and retire the old one rather than trying to rename it.
+
+## Related
+
+- [Choosing a Link Type](/links/choosing-a-link-type) — when a random or numbered slug fits better
+- [Numbered Links](/links/numbered-links) — what a claimed pattern reserves, and why it can block a custom slug
+- [What a Slug Is](/links/what-a-slug-is) — the address shape a custom slug produces
+- [What Is a Destination?](/destinations/what-is-a-destination) — pointing the Link somewhere once it exists

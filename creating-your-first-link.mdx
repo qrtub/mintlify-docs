@@ -1,45 +1,71 @@
 ---
 title: "Creating Your First Link"
-description: "Generate your first Link, download the QR code, and connect it to an Item"
-slug: "creating-your-first-link"
-sidebar_position: 1
-category: "getting-started"
+description: "A worked end-to-end path: create a Collection, add an Item, get a Link, download its QR code, and give it somewhere to go."
 ---
 
-Links are the foundation of QRtub. Each Link is a unique URL (like `qrtub.com/r/x5fgd`) that you can encode in a QR code and manage independently.
+This walks one complete path from an empty account to a QR code you can print and scan. It is
+not the only order that works — Collections, Items, Links and Pages are independent, so
+creating a hundred Links first and connecting them months later is equally valid.
 
-## Step 1: Navigate to Links
+**Before you start:** you need a QRtub account and a team selected in the team switcher at the
+top of the sidebar. Parts of the app still say "tub" where these docs say "Collection" — the
+entity was renamed and the labels have not all caught up.
 
-From your dashboard, click **Links** in the main navigation.
+## Create a Collection
 
-## Step 2: Generate a New Link
+In the sidebar, click the **+** next to the section labeled **Tub** — the old name for
+Collections, still on the button. The **New tub** screen it opens offers two cards —
+*Connects to one destination* and *Connects to several* — plus a row of starter templates.
 
-Click the **Generate Links** button. You can create:
+Picking any of them creates the Collection immediately. There is no form: the Collection gets
+an automatic sequential name (`Tub1`, `Tub2`, and so on) and you land on its empty grid, where
+the name, description and cover image are all editable in place. The two cards set what a
+scanned code does by default — pass through to one destination, or open a Page listing
+several — and that is changeable later in settings.
 
-- **Single Link** - Generate one Link at a time
-- **Bulk Links** - Generate multiple Links for professional printing
+## Add an Item and get a Link
 
-## Step 3: Choose Your Link Type
+Click **Add your first item**, give it a name, and save. Collections created this way default
+to random link generation, so QRtub mints a Link at the moment the Item is saved and confirms
+it with a message naming the new slug.
 
-- **Random** (`qrtub.com/r/x5fgd`) - Default, automatically generated
-- **ID-based** (`qrtub.com/cra001`) - Sequential or branded patterns
-- **Custom** (`qrtub.com/mylink`) - Memorable, custom URLs
+To see it, open the Item and switch to its **Access Links** tab — the full URL is listed there,
+in the form `qrtub.com/r/x5fgd`. An Item can hold more than one Link.
 
-## Step 4: Print or Connect
+If a Collection's link generation is set to *None* — the default for older Collections — saving
+an Item mints no Link, and you attach one yourself as below.
 
-Once generated, you can:
+## Or start from a Link you already printed
 
-- Download QR codes for printing
-- Connect the Link to an Item
-- Set up a Page with multiple Destinations
+Open **Access Link** in the sidebar and click **Create Link**. Choose a strategy — Random,
+Numbered, or Custom — and for Random you can create up to 100 in one request. Nothing needs to
+exist first: a Link with no Item and no destination is a valid, permanent, printable
+Link.
 
-## Next Steps
+To connect one, use the row menu on any Link and choose **Assign to Item**; the picker searches
+the whole team, so the Item can live in any Collection. An Item's **Access Links** tab works
+from the other direction, listing the team's unassigned Links so you can attach a pre-printed
+code there.
 
-- Learn about [Pages](/pages-overview)
-- Understand [Direct Mode vs Page Mode](/key-concepts#link-modes)
+## Download the QR code
 
----
+From a Link's row menu, choose **Download QR Code**. You get a single PNG at 1024 px, black on
+white, with a 2-module quiet zone; select several Links first and you get a zip of PNGs
+instead. There is no SVG export and no error-correction setting today.
 
-**Ready to get started with QRtub?** [See plans and pricing →](https://qrtub.com/pricing)
+## Point the Link at something
 
-Questions? Email us at [hi@qrtub.com](mailto:hi@qrtub.com)
+Open the Item and use the **Destination** tab to set where a scan goes, or the **Page** tab to
+build a screen with several Destinations. Either can be changed at any time without
+touching the printed code.
+
+A Destination can be a fixed URL or a template that inserts this Item's own field values, so
+one template serves every Item in the Collection. Values are inserted exactly as stored — no
+URL-encoding — so a field containing a space or an `&` breaks the resulting link.
+
+## Related
+
+- [What a Link Is](/links/what-a-link-is) — the slug-to-destination model
+- [Choosing a Link Type](/links/choosing-a-link-type) — random vs. numbered vs. custom
+- [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax and its rules
+- [The Print-First Workflow](/print-first/overview) — printing in bulk before the Items exist

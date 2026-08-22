@@ -1,0 +1,46 @@
+---
+title: "What a Slug Is"
+description: "The identifier segment of a Link's address — the two URL shapes it produces, and why random slugs are case-sensitive while numbered and custom ones are not"
+---
+
+The slug is the part of a Link's address that identifies it: the `x5fgd` in `qrtub.com/r/x5fgd`, the `exc203` in `qrtub.com/exc203`. Everything else in the URL is fixed. When QRtub asks how you want a Link created, it is really asking how you want its slug chosen.
+
+## The slug is not the whole address
+
+There are two address shapes, and which one you get depends on the Link's type:
+
+| Link type | Address shape | Example |
+|-----------|---------------|---------|
+| Random | `qrtub.com/r/{slug}` | `qrtub.com/r/x5fgd` |
+| Numbered | `qrtub.com/{slug}` | `qrtub.com/exc203` |
+| Custom | `qrtub.com/{slug}` | `qrtub.com/boardroom` |
+
+Random Links sit under `/r/` and the other two sit at the root. That separation is deliberate: `qrtub.com/r/abc12` and `qrtub.com/abc12` are two different addresses resolved by two different routes, so the automatic slugs never collide at scan time with the ones you choose yourself.
+
+The domain is always lowercase `qrtub.com`. When you print a Link as readable text under a QR code, print the whole address — including `/r/` if it is a random Link — because the slug alone will not get anyone anywhere.
+
+## Case matters for random slugs, and not for the others
+
+This is the one slug rule that catches people out:
+
+- **Random slugs are matched case-sensitively.** They are stored in lowercase, so the address you see and print is lowercase, and it has to be typed that way. `qrtub.com/r/X5FGD` will not resolve to `qrtub.com/r/x5fgd`.
+- **Numbered and custom slugs are matched case-insensitively.** A numbered Link keeps whatever case you typed when you claimed the pattern, so it can print as `qrtub.com/CRA0042TL`, and someone typing `cra0042tl` still lands in the right place. Custom slugs are stored lowercase and resolve either way.
+
+If your crews type addresses by hand — and on a muddy site with a cracked screen, some will — a numbered or custom slug is more forgiving than a random one.
+
+## Slugs are unique across all of QRtub, not just your team
+
+Slugs are checked against every Link in QRtub, not just your team's. If another team already holds `boardroom`, you cannot have it, and QRtub tells you it is in use rather than quietly giving you something else. The check ignores case, so `Boardroom` is not available either. Random slugs go through the same check when they are minted, which is why you never have to think about it — QRtub keeps drawing new ones until it finds a free slug.
+
+A slug is fixed once the Link exists. There is no rename: the point of the whole system is that a printed code keeps resolving, and renaming a slug would break every code already in the field. If you need a different address, create a new Link and, if the old one is no longer wanted, delete it.
+
+## What varies by type
+
+Each type has its own rules about what characters a slug may contain and how long it can be — a random slug is always five characters, a custom slug is validated against a fixed charset and a reserved-word list, and a numbered slug is built from a prefix, a zero-padded number and a suffix. Those rules live with each type rather than here.
+
+## Related
+
+- [Choosing a Link Type](/links/choosing-a-link-type) — which slug strategy fits which job
+- [Random Links](/links/random-links) — the automatic five-character slug
+- [Numbered Links](/links/numbered-links) — prefix, digits, suffix and claimed ranges
+- [Custom Links](/links/custom-links) — charset rules and reserved words

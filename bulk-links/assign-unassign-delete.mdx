@@ -1,0 +1,51 @@
+---
+title: "Bulk Assigning, Unassigning, and Deleting Links"
+description: "Acting on many Links at once: ticked rows versus 'select all' across every page of results, and the all-or-nothing rule that protects printed codes from a bulk delete"
+---
+
+Select Links in the list and a bulk menu appears with four actions: **Download QR Codes**, **Assign to Item**, **Unassign from Items** and **Delete Selected**. Anything else — changing a destination, editing fallbacks, renaming — is a per-Link edit.
+
+## Two ways to select, and the difference matters
+
+**Ticking rows** operates on exactly the Links you ticked. Straightforward, and limited to what is on screen.
+
+**Select all** is different: it selects every Link matching your current view, not just the page in front of you. QRtub sends the *filters* rather than a list of IDs, and resolves them on the server, so "delete all 4,000 unassigned random Links" is one request instead of shipping 4,000 IDs out to your browser and back. The count in the confirmation dialog is the full total, so read it before confirming — that is your check that the scope is what you meant.
+
+The scope carries the filters you can see in the list: link type, assigned or unassigned, whether the Link was adopted from a scanned code, any column filters, and your search term. Change the filters, and you change what "select all" means.
+
+**One filter cannot be part of a "select all" scope: print batch.** If the list is filtered by batch and you use select all, the operation is refused with a message saying the batch filter is not supported for bulk operations. Tick the rows you want individually instead, filter by something else, or work from the batch's own screen.
+
+## Assigning many Links to an Item
+
+**Assign to Item** opens a picker covering every Item in the team, across all Collections, and points every selected Link at the one Item you choose.
+
+That is the right shape more often than it sounds — a machine that carries a plate on the cab, a sticker in the engine bay and a spare tag in the office is one Item with three Links. But it does mean bulk assign cannot pair a list of Links with a list of Items one-to-one; that is a per-Link action, or a job for the Collection's link generation setting.
+
+A Link points at no more than one Item, so assigning replaces any existing assignment without asking.
+
+## Unassigning many Links
+
+**Unassign from Items** detaches every selected Link and returns it to the unassigned pool. The Links stay alive and the printed codes keep resolving — a scan lands on the neutral "not connected yet" page instead of the Item's Page.
+
+There is no print-status restriction on this. Detaching a code that is already installed is a normal, expected thing to do when the equipment behind it changes.
+
+## Deleting many Links
+
+**Delete Selected** is permanent and there is no undo — the slugs stop resolving and anyone scanning those codes gets "page not found". QRtub asks for confirmation with the count first.
+
+The important rule is that a bulk delete is **all or nothing**. Before deleting anything, QRtub checks whether any Link in the selection belongs to a print batch that has moved past Draft. If even one does, the whole operation is rejected and nothing is deleted. You never end up with a partially deleted selection and no clear record of which rows went.
+
+That check makes a large bulk delete a slightly awkward instrument: one printed code in a selection of two thousand blocks the lot. Narrow the filter — for example to unassigned Links only — or unassign rather than delete.
+
+## Working at real scale
+
+- Bulk actions run in chunks behind the scenes, so tens of thousands of Links is a supported size rather than a stress test
+- Selection resets after each action completes, and the list refreshes
+- If an operation fails, it fails as a whole with a message; it does not half-apply
+
+## Related
+
+- [Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links) — the three outcomes in detail, including automatic release
+- [Downloading QR Codes](/bulk-links/downloading-qr-codes) — the fourth bulk action
+- [Bulk Link Import via CSV](/bulk-links/csv-import) — bulk *editing* of destinations and fallbacks
+- [Adding and Removing Links in a Batch](/print-batches/editing-links) — batch membership, which the bulk menu doesn't cover

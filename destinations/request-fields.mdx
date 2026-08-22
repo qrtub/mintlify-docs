@@ -1,0 +1,77 @@
+---
+title: "Request Fields Reference"
+description: "The request.* values — language, referrer, timestamp and CDN-derived country, city and IP — where each comes from, when each is empty, and what binding them discloses"
+---
+
+The `request` namespace describes the incoming scan itself rather than the Item behind it: what
+language the browser asked for, where the visitor came from, and roughly where in the world they
+are. The location values are not measured by QRtub — they are read from headers the content
+delivery network adds in front of the app, which is why they are approximate and why several of
+them are frequently empty.
+
+## Available fields
+
+| Binding | Type | Source | Empty when |
+|---|---|---|---|
+| `request.timestamp` | string | The moment the request was handled, as an ISO timestamp in UTC | Never |
+| `request.path` | string | The path that was requested | Never |
+| `request.language` | string | The first entry of the browser's `Accept-Language` header, for example `en-US` | The browser sends no language preference |
+| `request.referrer` | string | The `Referer` header — the page the visitor came from | A direct QR scan, which is most of them |
+| `request.country` | string | Two-letter country code from the CDN's geo header, for example `AU` | The CDN did not supply one |
+| `request.city` | string | City name from the CDN's geo header, for example `Brisbane` | The CDN did not supply one |
+| `request.ip` | string | The client IP address, taken from the forwarded-for headers | No forwarded address is present |
+
+Two behaviors surprise people:
+
+- **`request.referrer` is usually empty.** A phone camera opening a QR code sends no referrer, so
+  a rule built on it will not fire for the scans you actually care about.
+- **`request.path` is always `/` when a Page renders.** It carries the real requested path during
+  Destination routing, but the Page renderer does not pass the path through.
+
+## Location values are not available in preview
+
+`request.country`, `request.city` and `request.ip` come from headers the CDN adds to a real
+inbound request. When you preview a Page or test a Destination inside the editor, the context is
+built in your own browser instead, and those three are always empty. There is no way to fake them
+in preview, so a location-based rule can only be verified with a real scan.
+
+Combined with the missing-value rule, that has teeth: **a Destination URL containing
+`{{request.city}}` resolves to nothing whenever the header is absent, and QRtub skips that
+Destination rather than opening a half-built URL.** If you route on location, always pair the rule
+with an unconditional fallback so a visitor the CDN could not place still lands somewhere. And
+because bindings are inserted with no URL encoding, a city name containing a space will break the
+URL it is inserted into.
+
+## What binding this data discloses
+
+State this to yourself plainly before you use it: **the moment you put `{{request.ip}}`,
+`{{request.country}}` or `{{request.city}}` into a Destination URL, you are sending that data to
+whoever runs the system on the other end.** It arrives in their query string, and from there it
+lands in their server logs, their analytics and any third-party script on the page they open —
+permanently, and outside your control.
+
+The person scanning gets no notice and no choice. They pointed a camera at a sticker; they did not
+agree to have their approximate location forwarded to a vendor. An IP address is personal data
+under the GDPR and comparable regimes, and city-level location is widely treated the same way, so
+if you operate anywhere those rules apply, forwarding it is a decision to make deliberately rather
+than a convenient parameter to add.
+
+Two practical guardrails:
+
+- **Prefer `request.country` over `request.city` or `request.ip`.** A country code is usually all a
+  routing decision needs, and it discloses the least.
+- **Use these values in conditions rather than in URLs where you can.** Routing an Australian
+  scanner to your Australian support page keeps the data inside QRtub; putting the city in the URL
+  hands it to someone else.
+
+Location data derived from an IP address is also inaccurate often enough to matter — VPNs,
+corporate networks and mobile carriers routinely resolve to the wrong city or the wrong country.
+Like device detection, this is a routing convenience, not a security control: never use
+`request.*` to decide who may see something.
+
+## Related
+
+- [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax, encoding and missing-value rules
+- [What Is a Destination?](/destinations/what-is-a-destination) — resolution order, and the conditional routing rules that read these fields
+- [Device Detection & Routing](/destinations/device-detection) — the other scan-time namespace, and the same "not for security" caveat
+- [Time Fields Reference](/destinations/time-fields) — the other values computed fresh at every scan

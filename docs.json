@@ -5,20 +5,100 @@
   "redirects": [
     {
       "source": "/help/profile-pages-overview",
-      "destination": "/pages-overview"
+      "destination": "/pages/pages-overview"
     },
-    { "source": "/help/creating-your-first-link", "destination": "/creating-your-first-link" },
-    { "source": "/help/key-concepts", "destination": "/key-concepts" },
-    { "source": "/help/print-first-workflow", "destination": "/print-first-workflow" },
-    { "source": "/help/media-basics", "destination": "/media-basics" },
-    { "source": "/help/custom-fields", "destination": "/custom-fields" },
-    { "source": "/help/pages-overview", "destination": "/pages-overview" },
-    { "source": "/help/building-a-page", "destination": "/building-a-page" },
-    { "source": "/help/using-fields", "destination": "/using-fields" },
-    { "source": "/help/conditional-visibility", "destination": "/conditional-visibility" },
-    { "source": "/help/device-detection", "destination": "/device-detection" },
-    { "source": "/help/app-links", "destination": "/app-links" },
-    { "source": "/help/print-batches", "destination": "/print-batches" }
+    {
+      "source": "/help/creating-your-first-link",
+      "destination": "/creating-your-first-link"
+    },
+    {
+      "source": "/help/key-concepts",
+      "destination": "/key-concepts"
+    },
+    {
+      "source": "/help/print-first-workflow",
+      "destination": "/print-first/overview"
+    },
+    {
+      "source": "/help/media-basics",
+      "destination": "/media/what-is-media"
+    },
+    {
+      "source": "/help/custom-fields",
+      "destination": "/fields/core-vs-custom"
+    },
+    {
+      "source": "/help/pages-overview",
+      "destination": "/pages/pages-overview"
+    },
+    {
+      "source": "/help/building-a-page",
+      "destination": "/pages/page-editor-layout"
+    },
+    {
+      "source": "/help/using-fields",
+      "destination": "/destinations/field-bindings"
+    },
+    {
+      "source": "/help/conditional-visibility",
+      "destination": "/destinations/conditional-visibility"
+    },
+    {
+      "source": "/help/device-detection",
+      "destination": "/destinations/device-detection"
+    },
+    {
+      "source": "/help/app-links",
+      "destination": "/destinations/app-links"
+    },
+    {
+      "source": "/help/print-batches",
+      "destination": "/print-batches/overview"
+    },
+    {
+      "source": "/using-fields",
+      "destination": "/destinations/field-bindings"
+    },
+    {
+      "source": "/conditional-visibility",
+      "destination": "/destinations/conditional-visibility"
+    },
+    {
+      "source": "/device-detection",
+      "destination": "/destinations/device-detection"
+    },
+    {
+      "source": "/app-links",
+      "destination": "/destinations/app-links"
+    },
+    {
+      "source": "/custom-fields",
+      "destination": "/fields/core-vs-custom"
+    },
+    {
+      "source": "/building-a-page",
+      "destination": "/pages/page-editor-layout"
+    },
+    {
+      "source": "/pages-overview",
+      "destination": "/pages/pages-overview"
+    },
+    {
+      "source": "/print-batches",
+      "destination": "/print-batches/overview"
+    },
+    {
+      "source": "/media-basics",
+      "destination": "/media/what-is-media"
+    },
+    {
+      "source": "/print-first-workflow",
+      "destination": "/print-first/overview"
+    },
+    {
+      "source": "/unallocated-links",
+      "destination": "/links/unallocated-links"
+    }
   ],
   "colors": {
     "primary": "#F25830",
@@ -37,47 +117,159 @@
           {
             "group": "Getting Started",
             "pages": [
-              "creating-your-first-link"
+              "creating-your-first-link",
+              "key-concepts"
             ]
           },
           {
-            "group": "Concepts",
+            "group": "Collections",
             "pages": [
-              "key-concepts",
-              "print-first-workflow",
-              "media-basics"
+              "collections/overview",
+              "collections/creating-a-collection",
+              "collections/starter-templates",
+              "collections/collection-details",
+              "collections/link-generation-modes",
+              "collections/item-id-mask",
+              "collections/scan-behavior-default",
+              "collections/default-destination",
+              "collections/export-backup",
+              "collections/import-backup",
+              "collections/new-collection-from-backup",
+              "collections/deleting-a-collection"
             ]
           },
           {
-            "group": "Items & Data",
+            "group": "Fields",
             "pages": [
-              "custom-fields"
+              "fields/core-vs-custom",
+              "fields/field-types",
+              "fields/allowed-values",
+              "fields/allow-new-values",
+              "fields/reference-fields",
+              "fields/field-defaults",
+              "fields/required-fields",
+              "fields/creating-a-field",
+              "fields/renaming-a-field",
+              "fields/deleting-and-disabling"
+            ]
+          },
+          {
+            "group": "Items",
+            "pages": [
+              "items/overview",
+              "items/name-and-description",
+              "items/item-id",
+              "items/tags",
+              "items/duplicating"
+            ]
+          },
+          {
+            "group": "Import & Export",
+            "pages": [
+              "import-export/importing-items",
+              "import-export/exporting-items"
+            ]
+          },
+          {
+            "group": "Links",
+            "pages": [
+              "links/what-a-link-is",
+              "links/what-a-slug-is",
+              "links/choosing-a-link-type",
+              "links/random-links",
+              "links/numbered-links",
+              "links/custom-links",
+              "links/unallocated-links",
+              "links/claim-on-scan",
+              "links/deleting-and-releasing-links"
+            ]
+          },
+          {
+            "group": "Bulk Link Operations",
+            "pages": [
+              "bulk-links/csv-import",
+              "bulk-links/assign-unassign-delete",
+              "bulk-links/downloading-qr-codes"
             ]
           },
           {
             "group": "Pages",
             "pages": [
-              "pages-overview",
-              "building-a-page",
-              "using-fields",
-              "conditional-visibility",
-              "device-detection",
-              "app-links"
+              "pages/pages-overview",
+              "pages/direct-mode-vs-page-mode",
+              "pages/page-privacy",
+              "pages/page-editor-layout",
+              "pages/section-types",
+              "pages/action-link",
+              "pages/admin-toolbar",
+              "pages/image-display-controls",
+              "pages/page-theming",
+              "pages/previewing-a-page",
+              "pages/page-overrides",
+              "pages/page-template-versions",
+              "pages/page-metadata"
             ]
           },
           {
-            "group": "Printing",
+            "group": "Destinations",
             "pages": [
-              "print-batches"
+              "destinations/what-is-a-destination",
+              "destinations/field-bindings",
+              "destinations/item-fields",
+              "destinations/collection-fields",
+              "destinations/time-fields",
+              "destinations/request-fields",
+              "destinations/conditional-visibility",
+              "destinations/device-detection",
+              "destinations/app-links"
+            ]
+          },
+          {
+            "group": "Media",
+            "pages": [
+              "media/what-is-media",
+              "media/media-types"
+            ]
+          },
+          {
+            "group": "Print Batches",
+            "pages": [
+              "print-batches/overview",
+              "print-batches/creating-a-batch",
+              "print-batches/batch-status",
+              "print-batches/archiving-and-deleting",
+              "print-batches/batch-details",
+              "print-batches/editing-columns",
+              "print-batches/editing-links",
+              "print-batches/deployment-status",
+              "print-batches/csv-download",
+              "print-batches/finding-batches",
+              "print-batches/link-print-history"
+            ]
+          },
+          {
+            "group": "Print-First Workflow",
+            "pages": [
+              "print-first/overview",
+              "print-first/scanner",
+              "print-first/claim-on-scan",
+              "print-first/tips"
+            ]
+          },
+          {
+            "group": "Working with a Print Shop",
+            "pages": [
+              "print-shop-basics",
+              "preparing-print-job"
             ]
           }
         ]
       },
       {
-        "tab": "Industries",
+        "tab": "Use Cases",
         "groups": [
           {
-            "group": "Industries",
+            "group": "By Industry",
             "pages": [
               "industries/civil-construction",
               "industries/contract-cleaning",
@@ -92,7 +284,7 @@
         "tab": "Integrations",
         "groups": [
           {
-            "group": "Operations",
+            "group": "Connecting Other Systems",
             "pages": [
               "integrations/safetyculture",
               "integrations/cmms-systems"
@@ -125,15 +317,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "branding": {

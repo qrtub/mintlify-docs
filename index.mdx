@@ -1,55 +1,55 @@
 ---
-title: "Welcome to QRtub"
-description: "Print Once. Update Forever."
+title: "QRtub Documentation"
+description: "What QRtub does, why nothing here has to be built in order, and where to find the page that answers your question."
 ---
 
-Physical QR codes are permanent once printed - but your systems aren't. QRtub lets you change what your codes do without reprinting.
+QRtub manages the QR-code layer between your physical items and the software systems that
+serve them. A QR code encodes a QRtub Link instead of a vendor's URL, so you can change
+where that code goes — or what it opens — without reprinting anything.
 
-Deploy QR codes in bulk before your systems are ready. Connect them during installation. Update Destinations whenever requirements change. One QR code can do more, linking to multiple systems — inspections, maintenance, manuals, support, contact.
+## Nothing here has to be built in order
 
-If you switch vendors in two years, update the Destination. Don't reprint 500 stickers.
+A Collection, an Item, a Link and a Page do not require each other to exist. You can create
+Links and send them to a printer before you know what they will point at, build a Page before
+any code opens it, or import real equipment data and print a box of spares in the same
+afternoon. Most systems make you finish the database before you can print; QRtub doesn't, and
+that changes how you sequence a rollout.
 
-## Why Choose QRtub?
+The tutorial below is one workable path through that, not the required one.
 
-### Print Before You're Ready
-Professional printing requires bulk orders and a lead time. Don't wait until everything is finalized. Generate Links, print QR codes, and connect them when convenient.
+## Start here
 
-### One Code, Multiple Systems
-Normally QR Codes only do one thing for one audience. One QRtub code can do the job of many. Have one link for your staff and customers to satisfy ops and sales. Equipment needs access to inspections, maintenance logs, manuals, and support. One QR code with a Page serves them all. No more cluttering items with multiple stickers.
+- [Key Concepts](/key-concepts) — Collection, Item, Link, Page and Media in a sentence each
+- [Creating Your First Link](/creating-your-first-link) — create a Collection, get a Link, connect it to an Item
+- [The Print-First Workflow](/print-first/overview) — printing codes before the Items exist
 
-### Future Proof
-Switch software, add new systems, fix broken links—all without touching your physical QR codes. Your infrastructure stays fixed while your digital requirements evolve.
+## Your data
 
-### Built for Physical Deployments
-Marine operations, construction equipment, rental fleets, lifesaving stations — QRtub handles real-world deployments where QR codes need to last months or years.
+- [What Is a Collection?](/collections/overview) and [Creating a Collection](/collections/creating-a-collection)
+- [Core Fields vs. Custom Fields](/fields/core-vs-custom) — what data each Item carries
+- [What Is an Item?](/items/overview)
+- [Importing Items from CSV](/import-export/importing-items)
 
-## Get Started
+## Links and QR codes
 
-Core features available today:
-- Bulk Link generation
-- Pages with multiple destinations
-- Print-before-link workflow
-- URL Templates for bulk deployment
+- [What a Link Is](/links/what-a-link-is)
+- [Choosing a Link Type](/links/choosing-a-link-type) — random, numbered, or custom
+- [Unallocated Links](/links/unallocated-links) — a real, printable Link with nothing attached yet
+- [Downloading QR Codes](/bulk-links/downloading-qr-codes)
 
-Deploy QR codes with professional management from day one. [See plans and pricing →](https://qrtub.com/pricing)
+## What a scan does
 
-## Find out more
+- [Pages Overview](/pages/pages-overview) — one code, several destinations
+- [What Is a Destination?](/destinations/what-is-a-destination)
+- [Field Bindings & URL Templates](/destinations/field-bindings) — pre-fill another system with this Item's data
 
-<Columns cols={2}>
-  <Card
-    title="Industries"
-    icon="building"
-    href="/industries"
-  >
-    How your industry uses QRtub.
-  </Card>
-  <Card
-    title="Integrations"
-    icon="plug"
-    href="/integrations"
-  >
-    How to use QRtub with your favourite tools.
-  </Card>
+## Printing and deployment
 
-</Columns>
+- [What Is Media?](/media/what-is-media) — stickers, plaques, signs, NFC tags
+- [Print Batches](/print-batches/overview) — tracking a production run
+- [Preparing Your Print Job](/preparing-print-job)
 
+## Use cases and integrations
+
+- Use cases by industry — [Civil Construction](/industries/civil-construction), [Contract Cleaning](/industries/contract-cleaning), [Arboriculture & Tree Management](/industries/arboriculture-tree-management), [Electrical Test and Tag](/industries/electrical-test-and-tag), [Local Government & Councils](/industries/local-government-councils)
+- Integrations — [Mitti (formerly SafetyCulture)](/integrations/safetyculture) and [CMMS Systems](/integrations/cmms-systems); every integration is a URL recipe, not an API sync

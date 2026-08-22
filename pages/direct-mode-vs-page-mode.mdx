@@ -1,0 +1,72 @@
+---
+title: "Direct Mode vs. Page Mode"
+description: "The Collection default and per-Item override that decide whether a scan redirects immediately or opens a Page — and the inheritance rule between them"
+---
+
+Two things can happen when someone scans a QR code, and one setting decides which:
+
+- **Direct Mode** — the scan goes straight to a single Destination. No page, no tap. The visitor
+  lands in the vendor's system.
+- **Page Mode** — the scan opens the Item's Page, where the visitor picks from the Destinations
+  you put there.
+
+You can switch between them at any time without reprinting. The printed code encodes the Link,
+never the Destination, so changing mode changes behavior on codes already stuck to equipment.
+
+## Where each is set
+
+**The Collection sets the default.** In the Collection's settings, the **Scan behavior** tab has
+one toggle, **Show a profile page**: on means new Items start in Page Mode, off means they start
+in Direct Mode. Turning it on also reveals the Collection's page tab and the Page Editor; turning
+it off surfaces a **Default destination** builder instead, because a pass-through Item needs
+somewhere to send the scan.
+
+**The Item can override it.** Open an Item, go to its **Destination** tab, and pick one of two
+radio buttons:
+
+- **Destination Link** — redirect to a URL when scanned. This is Direct Mode.
+- **Landing Page** — show the Item's page. This is Page Mode.
+
+(The radio is labeled "Landing Page" in the current app. The canonical name for the thing it
+produces is a Page.)
+
+## The inheritance rule
+
+An Item's own explicit choice always wins. An Item that has never made one inherits the
+Collection's default.
+
+That second half is the part that surprises people. Items created by CSV import, or created
+before you last flipped the Collection toggle, may carry no explicit choice at all — so flipping
+the Collection default changes how those existing Items resolve, not just new ones. Items that
+have been saved through the Item form do carry an explicit choice, and they will not move.
+
+## Conditional Destination rules force a redirect
+
+One exception is worth knowing because it looks like a bug. If an Item carries active conditional
+Destination rules, it **always** redirects — even when its mode resolves to Page Mode. The rules
+are evaluated and the scan is routed; the Page is not rendered.
+
+So if you added routing rules to an Item and its page stopped appearing, that is why. Clear the
+rules to get the Page back, or move the branching into the Page itself by putting conditions on
+individual sections. See [What Is a Destination?](/destinations/what-is-a-destination).
+
+## Choosing between them
+
+Direct Mode is right when a scan has exactly one sensible outcome — a product page, one asset
+record, one form. It is the fastest possible path for the person scanning, and it is what most
+single-purpose codes want.
+
+Page Mode is right when one code has to serve more than one purpose or more than one audience:
+the inspection app for the operator, the manual for the technician, a support form for the
+customer. One code, several Destinations, no second sticker.
+
+A Direct-Mode Item with no resolvable Destination does not fall back to a Page. It shows a "this
+link isn't ready yet" screen instead, which tells a signed-in owner how to fix it and tells
+everyone else nothing useful — so leaving the Destination blank is not a way to get a Page.
+
+## Related
+
+- [Pages Overview](/pages/pages-overview)
+- [Scan Behavior for New Items](/collections/scan-behavior-default)
+- [What Is a Destination?](/destinations/what-is-a-destination)
+- [Default Destination for New Items](/collections/default-destination)

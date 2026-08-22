@@ -1,0 +1,70 @@
+---
+title: "Page Privacy: Public vs. Private"
+description: "The per-Item setting that makes a scan require a signed-in team member, what a stranger sees instead, and why it is checked before any redirect"
+---
+
+By default a Page is public: anyone who scans the code sees it, no sign-in, no account. Marking an
+Item private changes that — the page is only viewable by a signed-in member of the team that owns
+the Collection.
+
+Privacy is set per Item. Open the Item, go to its **Destination** tab, choose **Landing Page**,
+and tick the checkbox that appears beneath it: **Private Landing page**. (That is the literal label
+in the current app; the canonical name for what it protects is a Page.) New Items start public.
+
+## What a visitor actually sees
+
+When a private Item is scanned:
+
+1. **Nobody signed in** — the visitor is sent to the QRtub sign-in screen, with a return path back
+   to the scanned code. After signing in successfully, they land on the page.
+2. **Signed in, but not a member of the owning team** — they get a plain not-found page. They are
+   not told the Item exists, who owns it, or that they lack permission. There is no request-access
+   flow.
+3. **Signed-in team member** — the page renders normally.
+
+So a private code is not a soft nudge; to an outsider it is indistinguishable from a code that
+points nowhere. That is intentional, but it means a private Item is a poor choice for anything a
+customer or subcontractor is meant to reach.
+
+## It gates the redirect too, not just the page
+
+The privacy check runs *before* the Destination is resolved. A private Item that is set to Direct
+Mode therefore still demands a sign-in first, and only redirects afterwards. Privacy is a gate on
+the scan, not a property of the page layout.
+
+## What it does not protect
+
+**Private means "who may view this QRtub page", not "who may use the system it links to."**
+Once a viewer is on the page, every Destination button behaves normally. If a button opens a
+public URL, that URL stays public — the vendor system on the other end does its own
+authentication, or doesn't. Making the Item private does not add a password to anything you link
+out to.
+
+It also does not hide Item data from the page's own bindings. A private page renders the same
+fields a public one would; the difference is only who is allowed to load it.
+
+If your goal is to keep one button away from the public rather than the whole page, use a
+condition on that section instead — a section can be shown only to signed-in team members. See
+[AdminToolbar](/pages/admin-toolbar), which does exactly that by default, and [Conditional
+Visibility](/destinations/conditional-visibility).
+
+## Effect on search engines and link previews
+
+Private pages are given deliberately minimal metadata: the title reads "Private Item", the
+description "Sign in to view this item", and search engines are told not to index the page and not
+to follow its links. Nothing about the real Item leaks into a search result or a chat-app link
+preview. Public pages get the Item's own name, description and image instead — see [Page Metadata
+& Social Previews](/pages/page-metadata).
+
+## A note on Collection-wide privacy
+
+There is a Collection-wide private flag in the underlying data, which would gate every Item's page
+at once, but nothing in the app sets it today. In practice, privacy is a per-Item decision — there
+is no single switch that makes an entire Collection sign-in-only, and no bulk privacy action.
+Setting it on many Items means setting it on each of them.
+
+## Related
+
+- [Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode)
+- [Page Metadata & Social Previews](/pages/page-metadata)
+- [AdminToolbar](/pages/admin-toolbar)

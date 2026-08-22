@@ -1,0 +1,75 @@
+---
+title: "ActionLink: The Destination Button"
+description: "The one section that is a Destination button — its fields, why it hides itself when a binding cannot resolve, and how adjacent ActionLinks merge into one block"
+---
+
+ActionLink is the section that sends someone somewhere. Every other section displays information;
+this one is a Destination. If a Page offers three systems, it has three ActionLinks.
+
+It renders as a card: an optional 40-pixel icon on the left, a bold label, an optional description
+underneath, and a chevron on the right. Tapping anywhere on the card follows the link.
+
+## Its settings
+
+| Setting | Notes |
+|---------|-------|
+| **Label** | The button text. Bindable. If no label is set, the URL is shown instead |
+| **Link URL** | The Destination. Bindable, and usually is — this is where `{{item.serial_number}}` and friends go |
+| **Description (Optional)** | A line of supporting text. Long text is truncated with a more/less control |
+| **Icon Image** | Bindable. Defaults to the Item's image |
+| **Open in new tab** | Off by default, so the Destination replaces the page |
+| **Fallback URL** / **Fallback Message** | Only used when the Link URL is an app deep link and the app does not open. See [App Links & Fallback URLs](/destinations/app-links) |
+
+A new ActionLink arrives pre-bound to the Item — label from `{{item.name}}`, description from
+`{{item.description}}`, icon from `{{item.image}}` — and with a placeholder Link URL that points at
+a field most Collections do not have. So a freshly added ActionLink is normally invisible until you
+give it a real URL, which is the behavior described next, not a bug.
+
+## It hides itself rather than showing a broken button
+
+**If any binding in the Link URL cannot be resolved, the whole ActionLink is removed from the
+page.** Same if the URL resolves to nothing but whitespace. A machine with no serial number simply
+does not show the "Open in the CMMS" button, instead of showing a button that leads to a 404.
+
+This is specific to ActionLink. Button and Link sections do not do it — they will happily render a
+dead control.
+
+In the editor, a hidden ActionLink is not invisible: it stays on the canvas with a dimmed orange
+outline so you can see it and fix the missing field. Switch on **Preview** and it disappears, the
+same as it would for a real visitor.
+
+Two consequences worth planning for:
+
+- A partially filled Collection will show different numbers of buttons on different Items. That is
+  usually what you want, and it is the reason to bind the URL rather than hardcode it.
+- The Item field the URL depends on is the thing to check first when a button "vanishes." Step
+  through Items with the preview selector to see which ones come up short — see [Previewing a
+  Page](/pages/previewing-a-page).
+
+## Values are inserted exactly as stored
+
+There is no automatic URL encoding. A field value containing a space, an `&` or a `?` is dropped
+into the URL as-is and will break the link — the button appears, it just goes somewhere wrong. If
+you are building a query string from free-text fields, keep the values URL-safe at the source. The
+full rules are in [Field Bindings & URL Templates](/destinations/field-bindings).
+
+Link URLs are also checked for script-executing schemes before rendering. A `javascript:` or
+`data:` URL is neutralized rather than made clickable, whether you typed it or a field supplied it.
+
+## Adjacent ActionLinks merge into one block
+
+When two or more ActionLinks sit next to each other, they lose the gap between them and the rounded
+corners in the middle, so the group reads as one segmented block of buttons rather than a stack of
+separate cards.
+
+The grouping is worked out from what will actually be visible. A hidden ActionLink — hidden by a
+condition, or by an unresolvable URL — is skipped, so the two links either side of it still join
+correctly and you never get a stray flat edge where something was removed. Putting any other
+section between two ActionLinks (a Spacer, a Text block) breaks the group deliberately.
+
+## Related
+
+- [Section Types](/pages/section-types)
+- [App Links & Fallback URLs](/destinations/app-links)
+- [Field Bindings & URL Templates](/destinations/field-bindings)
+- [Conditional Visibility](/destinations/conditional-visibility)

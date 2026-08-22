@@ -1,0 +1,83 @@
+---
+title: "Custom Field Types"
+description: "The six types a custom field can be, what each one gates, and how to choose between a fixed list of values (Allowed Values) and a live pointer to another record (Reference)."
+---
+
+A custom field is one of six types, chosen when you create it and changeable afterward. The
+type decides what the input looks like on the Item form, how the value is stored, and which
+of the field's other options you are allowed to switch on.
+
+## The six types
+
+| Type | Stored as | On the Item form | Use it for |
+|------|-----------|------------------|------------|
+| **Text** | A string | A text box, or a picker if you give it allowed values | Serial numbers, locations, statuses, URLs |
+| **Number** | A number | A number box | Quantities, hours, meter readings |
+| **Date** | A date only, `YYYY-MM-DD` | A date picker | Installation date, warranty end |
+| **Yes/No** | `true` or `false` | A checkbox | Flags — insured, decommissioned |
+| **List** | An array of strings | A multi-select picker, or a comma-separated box with no allowed values | Anything an Item can have several of |
+| **UUID** | The ID of another record | A dropdown of records to point at | A responsible person, a parent Item, a site |
+
+A Date field holds no time of day. It is stored as `YYYY-MM-DD`, displayed in the format of
+whoever is looking at it, and a CSV import must use `YYYY-MM-DD` — other formats are
+rejected row by row.
+
+## What each type gates
+
+Some options only appear for some types, which is the most common reason an option looks
+greyed out:
+
+- **Allowed Values** — Text and List only. On any other type the editor says so and hides
+  the list. See [Allowed Values](/fields/allowed-values).
+- **Multiple Values** and **Allow New Values** — List only. Both checkboxes stay disabled
+  until you switch the Field Type to List; the tooltip on each says the same thing. See
+  [Allow New Values](/fields/allow-new-values).
+- **Reference configuration** — offered on a new field only when the type is UUID. See
+  [Reference Fields](/fields/reference-fields).
+
+Multiple Values is what separates a single-select from a multi-select. With it off, a List
+field still uses a picker but keeps only the last value you choose; with it on, the field
+holds as many values as you select.
+
+## Which type do I need?
+
+Start with what the value *is*:
+
+- **A quantity or reading** → Number, not Text. A Number field rejects anything that is not
+  a number on CSV import; a Text field accepts whatever gets typed, typos included.
+- **A date** → Date, not Text, so it gets a date picker and a consistent stored format.
+- **One of a short, known set of options** → Text with allowed values (one value per Item),
+  or List with allowed values and Multiple Values on (several per Item).
+- **Free text nobody will filter on** → Text with no allowed values.
+- **Another record already in QRtub** → UUID with a reference type. Anything else means
+  retyping a name that will eventually go stale.
+
+## Allowed Values or a Reference field?
+
+These are the two options people mix up, and the difference is where the value lives.
+
+**Allowed Values** is a fixed list of literal values you author on the field itself —
+`operational`, `in_repair`, `retired`. The Item stores one of those strings. You maintain the
+list by hand in the Collection's field settings.
+
+**A Reference field** holds no value of its own. It stores the ID of another record — a team
+member, another Item, or a Collection — and displays that record's current name and image.
+Change the referenced record's name and every Item pointing at it shows the new name, because
+nothing was ever copied. No allowed-values list applies to a reference field; the options in
+its dropdown are whatever records exist.
+
+So: a short vocabulary you invented is Allowed Values. A pointer at something that already
+exists elsewhere in QRtub is a Reference field.
+
+## A note on UUID without a reference
+
+Choosing UUID and leaving the reference type unset gives you a plain text box, not a
+dropdown — the field has nothing to point at. Set the reference type as well, or pick Text
+instead.
+
+## Related
+
+- [Allowed Values](/fields/allowed-values)
+- [Reference Fields](/fields/reference-fields)
+- [Creating a Custom Field](/fields/creating-a-field)
+- [Core Fields vs. Custom Fields](/fields/core-vs-custom)

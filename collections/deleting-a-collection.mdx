@@ -1,0 +1,62 @@
+---
+title: "Deleting a Collection"
+description: "What deleting a Collection permanently removes, why your printed QR codes keep working anyway, and what to export before you confirm"
+---
+
+Deleting a Collection permanently removes the Collection, every Item in it, and its page design.
+The Links those Items were using are **released, not deleted** — so QR codes already printed and
+installed keep working.
+
+The action is in **Settings → Admin → Danger zone → Delete**. A confirmation dialog states the
+same thing before it runs.
+
+## What is permanently gone
+
+- **The Collection itself**, including its field schema and all its settings
+- **Every Item in it** — all field values, and any page override saved against an individual Item
+- **The page template**, including its version history
+
+There is no archive, no trash and no undo. Collections have no "archived" state to fall back on:
+once confirmed, the records are removed from the database immediately.
+
+## What survives
+
+**The Links.** Every Link that was assigned to an Item in this Collection is unassigned first and
+returned to your unassigned pool, and only then is the Collection deleted. That order is
+deliberate — it is what keeps a plaque bolted to a machine from becoming a dead code. Each of
+those Links keeps its address, still resolves, and can be assigned to a new Item whenever you are
+ready.
+
+That means deleting a Collection is recoverable in the one way that matters physically: you lose
+the data, you do not lose the printed codes. For what a released Link does in the meantime and how
+to reassign one, see [Deleting, Unassigning, and Releasing
+Links](/links/deleting-and-releasing-links).
+
+**Print batches.** Any print batch that was created from this Collection stays, along with its
+stored CSV and per-code deployment status. It simply loses the "made from this Collection"
+association.
+
+**Team-level things.** Numbered link patterns your team reserved stay reserved, and remain
+available to other Collections. Team members, billing and other Collections are untouched.
+
+## Before you confirm
+
+1. **Export the Items to CSV** from the Item grid. This is the only way to keep them — and note
+   that a [Collection backup](/collections/export-backup) will *not* help here, because backups
+   deliberately exclude Items.
+2. **Export a Collection backup** if you may want the structure again — the fields, settings and
+   page design. That file can later recreate the Collection as a new one.
+3. **Check whether codes are deployed.** They will keep resolving, but each released Link needs
+   reassigning before it points anywhere useful again. If there are hundreds, plan that work before
+   you delete rather than after.
+
+If your real goal is a clean slate rather than removal, changing the field schema and page design
+in place is usually less disruptive than deleting — the Items and their Link assignments stay
+intact throughout.
+
+## Related
+
+- [Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links)
+- [Exporting a Collection Backup](/collections/export-backup)
+- [Exporting Items to CSV](/import-export/exporting-items)
+- [What Is a Collection?](/collections/overview)

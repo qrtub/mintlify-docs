@@ -1,0 +1,90 @@
+---
+title: "Image Display Controls"
+description: "Frame Shape, Image Fit and Image Alignment — the shared controls that decide how an image is cropped and positioned in ImageSection, ItemHeader and Hero"
+---
+
+Three settings decide how an image sits in its space, and they work identically in the three
+sections that display images: **ImageSection**, **ItemHeader** and **Hero**. You will find them in
+the Media group of the Properties panel.
+
+They exist because Item photos are never a consistent shape. A page has to look right whether
+someone uploaded a tall phone snap of a serial plate or a wide shot of a machine.
+
+## Frame Shape
+
+Frame Shape sets the space the image is given, before anything is done to the image itself.
+
+| Option | Shape |
+|--------|-------|
+| **Square (1:1)** | Equal width and height |
+| **Portrait (3:4)** | Taller than wide |
+| **Landscape (16:9)** | Widescreen |
+| **Natural Size** | No fixed frame — the image keeps its own proportions and the section grows to fit |
+
+The first three give every Item the same shape regardless of what was uploaded, which is what keeps
+a Collection of two hundred pages looking like one design. Natural Size gives up that consistency
+in exchange for never cropping anything.
+
+## Image Fit
+
+Fit only applies inside a fixed frame, and answers what to do when the image and the frame are
+different shapes.
+
+- **Fit (Shrink to Fit)** — the whole image is visible, letterboxed with empty space on two sides.
+  Nothing is lost.
+- **Fill (Crop to Fill)** — the image covers the whole frame and the overflowing edges are cut off.
+  No empty space, but you lose part of the picture.
+
+Choose Fit when the image contains information — a nameplate, a wiring diagram, a serial number.
+Choose Fill when the image is decorative and you care more about a tidy block of color.
+
+**With Frame Shape set to Natural Size, Image Fit does nothing.** There is no frame to fit inside,
+so the setting is inert rather than wrong.
+
+## Image Alignment
+
+Alignment decides which part survives, or where the image sits.
+
+- In a **fixed frame with Fill**, it chooses which edge is kept when cropping: left, center or
+  right. A machine photographed off to one side of the shot may need this.
+- In a **fixed frame with Fit**, it positions the shrunk image within the letterboxed space.
+- With **Natural Size**, it positions the whole image in the section: flush left, centered, or
+  flush right.
+
+There is no vertical alignment control — the choice is horizontal only.
+
+## The defaults are different per section
+
+Each section starts from what usually looks right for it, so do not expect the same three values
+everywhere:
+
+| Section | Frame | Fit | Alignment |
+|---------|-------|-----|-----------|
+| **ImageSection** | Landscape (16:9) | Fit | Center |
+| **ItemHeader** | Square (1:1) | Fit | Center |
+| **Hero** | Square (1:1) | **Fill** | Center |
+
+Hero crops by default; the other two do not. If a Hero image looks cut off and an ImageSection with
+the same picture does not, that difference is why.
+
+## Zoom, and the missing-image case
+
+ImageSection and ItemHeader carry an **Image Zoom** toggle, on by default, letting a visitor enlarge
+the image in place — useful for a photographed label that is unreadable at page size. Turn it off
+for decorative images where an accidental zoom is just annoying.
+
+The two sections disagree about what to do with a missing image, which is worth knowing before you
+build a page for a Collection where only some Items have photos:
+
+- **ImageSection** shows a "No Image" placeholder in the frame, so the layout stays the same height
+  on every Item.
+- **ItemHeader** and **Hero** simply omit the image and let the text move up.
+
+Hero has no zoom toggle — its image is never zoomable.
+
+## Related
+
+- [Section Types](/pages/section-types)
+- [The Page Editor Layout](/pages/page-editor-layout)
+- [Theming a Page](/pages/page-theming)
+- [What Is an Item?](/items/overview)

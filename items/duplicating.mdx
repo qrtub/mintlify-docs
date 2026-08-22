@@ -1,0 +1,53 @@
+---
+title: "Duplicating an Item"
+description: "What the Duplicate action copies and what it deliberately does not — the Item ID prompt, the new Link, and the page override that stays behind"
+---
+
+Duplicating an Item creates a second Item in the same Collection with the same field values. It
+is the fastest way to add the tenth near-identical extinguisher or hire unit.
+
+Open the items table, use the menu at the end of an Item's row, and choose **Duplicate**. To copy
+several at once, select the Items and choose **Duplicate Selected Items** from the bulk actions
+menu.
+
+## What carries over
+
+Everything you filled in comes across: Description, Tags, the photo, every custom field, and the
+Item's Destination settings. The Name comes across with `(Copy)` appended, so "Generator"
+becomes "Generator (Copy)". An Item with no name at all produces a copy called "Copy".
+
+One subtlety: the copy is created like any other new Item, so any Collection-level field
+**defaults** apply to fields that were blank on the source. A field left empty on the original
+can arrive filled in on the copy.
+
+## What does not carry over
+
+**The Item ID.** Item IDs are unique within a Collection, so the copy cannot inherit one. If the
+source Item has an Item ID, you are prompted for a new one before the copy is created — the
+prompt shows the source's value as a placeholder. If the value you type is rejected, because it
+is already in use or does not match the Collection's Item ID mask, you are asked again with the
+reason shown. Canceling skips that Item; in a bulk duplicate the remaining Items still proceed.
+If the source has no Item ID, you get a simple confirmation instead and the copy is created
+without one.
+
+**The source Item's page override.** Per-Item page overrides are attached to a specific Item, and
+the copy is a new Item, so it starts on the Collection's base page template. If the original had
+its own tweaked page, re-apply them on the copy.
+
+**Internal values.** The copy gets its own internal ID and its own created and updated
+timestamps. Nothing is shared with the original — editing one afterwards never affects the other.
+
+## The copy gets its own Link
+
+Because the copy is a genuinely new Item, the Collection's rule for new Items runs for it. In
+random-link mode the copy gets a fresh random Link. In Item-ID mode the Link is built from the
+Item ID you just typed. If a copy somehow ends up with no Item ID in Item-ID mode, it is created
+successfully but without a Link, and you are told to assign an Item ID to generate one.
+
+Duplicates are created one at a time. If one fails, the reason is shown and the rest continue.
+
+## Related
+
+- [Item ID](/items/item-id)
+- [What Is an Item?](/items/overview)
+- [Per-Item Page Overrides](/pages/page-overrides)

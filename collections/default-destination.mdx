@@ -1,0 +1,77 @@
+---
+title: "Default Destination for New Items"
+description: "The URL template every new Item in a pass-through Collection starts with — built with field tokens, previewed against a real Item, and stamped at creation"
+---
+
+A Collection in Direct Mode can carry a **Default destination**: one URL template that every new
+Item starts with, so you configure the destination once instead of 500 times. It sits in
+**Settings → Scan behavior**, directly under the scan toggle, and only appears when pages are
+off — a Collection whose Items open a page has no single destination to default.
+
+## Building the URL
+
+Type the URL and insert field tokens where the Item's own data belongs. Typing `item.` offers the
+Collection's fields, and inserts them as `{{item.field_key}}`:
+
+```text
+https://safetyculture.com/asset/{{item.safetyculture_asset_id}}
+```
+
+With a real Item's data, that resolves to `https://safetyculture.com/asset/AST-4471`.
+
+The builder previews the result live against **a real Item from this Collection** — not a mock. It
+picks an Item that has a value for every field the template references, so the preview shows a URL
+that actually resolves; if no Item has all of them, it uses the first one.
+
+Two rules to keep in mind, because neither produces an error:
+
+- **Values are inserted exactly as stored, with no URL encoding.** A field containing a space,
+  `&`, `?` or `#` produces a broken link. Keep the fields you use inside URLs free of those
+  characters.
+- **A missing or empty field inserts an empty string**, so the URL is still built — just wrong.
+  That is what the warning below is for.
+
+## The missing-value warning
+
+If the template references a field that some Items have left blank, a warning appears naming the
+field and counting them: *"Uses Serial, but 12 of 40 items don't have a value yet — their codes
+won't resolve until filled,"* with a link straight to the Item grid.
+
+Take it seriously before a print run. Those Items have QR codes that will resolve to a truncated
+URL, and nothing about the code itself will look wrong.
+
+## App links and their fallback
+
+If the default destination is an app deep link (`myapp://…`) rather than a web URL, the builder
+adds a fallback pair: a web URL to send people to, and a message to show, when the app is not
+installed. Both belong to this default and are stamped onto new Items alongside it.
+
+Remove the default destination and the fallback pair is cleared with it, so a stale fallback can
+never quietly reactivate later.
+
+## Stamped at creation, never read at scan
+
+This is the one behavior worth being precise about.
+
+The default is **copied onto each Item when the Item is created**. Adding an Item through the form
+prefills its destination with the Collection default, where you can edit or clear it before
+saving; CSV imports and API calls get the same copy applied when the row does not supply a
+destination of its own.
+
+Two consequences follow:
+
+1. **Editing the Collection default is not retroactive.** Existing Items keep the copy they were
+   created with. To change many Items at once, update them — CSV export, edit the destination
+   column, re-import.
+2. **There is no scan-time fallback.** Nothing looks up the Collection default when a code is
+   scanned. An Item whose own destination is blank resolves to nothing, by design.
+
+This is the one exception to how field defaults normally work; see [Field
+Defaults](/fields/field-defaults) for the general rule.
+
+## Related
+
+- [Scan Behavior for New Items](/collections/scan-behavior-default)
+- [Field Bindings & URL Templates](/destinations/field-bindings)
+- [Field Defaults](/fields/field-defaults)
+- [App Links & Fallback URLs](/destinations/app-links)

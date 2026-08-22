@@ -1,0 +1,59 @@
+---
+title: "Creating a New Collection From a Backup"
+description: "Spinning up a brand-new Collection from a backup file — the preview step, the automatic (Copy) name, and why this is QRtub's closest thing to duplicating a Collection"
+---
+
+A backup file can create a brand-new Collection instead of restoring into an existing one. On the
+Collections list, choose **Import Backup** (next to the create button), pick a `.json` backup, and
+confirm.
+
+Nothing existing is touched, which makes this the safe way to use a backup file.
+
+## The preview step
+
+Before anything is created, a preview shows you what is in the file:
+
+- The name the new Collection will get
+- How many fields it defines
+- The page template it carries, if any
+- The description, if the file has one
+
+Confirm and the Collection is created in your currently active team, then you land on its settings
+so you can rename it and look over what came across. If you want it in a different team, switch
+teams first.
+
+## The name gets " (Copy)"
+
+The new Collection is named after the one in the backup with `" (Copy)"` appended — `Heavy
+Equipment (Copy)`. This is automatic and not optional, so renaming is usually the first thing you
+do. Nothing is derived from a Collection's name, so renaming costs nothing.
+
+## This is how you duplicate a Collection
+
+There is no **Duplicate** button anywhere in QRtub. This flow is the equivalent, in two steps:
+
+1. Export a backup of the Collection you want to copy.
+2. Import that file here.
+
+The copy arrives with the same field schema, the same details, the same link-generation and scan
+settings, and the same page design as the original.
+
+**It does not arrive with the original's Items** — Collection backups never contain Items. If you
+want the Items too, export them as CSV from the source Collection's grid and import that CSV into
+the copy.
+
+## One thing to check on the copy
+
+If the source Collection built ID-based Links from a *free-form* Item ID mask (a prefix and suffix
+with no digit count), the copy is created carrying the same affixes — and a free-form mask can only
+belong to one Collection per team. Creating the copy does not complain, but the first time you save
+its link-generation settings you will be asked to pick different affixes. Reserved numbered
+patterns are exempt: several Collections can share one. See [Building an Item ID
+Mask](/collections/item-id-mask).
+
+## Related
+
+- [Exporting a Collection Backup](/collections/export-backup)
+- [Importing a Collection Backup](/collections/import-backup)
+- [Starter Templates](/collections/starter-templates)
+- [Building an Item ID Mask](/collections/item-id-mask)

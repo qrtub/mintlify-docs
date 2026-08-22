@@ -1,0 +1,39 @@
+---
+title: "Claim-on-Scan"
+description: "Adopting a QR code you didn't create: how the first scan mints a Link bound to a hash of the code's contents, why a second scan never duplicates it, and what adopting does not change"
+---
+
+Claim-on-scan is what happens when you scan a QR code QRtub has never seen — a sticker a previous contractor applied, a manufacturer's serial-number label, an asset tag from a system you no longer use. Instead of shrugging, QRtub adopts the code: it creates a Link bound to that code's contents, so every later scan of the same physical code resolves to the same Link.
+
+It is how you bring existing labels into QRtub without relabeling anything.
+
+## How a foreign code gets recognized again
+
+QRtub cannot store the third-party code's text as a slug — it isn't a QRtub address, and it may be any length or format. So it stores a fingerprint instead: a SHA-256 hash of the decoded text, with the surrounding whitespace trimmed.
+
+That hash is the lookup key. Scan the same sticker next month and QRtub hashes what it reads, finds the match, and opens the Link you already have. QRtub also keeps the original decoded text alongside the hash, so the Link's details panel can show you what the code actually says — a hash can't be reversed, so without that copy you'd have no way to recognize the code again.
+
+## Scanning twice is safe
+
+Adoption is idempotent. Before minting anything, QRtub checks whether the scanned code already resolves — either as one of its own slugs, or by that hash — and if it does, it returns the existing Link and creates nothing. Two people scanning the same tag on the same morning end up with one Link, not two.
+
+## What you get is an ordinary Link
+
+The Link created by an adoption is a plain Random Link underneath: a five-character slug of its own, unattached, with no destination until you set one. From that point it behaves like any other Link — assign it to an Item, point it at a URL, put it in a print batch, delete it.
+
+The only difference is the fingerprint it carries, which is what lets the in-app scanner find it again from the original sticker.
+
+## The limit that matters: the physical code still says what it always said
+
+Adopting a code does not change the code. The sticker on the machine still encodes whatever text the previous system printed into it, and QRtub cannot alter that.
+
+So a member of the public pointing their phone camera at that sticker goes wherever the original text sends them — a dead vendor URL, a bare serial number, nothing at all. The adopted Link is reachable through **QRtub's own scanner, by someone signed in to your team**, not by an anonymous scan of the old code.
+
+That makes claim-on-scan a bridge, not a substitute for relabeling. It is genuinely useful for internal workflows — walk the yard, scan whatever tag is already on each machine, and get straight to that machine's Item — and it buys you time before a reprint. But if you need the public, or a contractor without an account, to reach your Page by scanning, that code has to carry a QRtub Link, which means a new tag.
+
+## Related
+
+- [The In-App QR Scanner](/print-first/scanner) — the camera, paste and scan-gun entry points
+- [Adopting an Unknown Code From the Scanner](/print-first/claim-on-scan) — the scanner's own flow, step by step
+- [Random Links](/links/random-links) — the slug an adopted code's Link gets
+- [What a Link Is](/links/what-a-link-is) — what the new Link can carry once it exists

@@ -1,0 +1,70 @@
+---
+title: "Deleting and Disabling Fields"
+description: "Core fields can only be disabled and always keep their data; a custom field can be deleted permanently, which leaves broken bindings and unreachable values behind."
+---
+
+There are two ways to get a field off your Items, and which one you get depends on the kind of
+field. Core fields can only be disabled. Custom fields are deleted outright.
+
+Both actions happen on the chip strip in the Collection's settings, under **Fields**, and
+neither takes effect until you press **Save changes**.
+
+## Disabling a core field
+
+Name, Item ID, Description, and Tags cannot be deleted — the × on the chip disables them
+instead. Disabling is a display decision, not a data one:
+
+- the field disappears from the Item form and the Items table,
+- every value already stored stays exactly where it is,
+- its Required flag is cleared, so re-enabling brings it back optional,
+- its default value stops being applied to new Items,
+- you can turn it back on any time from **Add More Fields**, values intact.
+
+Because they map to real database columns, the four core fields stay available to page
+bindings even while disabled — disabling hides the field from the people editing Items, not
+from the Page. A *custom* field that is switched off is a different story: it is dropped from
+the data a Page renders against, so a binding to it inserts an empty string and a condition
+referencing it evaluates to `false` with no error shown.
+
+## Deleting a custom field
+
+A custom field's chip carries a trash icon, and it means it. QRtub asks you to confirm, and
+the warning is accurate on both counts:
+
+- **Page templates and Destinations that reference this field will show broken or unresolved
+  bindings.** Nothing rewrites them for you the way a
+  [rename](/fields/renaming-a-field) does.
+- **Existing Item data stored for this field becomes inaccessible.** The values are no longer
+  readable anywhere: not in the table, not in an export, not by a binding.
+
+Creating a new field with the same key afterward does not recover them. A new field gets a new
+internal storage ID, so it starts empty — the old values stay stranded under the ID that was
+deleted. Treat deletion as one-way.
+
+Deleting a field does not delete any Items. They stay, minus that column.
+
+## Which to reach for
+
+If you might want the data later, do not delete. Nothing stops you from leaving a field enabled
+and simply not filling it in, and a Collection carries no per-field cost for that.
+
+Custom fields that arrive from a Collection template or the **Add More Fields** library can sit
+in a disabled state, and those you can re-enable freely. But once a custom field is on the chip
+strip, the only removal action offered for it is Delete — there is no "hide this custom field"
+switch.
+
+## Before you delete
+
+1. Search your Destinations and Page sections for the field's key and remove or repoint those
+   bindings. A binding left pointing at a deleted field inserts an empty string, so a URL built
+   from it silently becomes wrong rather than visibly failing.
+2. Export the Collection's Items to CSV first if the values are worth keeping. That export is
+   the only copy you will have.
+3. Then delete, and **Save changes**.
+
+## Related
+
+- [Renaming a Field](/fields/renaming-a-field)
+- [Core Fields vs. Custom Fields](/fields/core-vs-custom)
+- [Creating a Custom Field](/fields/creating-a-field)
+- [Exporting Items to CSV](/import-export/exporting-items)

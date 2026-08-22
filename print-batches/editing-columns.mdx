@@ -1,0 +1,60 @@
+---
+title: "Editing a Batch's Columns"
+description: "Change which Item and Link columns a Draft batch's CSV contains; saving rebuilds the stored file from current data. Locked once the batch leaves Draft."
+---
+
+While a batch is still in **Draft** you can change which columns its CSV contains — useful when
+the print shop comes back asking for a serial number you left out. Saving rebuilds the stored CSV
+so the file matches the new selection.
+
+Open the batch and choose **Edit included columns**. The button only exists while the batch is a
+Draft.
+
+## What you can pick
+
+The **CSV Columns** dialog is the same picker used when you first exported, with two groups:
+
+- **Link Fields** — **Full URL**, **Short URL** and **Active**. Full URL is the column a printer
+  normally needs.
+- **Item Fields** — the fields defined on the Collection the batch came from.
+
+Toggle a column with the eye icon and drag rows to set the column order in the file. Link fields
+are listed first here, matching the order they appear in the exported CSV.
+
+If the batch spans more than one Collection — which happens when you export from the Access Links
+page rather than from inside a Collection — there is no single field configuration to read, so the
+picker falls back to the standard fields: name, description, item_id, tags and destination_url.
+
+Choose **Save** to apply. QRtub saves the selection to the batch and immediately regenerates the
+stored CSV.
+
+## The regenerated CSV uses current data
+
+This is the part worth pausing on. Regenerating rebuilds every row from the Items and links **as
+they are now**, not as they were at export time. If someone renamed an Item or changed a field
+after the original export, the new file reflects that change.
+
+For a Draft batch that has not been sent anywhere, that is almost always what you want. It also
+means editing columns is not a way to inspect the original export — once regenerated, the earlier
+version of the file is gone.
+
+## Why it locks after Draft
+
+Advance the batch to Printing and the **Edit included columns** button disappears. Attempting the
+change anyway is rejected with "Can only edit column config on draft batches."
+
+The reason is the same one that protects the rest of the batch: past Draft, the CSV is the record
+of what the printer actually received. Silently rewriting it would leave you unable to tell what
+was produced. If a run genuinely needs different columns, revert the batch to Draft first (see
+[Batch Status: Draft to Deployed](/print-batches/batch-status)) — Printing can step back, Deployed
+cannot.
+
+Adding or removing links regenerates the CSV in exactly the same way, under the same Draft-only
+rule.
+
+## Related
+
+- [Adding and Removing Links in a Batch](/print-batches/editing-links)
+- [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download)
+- [Creating a Print Batch](/print-batches/creating-a-batch)
+- [Batch Status: Draft to Deployed](/print-batches/batch-status)

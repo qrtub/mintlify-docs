@@ -1,0 +1,65 @@
+---
+title: "Archiving and Deleting Batches"
+description: "Archiving hides a finished batch and is reversible; deleting is permanent and only possible while the batch is still a Draft. Why the difference exists."
+---
+
+Archiving and deleting are not two grades of the same action. Archiving hides a batch from the
+default view and can be undone at any time. Deleting destroys the record permanently and only
+works on a Draft batch. If a batch has moved past Draft, archiving is your only option.
+
+## Archiving a batch
+
+Open the batch and choose **Archive** in the footer, or use the row menu in the Access Media
+table. Archived batches:
+
+- drop out of the default batch list
+- come back with the **Show archived** toggle on the Access Media page, or the **Archived** filter
+  chip in the Print History panel
+- still appear in a link's own print history, so the record of what a code was printed in is
+  never hidden
+- keep their CSV, photo, notes, tags and every per-code deployment status
+
+**Unarchive** is the same button, and it restores the batch to the default view immediately.
+Archiving works at any status — including Deployed — which makes it the normal way to retire a
+completed run.
+
+## Deleting a batch
+
+Deleting is only available while the batch is in **Draft**. In the batch panel the **Delete**
+button appears in the footer; in the batch list a delete icon appears on hover. Either way you
+get a confirmation prompt, because there is no undo.
+
+Deleting a Draft batch removes:
+
+- the batch record
+- its stored CSV file
+- its cover photo
+- every per-code print event belonging to it
+
+The links themselves are untouched. Deleting a batch never deletes a Link, an Item, or anything
+those codes point at — it only discards the record of the run.
+
+## Why deletion stops at Draft
+
+Attempt to delete a batch that has reached Printing, Printed or Deployed and QRtub refuses with
+**"Cannot delete a batch that is past draft. Archive it instead."** This is deliberate. Once a
+batch has been sent to a printer, its codes may be physically on equipment, and the batch is the
+only record of what was produced. Losing it would leave stickers in the field with no trace of
+where they came from.
+
+The same protection extends to the links inside the batch: a link that appears in any batch past
+Draft cannot be hard-deleted. Unassigning it from its Item is still fine — see
+[Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links).
+
+Bulk-deleting several batches at once processes them one at a time and stops at the first batch
+that is past Draft, showing that error. Batches earlier in the selection are already gone by
+then, so check the statuses before you confirm a bulk delete.
+
+If you prepared a run you never sent, leave it as a Draft. That is the only state you can
+discard cleanly.
+
+## Related
+
+- [Batch Status: Draft to Deployed](/print-batches/batch-status)
+- [Finding and Filtering Your Batches](/print-batches/finding-batches)
+- [Viewing a Link's Print History](/print-batches/link-print-history)

@@ -1,0 +1,60 @@
+---
+title: "Deleting, Unassigning, and Releasing Links"
+description: "Three different things that look similar: permanently deleting a Link, detaching it from an Item yourself, and QRtub automatically releasing it when the Item or Collection is deleted"
+---
+
+There are three separate outcomes here, and mixing them up is how printed codes get orphaned:
+
+| Action | What happens to the Link | Who triggers it |
+|--------|--------------------------|-----------------|
+| **Delete** | Gone permanently. The slug stops resolving. | You, explicitly |
+| **Unassign** | Stays alive, detached from its Item, back in the unassigned pool | You, explicitly |
+| **Release** | Same as unassign — stays alive, detached | QRtub, automatically, when the Item or Collection is deleted |
+
+The short version: deleting an Item never deletes its Link, and that is on purpose.
+
+## Deleting a Link is permanent
+
+From the Links page, open a Link's row menu and choose **Delete**. There is no archive, no trash, and no undo: the row is removed and the slug stops resolving. Anyone who scans a code carrying that slug gets "page not found".
+
+Delete a Link when it was created in error and never printed. If the code has already been produced, unassigning is almost always what you actually want, because the physical tag outlives the record.
+
+**Deletion is blocked for Links in a live print batch.** If a Link belongs to a print batch that has moved past Draft — Printing, Printed or Deployed — QRtub refuses the delete. That guard exists so an accidental click cannot orphan a code that is already on a machine. In a bulk delete it applies to the whole selection: if any Link in it sits in a protected batch, the entire operation is rejected and nothing is deleted, rather than some rows disappearing silently.
+
+Two things about that block are worth knowing before you go looking for a way around it. Archiving the batch does not lift it — the check looks at the batch's status, and archiving is a separate flag. And status only steps one stage at a time, so a Printing batch can go back to Draft, a Printed batch can go back via Printing, but **Deployed is terminal**: a Link in a Deployed batch cannot be deleted at all. Unassign it instead, which is the action that fits a code already in service anyway.
+
+## Unassigning keeps the Link and frees it up
+
+Unassigning detaches a Link from its Item and leaves everything else intact. The slug still resolves, the printed code still works, and the Link goes back into your unassigned pool ready to be attached to something else.
+
+Two places to do it:
+
+- **A single Link:** open the Link's details and use **Unassign** next to the Item it is attached to. Once unassigned, you can point the Link straight at a URL instead.
+- **Many at once:** select Links in the list and use **Unassign from Items** from the bulk menu.
+
+Unlike deletion, unassigning is not blocked by print status — that is the point. A code in a Printed batch is exactly the kind of code you want to detach and reuse rather than destroy.
+
+Once a Link is unassigned, it behaves like any other Unallocated Link: a scan shows a neutral "not connected yet" page instead of an error, and a signed-in team member scanning it can attach it to something on the spot.
+
+## Deleting an Item or a Collection releases its Links automatically
+
+This is the behavior people are surprised by, so it is worth stating plainly: **deleting an Item does not delete the Links attached to it.** QRtub detaches them first, then deletes the Item. The Links survive, unassigned, and every physical code out in the field keeps resolving.
+
+Deleting a whole Collection does the same thing for every Item inside it. The Collection and its Items go; the Links are released into the pool.
+
+The reason is the print run. Equipment gets sold, scrapped and re-registered, but the plate riveted to it is still there. If deleting a record destroyed its Link, disposing of one machine would leave a live tag pointing at nothing — and you would find out from whoever scanned it.
+
+This is not configurable. There is no setting that makes Item deletion cascade into Link deletion; if you want the Links gone too, delete them yourself afterwards, at which point the print-batch guard above applies.
+
+### The one exception
+
+Importing a Collection backup in **Replace** mode is different. Replace deletes the existing Items outright rather than detaching their Links first, so Links attached to those Items are deleted along with them — including Links whose codes are already printed and installed.
+
+If you are about to restore a backup over a Collection whose codes are in the field, use Merge, or export the Links you care about first.
+
+## Related
+
+- [Bulk Assigning, Unassigning, and Deleting Links](/bulk-links/assign-unassign-delete) — doing any of this to thousands of Links at once
+- [Unallocated Links](/links/unallocated-links) — what a released Link does while it waits
+- [Importing a Collection Backup](/collections/import-backup) — Merge versus Replace, and what Replace destroys
+- [Archiving and Deleting Batches](/print-batches/archiving-and-deleting) — clearing the batch status that blocks a delete

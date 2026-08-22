@@ -1,0 +1,64 @@
+---
+title: "Page Metadata & Social Previews"
+description: "How a Page's browser title, link-preview card and search-engine directives are generated from the Item — and why pages are noindex but follow"
+---
+
+You do not write metadata for a Page. It is generated from the Item the Page is showing, every time
+the page is served:
+
+| Metadata | Comes from |
+|----------|------------|
+| Page title | The Item's name, or "Unnamed Item" if it has none |
+| Description | The Item's description — falling back to the Item's name when the description is blank |
+| Preview image | The Item's image |
+
+That covers the browser tab, the search-engine snippet, and the card that appears when someone
+pastes the Link into a messaging app or a work chat. Both OpenGraph and Twitter tags are emitted, so
+the major platforms all read the same values. The card is the large-image style when the Item has an
+image and the compact style when it does not.
+
+There is no per-Page override for any of it. If a link preview says the wrong thing, the fix is the
+Item's name, description or image — which also means a good Item description does double duty as the
+preview text.
+
+## Pages are noindex, follow
+
+Every Page is served with instructions telling search engines **not to index it**, but **to follow**
+the links on it.
+
+The reasoning is worth knowing, because the first half surprises people who expected their pages to
+rank. A Collection of a thousand Items produces a thousand thin, near-identical pages — "Pump 4A",
+"Table 12" — sitting on `qrtub.com`. Indexing those would dilute the domain rather than help anyone
+find anything, and none of them are pages a search visitor was looking for. Following the links
+keeps any link equity flowing outward to the sites the page points at.
+
+None of this affects scanning. Indexing directives are advice to crawlers; the page resolves
+normally for any person who scans the code, whether or not it is indexed.
+
+If you need a QR code to open something that *does* rank, point its Destination at a page on your
+own website rather than trying to make a QRtub Page indexable — see [Direct Mode vs. Page
+Mode](/pages/direct-mode-vs-page-mode).
+
+## Private Items get minimal metadata
+
+A private Item reveals nothing to a crawler or a link preview. Its metadata is deliberately
+generic — the title reads "Private Item" and the description "Sign in to view this item" — and it is
+marked both noindex *and* nofollow. The Item's real name, description and image never appear.
+
+So pasting a private Link into a group chat produces a bland card that gives away nothing about the
+equipment. See [Page Privacy: Public vs. Private](/pages/page-privacy).
+
+## Two other cases you may see
+
+- **A printed Link that is not connected to anything yet** gets its own placeholder metadata,
+  titled "Unassigned Link", and is kept out of the index for the same reason as everything else. A
+  batch of pre-printed codes will not turn into a batch of indexed empty pages.
+- **A Link that redirects rather than opening a Page** has almost no metadata to speak of; there is
+  no page to describe, only a redirect.
+
+## Related
+
+- [Page Privacy: Public vs. Private](/pages/page-privacy)
+- [Pages Overview](/pages/pages-overview)
+- [Name and Description](/items/name-and-description)
+- [Unallocated Links](/links/unallocated-links)

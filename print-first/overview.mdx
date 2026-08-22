@@ -1,0 +1,65 @@
+---
+title: "The Print-First Workflow"
+description: "Why durable tags get printed before the Items they represent exist, and the four-step order that makes a rollout of hundreds practical"
+---
+
+Most tools assume you create a record, generate a code for it, print that code, and go and stick it on something. That order works for one asset. It falls apart at two hundred.
+
+The print-first workflow inverts it: **the codes exist before the records do.** You generate the Links, get them produced in one run, apply them as gear arrives, and connect each one to an Item whenever that part is actually ready.
+
+## Why the usual order does not survive contact with a site
+
+Durable identification is made in runs. Photo-anodized aluminum plates are laid up and cut as a sheet. Engraved tags are set up once and produced as a batch. Even ordinary UV-resistant vinyl comes with minimum quantities and a lead time.
+
+![A CNC machine cutting a sheet of photo-anodized aluminum asset plates, each carrying a QR code, a large asset number and a readable link. The visible plates run in sequence: BOU027, BOU028, BOU029.](/images/print-first-plates.jpg)
+
+Above: a run of photo-anodized aluminum plates being cut. The numbers were allocated before any of the equipment they will be fixed to was recorded, because the sheet has to be machined as one job.
+
+That has a consequence people usually discover halfway through a rollout: **you physically cannot produce one tag on demand** at any sensible cost. So if your process requires the asset record to exist before the tag can be made, you are stuck choosing between delaying the order until every detail is final, or printing something disposable.
+
+Meanwhile the gear itself arrives over weeks. Equipment turns up before anyone has decided what it is called, who owns it, or which system tracks it.
+
+Print-first accepts both realities instead of fighting them.
+
+## The four steps
+
+**1. Generate the Links first.** Create as many as you need — a hundred, a thousand — before any Items exist. Each one is a real, resolvable URL from the moment it is created.
+
+**2. Send the batch to be produced.** Export the list and give it to whoever makes your tags. Plates, engraved labels, weatherproof vinyl, NFC inlays — the medium does not matter, because all it has to carry is a URL. Exporting a print list also records the run as a print batch, so you can tell later what was in that order.
+
+**3. Apply tags as gear arrives.** Fix a tag to each asset as it lands, in whatever order things turn up. No decisions required beyond "this tag is now on this machine".
+
+**4. Connect when you are ready.** Create the Item and connect it to the tag already on it. This is the only step that needs someone to think, and it is a single action.
+
+## What happens if someone scans a tag early
+
+This is the question that usually decides whether the workflow is practical, and the answer matters: **an unconnected code does not 404.** Someone on your team who scans it gets an option to assign it there and then, from their phone. Anyone else gets a neutral branded page rather than an error.
+
+So a tag applied on Monday and connected on Friday is not a dead code in the meantime — it is simply not allocated yet. See [Unallocated Links](/links/unallocated-links) for the full behavior.
+
+## Getting the mistakes back
+
+Tags get put on the wrong machine. Gear gets sold. A Link can be reassigned to a different Item at any point, so a mistake costs an edit rather than a reprint.
+
+The same applies at the end of an asset's life. Deleting an Item does not delete its Link — the Link is released back to your unassigned pool, so a tag already fixed to something in the field keeps working and can be reused. See [Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links).
+
+## Where the codes point
+
+A Link can go straight to a single destination, or open a Page with several options. Either way you set it up once for the whole Collection rather than per tag, using a template that fills in each Item's own data:
+
+```text
+https://example.com/assets/{{item.serial_number}}
+```
+
+Every tag then resolves to its own asset's record without being configured individually. That is what makes the workflow viable at a few thousand tags rather than a few dozen.
+
+Two things to know before you rely on a template across a whole run. Values are inserted **exactly as stored, with no URL-encoding** — a field containing a space or an `&` will break the resulting link, so keep the fields you bind into a URL clean. And Collection-level fields use the `tub.` prefix, not `collection.`: write `{{tub.name}}` even though the entity is called a Collection everywhere else. `{{collection.name}}` produces an empty string with no error. See [Field Bindings & URL Templates](/destinations/field-bindings).
+
+Because the destination is held by QRtub rather than baked into the code, you can change where every tag points later — a new system, a new URL structure — without touching anything physical.
+
+## Related
+
+- [Tips for Print-First Deployments](/print-first/tips) — numbering, readable text, spares
+- [Unallocated Links](/links/unallocated-links) — a printable Link with nothing attached yet
+- [Print Batches](/print-batches/overview) — tracking the run once it is sent to print
+- [Choosing Your Print Production Method](/print-shop-basics) — getting the run actually made

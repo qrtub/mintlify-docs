@@ -1,0 +1,98 @@
+---
+title: "The Page Editor Layout"
+description: "Opening the editor, the three-tab left panel, the Properties panel, drag-a-field binding, and the undo history that clears when you switch Item"
+---
+
+The Page Editor is where you decide what someone sees when they scan. The page sits in the middle;
+a panel on each side does the work.
+
+## Opening the editor
+
+From the Collection's settings, open the page tab and choose **Edit profile page**. The editor
+opens in a new browser tab. (That tab only appears when pages are switched on for the Collection —
+see [Pages Overview](/pages/pages-overview).)
+
+You can also open it against one specific Item: from the Item's **Page** tab, press **Edit Page**.
+That matters, because opening from an Item puts you in override mode — see [Per-Item Page
+Overrides](/pages/page-overrides).
+
+## The left panel: three tabs
+
+Only one tab is visible at a time.
+
+| Tab | What it does |
+|-----|--------------|
+| **Components** | The palette of sections you can add — searchable, grouped into Data Display, Layout, Content, Media and Interactive |
+| **Data** | The fields you can bind, grouped by namespace: Item Properties, Tub Properties, Device & Platform, Time & Date, Request Info, Access URL, User & Session, Theme Properties |
+| **Structure** | The page as a tree — reorder, nest, expand containers, and see which sections carry a condition |
+
+The Structure tab is the fastest way to work on a long page: each row shows the section type, a
+child count for containers, and an eye icon marking a section as currently visible or hidden by its
+condition. Move sections with the up and down controls, or with Alt+↑ and Alt+↓.
+
+## The Properties panel
+
+The panel on the right shows settings for whatever is selected, or **Page Settings** for the whole
+page when nothing is selected. A section's settings are grouped into collapsible sections —
+Visibility, Content, Media, Style, Layout, Behavior, Access, General and Custom Styles — so most
+sections open showing only the handful of fields you usually touch.
+
+Page Settings is where theming and page width live; see [Theming a Page](/pages/page-theming).
+
+## Adding and arranging sections
+
+1. On the **Components** tab, find a section and add it.
+2. Select it on the page to open its settings in **Properties**.
+3. Switch to **Structure** to reorder, or use the up and down controls.
+
+Container and Card can hold other sections, so you can group things and style the group as a unit.
+AdminToolbar is the exception to arranging: it is pinned to the end of the page and cannot be
+dragged.
+
+Selected sections are outlined in blue. An orange outline means that section is overridden for the
+Item you are viewing, and a dimmed orange outline means it is currently hidden — either by its
+condition or, for an ActionLink, by an unresolvable link.
+
+## Putting Item data into a section
+
+Most section settings accept a binding instead of fixed text. Bindings use double curly braces and
+a namespace:
+
+```text
+{{item.name}}
+{{item.serial_number}}
+{{tub.name}}
+```
+
+Rather than typing them, open the **Data** tab and drag a field straight onto the setting you want
+it in.
+
+Note the Collection prefix is `tub.`, not `collection.` — Collections were formerly called Tubs and
+the binding namespace kept the original term. `{{collection.name}}` is not a binding; it resolves
+to an empty string with no error.
+
+One namespace in that list is a trap: the **Access URL** group (`accessUrl.*`, the app's older name
+for a Link) is available to Destination URLs and routing rules, but it is not part of what a Page is
+rendered with. Dragging one of those fields into a section leaves you with an empty value and no
+error.
+
+Two behaviors to expect: a binding that cannot be resolved renders as empty rather than showing an
+error, and most sections hide themselves when their content is empty. Values are also inserted
+exactly as stored, with no URL encoding — so a field containing a space or an `&` will break a URL
+you build from it. The full syntax reference is [Field Bindings & URL
+Templates](/destinations/field-bindings).
+
+## Undo, redo, and the history gotcha
+
+Undo and redo are in the top bar, and hold the last 50 changes.
+
+**Switching to a different Item clears the undo history.** So does switching back to the base
+template. Finish an edit before you go looking at another Item — once you have switched, the
+previous work can only be undone by editing it back by hand.
+
+## Related
+
+- [Section Types](/pages/section-types)
+- [Previewing a Page](/pages/previewing-a-page)
+- [Per-Item Page Overrides](/pages/page-overrides)
+- [Theming a Page](/pages/page-theming)

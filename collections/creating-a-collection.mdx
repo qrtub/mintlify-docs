@@ -1,0 +1,67 @@
+---
+title: "Creating a Collection"
+description: "The one-step creation fork — one destination or several, or a starter template — plus the auto-generated name and where the page template comes from"
+---
+
+Creating a Collection is a single click. There is no multi-field setup form: you answer one
+question about what scanning an Item should do, the Collection is created immediately, and
+everything else is editable afterward from its settings.
+
+Open the Collections list and choose **Create**, or use the **+** button beside the Collections
+list in the sidebar.
+
+## The two choices on the creation screen
+
+Both cards create the Collection straight away and drop you into its (empty) Item grid.
+
+| Choice | What it sets up |
+|--------|-----------------|
+| **Connects to one destination** | Each Item's Link goes straight through to a single Destination — Direct Mode. Pages stay off, and the Collection gets a **Default destination** setting for new Items. |
+| **Connects to several** | Each Item's Link opens a page listing several Destinations — Page Mode. This turns pages on for the Collection and reveals the page tab in its settings. |
+
+Under the cards, the same screen offers a short strip of starter templates plus **Browse all**.
+Picking a template replaces this choice — the template carries its own scan behavior, field
+schema and page design. See [Starter Templates](/collections/starter-templates).
+
+Neither choice is permanent. You can flip a Collection between the two later from its settings;
+see [Scan Behavior for New Items](/collections/scan-behavior-default).
+
+## The name you get
+
+The new Collection is named sequentially — one past the highest numbered default the team
+already has, so deleting one in the middle never produces a name collision (Collection 1, 2, 3 →
+delete 2 → the next one is 4).
+
+One wrinkle worth knowing: Collections were renamed from "Tubs", and the name *generator* still
+uses the old word, so the name you actually see is `Tub4`, not `Collection4`. Rename it inline
+from the grid header or from **Settings → General** — nothing is derived from the name, so
+renaming is free at any time.
+
+## What a fresh Collection starts with
+
+- **Four fields** — name, Item ID, description and tags. Everything else you add yourself.
+- **Random link generation** — a fresh `qrtub.com/r/x5fgd`-style Link is minted and attached
+  automatically each time you add an Item. Change this in **Settings → Link generation**.
+- **No page template of its own.** A Collection created from one of the two cards has no stored
+  page design. Until you build one in the Page Editor, Items in Page Mode render a built-in
+  default page — the Item's name, image, status and tags, plus the Collection's own name,
+  description and image. Collections created from a starter template *do* get a real page
+  template, generated from that template's fields.
+- **No sample Items.** Only starter templates seed example data.
+
+Collections that predate the link-generation setting behave differently: their default is to
+mint no Link at all. Only Collections created through the current flow start on random.
+
+## If you only want to print codes
+
+If you have nothing to catalog yet and just need codes on physical items, you do not need a
+Collection first. The creation screen has a **Start with physical codes** link that takes you to
+Links instead, where you can generate and print Links now and attach them to Items whenever the
+Items exist. A Link can live on a QR code, an NFC tag or a plain short URL.
+
+## Related
+
+- [Starter Templates](/collections/starter-templates)
+- [Collection Details](/collections/collection-details)
+- [Link Generation for New Items](/collections/link-generation-modes)
+- [Scan Behavior for New Items](/collections/scan-behavior-default)

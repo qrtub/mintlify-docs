@@ -1,0 +1,76 @@
+---
+title: "Creating a Custom Field"
+description: "Adding a field to a Collection: the display label, the auto-generated field key and its validation rules, the type, and the ready-made fields you can add instead."
+---
+
+Custom fields are added in the Collection's settings, on the **Fields** tab. A new field
+appears on every Item in that Collection immediately, empty until someone fills it in.
+
+## Adding a field
+
+1. Open the Collection, go to its settings, and choose the **Fields** tab.
+2. Click **Create Custom Field**.
+3. Type a **Display Label** — the wording people see on forms and tables, e.g. "Warranty End
+   Date".
+4. Check the **Field Key** underneath. It is generated from your label (`warranty_end_date`)
+   and you can edit it. It is validated as you type, and the form shows you the binding it
+   produces: `{{ item.warranty_end_date }}`.
+5. Choose a **Field Type**. See [Custom Field Types](/fields/field-types) for what each one
+   gates.
+6. Set the options you need — Required, and for a List field Multiple Values and Allow New
+   Values. If the type is Text or List you can author its
+   [Allowed Values](/fields/allowed-values) here too; if it is UUID you can set up its
+   [reference configuration](/fields/reference-fields).
+7. Click **Create Field**, then **Save changes** on the settings form. The field is not
+   stored until you save.
+
+Behind the scenes the field is given a stable internal ID at this point, which is what lets
+you rename it later without touching any data.
+
+## Field key rules
+
+The key is what you write in bindings and conditions, so it is deliberately strict:
+
+- lowercase letters, numbers, and underscores only,
+- between 2 and 64 characters,
+- no leading, trailing, or repeated underscores,
+- not a core field name (`name`, `item_id`, `description`, `tags`),
+- not a name QRtub uses internally (`id`, `created_at`, `updated_at`, `image`,
+  `destination_url` and similar),
+- not a programming keyword such as `class`, `function`, or `return`,
+- unique within the Collection.
+
+Whatever the rule, the form tells you which one you broke and suggests a way out — a suffix
+like `status_2`, for instance. Because the label auto-generates the key, most of the time you
+never type one.
+
+## Adding a ready-made field instead
+
+Under **Add More Fields**, QRtub offers a library of common fields — Item Number, Serial
+Number, Category, Type, Subtype, Status, Location, Owner, Equipment Manager, Notes,
+Manufactured Date, Parent Item. Clicking one adds it with a sensible type already set (Owner
+and Equipment Manager arrive as team-member references, Parent Item as an Item reference), and
+you can then click its chip and change anything you like.
+
+The same section lists any field on this Collection that is currently switched off, so it
+doubles as the way to bring a disabled field back.
+
+## Ordering fields
+
+Fields show as chips in the order they are used on forms, tables, and CSV exports. Drag a chip
+to reorder, then **Save changes**. New fields land at the end.
+
+## Reset to Defaults
+
+**Reset to Defaults** strips the Collection back to the four core fields, removing every
+custom field from the configuration. It does not ask for confirmation. Nothing is written
+until you press **Save changes**, so leaving the settings form without saving undoes it — but
+save, and the fields are gone under the same terms as
+[deleting one](/fields/deleting-and-disabling).
+
+## Related
+
+- [Custom Field Types](/fields/field-types)
+- [Renaming a Field](/fields/renaming-a-field)
+- [Deleting and Disabling Fields](/fields/deleting-and-disabling)
+- [Core Fields vs. Custom Fields](/fields/core-vs-custom)

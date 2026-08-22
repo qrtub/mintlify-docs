@@ -1,0 +1,61 @@
+---
+title: "Viewing a Link's Print History"
+description: "Start from one code and see every batch it has ever appeared in, with the CSV of each run — the per-code view that answers 'has this one been printed before?'"
+---
+
+The batch pages answer "what was in that order?". This one answers the opposite question: given
+one code, which orders has it been in? Useful when a plaque needs replacing and you want to know
+what it was produced with, or when you suspect a code has been printed twice.
+
+## Opening it
+
+On the **Access Links** page, the **Media Batch** column summarizes each link's print record —
+`Printed 3×` with `Last: Mar 9` beneath it. Click that summary to open the Print History panel
+filtered to that link. A link that has never been in a batch shows a dash and has nothing to open.
+
+The panel header repeats the link's slug, where it points, and the Item it is assigned to, so you
+do not lose track of which code you clicked.
+
+## What you see
+
+Every batch the link has appeared in, newest first. Each row carries:
+
+- the batch name and its status badge — Draft, Printing, Printed or Deployed
+- who exported it and when
+- the batch's tags and cover photo
+- the batch's link and item counts
+- a download of that batch's stored CSV
+
+Archived batches are included here. Archiving hides a batch from the default batch list, but it
+never hides the fact that a code was printed in it.
+
+If the link appears twice, it was printed twice — one row per run. That is exactly how you catch a
+code that was reprinted without anyone meaning to.
+
+## Setting this link's deployment status
+
+On a batch that has reached **Deployed**, the row shows a small **This link is** control with
+Printed / Deployed / Retired. It sets the deployment status of *this one code in that one batch* —
+not the batch, and not the other codes in it. Rows for batches that have not reached Deployed do
+not show the control, because those codes are not out in the field yet.
+
+It is the same value you would set from the batch's deployment tracker, reached from the other
+direction. Use the tracker when you are working through a whole run; use this when you are
+following a single code. See
+[Tracking Deployment Status Per Code](/print-batches/deployment-status).
+
+## What print history does not tell you
+
+- **Nothing about scans.** QRtub records that a code was printed, not that anyone scanned it.
+  "Printed 3×" counts batches, not activity in the field.
+- **No timeline of changes.** You see each batch's export date, not a per-code history of status
+  changes.
+- **Nothing about the physical piece.** There is no material, cost or supplier field per code —
+  the batch's notes and cover photo are where that context lives.
+
+## Related
+
+- [Tracking Deployment Status Per Code](/print-batches/deployment-status)
+- [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download)
+- [Finding and Filtering Your Batches](/print-batches/finding-batches)
+- [Unallocated Links](/links/unallocated-links)

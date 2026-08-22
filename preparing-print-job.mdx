@@ -3,10 +3,6 @@ title: "Preparing Your Print Job: Artwork, Data and QR Codes"
 description: "What to hand a print shop for a batch of unique QR codes — the design spec, the data file, and the codes themselves"
 ---
 
-{/* DRAFT: written ahead of the SVG export feature described in
-    ../../qrtub-ops/briefs/qr-format-and-error-correction.md. Do not add to docs.json nav
-    until that ships — this page currently describes it as already available. */}
-
 A print shop running your QR code batch needs four things from you: a visual and spec of the design, a data file, the QR codes themselves, and a way to match one to the other. This page covers all four, plus what actually happens when you hand them over.
 
 ## The visual and spec
@@ -25,13 +21,15 @@ One row in this file is one physical piece. That's the whole convention — it's
 
 ## The QR codes themselves
 
-Download the matching QR codes as a ZIP from the same Links view. Choose **SVG** if you can — it's a vector format, so it stays sharp at any size, which matters once a code gets scaled up to sign or plaque size. PNG is fine for anything staying small or going on screen, but avoid enlarging a PNG QR code much past its original size; it can blur enough to stop scanning.
+Download the matching QR codes as a ZIP from the same Links view. **PNG is the only format QRtub exports** — 1024 × 1024 pixels, black on white, no vector option and no way to change the size or colors. There is also no error-correction setting to choose; QRtub uses the generator's default and does not expose the level.
 
-Set the error-correction level while you're there. The default (M) is fine for most jobs. Choose a higher level (Q or H) for anything that'll be outdoor, laminated, or otherwise likely to get scratched or dirty — a higher level survives more damage before the code stops scanning, at the cost of a slightly denser code for the same physical size.
+That has two practical consequences for a print job. Don't scale a PNG code much past 1024 px of print area — a code enlarged onto a sign or plaque can blur enough to stop scanning. And if the finished piece will live outdoors, be laminated, or get scratched, you can't compensate with a higher error-correction level, so compensate with size instead: print the code bigger, and print its address in readable text nearby so it can be typed when the code is damaged.
+
+If your shop needs vector artwork, or wants a specific error-correction level, give them the **Full URL** column from the data file and let them regenerate the code themselves. That is normal practice — the URL is all a QR generator needs, and it puts the format and error-correction choice in the hands of the people who know the press.
 
 ## Matching a code to a data row
 
-Right now, matching is manual: each downloaded code is named after its link's code — for example, a code at `qrtub.com/r/aBc12` downloads as `aBc12.svg`. In your data file, that same code appears at the end of the **Short URL** or **Full URL** column. Match on that.
+Right now, matching is manual: each downloaded code is named after its link's slug — for example, a code at `qrtub.com/r/aBc12` downloads as `qr-code-aBc12.png`. In your data file, that same slug appears at the end of the **Short URL** or **Full URL** column. Match on that. Note that neither column is an exact string match for the filename — **Short URL** carries a leading slash and, for random links, an `/r/` prefix, and **Full URL** carries the protocol and domain — so whoever does the matching needs to strip those.
 
 If your shop's software can render the QR code itself from the **Full URL** column, you don't need the image files at all — hand over the data file alone.
 
@@ -48,5 +46,5 @@ Before the full run, ask for a proof of a handful of real records — not just t
 ## Related
 
 - [Working with a Print Shop](/print-shop-basics) — the two ways a shop can produce unique codes, and which one yours needs
-- [Print Batches](/print-batches) — tracking the run once it's sent to print
-- [The Print-First Workflow](/print-first-workflow) — ordering and applying tags before the equipment exists
+- [Print Batches](/print-batches/overview) — tracking the run once it's sent to print
+- [The Print-First Workflow](/print-first/overview) — ordering and applying tags before the equipment exists

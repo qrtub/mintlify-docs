@@ -1,0 +1,73 @@
+---
+title: "Finding and Filtering Your Batches"
+description: "The Access Media page: four summary cards, a sortable and searchable batch table, the Show archived toggle, and how to filter Items or Links by the batch they were printed in."
+---
+
+Every batch your team has ever created lives on the **Access Media** page. It opens as a table
+sorted newest first, with archived batches hidden until you ask for them.
+
+## The four summary cards
+
+| Card | What it counts |
+|---|---|
+| **Total Batches** | Batches matching your current search, filters and archived toggle |
+| **Total Links** | Links across every batch in the team |
+| **Allocated** | Those links that are assigned to an Item |
+| **Unallocated** | Those links with no Item attached yet |
+
+Worth knowing: only the first card responds to your filters. The three link cards are team-wide
+totals across every batch, archived ones included, so they will not narrow as you search. A large
+Unallocated number is normal on a print-first deployment — those are codes printed ahead of the
+equipment they will represent.
+
+## The table
+
+| Column | Contents |
+|---|---|
+| **Batch Name** | The name, renameable in the batch panel |
+| **Links** | How many links are in the run |
+| **Create Date** | When the batch was exported — the default sort, newest first |
+| **Print Status** | Draft, Printing, Printed or Deployed |
+| **Comment** | The batch's notes |
+| **Item List** | The Collection the batch was exported from, or a dash for a batch spanning several |
+| **Allocated / Unallocated** | This batch's own split |
+
+Click a row to open the batch panel. Use the column menu to hide columns you never look at —
+that choice is saved in your browser, so it is per-device rather than per-account, and a
+different computer starts from the defaults.
+
+## Searching and filtering
+
+- **Search** matches the batch name and its notes. Typing a supplier name recorded in the notes
+  finds every run you ordered from them.
+- **Filters and sorting** work on Batch Name, Links, Create Date, Print Status and Comment.
+  **Item List** and **Allocated / Unallocated** are calculated when the page loads rather than
+  stored, so they cannot be filtered or sorted on.
+- **Show archived** at the top right brings archived batches into the table. Turning it on resets
+  you to page one.
+- Results are paged, 25 to a page by default.
+
+## The Print History panel
+
+The Access Links page has a second, narrower view of the same batches: a Print History panel with
+a search box and filter chips for each status, each tag in use, and archived. It shows a batch's
+cover photo as a thumbnail, which is often the quickest way to recognize a run. Use Access Media
+when you want the table, and this panel when you want to skim.
+
+## Filtering Items or Links by batch
+
+The reverse question — "what was in that delivery?" — is answered from the batch panel. Its
+**links** and **items** chips open the Access Links grid and the Items grid filtered to that
+batch, which is how you get at the Items' own fields rather than the batch's summary.
+
+One limit to know: with the Access Links grid filtered by batch, a bulk assign, unassign or
+delete that acts on "everything matching" cannot use the batch filter as its scope and is
+rejected with "batch_id filter is not supported for bulk operations". Tick the specific rows you
+want instead, and the same bulk actions work normally.
+
+## Related
+
+- [Print Batches](/print-batches/overview)
+- [Archiving and Deleting Batches](/print-batches/archiving-and-deleting)
+- [Viewing a Link's Print History](/print-batches/link-print-history)
+- [Naming, Tagging and Photographing a Batch](/print-batches/batch-details)

@@ -1,0 +1,90 @@
+---
+title: "Section Types"
+description: "A map of all 17 sections in the Page Editor palette, grouped by the five categories they appear under, with what each one is for"
+---
+
+Seventeen section types are available in the Page Editor, grouped into five categories in the
+**Components** palette. The palette has a search box, so if you know roughly what you want you can
+type it rather than hunting through categories.
+
+This page is a map: what each section is for, and which ones have behavior worth reading about
+separately. Every section's own fields are listed in the Properties panel when you select it.
+
+## Data Display
+
+The sections built around Item and Collection data. This category is expanded by default.
+
+| Section | What it is |
+|---------|------------|
+| **ItemHeader** | Card-style header: image, title, type and subtype, status, chips and a note. The usual top of an Item's page. Its image controls are shared — see [Image Display Controls](/pages/image-display-controls) |
+| **ActionLink** | The button that sends someone to a Destination. Card-style, with an optional icon and description. See [ActionLink: The Destination Button](/pages/action-link) |
+| **KeyValue** | A titled card of label-and-value rows. Good for a handful of details |
+| **SpecGrid** | The same label-and-value pairs laid out as a grid — one or two columns on a phone, up to three on a wider screen |
+| **Tags** | Inline tag pills, usually bound to the Item's `tags` field |
+| **ContactInfo** | A contact card: name, title, phone, company with an optional link, address |
+| **TubInfo** | A card showing the Collection's own name, subtitle, description and image. Note the Collection binding prefix is `tub.`, not `collection.` — the entity was renamed, the namespace was not, and `{{collection.name}}` silently resolves to nothing |
+
+## Layout
+
+| Section | What it is |
+|---------|------------|
+| **Container** | A wrapper with max-width, padding and background controls. Can hold other sections |
+| **Card** | A card with an optional title and subtitle, and padding control. Can hold other sections |
+| **Spacer** | Adds vertical (or horizontal) space between sections, in six sizes |
+| **AdminToolbar** | A bar of your own buttons pinned to the bottom of the page, hidden from the public by default. See [AdminToolbar](/pages/admin-toolbar) |
+
+Container and Card are the two sections that can hold others, so they are how you group things and
+style the group as a unit. AdminToolbar is always rendered last on the page no matter where it sits
+in the tree.
+
+## Content
+
+| Section | What it is |
+|---------|------------|
+| **Hero** | A compact hero block: image, a number, title, description, status, a details list and tags — a denser alternative to ItemHeader |
+| **Text** | A text block with control over the HTML element (paragraph or `h1`–`h6`), size, weight, color role and alignment |
+| **Banner** | A full-width strip of text for a status or a message |
+
+## Media
+
+| Section | What it is |
+|---------|------------|
+| **ImageSection** | A standalone image card. Viewers can zoom the image unless you turn that off. With no image set, it shows a placeholder rather than collapsing. Frame, fit and alignment are covered in [Image Display Controls](/pages/image-display-controls) |
+
+## Interactive
+
+| Section | What it is |
+|---------|------------|
+| **Button** | A simple primary or secondary button. Use ActionLink instead when you want the card-style Destination button |
+| **Link** | A plain text link. Again, ActionLink is the card-based version |
+
+## Choosing between the three link-shaped sections
+
+They are not interchangeable, and the difference is what happens when the URL does not resolve:
+
+- **ActionLink** removes itself from the page if its URL depends on a field the Item has not filled
+  in. This is why it is the right choice for Destinations.
+- **Button** and **Link** do not. A Button with an empty URL renders as a button that does nothing;
+  a Link with an empty URL renders as a link to nowhere. Both are fine for fixed URLs you typed
+  yourself, and a poor choice for URLs built from Item fields.
+
+All three support app deep links with a fallback URL or message, so `tel:`, `mailto:` and
+`myapp://` schemes work in any of them — see [App Links & Fallback
+URLs](/destinations/app-links).
+
+## What is not a section
+
+`Initials` and `ExpandableText` show up inside other sections — the avatar fallback when an Item
+has no image, and the truncate-with-more control on long descriptions. They are internal pieces,
+not separate section types, and they are not in the palette.
+
+Every section, whatever its type, also carries an optional visibility condition; that is a
+mechanism of its own, covered in [Conditional
+Visibility](/destinations/conditional-visibility).
+
+## Related
+
+- [ActionLink: The Destination Button](/pages/action-link)
+- [AdminToolbar](/pages/admin-toolbar)
+- [Image Display Controls](/pages/image-display-controls)
+- [The Page Editor Layout](/pages/page-editor-layout)

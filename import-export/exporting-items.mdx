@@ -1,0 +1,69 @@
+---
+title: "Exporting Items to CSV"
+description: "Download a Collection's Items as CSV — visible columns or a full-field backup — scoped by whatever search, filter and sort the items table is showing"
+---
+
+Exporting writes a Collection's Items to a CSV file you can open in a spreadsheet, edit, and
+upload back. Open the Collection, use the **Download / Upload List** menu above the items table,
+and pick one of the two download options.
+
+This is the Item list. It is not the print list a [print batch](/print-batches/csv-download)
+produces — that file describes Links and codes for a printer and contains different columns.
+
+## The two options
+
+**Download Visible Columns** exports exactly the columns currently shown in the items table. Use
+it when you want a working file for a specific job — a stocktake sheet, a list to send someone —
+and want to keep the columns you already arranged on screen.
+
+**Download All Columns (Backup)** exports every field configured on the Collection, in the order
+the fields are arranged, including fields that happen to be empty on every Item. It also always
+includes the Destination URL column and the app-link fallback columns, so a restore can seed
+those again. Use it as a backup or when you plan to edit and re-import.
+
+## The export follows what you are looking at
+
+Whatever search, filters and sort order the items table has applied carries into the file. Filter
+to one site and you export that site. Clear the filters first if you want everything.
+
+Filtering affects rows, not columns, and pagination does not apply: every matching Item is
+exported, not just the page you can see.
+
+## What the file looks like
+
+- **`id` is always the first column.** That is what makes a re-import update the same Items
+  instead of creating duplicates, so keep it if you plan to upload the file back.
+- **Headers use each field's configured label** — a field relabeled to "Plant No." exports under
+  that heading. If two fields would produce the same heading, the second falls back to its field
+  key so no two columns collide. Import recognizes either form.
+- **List values, such as Tags, are joined with `; `** in a single cell.
+- **Dates export as ISO `YYYY-MM-DD`**, regardless of how they are displayed on screen, and
+  yes/no fields export as `true` or `false`.
+- **Fields no longer on the Collection are left out.** Data left behind by a deleted field is not
+  exported.
+- **The Item photo is never exported.** Import ignores it too, so there is nothing to round-trip.
+
+The file is named after the Collection and the date — `Heavy_Equipment_2026-08-18.csv` — with any
+character that is not a letter, number, hyphen or underscore replaced by an underscore.
+
+## Exporting an empty Collection gives you a template
+
+A Collection with no Items still exports a file with the full header row when you choose the
+backup option. That is a convenient starting template: download it, fill in the rows, and
+[import it](/import-export/importing-items).
+
+## One thing to fix before re-importing
+
+Values beginning with `=`, `+`, `-`, `@`, `|` or a tab are exported with a leading apostrophe, so
+a spreadsheet cannot execute them as formulas. The apostrophe is not removed on import, because
+QRtub cannot tell it apart from an apostrophe you meant to store.
+
+The practical consequence: a negative number such as `-40` exports as `'-40`, and re-importing it
+into a number field is rejected as an invalid number for that row. Strip the apostrophe from
+those cells before uploading.
+
+## Related
+
+- [Importing Items from CSV](/import-export/importing-items)
+- [What Is an Item?](/items/overview)
+- [Tags](/items/tags)

@@ -1,0 +1,104 @@
+---
+title: "Item Fields Reference"
+description: "Every item.* binding: the four core fields, the standard fields a new Collection ships with, the read-only system fields, and your own custom fields"
+---
+
+The `item` namespace reads the scanned Item's own data, and it is the namespace you will use for
+almost everything. Write it as `{{item.field_name}}` in a Destination URL, or as `item.field_name`
+without braces in a condition. See [Field Bindings & URL Templates](/destinations/field-bindings)
+for the syntax rules and the encoding behavior.
+
+The exact set of `item.*` fields depends on the Collection, because a Collection defines its own
+fields. The tables below cover what every Collection has plus what a new one starts with.
+
+## Core fields
+
+Four fields exist on every Item in every Collection, are stored in their own database columns, and
+cannot be renamed or removed.
+
+| Binding | Type | Notes |
+|---|---|---|
+| `item.name` | string | The Item's display name, for example `Excavator #203` |
+| `item.item_id` | string | The Item ID — your own identifier, unique within the Collection, and the value ID-based Links are built from |
+| `item.description` | string | Free-text description |
+| `item.tags` | array | The tags list, for example `["construction", "rental"]` |
+
+## Standard fields
+
+A new Collection ships with these fields defined. They are ordinary configurable fields, not
+fixed columns: you can relabel, rename, disable or delete them, and the last four are switched
+**off** by default, so they resolve to nothing until you enable them on the Collection.
+
+| Binding | Type | On by default |
+|---|---|---|
+| `item.item_number` | string | Yes |
+| `item.serial_number` | string | Yes |
+| `item.category` | string | Yes |
+| `item.type` | string | Yes |
+| `item.subtype` | string | Yes |
+| `item.status` | string | Yes |
+| `item.location` | string | Yes |
+| `item.owner` | string | Yes |
+| `item.equipment_manager` | string | No |
+| `item.notes` | string | No |
+| `item.manufactured_date` | date | No |
+| `item.parent_item` | string | No |
+
+**`item.item_number` and `item.item_id` are different fields.** Item Number is the standard
+SKU-style field above; Item ID is the core identifier that Links can be generated from. There is
+no `item.number`.
+
+## System fields
+
+These are set by QRtub, not by you, and are read-only.
+
+| Binding | Type | Notes |
+|---|---|---|
+| `item.id` | string | QRtub's internal identifier for the Item — long and opaque; prefer `item.item_id` or `item.item_number` in a URL you have to read or support |
+| `item.created_at` | date | When the Item was created, as an ISO timestamp |
+| `item.updated_at` | date | When the Item was last changed, as an ISO timestamp |
+| `item.image` | string | URL of the Item's image |
+
+## Custom fields
+
+Any field you add to a Collection is readable under its field key, with no extra prefix. A field
+you created with the label "Inspection Due" and the key `inspection_due` is `{{item.inspection_due}}`
+in a URL and `item.inspection_due` in a condition.
+
+Field keys are lowercase letters, numbers and underscores, so a binding for a custom field is
+always lowercase. If you are unsure of a key, open the Collection's **Fields** tab — the key is
+shown next to the label.
+
+Renaming a custom field does not break existing bindings. QRtub rewrites the Destination URLs,
+fallback URLs and conditions that used the old key when you save the rename, and Page template
+bindings are stored against a hidden stable identifier that a rename never touches.
+
+## Things that catch people out
+
+**Field names are case-sensitive.** `item.Status` resolves to nothing. `item.status` works.
+
+**Tags cannot go in a URL.** `item.tags` is a list, not a single value, and a binding that
+resolves to a list makes the whole URL count as unresolved — the Destination is skipped rather
+than opening with `construction,rental` pasted into it. Tags work normally in conditions, where
+you test them with `in` and `size()`:
+
+```text
+"crane" in item.tags
+size(item.tags) > 0
+```
+
+**A disabled field disappears from a Page.** When a Page renders, QRtub passes only the
+Collection's enabled fields into the data a binding can read, so turning a field off on the
+Collection makes `{{item.that_field}}` resolve to nothing on every Page that used it.
+
+**Dates are text, not numbers.** `item.created_at`, `item.manufactured_date` and any date
+custom field come through as ISO-style strings. You can insert them into a URL, but you cannot do
+arithmetic on them or compare them against today's date — see
+[Time Fields Reference](/destinations/time-fields) for why, and what to do instead.
+
+## Related
+
+- [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax, encoding and missing-value rules
+- [Core Fields vs. Custom Fields](/fields/core-vs-custom) — which fields are fixed and which you control
+- [Collection Fields Reference](/destinations/collection-fields) — the `tub.*` catalog for Collection-level data
+- [What Is a Destination?](/destinations/what-is-a-destination) — conditional routing rules that send different Items to different URLs

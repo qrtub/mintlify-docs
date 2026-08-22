@@ -1,0 +1,57 @@
+---
+title: "What Is a Collection?"
+description: "The entity that groups Items under one shared field schema, one link-generation rule, one scan default and one page design — and what deliberately sits outside it"
+---
+
+A Collection is a group of Items that share the same set of fields, the same page design, and
+the same rule for how new Links get created.
+
+A Collection is more than a folder. Putting Items in the same Collection is what makes them
+share a structure — add a "Service Hours" field to the Collection and every Item in it has that
+field. That shared structure is the point; the grouping is a side effect.
+
+Every Item belongs to exactly one Collection. An Item cannot exist without one, which is why
+creating a Collection is the first thing you do in QRtub.
+
+## What a Collection owns
+
+Five things are set once on the Collection and then apply to every Item inside it:
+
+| Setting | What it decides |
+|---------|-----------------|
+| **Fields** | The columns every Item carries — the four core fields plus any custom fields you define. See [Core Fields vs. Custom Fields](/fields/core-vs-custom). |
+| **Link generation** | Whether a Link is minted automatically when an Item is created, and how its address is built. See [Link Generation for New Items](/collections/link-generation-modes). |
+| **Scan behavior** | Whether a new Item starts in Direct Mode (straight to one Destination) or Page Mode (opens a page of several). See [Scan Behavior for New Items](/collections/scan-behavior-default). |
+| **Page template** | The one page design every Item in the Collection renders when scanned, unless that Item has its own override. |
+| **Details** | Name, description, what to call one Item, and a cover image. See [Collection Details](/collections/collection-details). |
+
+Two of these are defaults rather than rules: scan behavior and field default values can be
+overridden on an individual Item. The field schema, the link-generation rule and the page
+template apply Collection-wide.
+
+## What sits outside a Collection
+
+**Links live at the team level, not inside a Collection.** A Link can be created, printed and
+deployed before any Item exists, and later assigned to an Item in any Collection on the team.
+That separation is what makes the print-first workflow possible — and it is also why deleting a
+Collection does not destroy its Links.
+
+**Teams own Collections.** A Collection belongs to one team, and everything team-scoped —
+members, billing, reserved numbered link patterns — is shared across all of that team's
+Collections.
+
+## Typical Collections
+
+- **Heavy Equipment** — fields for serial number, make, model, service hours, site
+- **Meeting Rooms** — room number, floor, capacity, AV equipment
+- **Fire Safety Equipment** — type, location, inspection due, certification number
+
+Splitting by Item type rather than by site or client is usually right: Items in one Collection
+have to make sense sharing one set of fields and one page design.
+
+## Related
+
+- [Creating a Collection](/collections/creating-a-collection)
+- [Starter Templates](/collections/starter-templates)
+- [Collection Details](/collections/collection-details)
+- [Deleting a Collection](/collections/deleting-a-collection)

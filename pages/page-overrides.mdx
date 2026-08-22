@@ -1,0 +1,91 @@
+---
+title: "Per-Item Page Overrides"
+description: "Why an edit can change every Item, what the base template is, and how the Override toggle decides whether Save touches one Item or the whole Collection"
+---
+
+If you edited a page and the change landed on every Item in the Collection, you saved to the **base
+template**. That is the normal, intended behavior of the Page Editor — and this page is about the
+one switch that changes it.
+
+The **base template** is the Collection's single page design. Every Item renders it, filled in with
+its own field values. It is what you are editing whenever no Item is selected, and it is what
+"changed everything" means: one design, four hundred Items, one save.
+
+An **override** is a per-Item exception on top of that base template — one machine that needs an
+extra button, one room that needs a different photo.
+
+## The Override toggle
+
+When you are viewing a real Item in the editor, the top bar shows an **Override** toggle:
+
+- **Override: ON** (orange, unlocked) — saving stores your changes for **that Item only**. The rest
+  of the Collection is untouched. The top bar also shows an "Item Override Mode" badge.
+- **Override: OFF** (locked) — saving updates the **base template**, changing the page for *every*
+  Item in the Collection.
+
+With no Item selected there is no toggle at all, because there is nothing to override: you are
+editing the base template by definition.
+
+**Selecting a real Item turns Override on automatically.** That is the safe default — an experiment
+on one machine cannot silently reshape the other four hundred. To change the page for everyone,
+either switch the selector back to **Base Template**, or turn Override off deliberately.
+
+## Saving to the base template while an Item has overrides
+
+This case gets its own warning dialog, because it does more than you might expect. If you save with
+Override OFF while the Item you are looking at has overridden sections, those overridden sections
+are **pushed into the base template** and the Item's override record is deleted. The confirm button
+is labeled "Apply to All Items", which is exactly what happens.
+
+The dialog lists which sections are about to be applied, so read the list before confirming. It also
+offers "Don't show this warning again for this tub" — that preference is remembered per Collection
+in your own browser, so dismissing it does not affect your colleagues, and does not carry to your
+other devices.
+
+## Undoing an override
+
+Two levels, both from the editor while viewing that Item:
+
+- **One section** — select an overridden section (they carry an orange outline) and press the revert
+  button in the Properties panel header. That section goes back to the base template version;
+  everything else the Item overrides stays.
+- **Everything** — press **Revert All** in the top bar. It appears only when the Item actually has
+  overrides, and it deletes the whole override record, putting the Item back on the base template.
+
+There is also an automatic case: if you edit an Item's page back to match the base template exactly,
+the now-empty override record is deleted for you rather than left behind as an empty exception.
+
+## What an override actually stores
+
+An override is stored as a difference, not a copy of the whole page. It records only which sections
+were added or changed, which base sections were removed, and the section order if you reordered
+things. Theme and layout are recorded only if you changed them.
+
+That has a consequence worth planning around:
+
+- **Sections the Item has not overridden keep following the base template.** Fix a typo in the base
+  template's Text block and the fix reaches every Item, including Items with overrides elsewhere.
+- **Sections the Item has overridden stop following it.** That section is now frozen at what you
+  saved; later base-template edits to it will not reach this Item.
+- **Theme and layout are stored whole.** If an Item overrides the theme at all, it stops following
+  the Collection's theme entirely — not just the one value you changed.
+
+## Use overrides sparingly
+
+One machine that needs an extra button is a good reason. Restyling forty Items individually is a
+sign the base template should change instead — and each of those forty becomes a place a future fix
+silently fails to land.
+
+There is no list of which Items in a Collection carry overrides, and no bulk clear. You find them by
+stepping through Items in the editor and looking for orange outlines, so keeping the count small is
+a practical matter, not just tidiness.
+
+Overrides are also invisible in a Collection's page template history: they are not versioned. See
+[Page Template Versions](/pages/page-template-versions).
+
+## Related
+
+- [Previewing a Page](/pages/previewing-a-page)
+- [Page Template Versions](/pages/page-template-versions)
+- [The Page Editor Layout](/pages/page-editor-layout)
+- [Duplicating an Item](/items/duplicating)

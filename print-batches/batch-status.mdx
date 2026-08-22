@@ -1,0 +1,68 @@
+---
+title: "Batch Status: Draft to Deployed"
+description: "The single status carried by a whole print run — Draft, Printing, Printed, Deployed — what each stage unlocks, and why Deployed is the end of the line."
+---
+
+Every batch carries **one** status covering the entire run: Draft, Printing, Printed or
+Deployed. It describes where the order is, not where any individual sticker ended up. The
+per-code equivalent is a separate thing entirely — see
+[Tracking Deployment Status Per Code](/print-batches/deployment-status).
+
+You change it from the batch detail panel, which shows the current status in the header and one
+primary button for the next step.
+
+## The four stages
+
+| Status | Meaning |
+|---|---|
+| **Draft** | Prepared, not yet sent to the printer. The only stage where the batch can still be edited. |
+| **Printing** | With the printer. |
+| **Printed** | Received, not yet installed. |
+| **Deployed** | Out in the field. |
+
+## Moving forward
+
+Each stage has one named action, and it only ever moves one step:
+
+- Draft → Printing: **Finalise and print**
+- Printing → Printed: **Mark as printed**
+- Printed → Deployed: **Move to deployment**
+
+You cannot skip a stage. There is no way to take a Draft batch straight to Deployed.
+
+## Stepping back
+
+Printing and Printed each offer a **Revert to draft** / **Revert to printing** button — one stage
+back, no further.
+
+**Deployed is terminal.** There is no revert out of it, and no way to reopen a Deployed batch
+for editing. Advance to Deployed once the codes are genuinely out, because that decision is
+permanent for that batch.
+
+Draft has nothing behind it, so it has no revert either.
+
+## What each status changes
+
+The status is not just a label — it gates what the batch will let you do:
+
+| Only while Draft | Only once Deployed |
+|---|---|
+| Add or remove links | The per-code deployment tracker appears |
+| Change the CSV columns | |
+| Delete the batch outright | |
+
+Two more stage-specific behaviors:
+
+- **Printing** adds a **Share with print partner** shortcut, which is simply a download of the
+  stored CSV.
+- Past Draft, the links inside the batch are protected from deletion — a code may already be
+  printed and stuck to something, so removing it from QRtub would strand the physical item.
+
+Name, notes, tags, the cover photo, archiving and the CSV download are available at every stage.
+
+## Related
+
+- [Tracking Deployment Status Per Code](/print-batches/deployment-status)
+- [Adding and Removing Links in a Batch](/print-batches/editing-links)
+- [Archiving and Deleting Batches](/print-batches/archiving-and-deleting)
+- [Print Batches](/print-batches/overview)

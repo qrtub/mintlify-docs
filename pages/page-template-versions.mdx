@@ -1,0 +1,81 @@
+---
+title: "Page Template Versions"
+description: "Every save of a Collection's page design creates a numbered version, one active at a time — what that means in practice, and what the app cannot do with the older ones"
+---
+
+Every time you save the base template in the Page Editor, QRtub writes a new version of that
+Collection's page design rather than overwriting the old one. Versions are numbered from 1, counting
+up per Collection, and exactly one is active at a time — the newest. That active version is what
+every scan renders.
+
+You can see the number in the Page Editor: with nothing selected, **Page Settings → Page Info**
+shows a read-only **Version** field. If it reads v14, this Collection's page has been saved
+fourteen times.
+
+Each version is stamped with who saved it and when. Saves are manual — there is no autosave, so a
+version appears when you press Save and not before.
+
+## Versions vs. starter templates
+
+These two are easy to confuse, and the difference is *when they act*:
+
+- A **starter template** acts **once, at the moment a Collection is created**. It seeds the
+  Collection's fields, its first page design and some sample Items, and then it is finished — it
+  never applies again, and there is no way to re-run it. See [Starter
+  Templates](/collections/starter-templates).
+- A **page template version** is created **every time you save this Collection's page**, from then
+  on. It is the ongoing history of the design that the starter template began.
+
+So a Collection created from the IT Assets starter template has one starter template forever and a
+growing pile of versions — v1 being roughly what the starter gave it, and v9 being what it looks
+like after nine rounds of editing.
+
+## What versioning does and does not give you
+
+What it gives you: saves are additive, so a save never destroys the previous state at the database
+level, and the design's history is retained per Collection rather than being a single mutable
+record.
+
+What it does not give you today:
+
+- **There is no version history screen.** The editor shows the current number, not a list, and
+  there is no way to browse or preview an earlier version.
+- **There is no restore button.** An older version cannot be rolled back to from the app.
+- **There is no "copy this page to another Collection" action.**
+
+That is worth stating plainly rather than implying: if you make a mess of a page design, undo is
+your recovery path within the editing session — and the undo history holds the last 50 changes and
+is cleared if you switch Item. Once you have saved and closed the tab, rebuilding by hand is the
+practical route.
+
+## Copying a page design to another Collection
+
+The route that does exist is a Collection backup. Exporting a Collection writes a JSON file
+containing its settings, its field schema and its **active** page template; creating a new
+Collection from that file brings the page design with it.
+
+That is also the closest thing to a snapshot you can keep on purpose: export a backup when a page
+design is in a state you would hate to lose. See [Exporting a Collection
+Backup](/collections/export-backup) and [Creating a New Collection From a
+Backup](/collections/new-collection-from-backup).
+
+Importing a backup into an *existing* Collection replaces its page design — which, consistent with
+everything above, arrives as a new version rather than as an edit to the current one.
+
+## What is not versioned
+
+- **Per-Item overrides.** An Item's exceptions are stored separately and carry no version history at
+  all; the only recovery from a bad override is to revert it. See [Per-Item Page
+  Overrides](/pages/page-overrides).
+- **Item data.** Versions cover the design, never the field values it renders.
+
+Deleting a Collection permanently deletes its page templates along with it, every version. Its Links
+survive and return to your unassigned pool, so printed codes keep working — but the design does not
+come back.
+
+## Related
+
+- [Per-Item Page Overrides](/pages/page-overrides)
+- [Starter Templates](/collections/starter-templates)
+- [Exporting a Collection Backup](/collections/export-backup)
+- [Creating a New Collection From a Backup](/collections/new-collection-from-backup)

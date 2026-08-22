@@ -1,0 +1,56 @@
+---
+title: "Scan Behavior for New Items"
+description: "The Collection toggle that decides whether a new Item's scan passes straight through to one Destination or opens a page of several"
+---
+
+One toggle in **Settings → Scan behavior** decides what scanning an Item does by default:
+**Show a profile page**.
+
+- **On** — a scan opens the Item's page, which can offer several Destinations. This is Page Mode.
+- **Off** — a scan goes straight to a single Destination, with no page in between. This is Direct
+  Mode, and it makes a **Default destination** setting appear below the toggle.
+
+## It is a default, not a rule
+
+This sets the starting point for new Items. Any individual Item can be switched to the other mode
+from its own settings, and that explicit choice always wins over the Collection.
+
+The corollary matters: an Item that has *never* made an explicit choice follows the Collection.
+Flipping this toggle changes how those Items resolve, including Items that already exist — most
+often Items created by CSV import, which do not record a per-Item choice unless you give them
+one.
+
+## What changes in the interface
+
+Turning the toggle on reveals the Collection's page tab in settings, where you can preview the
+page design and open the Page Editor. Turning it off hides that tab — and if you were sitting on
+it, you land back on **Scan behavior**. The page design itself is not deleted; it is still there
+if you turn pages back on.
+
+Turning pages off is also what surfaces the [Default Destination for New
+Items](/collections/default-destination) builder, since a pass-through Item needs somewhere to
+send the scan.
+
+## Privacy is per-Item, not per-Collection
+
+A related setting people look for here and do not find: there is no Collection-level control for
+whether pages require sign-in. Privacy is set on the individual Item. New Items start public.
+
+## Choosing between them
+
+Direct Mode is right when a scan has exactly one sensible outcome — a product page, an asset
+record in one system, a form. It is the fastest path for the person scanning: no page, no tap.
+
+Page Mode is right when one physical code has to serve more than one purpose or more than one
+audience — an inspection app for the operator, a manual for the technician, a support form for a
+customer. One code, several Destinations, no second sticker.
+
+For a full comparison of the two modes, see [Direct Mode vs. Page
+Mode](/pages/direct-mode-vs-page-mode).
+
+## Related
+
+- [Default Destination for New Items](/collections/default-destination)
+- [Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode)
+- [Pages Overview](/pages/pages-overview)
+- [What Is a Collection?](/collections/overview)

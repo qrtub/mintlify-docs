@@ -1,290 +1,52 @@
 ---
 title: "Key Concepts"
-description: "The three-entity model, Link modes, Collections, and the print-before-link workflow"
-slug: "key-concepts"
-sidebar_position: 1
-category: "fundamentals"
+description: "One or two sentences each on Collection, Item, Link, Page and Media, and which page owns the full explanation of each."
 ---
 
-Understanding these core concepts will help you get the most out of QRtub.
+QRtub has five nouns. None of them require each other to exist — a Link can be printed before
+any Item exists, and a Page can be built before any code opens it — so this page defines each
+one and points to the page that owns it.
 
-## The Three-Entity Model
+## Collection
 
-Most QR code systems treat everything as one thing. QRtub recognizes that physical QR code deployments involve three distinct entities, each with its own lifecycle:
+A Collection groups Items that share one field schema, one link-generation rule, one scan
+behavior, and one page template. It belongs to a team, and every Item belongs to exactly one
+Collection. In URL templates and conditions, the namespace for Collection values is still
+`tub.` — write `{{tub.name}}`, because `collection.name` returns an empty string with no
+error. See [What Is a Collection?](/collections/overview).
 
-### Item
-**What it is:** The thing being represented or tracked.
+## Item
 
-**Examples:**
-- An excavator
-- A fire extinguisher
-- A meeting room
-- A product
-- A building system
-- A rental tool
+An Item is the individual record a Collection tracks: one machine, one room, one product, one
+extinguisher. What data it holds is decided by its Collection's fields, and it can carry one
+or more Links. See [What Is an Item?](/items/overview) and
+[Core Fields vs. Custom Fields](/fields/core-vs-custom).
 
-**Key point:** Items are what you're actually managing—your equipment, products, locations, or assets. They have details like serial numbers, descriptions, status, and custom fields you define.
+## Link
 
----
+A Link is a QRtub-managed URL, like `qrtub.com/r/x5fgd`, that resolves to a destination. A QR
+code is one way to encode it — an NFC tag or a typed address work the same way. Links belong
+to the team rather than to a Collection, so any Link can be assigned to any Item the team
+owns, or to nothing at all. See [What a Link Is](/links/what-a-link-is).
 
-### Link
-**What it is:** The QRtub-managed URL that QR codes encode.
+## Page
 
-**Examples:**
-- `qrtub.com/r/x5fgd` (Random)
-- `qrtub.com/exc001` (ID-based)
-- `qrtub.com/boardroom` (Custom)
+A Page is the mobile screen a Link can open, holding one or more Destinations for the person
+scanning to choose from, and built in the Page Editor. A Link that skips the Page and
+redirects straight to a single Destination is in Direct Mode; a Link that opens a Page is in
+Page Mode. See [Pages Overview](/pages/pages-overview) and
+[Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode).
 
-**Key point:** Links are digital patterns—the URLs that QR codes resolve to. They exist independently from Items, which means you can generate Links and print QR codes before you even have the Items in your system. This is the "print-before-link" workflow.
+## Media
 
-**Why this matters:**
-- Generate Links for professional printing before systems are ready
-- Print QR codes in bulk without knowing final destinations
-- Reassign Links if you make mistakes—no reprinting needed
-- Change where Links point without touching physical QR codes
+Media is the physical thing the QR code lives on — a vinyl sticker, an engraved plaque, a
+sign, an NFC chip — with a lifecycle of its own, often longer than the Item it is attached to.
+QRtub tracks production runs as print batches; it does not keep a per-code record of material,
+cost, or installation location. See [What Is Media?](/media/what-is-media) and
+[Print Batches](/print-batches/overview).
 
----
+## Related
 
-### Media
-**What it is:** The physical material the QR code is displayed on.
-
-**Examples:**
-- A vinyl sticker
-- A metal plaque
-- A billboard
-- A real estate sign
-- A printed ad
-- An NFC chip
-- A rigid sign
-
-**Key point:** Most people think generating a QR code pattern is all there is. But QRtub recognizes that the QR code gets printed or displayed on something physical—and that physical material has real costs, durability characteristics, and lifecycle needs.
-
-**Why track Media separately:**
-- **Cost tracking** - A billboard costs $5,000. That's infrastructure worth managing.
-- **Durability** - Metal plaques last 10+ years. Vinyl stickers last 1-3 years. Different materials have different lifecycles.
-- **Replacement** - When Media is damaged, you can replace it with new Media linking to the same Link—so the Item connection is preserved and nothing needs reconfiguring.
-- **Inventory** - Track what's been produced, what's installed, what's in stock.
-- **Production** - Manage Media Batches from different print partners or production runs.
-
----
-
-## Example
-
-```
-ITEM: Excavator #203 
-- Serial: EXC-2024-203  
-- Location: Site A    
-- Status: Active  
-▼
-is assigned to
-▼                 
-LINK: qrtub.com/exc203 
-- Type: ID-based           
-- Mode: Page       
-- Created: Jan 2025        
-▼
-is encoded on
-▼
-MEDIA: Metal Plaque #4729 
-- Type: Stainless steel, engraved      
-- Cost: $75                            
-- Installed: March 2025, left cab door 
-- Batch: #47 (500 pieces, PrintCo)
-
-```
-
-Each entity has its own lifecycle. The excavator might be sold. The Link persists and can be reassigned. The metal plaque might outlast the excavator and get moved to new equipment.
-
----
-
-## Link Modes
-
-Links can operate in two modes:
-
-### Direct Mode
-**How it works:** Immediate redirect to a single Destination.
-
-**When to use:**
-- Simple redirects (QR code → one URL)
-- No need for user choice
-- Quick deployment
-
-**Example:** QR code on a poster → Event registration page
-
----
-
-### Page Mode
-**How it works:** Link opens a Page—a mobile-friendly landing page where users select from multiple Destinations.
-
-**When to use:**
-- One QR code needs to serve multiple purposes
-- Different audiences need different information
-- Multi-system integration
-
-**Example:** QR code on equipment offers:
-- "Start Inspection" → Mitti (formerly SafetyCulture)
-- "Log Maintenance" → Your CMMS
-- "Operator Manual" → PDF documentation
-- "Contact Support" → Support form
-
-**Key benefit:** One physical QR code, multiple systems. No code proliferation.
-
----
-
-## Destinations
-
-**What they are:** Where users end up when they interact with a Link.
-
-**In Direct Mode:** The Link has one Destination and immediately redirects.
-
-**In Page Mode:** The Page displays multiple Destinations as buttons/cards that users tap.
-
-### Current Destination Types:
-- **External URLs** - Any web address (your systems, documentation, websites)
-
-### URL Templates
-
-**What they are:** Destination URLs that use field placeholders to automatically insert Item data.
-
-**Example template:**
-```
-app.com/inspect?id={{item.assetID}}&name={{item.name}}
-```
-
-**What happens when scanned:**
-```
-app.com/inspect?id=EXC-203&name=Excavator 203
-```
-
-Values are inserted **exactly as stored**. QRtub does not URL-encode them, so a field
-containing a space, `&`, `?` or `#` will produce a broken link — as the space in
-`Excavator 203` would above. Keep the fields you use inside URLs free of those characters,
-or store a pre-encoded version alongside the display name.
-
-**Why this matters for bulk deployment:**
-
-URL Templates are what make QRtub truly scalable. Instead of configuring each QR code individually, you:
-
-1. **Configure once** - Set up the URL template with placeholders
-2. **Deploy everywhere** - Apply to hundreds or thousands of Items
-3. **Automatic personalization** - Each QR code intelligently routes based on its Item's data
-
-Without URL Templates, deploying 500 equipment QR codes means manually configuring 500 different inspection URLs. With URL Templates, you configure the template once—every piece of equipment gets its own pre-filled inspection form automatically.
-
-**Common use cases:**
-- Pre-fill inspection forms with equipment IDs
-- Route to specific asset records in maintenance systems
-- Pass serial numbers to warranty lookup systems
-- Include location data in work order systems
-
----
-
-## Collections
-
-**What they are:** A group of Items that share the same set of fields, the same page design, and the same rule for how new Links get created.
-
-A Collection is more than a folder. Putting Items in the same Collection is what makes them share a structure — add a "Service Hours" field to the Collection and every Item in it has that field. That shared structure is the point; the grouping is a side effect.
-
-### What Collections Provide:
-- **Custom fields** - Define exactly what data each Item type needs
-- **Page templates** - Design how Pages look for every Item in this Collection
-- **Organized management** - Keep equipment separate from products, facilities separate from tools
-
-### Examples:
-- **Collection: "Heavy Equipment"**
-  Custom fields: Serial #, Make, Model, Service Hours, Site
-
-- **Collection: "Meeting Rooms"**
-  Custom fields: Room #, Floor, Capacity, AV Equipment
-
-- **Collection: "Fire Safety Equipment"**
-  Custom fields: Type, Location, Inspection Due, Certification #
-
-**Key point:** Items live inside Collections. Links live at the account level and can be assigned to Items in any Collection.
-
----
-
-## Print-Before-Link Workflow
-
-**The traditional problem:**
-1. You need professional QR codes printed
-2. Professional printing requires bulk orders and lead time
-3. But you don't have all your Item details finalized yet
-4. You're stuck: delay printing or print without knowing what codes connect to
-
-**The QRtub solution:**
-1. **Generate Links** - Create 100, 500, or however many you need
-2. **Professional printing** - Order quality Media (stickers, signs, plaques)
-3. **Field deployment** - Apply Media to Items as they arrive/deploy
-4. **Connect later** - Link codes to Items and Destinations when convenient
-
-**Why this works:** Links exist independently from Items. Print first, connect later. If you make mistakes, reassign Links—no reprinting needed.
-
----
-
-## Update Without Reprinting
-
-**The core benefit:** Change where your QR codes point at any time without touching the physical codes.
-
-### Common scenarios:
-- **Vendor switching** - Switch from one inspection app to another → Update Destinations
-- **Adding systems** - Add a new Destination to Pages → One QR code now serves another system
-- **Broken links** - URL changed or site migrated → Update the Destination
-- **Requirements evolution** - Your needs change over time → Update freely
-
-**Example:** 500 equipment QR codes point to "System A" for inspections. Two years later, you switch to "System B." With traditional QR codes, you reprint 500 codes. With QRtub, you update 500 Destinations. Physical codes unchanged.
-
----
-
-## Integration Layer
-
-**What QRtub is:** A connection layer between your physical items and your digital systems.
-
-**What QRtub is NOT:**
-- ✗ Asset management software (connects to yours)
-- ✗ Inspection software (links to Mitti, etc.)
-- ✗ Maintenance tracking (integrates with your CMMS)
-- ✗ Compliance platform (routes to your compliance tools)
-
-**What QRtub does:** Manages the QR code infrastructure that connects physical items to all your digital systems.
-
-**Think of it as:** The smart router between your physical world (equipment, products, locations) and your digital world (multiple software systems).
-
----
-
-## Common Questions
-
-**Q: Why can't I just use a regular QR code generator?**
-A: Regular generators hardcode URLs into QR codes. Once printed, they can't be changed. QRtub decouples the physical code from its Destination, enabling updates without reprinting.
-
-**Q: What's the difference between a Link and a QR code?**
-A: A Link is the QRtub-managed URL (`qrtub.com/r/xxxxx`). A QR code is one way to encode that Link (the black/white pattern). You could also type the Link, embed it in NFC, or use RFID.
-
-**Q: Do I need Items to use Links?**
-A: No. Links can exist without Items (useful for simple redirects). But connecting Links to Items unlocks Pages, URL Templates, and organized management.
-
-**Q: Can one Link connect to multiple Items?**
-A: No. One Link connects to either one Item (Page Mode) or one Destination (Direct Mode). But one Item can have multiple Links.
-
-**Q: What happens to my scan data if I replace damaged Media?**
-A: When you replace damaged Media with new Media, both encode the same Link. The Item connection stays intact, so the new Media resolves exactly as the old one did.
-
----
-
-## Next Steps
-
-**Related Help Pages:**
-- [Creating Your First Link](/creating-your-first-link)
-- [Pages Overview](/pages-overview)
-- [Conditional Visibility](/conditional-visibility)
-- [Physical Media Management Basics](/media-basics)
-
-**Integration Guides:**
-- [Mitti Integration](/integrations/safetyculture)
-- [CMMS Systems Integration](/integrations/cmms-systems)
-
----
-
-**Ready to get started with QRtub?** [See plans and pricing →](https://qrtub.com/pricing)
-
-Questions? Email us at [hi@qrtub.com](mailto:hi@qrtub.com)
+- [Creating Your First Link](/creating-your-first-link) — these five in one worked example
+- [The Print-First Workflow](/print-first/overview) — why printing before the data exists is normal here
+- [What Is a Destination?](/destinations/what-is-a-destination) — where a scan actually ends up

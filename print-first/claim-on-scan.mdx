@@ -1,0 +1,41 @@
+---
+title: "Adopting an Unknown Code From the Scanner"
+description: "The scanner's Create & open action: what happens when you adopt a code QRtub doesn't recognize, and the reference photo it captures from the camera"
+---
+
+When you scan a code the scanner cannot match to any of your Links, it says **"That code isn't linked yet"** and offers **Create & open**. Choosing it adopts that physical code: QRtub mints a new Link for it and opens the new Link's details panel straight away, so you can name it and connect it to an Item while you are still standing in front of the thing.
+
+This is how you bring codes you did not print into QRtub — a manufacturer's serial-number sticker, a previous system's asset tag, a hire company's label already stuck to a machine — without relabeling anything.
+
+**Availability:** this action lives inside the in-app scanner, whose button is currently hidden in the interface. See [The In-App QR Scanner](/print-first/scanner) for what that means today.
+
+## What Create & open does
+
+1. A new random Link is created in your **currently selected team**, bound to the scanned code. If no team is active you get "Pick an active team first" and nothing is created.
+2. The binding is a stored hash of the code's decoded text, so scanning that same physical code again later resolves to the same Link. It is idempotent — a second scan never creates a duplicate. The mechanics of that binding, including what happens to the original decoded text, belong to [Claim-on-Scan](/links/claim-on-scan).
+3. The new Link's details panel opens immediately. At this point the Link exists but has nothing attached, so treat the panel as the place to finish the job: give it a destination, or connect it to an Item.
+
+The Link you get is a normal random Link. It behaves like any other from then on — you can reassign it, put a Page behind it, include it in a print batch.
+
+## The reference photo
+
+If you adopted the code from the **camera**, the scanner grabs a still from the live video at the moment of the scan and attaches it to the new Link as a low-resolution reference photo. It is downscaled to roughly 480 pixels on the long edge and saved as a modest-quality JPEG — enough to recognize which machine, panel or shelf you were looking at, not a documentation photo.
+
+Two things worth knowing about it:
+
+- **It is best-effort.** The capture happens at scan time but is only uploaded if you actually choose Create & open. If the video was not ready, or the upload fails, adoption still goes ahead — you just get a Link with no photo, and no error.
+- **The paste and gun-scanner paths never produce one.** There is no camera frame to capture when the code arrived as typed text or from a USB gun scanner, so those adoptions have no photo. If you want the photo, adopt from the camera.
+
+The photo is captured at the moment of adoption or not at all — the scanner has no separate "add a photo" step, so if you want one, scan with the camera rather than pasting the code in.
+
+## When to use it, and when not to
+
+Use it when the physical code already exists and is staying put: you are adopting the label rather than replacing it. The tradeoff is that the code's meaning now lives in a hash QRtub holds, not in anything readable on the tag, so a code that gets replaced or reprinted by its original owner will no longer match.
+
+Where you control the tags, printing QRtub's own Links is the more durable route — see [The Print-First Workflow](/print-first/overview).
+
+## Related
+
+- [The In-App QR Scanner](/print-first/scanner) — the camera, paste and gun-scanner inputs this action sits behind
+- [Claim-on-Scan](/links/claim-on-scan) — the underlying hash-binding mechanism and its idempotency
+- [The Print-First Workflow](/print-first/overview) — the alternative: printing your own codes up front

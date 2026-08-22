@@ -1,0 +1,68 @@
+---
+title: "Pages Overview"
+description: "What a Page is, the four steps that turn Pages on for a Collection, and why assigning a Link alone does not produce one"
+---
+
+A Page is the screen someone sees when they scan a QR code. You build one layout for a
+Collection, and every Item in that Collection renders that layout with its own field values — so
+two hundred machines share one design and each shows its own name, serial number and buttons.
+
+Because a Page can hold several Destination buttons, one physical code can serve the inspection
+app, the maintenance system and the operator manual at once, instead of three stickers.
+
+## One Page design per Collection
+
+The design is stored once per Collection, as a page template. Items do not each get their own
+layout; they get their own *data* in the same layout. If you add a button, it appears on every
+Item in the Collection.
+
+That is deliberate — it is what makes a Collection of four hundred Items maintainable. When one
+Item genuinely needs something different, you can save changes to that Item alone; see [Per-Item
+Page Overrides](/pages/page-overrides).
+
+## Turning Pages on for a Collection
+
+Pages are switched on per Collection, not per Link.
+
+1. **Turn pages on.** In the Collection's settings, open the **Scan behavior** tab, turn on
+   **Show a profile page**, and press **Save changes**. This reveals the Collection's page tab,
+   where you can preview the design and open the Page Editor. Left off, scans pass straight
+   through to a single Destination and there is no page to edit.
+2. **Create an Item.** The Page renders an Item's field values, so until a Collection has at
+   least one Item there is nothing for the layout to fill in.
+3. **Assign a Link to the Item.** The Link is the URL a QR code encodes. Scanning it resolves to
+   the Item, and the Item's mode decides whether that means a redirect or a Page.
+4. **Add Destinations.** In the Page Editor, add ActionLink sections and set each one's Link URL —
+   usually a vendor URL with an Item field folded into it, like
+   `https://cmms.example.com/asset/{{item.serial_number}}`.
+
+Switching a Collection between modes later never requires reprinting: the printed code encodes
+the Link, not the Destination.
+
+## Assigning a Link does not create a Page
+
+This is the trap worth knowing before you go looking for a missing page. Assigning a Link only
+attaches a URL to an Item. If the Collection is set to pass through, its Items keep redirecting no
+matter how many Links you assign, and no page is ever rendered.
+
+The mode is what decides, and an individual Item can override its Collection's setting in either
+direction — see [Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode).
+
+## Everyone who scans sees the same Page
+
+A Page is one page. It is not targeted per viewer: an operator, a customer and a contractor
+scanning the same code all get the same layout, and they self-select from the Destinations on
+offer. That is usually the point — one code, every option, no wrong sticker.
+
+If you need a section to appear only sometimes, that is a separate, explicit mechanism: a
+condition on the section, evaluated against Item fields, device, time and whether the viewer is a
+signed-in team member. See [Conditional
+Visibility](/destinations/conditional-visibility). Without a condition, nothing on the page
+varies by who is looking.
+
+## Related
+
+- [Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode)
+- [The Page Editor Layout](/pages/page-editor-layout)
+- [Section Types](/pages/section-types)
+- [Scan Behavior for New Items](/collections/scan-behavior-default)

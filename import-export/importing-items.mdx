@@ -1,0 +1,102 @@
+---
+title: "Importing Items from CSV"
+description: "Bulk create and update Items in a Collection from a CSV file: the 10 MB / 10,000-row limits, the dry-run preview, and what each row is validated against"
+---
+
+A CSV import creates and updates Items in one Collection in bulk. Open the Collection, use the
+**Download / Upload List** menu above the items table, and choose **Upload CSV**.
+
+This is the Item list — the same data the items table shows. It is a different feature from the
+print list a [print batch](/print-batches/overview) produces: that CSV describes Links and codes
+to send to a printer and is never uploaded back here.
+
+## File requirements
+
+| Requirement | Limit |
+|---|---|
+| File type | Must end in `.csv` |
+| File size | 10 MB maximum |
+| Rows | 10,000 data rows maximum |
+| Minimum content | A header row plus at least one data row |
+
+Exceed a limit and the whole upload is refused with a message saying which one — nothing is
+partially imported.
+
+Column headers are matched to the Collection's fields case-insensitively, by either the field's
+key (`serial_number`) or its label ("Serial Number"). **A column that matches nothing is an
+error**, and the rows carrying it are rejected, so the easiest way to build a valid file is to
+[export the Collection first](/import-export/exporting-items) and edit what comes back.
+
+## Each row creates or updates — nothing is deleted
+
+The `id` column decides which. A row whose `id` matches an existing Item in this Collection
+updates that Item; a row with a blank or unrecognized `id` creates a new one. An import never
+deletes an Item, and there is no replace mode here — the destructive
+[Collection backup import](/collections/import-backup) is a separate feature.
+
+If the same `id` appears twice in one file, the first occurrence is used and the later ones are
+rejected as duplicates.
+
+## Partial updates are safe
+
+On an update row, columns you left out of the file are preserved rather than blanked. A column
+that is present but empty is treated as a deliberate "clear this value".
+
+Two related behaviors follow from that:
+
+- Required fields are only enforced on an update row for columns actually present in that row, so
+  a partial update cannot be rejected over an unrelated required field it never touched.
+- Collection-level field defaults apply to new Items only. An update never has a default written
+  over a column it omitted.
+
+## The preview step
+
+Uploading runs a dry run first. Nothing is written. You get three counts — to create, to update,
+rejected — and a list of every rejected row with the reason and the column at fault.
+
+**Download errors** gives you a CSV containing just the rejected rows, with your original columns
+plus an extra `Errors` column. Fix those rows, upload that file, and you are done — no need to
+re-upload the whole set.
+
+Confirming commits the import. The server re-validates everything and writes only the valid rows,
+then shows what actually happened.
+
+## What every row is checked against
+
+- **Unknown columns** — every column must map to a field on this Collection.
+- **Required fields** — a blank required value rejects that row.
+- **Allowed values** — a value outside a field's Allowed Values list is rejected, unless that
+  field has Allow new values switched on, in which case anything is accepted.
+- **Item ID** — must be unique in the Collection, and must match the Collection's Item ID mask if
+  it generates Links from Item IDs.
+- **Cell format** — numbers as `123` or `123.45`; yes/no as `true`, `false`, `1` or `0`; dates as
+  ISO `YYYY-MM-DD` only, so `31/12/2026` is rejected; list values separated by semicolons; and
+  every row must have the same number of columns as the header.
+
+Bad rows are rejected one by one. The good rows in the same file still import, and a row with
+several problems reports all of them at once so you can fix it in a single pass.
+
+## Columns that are ignored
+
+`image`, `created_at`, `updated_at` and internal columns are skipped on import. In particular, a
+CSV cannot set, change, or clear an Item's photo.
+
+One gotcha when you re-import a file QRtub exported: values beginning with `=`, `+`, `-`, `@` or
+a tab are exported with a leading apostrophe so spreadsheets do not read them as formulas, and
+the apostrophe is not stripped on the way back in. A negative number such as `-40` comes back as
+`'-40` and is rejected as an invalid number for that column. Delete the apostrophe before
+importing.
+
+## Links for newly created Items
+
+A row that creates an Item also mints a Link for it, following the Collection's rule for new
+Items — exactly as if you had added the Item by hand. If a Link cannot be minted, the Item is
+still created and the row gets a warning telling you why, such as an Item ID that does not match
+the Collection's mask.
+
+## Related
+
+- [Exporting Items to CSV](/import-export/exporting-items)
+- [Item ID](/items/item-id)
+- [Required Fields](/fields/required-fields)
+- [Allow New Values](/fields/allow-new-values)

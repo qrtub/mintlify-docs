@@ -1,0 +1,63 @@
+---
+title: "Item ID"
+description: "The identifier you control on each Item: unique within its Collection, optional, and the value ID-based Links are built from"
+---
+
+Item ID is your own identifier for an Item — the plant number, asset number, or tag number your
+business already uses. Unlike Name, it is unique within the Collection, which makes it the field
+you use to tell two similar Items apart.
+
+## Uniqueness and blank values
+
+No two Items in the same Collection can hold the same Item ID. The constraint is per Collection,
+so "EXC-203" in Heavy Equipment and "EXC-203" in Hire Fleet are fine — the same value twice in
+one Collection is rejected.
+
+Item ID is optional. Values are trimmed before they are stored, and a blank or whitespace-only
+value is stored as no value at all, so any number of Items in a Collection can have no Item ID
+without colliding with each other. Trimming also means `" EXC-203 "` and `"EXC-203"` are the
+same Item ID, not two different ones.
+
+## Where Item ID appears
+
+- In the items table, and as the subtitle under an Item's name when another Item references it
+  through a reference field.
+- In the search box of the item picker inside the item form, alongside Name and Description.
+- In bindings, as `{{item.item_id}}` — usable in a Destination URL such as
+  `https://example.com/items/{{item.item_id}}`. Bindings are inserted exactly as stored with no
+  URL encoding, so keep Item IDs free of spaces and `&` if you build URLs from them.
+
+## Item ID and ID-based Links
+
+If the Collection generates Links from Item IDs, the Item ID *is* the Link's slug. The
+Collection defines a mask — a prefix, a digit count, and an optional suffix, such as
+`CRA####TL` — and an Item with the Item ID `CRA0042TL` gets the Link `qrtub.com/CRA0042TL`.
+
+That mode adds real rules to this field:
+
+- The Item ID must match the mask. The check runs in the item form, in the API, and on CSV
+  import, and a value like `CRA42TL` is rejected for having the wrong number of digits.
+- An Item saved with no Item ID is created successfully but gets no Link, because there is
+  nothing to build the slug from. You will see a message saying so.
+- If that slug already exists as an unassigned Link — a code you pre-printed — the existing Link
+  is adopted rather than duplicated. If it is already attached to a different Item, the save is
+  rejected and you are told to pick an unused number.
+
+None of this applies in the other link-generation modes, where Item ID is simply an identifier
+you keep for your own reference.
+
+## Two behaviors that surprise people
+
+**Duplicating an Item never copies its Item ID**, because the copy would collide on the
+uniqueness constraint. You are prompted for a new one instead.
+
+**On CSV import, duplicate Item IDs are caught in the preview**, before anything is written —
+both a value already used by another Item in the Collection and the same value appearing twice
+in the file. Those rows are rejected individually; the rest of the file still imports.
+
+## Related
+
+- [What Is an Item?](/items/overview)
+- [Name and Description](/items/name-and-description)
+- [Duplicating an Item](/items/duplicating)
+- [Importing Items from CSV](/import-export/importing-items)

@@ -1,0 +1,60 @@
+---
+title: "Bulk Link Import via CSV"
+description: "Creating and updating many Links from a spreadsheet: the six columns, what each link type requires, and the dry-run preview that runs before anything is written"
+---
+
+The CSV import on the Links page creates new Links and updates existing ones in one pass, up to 10,000 rows at a time. Every import runs as a preview first: QRtub reads the whole file, tells you how many rows would be created, updated or rejected and why, and writes nothing until you confirm.
+
+Use it when the addresses already exist somewhere else — a list of asset numbers from your maintenance system, a spreadsheet of destinations, an export you edited.
+
+## The columns
+
+| Column | Purpose |
+|--------|---------|
+| `link_type` | Required. `random`, `numbered` or `custom` |
+| `url` | The slug. Required for numbered and custom; must be blank to create a random Link |
+| `destination_url` | Where the Link sends someone |
+| `fallback_url` | Where to send someone if a deep link doesn't open an app |
+| `fallback_message` | What to show instead if there's no fallback URL |
+| `is_active` | `true`/`false`, also accepts `1`/`0`, `yes`/`no`, `y`/`n`. Blank means active |
+
+This is exactly the shape the Links **Export** produces, so the fastest way to get a valid file is to export, edit, and import the same file back. Every column is read as text, which matters for numbered slugs: leading zeros in `cra0042` survive rather than being turned into `42`.
+
+`destination_url` can be a URL template with field bindings, like `app.com/inspect?id={{item.assetID}}`. Bindings are inserted exactly as stored with no URL-encoding, so a field containing a space or an `&` produces a broken address — check the fields you reference before importing hundreds of rows that use them.
+
+## What each type needs on a create
+
+**Random** — leave `url` blank. QRtub mints the slug. A random row *with* a `url` is only ever an update; if that url matches nothing, the row is rejected rather than guessed at, with a message saying so.
+
+**Numbered** — `url` is required, and it must match a numbering pattern your team already owns. `cra0042` is accepted if you hold `cra` + 4 digits; otherwise the row is rejected with "does not match any numbering pattern owned by this team". The import does not claim new patterns for you.
+
+**Custom** — `url` is required and must satisfy the custom-slug rules: 3–50 characters, lowercase letters, digits, hyphens and underscores, not a reserved word, not already in use, and not inside a numbered pattern your team owns.
+
+## How a row becomes an update instead of a create
+
+By its `url`. If the slug already exists on one of your team's Links, the row updates that Link instead of creating one — whatever `link_type` says. Matching follows each type's own case rules: numbered and custom slugs match without regard to case, random slugs match exactly.
+
+Only your team's Links are eligible. If you belong to several teams and a slug in the file exists in a different one, it is never treated as an update to that other team's Link.
+
+On an update, **columns absent from the file are left alone**, so a two-column file of `url,destination_url` will not wipe everyone's fallback settings. A column that is present but blank is treated as an instruction: a blank `destination_url` clears the destination, and a blank `fallback_url` or `fallback_message` clears that value.
+
+## The dry run
+
+Choosing **Import** and picking a file runs the preview automatically. It performs the same classification and the same checks as the real thing — pattern matching, reserved-by-pattern, the random-slug rule, and duplicate detection — without writing anything, so the created and updated counts you see are honest rather than optimistic.
+
+Two rows creating the same new slug are caught here too: the first is counted, the second is rejected as a duplicate. Without that, the preview would promise two Links and the commit would deliver one plus an error.
+
+Confirm, and QRtub re-posts the same file to commit it. Rows that fail at this point — a custom slug that turned out to be taken, for instance — are reported individually and **do not stop the rest of the import**. You get a count of what landed and a per-row list of what didn't, so you can fix those rows and re-import just them.
+
+## Limits
+
+- 10 MB per file, 10,000 rows, and the filename must end in `.csv`
+- Rows are processed one at a time, so a very large file takes a while — leave the tab open
+- The importer cannot assign Links to Items, add them to a print batch, or claim numbering patterns; it handles the Link's own slug, destination, fallbacks and active state only
+
+## Related
+
+- [Bulk Assigning, Unassigning, and Deleting Links](/bulk-links/assign-unassign-delete) — attaching imported Links to Items afterwards
+- [Numbered Links](/links/numbered-links) — claiming the pattern a numbered import needs
+- [Custom Links](/links/custom-links) — the full slug rules the importer enforces
+- [App Links & Fallback URLs](/destinations/app-links) — what the two fallback columns are for

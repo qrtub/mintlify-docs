@@ -1,0 +1,38 @@
+---
+title: "What a Link Is"
+description: "A Link is a QRtub-owned slug that resolves to a destination — and the simplest valid one is just a slug pointing at a URL, with no Item, Collection or Page attached"
+---
+
+A Link is a short address QRtub owns — a slug — plus a rule for where that address sends someone. `qrtub.com/r/x5fgd` and `qrtub.com/exc203` are both Links. A QR code is one way to encode a Link; an NFC tag, a printed line of text someone types, or a plain hyperlink work equally well, because all any of them has to carry is a URL.
+
+## The simplest valid Link is a slug and a URL
+
+A Link needs exactly two things: the team that owns it, and its slug. Everything else is optional. There is no requirement for an Item, a Collection, or a Page — a Link that points straight at `https://example.com/manual.pdf` is a complete, fully supported Link, not a half-finished one.
+
+When a Link has its own destination and no Item attached, a scan redirects immediately to that destination. That is the whole behavior. You can use QRtub this way forever: print a hundred codes, point each one at a URL, change those URLs whenever you like, and never create a single Item.
+
+## Why it behaves like an ordinary URL shortener
+
+Because in the base case it is one. Someone opens the slug, QRtub looks it up, QRtub redirects. That is the same three steps any link shortener runs, and nothing QRtub-specific is needed to make it work.
+
+What QRtub adds is everything around that redirect: the destination is stored on the server rather than baked into the printed code, so you can change where a code goes without reprinting it; slugs can be minted in bulk before you know what they are for; and a Link can be attached to an Item and open a Page with several Destinations instead of redirecting to one. None of that changes the mechanism underneath, which is why a Link feels familiar the first time you use one.
+
+## What a Link can carry
+
+- **A destination URL.** One address, optionally built from a template that inserts an Item's own field values, like `app.com/inspect?id={{item.assetID}}`. Values are inserted exactly as stored — QRtub does not URL-encode them, so a field containing a space, `&`, `?` or `#` produces a broken address.
+- **An assignment to one Item.** A Link points at no more than one Item, though one Item can have several Links pointing at it.
+- **A Page.** With an Item attached, the Link can open a Page listing multiple Destinations instead of redirecting to a single one.
+- **An active/inactive switch.** Switching a Link off does not show a friendly notice — an inactive Link returns a plain "page not found" to anyone who scans it. If you want a code to stay polite while you decide what it does, leave it active and unattached instead.
+
+## Where Links live
+
+Links belong to a team, not to a Collection. That is why a Link can be assigned to an Item in any of the team's Collections, and why deleting a Collection does not take its team's Links with it.
+
+A Link's slug is fixed once it is created. You can change where a Link goes as often as you want, but you cannot rename it — the printed code has to keep resolving.
+
+## Related
+
+- [What a Slug Is](/links/what-a-slug-is) — the identifier part of the address, and the case rules that come with it
+- [Choosing a Link Type](/links/choosing-a-link-type) — Random, Numbered or Custom, and when each is the right call
+- [Unallocated Links](/links/unallocated-links) — a real, printable Link with nothing attached yet
+- [What Is a Destination?](/destinations/what-is-a-destination) — where a scan actually ends up

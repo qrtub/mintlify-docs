@@ -1,0 +1,73 @@
+---
+title: "Collection Fields Reference"
+description: "The tub.* catalog — why the Collection binding prefix is still tub, which Collection values resolve, and the two metadata paths the editor offers that never populate"
+---
+
+The Collection namespace reads the Collection that the scanned Item belongs to — its name, its
+description, its cover image. Every Item in the Collection sees the same values, which is what
+makes these bindings useful for branding a URL or a Page and largely useless for identifying a
+specific Item.
+
+## The prefix is `tub.`, not `collection.`
+
+**Write `{{tub.name}}`. `{{collection.name}}` is not a namespace and resolves to nothing.**
+Collections were previously called Tubs, and while the interface was renamed, the binding
+namespace was not. This is the single most common mistake on this namespace, and it fails
+silently: there is no error, no warning in the editor, and no clue in the resulting URL beyond a
+missing value.
+
+## Available fields
+
+| Binding | Type | Notes |
+|---|---|---|
+| `tub.name` | string | The Collection's display name, for example `Heavy Equipment` |
+| `tub.description` | string | Free-text description; often empty |
+| `tub.image_url` | string | URL of the Collection's cover image |
+| `tub.items_name` | string | The custom label for this Collection's Items, for example `Machines`. Empty unless you set one |
+| `tub.id` | string | QRtub's internal identifier for the Collection — long and opaque |
+| `tub.created_at` | date | When the Collection was created, as an ISO timestamp |
+| `tub.updated_at` | date | When the Collection was last changed, as an ISO timestamp |
+
+There are no custom fields at Collection level. Custom fields are defined *by* a Collection and
+belong to its Items, so they are read as `item.*` — see
+[Item Fields Reference](/destinations/item-fields).
+
+## `tub.metadata` is not a binding surface
+
+`tub.metadata` exists, but it holds QRtub's own configuration for the Collection — its field
+definitions, its Link generation rule, its scan-behavior defaults. Nothing in it is a stable,
+documented value to bind against, and its internal structure can change between releases.
+
+Two paths under it deserve a specific warning, because the editor's property picker offers them
+as if they were real data:
+
+- `tub.metadata.page.is_public`
+- `tub.metadata.organizationName`
+
+**Neither is ever populated.** No part of QRtub stores a value at either path, so both resolve to
+nothing. In a condition that means the whole expression evaluates to `false` and the rule never
+fires; in a Destination URL it means every binding in that URL counts as unresolved and the
+Destination is skipped. If you need to know whether a Page is private, check the Collection's
+privacy setting in the interface rather than trying to read it from a binding.
+
+## When Collection fields are worth using
+
+The honest answer is: less often than Item fields. A `tub.*` value is identical for every Item in
+the Collection, so it cannot identify anything. The cases where it does earn its place are:
+
+- **Passing your own grouping to another system**, so a work-order URL arrives tagged with the
+  Collection it came from: `https://cmms.example.com/wo/new?asset={{item.item_number}}&group={{tub.name}}`.
+- **Labeling a shared Page template** with `{{tub.name}}` so one template reads correctly across
+  several Collections.
+
+Both are cosmetic. If the receiving system needs to distinguish one Item from another, bind an
+`item.*` field. And remember that values are inserted with no URL encoding, so a Collection name
+containing a space or an ampersand will break the URL it is inserted into — see
+[Field Bindings & URL Templates](/destinations/field-bindings).
+
+## Related
+
+- [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax, encoding and missing-value rules
+- [Item Fields Reference](/destinations/item-fields) — the `item.*` catalog, including custom fields
+- [What Is a Collection?](/collections/overview) — the entity these fields describe
+- [Page Privacy: Public vs. Private](/pages/page-privacy) — where the public/private setting actually lives

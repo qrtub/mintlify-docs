@@ -1,0 +1,78 @@
+---
+title: "Tracking Deployment Status Per Code"
+description: "Each code in a batch carries its own Printed / Deployed / Retired state — one value per code, independent of the batch's own status — so you can find the ones still in the box."
+---
+
+Every code inside a batch has its own deployment status: **Printed**, **Deployed** or
+**Retired**. A run of 500 stickers has 500 of these values, moving independently. This is what
+tells you which sixty codes from a run of five hundred never made it out of the box.
+
+Do not confuse this with the batch's own status, which is a single value describing the whole
+order — see [Batch Status: Draft to Deployed](/print-batches/batch-status). A batch marked
+Deployed says the order went out; the per-code statuses say what happened to each piece. Setting
+one never changes the other.
+
+## Where to find it
+
+The deployment tracker appears in the batch panel **once the batch's status reaches Deployed**.
+Before that the codes are not physically out yet, so the question does not apply and the tracker
+is hidden.
+
+## The three states
+
+| State | Meaning |
+|---|---|
+| **Printed** | Produced, not installed yet. Every code starts here. |
+| **Deployed** | Installed and in service. |
+| **Retired** | No longer in service — damaged, removed, or the item is gone. |
+
+Retiring a code is a record, not a deletion. The Link keeps working, and the code stays in the
+batch and in its own print history.
+
+## Reading the tracker
+
+At the top, a segmented bar shows the mix — printed, deployed and retired as proportions of the
+batch — with a count beside each color and the batch total on the right. Only states that
+actually occur get a segment, so a batch nobody has touched is a single bar.
+
+Below it, **Set statuses** expands to the full list. Each row shows the link's slug and, where the
+link is assigned, the Item's number and name as a link to the Item itself. Codes with nothing
+attached read "No item linked" — normal for a print-first run where the codes exist before the
+equipment.
+
+**Filter by slug or item** narrows the list as you type, matching the slug, the item name or the
+Item ID. **Open in grid** opens the Items grid filtered to this batch, which is the better view
+when you want the Items' own data rather than their deployment state.
+
+## Changing statuses
+
+**One at a time:** each row has a three-way Printed / Deployed / Retired control. Click a state
+and it saves immediately.
+
+**In bulk:** **Mark all as deployed** and **Retire all** sit under the tracker.
+
+One caution about the bulk buttons: they apply to **every code in the batch**, not to the rows
+currently showing. The filter box is a view, not a selection — filtering to twelve codes and then
+clicking **Retire all** retires the whole batch. To act on a subset, use the per-row controls.
+
+There is no undo prompt on either bulk action, but nothing is destroyed: run the other bulk
+button, or set individual rows back, and you are where you were.
+
+## What is not recorded
+
+- **No per-code history.** You see a code's current status, not when it changed or who changed
+  it.
+- **No install location.** There is no field for where a code was fitted. Use the Item it is
+  assigned to for that.
+- **No scan data.** Deployment status is something you set, not something QRtub infers. A code
+  being scanned does not mark it deployed.
+
+Because of that, the practical workflow is to mark codes as they are fitted, or to bulk-mark the
+run deployed after installation and then retire the handful that never got used.
+
+## Related
+
+- [Batch Status: Draft to Deployed](/print-batches/batch-status)
+- [Viewing a Link's Print History](/print-batches/link-print-history)
+- [Finding and Filtering Your Batches](/print-batches/finding-batches)
+- [The Print-First Workflow](/print-first/overview)

@@ -1,0 +1,53 @@
+---
+title: "Print Batches"
+description: "What a print batch is: the saved record of one print-list export — the links that were in it, how far the run has progressed, and the CSV the printer received."
+---
+
+When you export a print list, QRtub can keep the run as a **batch**. A batch is the record of
+one export: which links were in it, the CSV file that went to the printer, who exported it and
+when, and how far along the run is. Months later it answers the question a spreadsheet never
+does — "what was in that order, and where did it go?"
+
+Batches live under **Access Media** in the main navigation.
+
+## What a batch stores
+
+| Kept with the batch | Notes |
+|---|---|
+| The list of links | One row per link, deduplicated |
+| The exported CSV | The exact file, stored, not rebuilt on demand |
+| Name, notes, tags, cover photo | All editable at any time |
+| Batch status | One value: Draft, Printing, Printed or Deployed |
+| Per-code deployment status | One value per link: Printed, Deployed or Retired |
+| Who exported it, and when | Shown on every batch row |
+
+## Two different statuses, two different scopes
+
+This trips people up, so it is worth being blunt about it. The two things share vocabulary but
+count differently:
+
+- **Batch status** is a single value for the whole run. One batch, one status. It answers
+  "has this order come back from the printer yet?" See
+  [Batch Status: Draft to Deployed](/print-batches/batch-status).
+- **Deployment status** is one value per code — 500 stickers means 500 independent values. It
+  answers "which of these are actually stuck to something?" See
+  [Tracking Deployment Status Per Code](/print-batches/deployment-status).
+
+A batch marked Deployed does not mean every code in it is deployed, and marking every code
+deployed does not move the batch. Neither one changes the other.
+
+## What batches do not record
+
+Batches track production runs, not individual pieces of Media. There is no per-code record of
+material, cost, durability, supplier or install location, and no Media inventory. Scans are not
+recorded either — QRtub logs that a code was printed, not that it was later scanned.
+
+If you need that context today, the batch's notes, tags and cover photo are the place to put
+it.
+
+## Related
+
+- [Creating a Print Batch](/print-batches/creating-a-batch)
+- [Finding and Filtering Your Batches](/print-batches/finding-batches)
+- [What Is Media?](/media/what-is-media)
+- [The Print-First Workflow](/print-first/overview)

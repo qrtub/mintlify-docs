@@ -1,0 +1,71 @@
+---
+title: "Importing a Collection Backup"
+description: "Restoring a backup file into an existing Collection: what Merge adds, what Replace destroys, and why Replace is riskier than the confirmation says"
+---
+
+Importing restores a backup file into a Collection that already exists. Open **Settings → Admin →
+Backup & restore → Manage backup**, pick an import mode, then choose the `.json` file. A
+confirmation step lists what will happen before anything is written.
+
+There are two modes and they are not variations on a theme — one is additive, the other deletes
+data.
+
+## Merge — additive
+
+Merge compares the backup's fields against the Collection's and **adds only the fields that are
+missing**. Fields the Collection already has are left exactly as they are: same type, same labels,
+same allowed values, same defaults. Nothing is overwritten and no Item data is touched.
+
+What Merge does *not* leave alone is the page design. **If the backup contains a page template —
+and it almost always does — that template replaces the Collection's current one.** The
+confirmation step says as much ("Update page template if included"), and it is easy to skim past.
+If you only want the fields, export a backup of the current page design first so you can put it
+back.
+
+Collection details — name, description, cover image, Items label — are untouched by Merge.
+
+## Replace — destructive
+
+Replace overwrites the Collection from the backup: details, the entire field schema, and the page
+template. You have to type `REPLACE` to confirm it, and it cannot be undone.
+
+**It also deletes every Item in the target Collection, along with their per-Item page overrides.**
+The in-app note beside this option says Items are not affected. That note is wrong: the Items in
+the Collection you are importing *into* are deleted before the backup is restored. The backup
+itself carries no Items to put back in their place (see [Exporting a Collection
+Backup](/collections/export-backup)), so the practical result is an empty Collection with the
+backup's structure.
+
+Two consequences to take seriously before you type `REPLACE`:
+
+- **Export your Items to CSV first.** It is the only copy of them you will have.
+- **Deleted Items do not release their Links.** Deleting an Item or a whole Collection through the
+  normal path releases its Link back to your unassigned pool so printed codes keep working. This
+  path does not — a Link attached to one of these Items goes with it. If the Collection has codes
+  in the field, do not use Replace; import into a new Collection instead.
+
+If what you actually want is "this backup, as a fresh Collection," use [Creating a New Collection
+From a Backup](/collections/new-collection-from-backup). It is safe by construction — nothing
+existing is involved.
+
+## What both modes tell you afterward
+
+A summary reports what changed: whether the Collection's settings were updated, how many new
+fields were added, and whether the page template was replaced. Warnings appear in the same dialog
+rather than silently — the ones worth reading are:
+
+- **A version mismatch**, if the file came from an older export format. The import still runs.
+- **Overrides that found no matching Item.** Per-Item page overrides are matched by Item
+  identifier, so an override whose Item does not exist in the target is skipped and named.
+- **Skipped rows**, in the rare case a hand-edited backup carries an `items` array and one of
+  those Items collides with an existing Item ID. The rest still import.
+
+Only `.json` files are accepted, and a file that is not a valid backup is rejected before
+anything is written.
+
+## Related
+
+- [Exporting a Collection Backup](/collections/export-backup)
+- [Creating a New Collection From a Backup](/collections/new-collection-from-backup)
+- [Exporting Items to CSV](/import-export/exporting-items)
+- [Deleting a Collection](/collections/deleting-a-collection)

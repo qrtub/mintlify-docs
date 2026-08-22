@@ -1,0 +1,119 @@
+---
+title: "Field Bindings & URL Templates"
+description: "The double-curly-brace syntax for inserting live data into a Destination URL, the eight namespaces you can read from, and the encoding and missing-value rules"
+---
+
+A field binding is a placeholder you write inside a Destination URL that QRtub replaces with real
+data at the moment someone scans. It is what lets one URL template serve every Item in a
+Collection instead of one URL per Item.
+
+```text
+https://app.example.com/inspection/new?assetId={{item.serial_number}}
+```
+
+Scan the code on Item "EXC-203", whose serial number is `SN-2024-203`, and the browser opens:
+
+```text
+https://app.example.com/inspection/new?assetId=SN-2024-203
+```
+
+The same template on a different Item substitutes that Item's serial number, so every code routes
+to its own pre-filled URL from one configuration.
+
+## Syntax rules
+
+Write a namespace, a dot, and a field name, wrapped in **double** curly braces.
+
+- **Double braces are required.** `{item.name}` is not a binding. Single braces are sent to the
+  browser literally, so the receiving system gets the characters `{item.name}` instead of a value.
+- **The namespace prefix is required.** `{{name}}` does not resolve; write `{{item.name}}`.
+- **Field names are case-sensitive.** `{{item.Status}}` does not resolve. `{{item.status}}` does.
+- **Spaces inside the braces are ignored.** `{{ item.name }}` behaves identically to
+  `{{item.name}}`.
+- **You can use as many bindings as you like in one URL**, mixed freely with literal text:
+  `https://cmms.example.com/wo/new?asset={{item.item_number}}&site={{item.location}}`.
+
+The same field names go into a condition without the braces — `item.status == "operational"`.
+Braces build a value; a bare reference tests one.
+
+## The namespaces
+
+Eight namespaces exist. Each one is only readable where the data behind it exists, which is why
+the last three are not available everywhere.
+
+| Namespace | What it holds | Available in |
+|---|---|---|
+| `item` | The scanned Item's own fields, standard and custom — see [Item Fields Reference](/destinations/item-fields) | Destinations and Pages |
+| `tub` | The Collection the Item belongs to — see [Collection Fields Reference](/destinations/collection-fields) | Destinations and Pages |
+| `device` | The scanning device's type, OS and browser — see [Device Detection & Routing](/destinations/device-detection) | Destinations and Pages |
+| `time` | The current hour, day, month and year in UTC — see [Time Fields Reference](/destinations/time-fields) | Destinations and Pages |
+| `request` | Language, referrer and CDN-derived location — see [Request Fields Reference](/destinations/request-fields) | Destinations and Pages |
+| `accessUrl` | The specific Link that was scanned: its slug, strategy and sequence number | Destinations only |
+| `session` | The signed-in team member viewing the Page, if any | Pages only |
+| `theme` | The Page's accent color and border radius — see [Theming a Page](/pages/page-theming) | Pages only |
+
+Two of those names do not match the words used in the interface, because the underlying data
+was renamed and the binding namespaces were not:
+
+- **The Collection prefix is `tub.`, not `collection.`.** Collections were previously called
+  Tubs. Write `{{tub.name}}`. `{{collection.name}}` is not a namespace and resolves to nothing,
+  with no error message.
+- **The Link prefix is `accessUrl.`, not `link.`.** Same reason.
+
+## Values are inserted exactly as stored
+
+There is **no automatic URL encoding**. Whatever is in the field is dropped into the URL
+character for character. A field value containing a space, an ampersand, a question mark or a
+slash will produce a URL that the receiving system reads differently from what you intended — an
+`&` in a value, for example, looks to the receiving system like the start of a new query
+parameter.
+
+Either confirm the receiving system tolerates those characters, or keep bound fields to plain
+identifiers — serial numbers, asset numbers, Item IDs — which is what most templates use anyway.
+
+## What happens when a field is empty
+
+This differs depending on where the binding sits, and the difference matters.
+
+**In a Destination URL, an empty or missing field invalidates the whole URL.** QRtub will not
+open a half-built link. If any binding in the template resolves to nothing, that Destination is
+treated as unresolved: a conditional rule is skipped and the next rule is tried, and a plain
+Destination URL resolves to nothing at all, which lands the scan on the "this link isn't ready
+yet" screen instead of a broken URL. The same rule applies to a binding that resolves to a list
+or a nested object rather than a single value — `{{item.tags}}` is an array, so a URL containing
+it never resolves.
+
+**In a Page section, an empty field renders as an empty string** and most sections then hide
+themselves rather than display a blank. The exception is the ActionLink section, which checks its
+own `href` first and hides itself entirely if a binding there cannot be resolved.
+
+Neither case produces an error message. A Destination that quietly never fires is almost always a
+binding that never resolved, so check the field name's spelling and case first, and then check
+that the Item you are testing with actually has a value in that field.
+
+## Session fields
+
+`session` describes the signed-in team member looking at a Page, and is empty for an ordinary
+anonymous scan. There are two usable values, `session.user.id` and `session.user.email`, plus the
+`session.user` object itself, which is what the common test uses:
+
+```text
+session.user != null
+```
+
+That expression is true only for a signed-in member of your team, which is how the AdminToolbar
+section keeps owner-only shortcuts off the version of the Page the public sees. `session` is not
+part of the data available when a Direct-Mode scan resolves a Destination, so it cannot be used
+to route a redirect.
+
+## Renaming a field does not break a binding
+
+If you rename a custom field on a Collection, QRtub rewrites the Destination URLs, fallback URLs
+and conditions that referenced the old name, in place, when you save. Page template bindings are
+stored against a hidden stable identifier and never see the rename at all.
+
+## Related
+
+- [What Is a Destination?](/destinations/what-is-a-destination) — where a scan is routed, and the order QRtub checks
+- [Item Fields Reference](/destinations/item-fields) — the full `item.*` catalog, including custom fields
+- [Renaming a Field](/fields/renaming-a-field) — why a rename is safe and what it updates

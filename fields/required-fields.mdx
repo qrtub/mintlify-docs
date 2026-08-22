@@ -1,0 +1,66 @@
+---
+title: "Required Fields"
+description: "The Required checkbox on a field, what counts as blank, and the one carve-out: a CSV row updating an existing Item is only checked on the columns it actually contains."
+---
+
+Any field can be marked required, core fields included. Tick **Required** on the field's chip
+in the Collection's **Fields** tab and press **Save changes**. From then on the field's label
+carries an asterisk on the Item form, and an Item cannot be saved without it.
+
+## Where it is enforced
+
+Two places, with the same definition of "missing":
+
+- **The Item form**, on both create and edit. Saving with a required field blank shows
+  "*Field* is required" against that field and the Item is not saved.
+- **CSV import**, row by row. A row missing a required value is rejected and named in the
+  import report; the rest of the file still imports.
+
+A value counts as missing when it is null, an empty text box, a blank number, or a list field
+with nothing in it. An empty list is missing, not present — a required Tags field means at
+least one tag.
+
+## Only enabled fields are enforced
+
+Required is ignored on a disabled field. That combination is easy to arrive at by accident:
+if you disable a core field, QRtub clears its Required flag at the same time, so re-enabling
+it later brings it back optional. Re-tick Required if you still want it.
+
+## The CSV partial-update carve-out
+
+This is the behavior most likely to catch you out, and it is deliberate.
+
+When a CSV row **creates** an Item, every required field on the Collection has to be present
+and filled in that row.
+
+When a CSV row **updates** an existing Item — because its `id` matches one already in the
+Collection — required fields are only checked for the columns that row actually contains. A
+two-column file that updates nothing but `status` will not be rejected over a required
+`serial_number` column it never mentioned.
+
+Without that carve-out, no partial update would ever be possible: any file narrower than the
+full set of required columns would fail on every row. The trade-off is that a partial update
+cannot be used to *notice* an existing Item with a required field left blank — nothing is
+re-validated except what you sent.
+
+The same rule applies to the Item ID format check when a Collection mints its links from a
+numbered pattern: an update row that omits `item_id` is not asked to prove anything about the
+Item ID the Item already has.
+
+## Choosing what to require
+
+Require the fields a scan depends on. If a Destination URL is built from
+`{{item.serial_number}}`, an Item with no serial number produces a broken link — the binding
+inserts an empty string rather than failing loudly. Making that field required is the cheapest
+place to catch it.
+
+Conditions behave the same way. An undefined identifier makes a whole condition evaluate to
+`false` silently, with no error shown, so a Destination gated on a field nobody filled in
+simply never appears.
+
+## Related
+
+- [Field Defaults](/fields/field-defaults)
+- [Creating a Custom Field](/fields/creating-a-field)
+- [Deleting and Disabling Fields](/fields/deleting-and-disabling)
+- [Importing Items from CSV](/import-export/importing-items)

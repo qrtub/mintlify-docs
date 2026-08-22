@@ -1,0 +1,90 @@
+---
+title: "Building an Item ID Mask"
+description: "The prefix, digit-count and suffix editor behind ID-based link generation — free-form masks vs. reserved numbered patterns, and the conflict rules for each"
+---
+
+When a Collection mints ID-based Links, the *mask* is what turns an Item ID into a Link address.
+It is three parts — a prefix, an optional digit count, and a suffix — and the editor appears
+inline the moment you select **Create an ID-based link** in **Settings → Link generation**.
+
+The editor shows a live preview of the address it will produce, so you can see the result before
+saving: `qrtub.com/CRA####TL` for a numbered mask, or `qrtub.com/cra<item id>tl` for a free-form
+one.
+
+## Two shapes, one editor
+
+The digit count is what separates them, and the difference matters more than it looks.
+
+### A numbered pattern (digit count set)
+
+Setting a digit count between 1 and 10 turns the mask into a **reserved numbered pattern**:
+prefix, exactly that many digits, suffix. `CRA` + 4 + `TL` produces the template `CRA####TL`,
+which an Item ID must match exactly — `CRA0042TL` passes, `CRA42TL` and `CRA0042` do not.
+
+This is enforced, not suggested:
+
+- The Item form prefills the Item ID box with the template (`CRA####TL`) so you only type the
+  number into the `#` slots.
+- The format is checked **on the server** on both create and edit, so CSV imports and API calls
+  are held to it too, not just the form.
+- Matching is case-insensitive, and the affixes are stored exactly as you type them.
+
+**Saving a numbered mask reserves that pattern for your team.** It then appears in the numbered
+patterns your team owns, and its number pool is shared.
+
+### A free-form mask (digit count blank)
+
+Leave the digits blank and the affixes simply wrap whatever Item ID you type:
+`<prefix><item id><suffix>`, lowercased. Nothing about the Item ID's shape is enforced.
+
+This is the older behavior, kept so existing Collections do not change. Use it when you already
+maintain an ID scheme of your own — a manufacturer's serial, an accounting code — and just want
+the Link to mirror it.
+
+## Adopting a pattern the team already has
+
+If your team has reserved numbered patterns already, the editor lists them in a dropdown with
+each one's next available number, so a second Collection can join an existing scheme instead of
+inventing a parallel one. Pick one and the prefix, digits and suffix fill themselves in.
+
+Once the mask matches a pattern the team owns, the editor shows its usage: the next number, the
+total generated, how many are currently active, which numbers are used, and which numbers are
+free in the gaps. That last one is the useful column — deleted Items leave their numbers behind,
+and this is where you see them.
+
+For what a numbered pattern is in its own right, and how claiming a range works outside a
+Collection, see [Numbered Links](/links/numbered-links).
+
+## Conflict rules
+
+The two mask shapes behave in opposite ways here, which is the single most surprising thing on
+this page.
+
+**A free-form mask can only belong to one Collection per team.** Try to save affixes another
+Collection on your team already uses and the save is refused, naming the Collection that has
+them. The reason is mechanical: a free-form mask has no shared number pool to coordinate with,
+so two Collections using the same affixes would race each other for the same addresses.
+
+**A numbered pattern is deliberately shareable.** Several Collections on the same team can adopt
+the same pattern, because they draw from one pool with shared used-number tracking, and each Item
+takes an unused number. Adopting a pattern is never blocked by another Collection.
+
+**A pattern reserved by a different team is refused.** Numbered patterns are globally unique, so
+if another team holds `CRA####TL` you will be asked for different affixes or a different digit
+count.
+
+## Failure modes worth knowing
+
+- **A number already taken by another Item** stops the Link, and the Item is still created
+  without one. Pick an unused number — the gaps list shows which are free.
+- **An unattached Link at that address is adopted**, not duplicated. This is how a pre-printed
+  numbered code gets picked up automatically when you create the matching Item.
+- **A blank Item ID mints no Link.** The Item form requires one, but paths that can leave it
+  blank — duplicating an Item, for instance — produce an Item with no Link rather than an error.
+
+## Related
+
+- [Link Generation for New Items](/collections/link-generation-modes)
+- [Numbered Links](/links/numbered-links)
+- [Item ID](/items/item-id)
+- [Choosing a Link Type](/links/choosing-a-link-type)

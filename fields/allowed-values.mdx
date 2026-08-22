@@ -1,0 +1,72 @@
+---
+title: "Allowed Values"
+description: "The fixed list of value, label and color options authored on a Text or List field, which turns it into a picker and colors the matching chip everywhere the field is shown."
+---
+
+Allowed Values is a fixed list of literal values you author on the field itself. Give a field
+a list and it stops being a free-text box and becomes a picker, with each option carrying its
+own color. The values belong to this field — a field that instead points at another record
+and shows *that* record's data is a
+[Reference field](/fields/reference-fields), which never uses an allowed-values list.
+
+Allowed Values is available on **Text** and **List** fields only. On any other type the field
+editor says so and offers no list.
+
+## Adding values to a field
+
+1. Open the Collection's settings and go to the **Fields** tab.
+2. Click the chip for the field you want, then **Manage Allowed Values**.
+3. Type the option's text under **Add Value**, pick a color, and press **Add**. A preview
+   chip shows what it will look like.
+4. Press **Save changes** on the settings form. Until you do, the list is not saved.
+
+Each option is stored as three things:
+
+- **Value** — what is actually written onto the Item. Generated from what you typed,
+  lowercased with spaces turned into underscores: "In Repair" becomes `in_repair`.
+- **Label** — what people see in the picker and on the Item. This keeps your capitals and
+  spacing: "In Repair".
+- **Color** — the color of the chip for that option.
+
+Because the value is the part that gets stored, it is also the part you write in conditions
+and URL templates: `item.status == "in_repair"`, not `"In Repair"`.
+
+## Colors are configured once and apply everywhere
+
+The color on each option is not just decoration in the picker. It is the color of that
+value's chip wherever the field is rendered:
+
+- in the Items table,
+- on the scanned Page, for Tags and for a Banner section bound to that field.
+
+So a status of `overdue` set to red shows red in your Items table and red on the page a
+customer scans, without configuring it twice.
+
+The match is on the stored value, exactly. If an Item holds a value that is not on the list —
+usually because it was imported, or typed in while
+[Allow New Values](/fields/allow-new-values) was on — it still displays, but with no color,
+because there is no option to take a color from.
+
+## Changing or removing an option
+
+Editing the list changes the list, not the Items. Removing an option leaves any Item that
+already holds that value untouched: the value stays on the Item, but it is no longer offered
+in the picker and no longer has a color. Changing an option's color reaches every Item at
+once, since the color was never stored on the Item in the first place.
+
+There is no rename for an option's stored value. Adding a replacement and removing the old
+one leaves existing Items holding the old value, so re-pick those Items or re-import them.
+
+## How strict is the list?
+
+By default, strict: the picker offers only what is on the list, and a CSV import rejects any
+row with a value that is not on it. That strictness is controlled by a single per-field
+toggle, and switching it on changes both the form and the import — see
+[Allow New Values](/fields/allow-new-values).
+
+## Related
+
+- [Allow New Values](/fields/allow-new-values)
+- [Reference Fields](/fields/reference-fields)
+- [Custom Field Types](/fields/field-types)
+- [Tags](/items/tags)

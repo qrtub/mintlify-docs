@@ -1,0 +1,57 @@
+---
+title: "Allow New Values"
+description: "The per-field toggle deciding whether a value outside the Allowed Values list can be typed in or imported — and why it switches off allowed-values checking on CSV import entirely."
+---
+
+**Allow New Values** decides whether people are limited to the options on a field's
+[Allowed Values](/fields/allowed-values) list, or can add one that is not there yet. It is a
+checkbox on the field itself, in the Collection's **Fields** tab.
+
+The checkbox only applies to **List** fields. On any other type it stays disabled, and the
+editor tells you why: switch the Field Type to List first. Tags, the core list field on every
+Item, ships with Allow New Values already on, which is why you can type any tag you like
+without configuring anything.
+
+## With it off
+
+The list is the whole vocabulary:
+
+- The Item form offers the list and nothing else.
+- A CSV import checks every cell in that column against the list and **rejects any row with
+  a value that is not on it**, naming the offending value and listing what is allowed. Other
+  rows in the file still import.
+
+This is the setting to keep for anything you filter, route, or condition on. A status column
+with three real values stays three values.
+
+## With it on
+
+- In the Item form, the picker gains an "Add" box. Type a value, choose a color, and it is
+  added to the Collection's Allowed Values list immediately — that one action saves straight
+  away, unlike the rest of the Fields tab, which waits for **Save changes**. From then on
+  the value is a normal option for every Item in the Collection, colored chip included.
+- Like values added in settings, a value typed here is stored lowercased with spaces turned
+  into underscores, while the text you typed is kept as its label.
+
+## The CSV interaction to know about
+
+**When Allow New Values is on, CSV import skips the allowed-values check on that field
+completely.** It is not a lenient check — there is no check. Any string in that column is
+accepted, and the row imports without a warning.
+
+That has a consequence worth stating plainly: `oprational` imports as happily as
+`operational`. And unlike a value typed into the Item form, a value that arrives by CSV is
+**not** added to the Allowed Values list. So it sits on the Item, out of the picker, with no
+chip color, and any condition testing for the correct spelling quietly fails to match it.
+
+If you rely on CSV import to keep a field clean, leave Allow New Values off and let the
+import reject the bad rows — the rejection report tells you exactly which rows and which
+values, and the good rows still land. Turn it on when the field is a genuinely open
+vocabulary that you want people to grow as they go.
+
+## Related
+
+- [Allowed Values](/fields/allowed-values)
+- [Custom Field Types](/fields/field-types)
+- [Importing Items from CSV](/import-export/importing-items)
+- [Tags](/items/tags)

@@ -1,0 +1,71 @@
+---
+title: "Adding and Removing Links in a Batch"
+description: "Two ways to change which links a Draft batch contains — from inside the batch, or from the Items and Access Links grids — and the one rule both obey."
+---
+
+A Draft batch's contents are not fixed. You can add links to it or take links out, one at a time
+or in bulk, right up until the batch leaves Draft. Every change regenerates the batch's stored
+CSV so the file always matches the list.
+
+The rule behind both routes below is the same: **links can only be edited on a Draft batch.**
+
+## From inside the batch
+
+Open the batch and choose **Edit included links**. The dialog has two tabs:
+
+**Current** lists every link in the batch. Filter by link URL, item name or Item ID, tick the
+links you want gone (or **Select all filtered**), and choose **Remove**.
+
+**Add** searches your team's links by link URL, destination, item name or Item ID. Links already
+in the batch are excluded from the results, so everything you see is genuinely addable. The list
+shows the first 50 matches with a note like "Showing 50 of 320 available links" — refine the
+search to reach the rest, or use **Select all (320)** and QRtub adds every match server-side
+without you paging through them.
+
+## From the Items or Access Links grid
+
+Both grids offer **Add to batch...** in the row menu and in the bulk-actions menu. Picking it
+opens a batch picker that lists **only Draft batches** — a batch past Draft is not offered at
+all, which is the first place most people notice the rule.
+
+If the grid is already filtered to one batch, that batch is hidden from the picker (every row is
+already in it) and the menu offers a direct add or remove against it instead.
+
+From the Items grid the selection is Items, and QRtub resolves each Item to its Link. An Item with
+no Link is skipped with the warning "Item has no links to add" rather than failing the whole
+operation.
+
+Bulk actions work either from the rows you ticked, or — with "select all pages" — from your
+current filters, handed to the server as a scope. That avoids sending tens of thousands of IDs
+from the browser.
+
+## The Draft-only rule, and how it surfaces
+
+Once a batch reaches Printing, Printed or Deployed, its link list is frozen:
+
+- **Edit included links** disappears from the batch panel.
+- The batch stops appearing in the "Add to batch" picker.
+- Where a batch is already selected in a grid, the add/remove controls are disabled with the
+  tooltip "Batch is printed — links are locked".
+- An attempt that reaches the server anyway is refused with "Links can only be edited on a draft
+  batch."
+
+To change a Printing or Printed batch, revert it to Draft first. Deployed cannot be reverted at
+all — see [Batch Status: Draft to Deployed](/print-batches/batch-status).
+
+## Details worth knowing
+
+- **Adding the same link twice is harmless.** A link already in the batch is skipped, never
+  duplicated, and the "added" count reflects only genuinely new links.
+- **The CSV is rebuilt from current data** after every add or remove, so a renamed Item shows its
+  new name in the regenerated file.
+- **Removing a link from a batch does not delete it.** The Link, its Item and its destination are
+  untouched; only its membership in this run goes away.
+- **Link and item counts are recalculated** after every change, so the batch row stays accurate.
+
+## Related
+
+- [Editing a Batch's Columns](/print-batches/editing-columns)
+- [Batch Status: Draft to Deployed](/print-batches/batch-status)
+- [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download)
+- [Creating a Print Batch](/print-batches/creating-a-batch)

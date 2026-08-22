@@ -1,0 +1,83 @@
+---
+title: "Previewing a Page"
+description: "The Item selector, the five responsive widths and the Preview toggle — and the four ways an editor preview differs from a real scan"
+---
+
+The Page Editor renders against real data, not a mockup. The Item selector in the top bar decides
+which data:
+
+- **Base Template** — the default view, with no Item selected.
+- **Any Item in the Collection** — that Item's actual field values.
+
+Switching Item is the fastest way to catch a layout that works for a short name and breaks for a
+long one, or an ActionLink that quietly disappears because one machine has no serial number.
+
+## Using the Item selector
+
+Open the selector and you get a searchable list. Search matches an Item's name, Item ID or
+description. The arrows either side step to the previous or next Item in the list, which is the
+efficient way to sweep a Collection looking for layout problems.
+
+Two things to know:
+
+- **The selector loads the first 100 Items only.** In a larger Collection, search only filters
+  those hundred — an Item beyond them will not appear. To reach one directly, open the editor from
+  that Item instead: its **Page** tab has an **Edit Page** button.
+- **Selecting an Item turns on override mode**, which changes what saving does. That is the single
+  most important thing to understand before you press Save — see [Per-Item Page
+  Overrides](/pages/page-overrides).
+
+**Base Template does not mean placeholder data.** With no Item selected, the canvas still renders
+against the first Item in the Collection, so what you see is real. Only an empty Collection gets
+invented sample values ("Sample Machine" and a placeholder image), which exist so that bindings
+show something rather than blank space.
+
+## Checking widths
+
+Five widths are available: **Responsive** (fills the panel), **Mobile** (375px), **Tablet**
+(768px), **Desktop** (1024px) and **Wide** (1440px). On a narrow screen these collapse into a
+single dropdown.
+
+Mobile is the one that matters most — nearly every scan is a phone — but Desktop and Wide are worth
+a look if the page's Max Width is set generously, since that is where a page designed on a phone
+starts to look sparse.
+
+## The Preview toggle
+
+The eye button hides the editing chrome: selection outlines, drag handles and drop zones. It also
+stops rendering sections that are currently hidden, instead of showing them dimmed, so you see
+close to the finished page. Toggle it back to keep working.
+
+## Four ways a preview is not a scan
+
+The preview is honest about data and not about context. These differences are real, and each one
+has fooled someone:
+
+1. **The preview is always signed in.** A session is always present — yours, or a stand-in if it
+   cannot be read. So any section gated on the viewer being signed in, including the AdminToolbar
+   with its default condition, always appears in the editor and may never appear for a scanner.
+2. **Device values come from your own browser.** `device.isMobile`, `device.os` and `device.browser`
+   describe the machine you are editing on. Clicking the Mobile width button changes the canvas
+   width and nothing else — a condition like `device.isMobile` still evaluates as your desktop.
+3. **Location is empty.** `request.country`, `request.city` and `request.ip` are all blank in a
+   preview, because there is no real scan behind it. A condition that depends on them will not fire
+   here even when it would fire in the field.
+4. **Time is your clock, in the moment.** Time values are computed fresh when the preview loads, so
+   a "weekday business hours" condition shows whatever is true right now.
+
+To check any of those four, open the Item's Link on the actual device — and, for the signed-in
+case, in a browser you are not logged in to.
+
+## The read-only previews outside the editor
+
+Two smaller previews render the same page without letting you edit it: the Collection's page tab in
+settings shows the template in a phone-sized frame, and an Item's **Page** tab shows that Item's
+page. Both need the Item saved first — a brand-new, unsaved Item shows a "Preview Not Available"
+message instead. Both carry a button through to the editor.
+
+## Related
+
+- [Per-Item Page Overrides](/pages/page-overrides)
+- [The Page Editor Layout](/pages/page-editor-layout)
+- [ActionLink: The Destination Button](/pages/action-link)
+- [Conditional Visibility](/destinations/conditional-visibility)

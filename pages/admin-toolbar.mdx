@@ -1,0 +1,88 @@
+---
+title: "AdminToolbar"
+description: "The button bar pinned to the bottom of a Page, visible only to signed-in team members by default, for shortcuts the public should not see"
+---
+
+AdminToolbar is a bar of your own buttons fixed to the bottom of the page — icon above a short
+label, spread evenly across the bar in the page's accent color. Its point is that it defaults to
+showing only when the viewer is signed in, so you can put internal shortcuts on a page the public
+also scans.
+
+A yard supervisor scanning a forklift sees a row of internal shortcuts along the bottom. A customer
+scanning the same forklift sees the page without them.
+
+## What it comes with
+
+Add an AdminToolbar and it arrives with three buttons already configured:
+
+| Button | Goes to |
+|--------|---------|
+| **QR Codes** | Your Links list |
+| **Edit** | This Item, open in the app for editing |
+| **Manage Tub** | This Collection's settings — the default label still carries the old name for a Collection, so rename it |
+
+Those default URLs use bindings — `{{tub.id}}` for the Collection and `{{item.id}}` for the Item —
+so they point at whatever you are looking at rather than at a fixed record. Note the Collection
+prefix is `tub.`, not `collection.`: the entity was renamed and the binding namespace kept the
+original term, and `{{collection.id}}` would resolve to an empty string with no error, producing a
+button that goes nowhere.
+
+## Configuring buttons
+
+Each button has three parts: a **label**, a **URL**, and an **icon** chosen from a curated set of
+around 110 common icons (tools, arrows, documents, devices, brands). An icon name the app does not
+recognize falls back to a plain circle rather than failing.
+
+The URL can be anything a link can be — an app page, an external system, an app deep link. Bindings
+work in it, with the same no-URL-encoding rule as everywhere else: a field value containing a space
+or an `&` will break the link.
+
+Two silent behaviors to know:
+
+- **A button with an empty label or an empty URL is dropped.** It does not render as a half-button;
+  it is simply not there.
+- **If no button survives that check, the whole toolbar renders nothing.** An AdminToolbar with
+  three blank rows is invisible, and looks identical to one that is hidden by its condition.
+
+Keep the count modest. The bar centers itself in a column about 480 pixels wide and divides the
+space evenly, so a handful of buttons reads well on a phone and a long list turns into unreadable
+slivers.
+
+## The signed-in default, and how to change it
+
+The visibility is not hardcoded — it is an ordinary section condition, pre-filled with a check for a
+signed-in viewer. You will find it in the **Visibility** group of the Properties panel.
+
+That means you can change it like any other condition: clear it to show the toolbar to everyone,
+or replace it with something narrower. The usual caution applies — an undefined identifier makes
+the whole condition evaluate to false silently, so a typo hides the toolbar with no error shown.
+See [Conditional Visibility](/destinations/conditional-visibility).
+
+**Being signed in is not the same as being on your team.** The default condition asks whether
+anyone is signed in to QRtub, not whether they belong to the team that owns the Collection. Do not
+put anything genuinely sensitive behind it. If a page must not be seen by outsiders at all, make
+the Item private instead — that is a real membership check. See [Page Privacy: Public vs.
+Private](/pages/page-privacy).
+
+## It always renders last
+
+Wherever the AdminToolbar sits in the Structure tree, it is rendered at the very end of the page and
+fixed to the bottom of the viewport, floating above the content as the visitor scrolls. Its row in
+the Structure panel has no drag handle and no move controls, because moving it would change nothing.
+The page adds extra bottom padding when a toolbar is present so the footer is not trapped
+underneath it.
+
+## It always appears in the editor
+
+Previews are always treated as signed in, so the default condition is always true there. The
+AdminToolbar shows in the Page Editor canvas, in Preview mode, and in the read-only previews in
+Collection and Item settings — including for pages where no real visitor will ever see it. The only
+way to check what an anonymous scan looks like is to open the Link in a browser you are not signed
+in to.
+
+## Related
+
+- [Section Types](/pages/section-types)
+- [Conditional Visibility](/destinations/conditional-visibility)
+- [Page Privacy: Public vs. Private](/pages/page-privacy)
+- [Previewing a Page](/pages/previewing-a-page)

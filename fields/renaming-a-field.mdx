@@ -1,0 +1,78 @@
+---
+title: "Renaming a Field"
+description: "Renaming a custom field is safe because its hidden storage ID never changes — and QRtub updates the page bindings, Destinations, and app-link fallbacks that referenced the old key."
+---
+
+Renaming a custom field does not move any data and does not break the things pointing at it.
+You rename it by changing its label; the key follows.
+
+1. Open the Collection's settings and go to the **Fields** tab.
+2. Click the field's chip.
+3. Edit **Custom Label**. The field key is regenerated from the new label — "Warranty End" on
+   a field keyed `warranty_date` makes it `warranty_end`.
+4. Click **Save**, then **Save changes** on the settings form.
+
+QRtub confirms the change as you save it, naming both keys: *Field key changed from
+"warranty_date" to "warranty_end".*
+
+## Why it is safe
+
+Every custom field is created with a stable internal ID — an 8-character code you never see
+— and the Item's value is stored under that ID, not under the key. The key is a
+human-readable pointer to the ID. Renaming rewrites the pointer and leaves the storage alone,
+so there is no data migration, no export-and-reimport, and no window where values are missing.
+
+Two consequences follow. Renaming is instant even on a Collection with thousands of Items. And
+a field that is deleted and re-created with the same key is *not* the same field: it gets a new
+ID, and it cannot see the old field's data.
+
+## What updates by itself
+
+**Page bindings.** The Page Editor shows you readable bindings like `{{item.warranty_date}}`,
+but stores them against the stable ID. A rename cannot break them; they simply display the new
+key next time you open the editor.
+
+**Destinations and renamed fields.** Destination URLs are stored with the readable key, so
+these genuinely would break — and QRtub rewrites them for you when you save the rename. Across
+every Item in the Collection it rewrites the Destination URL, the URL and condition of every
+conditional destination rule, the app-link fallback URL and message, and the Collection's own
+default destination template. Only Items that actually reference the renamed key are touched.
+
+This rewrite runs once, at the moment of the rename, using a before-and-after comparison of the
+field configuration. On the rare occasion an individual Item is missed, a later save will not
+retry it — the comparison shows no rename by then — so fix that Item's Destination by hand.
+
+**Conditions.** A condition typed against the field, whether on a page section or a
+destination rule, is covered by the two mechanisms above. This matters because a condition
+referencing a key that no longer exists does not raise an error: it evaluates to `false`
+silently, and the rule simply stops firing.
+
+## What does not update
+
+**A CSV file you already have.** An export's column headers come from each field's label, and
+an import matches a header back by label or by key — both of which the rename just changed. So
+a file exported beforehand now carries a column QRtub does not recognize, and its rows are
+rejected as an unknown column. Export the Collection again to get a file with current headers,
+or edit that one header by hand.
+
+**Anything outside QRtub.** The rename changes your field's key, not the parameter names of
+the system you are sending values to. A URL like
+`https://example.com/asset?sn={{item.warranty_end}}` has its binding rewritten; the `sn=`
+part is yours to maintain.
+
+## What cannot be renamed
+
+Core fields — Name, Item ID, Description, and Tags — have dedicated database columns rather
+than an internal ID, so both their key and their label are locked. The field editor marks them
+as such.
+
+A rename is also refused if the new key is already in use in the Collection, or breaks any of
+the [field key rules](/fields/creating-a-field). The error names the conflict and nothing is
+changed.
+
+## Related
+
+- [Creating a Custom Field](/fields/creating-a-field)
+- [Core Fields vs. Custom Fields](/fields/core-vs-custom)
+- [Deleting and Disabling Fields](/fields/deleting-and-disabling)
+- [Field Bindings](/destinations/field-bindings)

@@ -1,0 +1,54 @@
+---
+title: "Exporting a Collection Backup"
+description: "Downloading a JSON snapshot of a Collection's settings, field schema and page template — and why its Items are deliberately not in the file"
+---
+
+A Collection backup is a single JSON file you download on demand. Open **Settings → Admin →
+Backup & restore**, choose **Manage backup**, then **Download Backup**. The file is named after
+the Collection and the date, like `heavy-equipment-2026-08-22.json`.
+
+## What is in the file
+
+- **Details** — name, description, cover image and the "what is one Item called" label
+- **The full field schema** — every field, its type, labels, allowed values, defaults and
+  required flags
+- **Collection settings** — link generation mode and Item ID mask, scan behavior default,
+  default destination
+- **The active page template** — the page design Items in this Collection render
+- **Per-Item page overrides** — any page customization saved against an individual Item
+
+## What is not in the file
+
+**Items are not included.** This is the one thing everyone assumes and it is worth being blunt
+about: a Collection backup captures the *shape* of a Collection, not its contents. Restoring one
+will not bring your equipment records back.
+
+Export Items separately as CSV from the Item grid. Keep the two files together if you are
+archiving a Collection properly — the JSON restores the structure, the CSV restores the rows.
+
+Also absent: Links (they belong to the team, not the Collection, and survive independently),
+print batches, and anything team-level such as members or billing.
+
+Because Items are excluded, the per-Item page overrides in the file are recorded against an Item
+identifier rather than an internal database ID. They reattach only if Items with matching
+identifiers exist wherever you import the file — otherwise they are skipped with a warning.
+
+## When to take one
+
+- **Before a destructive change** — reworking a field schema, or replacing a page design you may
+  want back.
+- **To reuse a setup** — a finished Collection exported as a backup becomes your own reusable
+  starter, better fitted than any system template. See [Creating a New Collection From a
+  Backup](/collections/new-collection-from-backup).
+- **To move a setup to another team** — the file has no team baked into it; you choose the team
+  when you import.
+
+Backups are manual and on demand. Nothing is scheduled, and QRtub does not keep old versions of
+this file for you — the copy you download is the copy you have.
+
+## Related
+
+- [Importing a Collection Backup](/collections/import-backup)
+- [Creating a New Collection From a Backup](/collections/new-collection-from-backup)
+- [Exporting Items to CSV](/import-export/exporting-items)
+- [Deleting a Collection](/collections/deleting-a-collection)

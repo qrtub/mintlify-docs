@@ -1,0 +1,37 @@
+---
+title: "Random Links"
+description: "The default Link type: a five-character slug QRtub draws for you, served under /r/, with no length or charset options to configure"
+---
+
+A Random Link is one whose slug QRtub picks: five characters of letters and digits, served at `qrtub.com/r/{slug}`. You cannot choose the slug, and there is nothing to configure — which is exactly why it is the default and the fastest way to get printable codes.
+
+## How the slug is generated
+
+QRtub draws five characters from a base62 alphabet (`A–Z`, `a–z`, `0–9`) and stores the result in lowercase, so the address you see and print is always lowercase letters and digits, like `qrtub.com/r/x5fgd`.
+
+The length and the alphabet are fixed. There is no setting for a longer slug, a shorter one, or a different character set anywhere in QRtub — if you send a request asking for one, it is ignored and the standard five-character slug is minted instead.
+
+Before using a slug, QRtub checks that it is free. If the first draw is taken it tries again, up to a hundred times, and only fails if it somehow cannot find an unused slug in that many attempts. In practice you never see this; it is why creating five hundred random Links never asks you to resolve a conflict.
+
+## Creating them
+
+On the Links page, open the create form and choose **Random** as the strategy. Set **Number of Links** — the form accepts up to 100 in one request — and create. Each Link comes into existence unattached: a real, resolvable address with no Item, no Page and no destination until you give it one.
+
+Random is also the type QRtub uses when a Collection is set to mint a Link automatically for each new Item. That is a Collection-level setting rather than a property of the Link itself.
+
+## The one gotcha: case matters
+
+Random slugs are matched case-sensitively. `qrtub.com/r/x5fgd` resolves; `qrtub.com/r/X5FGD` does not — it returns "page not found", not a helpful redirect. Because slugs are stored lowercase, the practical rule is simple: print and type random addresses entirely in lowercase.
+
+This is the only Link type with that behavior. Numbered and custom slugs resolve regardless of case, which is worth remembering if the people using your codes are likely to type addresses instead of scanning them.
+
+## Don't forget the `/r/`
+
+A random slug lives under `/r/`, and the prefix is part of the address. `qrtub.com/x5fgd` is not the same URL as `qrtub.com/r/x5fgd` and will not find the Link. When you print a readable address underneath a QR code — and you should, because codes get scratched and painted over — print the whole thing including `/r/`.
+
+## Related
+
+- [Choosing a Link Type](/links/choosing-a-link-type) — when a numbered or custom slug is the better call
+- [What a Slug Is](/links/what-a-slug-is) — address shapes and case rules across all three types
+- [Downloading QR Codes](/bulk-links/downloading-qr-codes) — turning a batch of new Links into printable images
+- [Unallocated Links](/links/unallocated-links) — what a freshly created Link does before you attach anything
