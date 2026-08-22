@@ -1,0 +1,37 @@
+---
+title: "Upgrading a Team's Plan"
+description: "How a signed-in owner puts a plan on one specific team from inside the app, why only the owner can complete it, and why a team that already has a subscription shows a different button"
+---
+
+When you are already signed in, you subscribe a team from inside the app rather than through public checkout. Two places open the same plan picker: the **Upgrade** button in the top bar, which applies to whichever team you are currently in, and the **Choose a plan** button on the Subscription card on that team's page. Both attach the new subscription to that one team.
+
+## Picking a plan
+
+The picker shows the three self-serve tiers side by side with a monthly / annual toggle, opens with annual selected and Professional highlighted, and has a **Need more than Scale?** panel at the bottom that leads to a contact form for Enterprise.
+
+Choosing a tier sends you to Stripe's hosted payment page with the team recorded against the transaction. After payment, QRtub attaches the subscription to that existing team — it does not create another one, which is the difference between this path and [public checkout](/billing/subscribe).
+
+You land on a confirmation page afterwards. Activation is automatic, but Stripe's confirmation reaching QRtub takes a few seconds, so if the team page still shows the old state immediately after paying, reload it.
+
+## Only the owner can finish it
+
+The **Upgrade** button in the top bar appears for anyone on a team without an active subscription, including members who do not own it. Choosing a plan, though, is checked against team ownership on the server: if you are not the owner, the attempt stops with an error saying only the team owner can do that, and nothing is charged.
+
+If that happens to you, you are on someone else's team. Ask whoever owns it to subscribe it — the Subscription card and the billing portal are both owner-only, so there is nothing you can do from your own account. Owners can confirm which teams are theirs under **Profile → Your teams & subscriptions**.
+
+## A team that already has a subscription shows a different button
+
+The plan picker only appears for a team with no subscription attached. Once a team has one, the Subscription card shows the plan name and a **Manage subscription** button instead, which hands off to the Stripe billing portal — see [Managing Your Subscription](/billing/customer-portal).
+
+That means a genuine tier change on a paid team is a portal action, not an in-app one. QRtub records the new tier when Stripe reports the change, so the team page will show the new plan name shortly after the change goes through. What the portal actually offers depends on how it is configured, so if you cannot find an option to change tier there, email hi@qrtub.com rather than starting a second subscription for the same team.
+
+## Upgrading several teams
+
+Each team is a separate transaction. If you own three teams and want all three on a plan, you subscribe each one — switch to the team, open the picker, pay. There is no bulk or account-wide purchase, because there is no account-wide plan; [Billing Is Per-Team](/billing/per-team-billing) explains why.
+
+## Related
+
+- [Billing Is Per-Team](/billing/per-team-billing) — why a subscription belongs to one team
+- [Managing Your Subscription](/billing/customer-portal) — the portal, and what changes there
+- [Plans Overview](/billing/plans-overview) — what separates the tiers
+- [Subscription Status](/billing/subscription-status) — reading the state on the team page

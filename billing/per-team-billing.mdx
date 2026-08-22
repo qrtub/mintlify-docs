@@ -1,0 +1,37 @@
+---
+title: "Billing Is Per-Team"
+description: "A subscription attaches to one team rather than to your login, so one person can own several teams that each carry their own plan, payment method, and invoices"
+---
+
+In QRtub, a plan belongs to a **team**, not to your login. If you own three teams, that is three separate subscriptions — three plans, three payment methods, three sets of invoices. There is no account-wide plan sitting above them.
+
+## Why it works this way
+
+A team is the thing that holds the work: the Collections, the Items, the Links, and the people who manage them. Attaching payment to the team means the unit that owns the work is the unit that gets paid for, and it keeps separate operations genuinely separate.
+
+That matters most when one person is running more than one operation. A contractor managing their own plant fleet in one team and a client's site in another can put each on the plan that fits it, hand over or wind down one without touching the other, and give each its own invoice trail for their own accounting.
+
+## One person, several teams
+
+You can create additional teams from the team switcher at any time. A team created that way starts with no subscription attached — it is a working team immediately, and subscribing it is a separate step you take when you want to.
+
+To see everything at once, open **Profile → Your teams & subscriptions**. That section lists every team you own, with each team's current plan next to it and a button that takes you to that team's page — **Manage** for a team that already has a subscription, **Subscribe** for one that does not. It only lists teams you own, so teams where you are a member rather than the owner do not appear.
+
+## Only the team owner sees the billing controls
+
+The **Subscription** card on the team page is rendered for the team owner only. Other members of the same team do not see the card, cannot open the billing portal for it, and cannot start a subscription for it — the checkout and portal requests both check team ownership on the server, not just in the browser.
+
+So if you are a member of someone else's team and want to change its plan, the person who owns that team has to do it. If you own the team but signed in with a different account than the one that set it up, you will not see the card either — sign in as the owner.
+
+## A team with no subscription
+
+On a team that has never been subscribed, the Subscription card reads **No active subscription** and offers a **Choose a plan** button, and an **Upgrade** button appears in the top bar. That is the state a newly created team starts in.
+
+What a plan includes, and how QRtub treats a team whose usage has grown past what its plan advertises, is covered separately in [Plan Limits & Quotas](/billing/plan-limits) — read that page rather than assuming, because the answer is more specific than most software.
+
+## Related
+
+- [Plans Overview](/billing/plans-overview) — the tiers, the billing intervals, and how prices are shown
+- [Upgrading a Team's Plan](/billing/upgrade-a-team) — subscribing a specific team from inside the app
+- [Managing Your Subscription](/billing/customer-portal) — payment method, invoices, and cancellation
+- [Plan Limits & Quotas](/billing/plan-limits) — what an allowance is, and what it is not

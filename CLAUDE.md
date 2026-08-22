@@ -226,8 +226,14 @@ Navigation is defined in `docs.json`. A new page is not live until it is added t
 | Industry | Speak to a specific vertical | Industry-aware, practical |
 | Integration | Connect QRtub to a third-party tool | Precise, honest about mechanism |
 
-**CTAs:** pages close with "See plans and pricing" linking to `qrtub.com/pricing`, and the
-support address.
+**Page endings:** every page closes with a short `## Related` list of 2–4 sibling pages.
+**There is no CTA footer** — do not add "See plans and pricing", the support address, or the
+`snippets/cta.mdx` block to a help page, and do not "restore" one you find missing.
+
+Why: the identical CTA block appeared on all 19 pre-migration pages, so it carried no
+answering signal and only diluted every page's retrieval chunk. A `## Related` list of real
+sibling pages earns the same footer space by actually routing the reader onward. Commercial
+CTAs live in the navbar "Get Started" button, not in page bodies.
 
 **Do not describe QRtub as being in BETA.** The word was retired across every surface in
 August 2026 — docs, marketing and the founder's LinkedIn. On a reference site it reads as a

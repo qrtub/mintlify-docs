@@ -1,0 +1,57 @@
+---
+title: "Team Settings"
+description: "Renaming a team, changing its slug and replacing its logo from the owner-only Edit panel — including the slug that rewrites itself while you type a new name"
+---
+
+Open **Team** in the sidebar and click **Edit** next to the team name. A **Team Settings** panel
+opens with three fields — Team Name, Team Slug and Team Logo — plus **Save Changes** and
+**Cancel**. Nothing is saved until you click **Save Changes**.
+
+The **Edit** button only appears for the team's owner. Other members see the Team page without it,
+and the change is refused at the server as well, so there is no way around it. If you need a
+different person editing the team, ownership has to move — see [Leaving a Team](/team/leave-a-team).
+
+## Renaming the team
+
+Type a new name and save. The name updates everywhere at once: the switcher, the Team page header,
+your Profile's team list, and the invitation emails sent from then on. Existing Links, Collections
+and printed QR codes are unaffected — nothing physical depends on the team's name.
+
+**Watch the slug field while you rename.** As long as you have not touched the slug yourself, it
+rewrites itself from the name on every keystroke. Rename "Northside Plumbing" to "Northside
+Plumbing Group" and the slug silently becomes `northside-plumbing-group`. If you want the slug to
+stay as it is, retype it in the slug field before saving — editing it once stops it from following
+the name for the rest of that editing session.
+
+## The slug
+
+The slug accepts lowercase letters, numbers and hyphens only; anything else is rejected on save.
+It has to be unique across all of QRtub, so a save can come back with "That team slug is already
+taken" — pick another and save again.
+
+What the slug is actually for is narrower than it looks. It is a readable identifier shown under
+the team name on the Team page and beside each team on your Profile page. It is **not** part of any
+Link address, any scanned URL, or any dashboard address, so changing it cannot break a printed QR
+code or a saved bookmark.
+
+## The logo
+
+Upload a JPEG, PNG, GIF or WebP file up to 50 MB. SVG files are rejected. The logo appears in the
+team switcher and in the Team page header; teams without one show the first letter of the team name
+instead. Uploading a new file replaces the old one on save.
+
+## What is not here
+
+There is no delete-team button anywhere in the dashboard, and no control for changing another
+member's role. Member roles are fixed when you invite them ([Team Roles](/team/roles)), and the
+only thing that moves ownership is an owner leaving the team.
+
+Owners also see a **Subscription** section above the settings panel on the same page. That covers
+the team's plan rather than its identity, and it is visible to the owner only.
+
+## Related
+
+- [Team Overview](/team/overview)
+- [Creating a Team](/team/create-a-team)
+- [Team Roles](/team/roles)
+- [Leaving a Team](/team/leave-a-team)

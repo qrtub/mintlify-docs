@@ -277,6 +277,46 @@
               "print-shop/shop-redraws-your-file",
               "print-shop/getting-a-proof"
             ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "account/overview",
+              "account/change-password"
+            ]
+          },
+          {
+            "group": "Team",
+            "pages": [
+              "team/overview",
+              "team/switching-teams",
+              "team/create-a-team",
+              "team/team-settings",
+              "team/roles",
+              "team/invite-members",
+              "team/pending-invitations",
+              "team/accept-invitation",
+              "team/remove-members",
+              "team/leave-a-team"
+            ]
+          },
+          {
+            "group": "Billing",
+            "pages": [
+              "billing/per-team-billing",
+              "billing/plans-overview",
+              "billing/subscribe",
+              "billing/upgrade-a-team",
+              "billing/customer-portal",
+              "billing/subscription-status",
+              "billing/plan-limits"
+            ]
+          },
+          {
+            "group": "Workspace",
+            "pages": [
+              "workspace/search-everything"
+            ]
           }
         ]
       },

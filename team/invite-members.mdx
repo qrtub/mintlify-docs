@@ -1,0 +1,56 @@
+---
+title: "Inviting Team Members"
+description: "Sending an invitation from the owner-only Invite Member card, the two different paths for people who already have a QRtub account and people who don't, and the daily invite limit"
+---
+
+On the **Team** page, use the **Invite Member** card: type the person's email address, pick their
+role, and click **Invite**. Only the team's owner sees that card, and the server refuses invitations
+from anyone else.
+
+You do not need a paid plan to invite people. Inviting is not gated on having a subscription.
+
+## The email field
+
+Type the full email address. The dropdown that appears under the field matches **exact addresses
+only** — typing `jo` will never suggest `joanne@example.com`. That is deliberate: partial matching
+would let anyone probe which email addresses have QRtub accounts. People already on the team are
+left out of the suggestions entirely.
+
+You do not have to wait for a suggestion. Type the whole address and click **Invite** either way.
+
+Pick the role in the dropdown next to the button. **Editor** is the default and is what almost
+everyone should get. **Owner** is also offered, but it only sets a label — it does not give that
+person any owner powers. See [Team Roles](/team/roles).
+
+## What happens next depends on the invitee
+
+**If they already have a QRtub account,** a pending membership is created. They appear in your
+members table immediately with the status **Pending**, and they get an email plus a notification in
+the bell at the top right of their dashboard. They join when they accept it there. This kind of
+invitation does not expire.
+
+**If they don't have an account,** QRtub creates an email invitation instead. It appears in the
+**Pending Invitations** card, expires in 7 days, and the email they receive contains a link that
+creates their account. They join the team automatically on their first sign-in — no accept step.
+See [Accepting a Team Invitation](/team/accept-invitation).
+
+The two lists are separate, and this trips people up: someone who already had an account shows up
+in the **members table** as Pending, not in the Pending Invitations card. The **Pending** tile at
+the top of the page counts email invitations only.
+
+## When an invitation is refused
+
+- **"This user is already a member of this team."** They are already on the team, or already have a
+  pending membership. Check the members table for their row.
+- **An email invitation already exists for that address.** QRtub sends the invitation again and
+  restarts its 7-day window rather than creating a duplicate.
+- **"Too many requests. Please try again later."** Each team can send **50 invitations per day**.
+  The message includes how long to wait. The count is per team, not per person, and it covers both
+  kinds of invitation.
+
+## Related
+
+- [Managing Pending Invitations](/team/pending-invitations)
+- [Accepting a Team Invitation](/team/accept-invitation)
+- [Team Roles](/team/roles)
+- [Removing Team Members](/team/remove-members)

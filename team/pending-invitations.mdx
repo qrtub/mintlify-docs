@@ -1,0 +1,56 @@
+---
+title: "Managing Pending Invitations"
+description: "The Pending Invitations card — resending or revoking an emailed invitation, the 7-day expiry, and where the other kind of pending invite hides"
+---
+
+The **Pending Invitations** card on the Team page lists invitations you have sent, with the
+person's email address, the role they were invited as, and the date the invitation expires. Each row
+has two buttons: **Resend** and **Revoke**. The card is visible to the team's owner only.
+
+## What this card does and does not list
+
+It lists **only invitations sent to email addresses that have no QRtub account yet**. Those people
+have nothing to accept in-app — the emailed link is the whole mechanism, so it needs managing from
+here.
+
+Anyone you invited who **already had a QRtub account** is not in this card. They are in the members
+table below it, with the status **Pending**, and they join by accepting the notification in their
+own dashboard. To cancel that kind of invitation, remove their row from the members table — see
+[Removing Team Members](/team/remove-members).
+
+The **Pending** tile at the top of the page counts this card's rows only, so it can read `0` while a
+Pending row still sits in the members table.
+
+## Resend
+
+**Resend** emails the person a fresh sign-in link and pushes the expiry out to 7 days from now. Use
+it when the original never arrived, went to spam, or has expired.
+
+Resending is limited to **10 times per hour for any one invitation**. Past that, the button reports
+too many requests and tells you when to try again. Resending never creates a second invitation —
+there is only ever one per email address per team.
+
+## Revoke
+
+**Revoke** asks you to confirm, then deletes the invitation. The link already sitting in that
+person's inbox stops adding them to your team. Nothing else is affected: if they had already created
+a QRtub account from the link and joined, revoking a later invitation does not remove them — that is
+a member removal instead.
+
+You can re-invite the same address afterwards from the **Invite Member** card.
+
+## Expiry
+
+Email invitations expire **7 days** after they are sent, and again 7 days after each resend.
+
+Expired invitations are not cleaned up automatically. They stay in this card with a past expiry date
+until you revoke them, so the list is worth a scan occasionally. An expired invitation no longer
+adds anyone to the team, even if they click the old link and create an account — but a **Resend**
+brings it back to life with a new 7-day window, so you never need to delete and recreate it.
+
+## Related
+
+- [Inviting Team Members](/team/invite-members)
+- [Accepting a Team Invitation](/team/accept-invitation)
+- [Removing Team Members](/team/remove-members)
+- [Team Overview](/team/overview)

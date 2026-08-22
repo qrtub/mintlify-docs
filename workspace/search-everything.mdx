@@ -1,0 +1,58 @@
+---
+title: "Search Everything"
+description: "The global search in the dashboard top bar: which four things it matches, the six-results-per-section cap, how recent searches are stored, and why it spans every team you belong to"
+---
+
+Search Everything is the magnifying glass in the top bar of the dashboard. One box searches your Collections, Items, Links and Pages at the same time, and clicking a result takes you straight to it. It is built for finding one specific thing fast — not for building a filtered list, which is what the search and filter controls inside a Collection are for.
+
+Click the magnifying glass to open the panel, then start typing. Press `Escape`, click the X, or click outside the panel to close it. The magnifying glass only appears at tablet and desktop widths; on a narrow phone screen it is not in the top bar, so navigate through the sidebar instead. There is no keyboard shortcut to open it.
+
+## What it matches
+
+Results are grouped into up to four sections, and each section matches a specific piece of text:
+
+| Section | What it matches |
+|---------|-----------------|
+| Collections | The Collection name |
+| Items | The Item's name **or** its Item ID |
+| Links | The slug in the Link's address — not the name of the Item attached to it |
+| Pages | Same as Links, for Links whose Collection has Page Mode as its scan default |
+
+In the app the Collections section is labeled "Tub" and the Links section "Access Link" — older names for the same two things.
+
+The Links/Pages split is decided by the Collection's default scan behavior, not by the individual Item. A Link in a Page Mode Collection is filed under Pages even if that particular Item is set to Direct Mode. Both kinds of result show the Item's name when one is attached, but the search itself only looks at the address, so typing an Item name will not surface its Link — search the Items section for that and open the Item.
+
+Nothing else is searched. Descriptions, tags, custom field values, Destinations, Media and print batches, Page templates and teammate names are all outside this search.
+
+## Matching is a plain "contains", from one character
+
+Searching begins as soon as you have typed one character, after a short pause of about a third of a second so it is not re-querying on every keystroke. Matching is case-insensitive and matches anywhere in the text, so `cav` finds `Excavator`.
+
+It is not fuzzy and it is not word-by-word. The whole phrase you typed is matched as a single run of text, so `excavator north` only finds text containing exactly that sequence, and a misspelling finds nothing.
+
+These characters are removed and replaced with a space before the search runs: `%` `_` `,` `(` `)` `\` `*`. That means an Item ID like `AB_100` cannot be found by typing `AB_100` — type `AB` or `100` instead.
+
+## Six results per section, and no results page
+
+Each section shows at most six results. There is no pagination and no "see all results" screen — if what you want is not in the first six, type more of it. Links and Pages are drawn from the same batch of matching addresses, so a query matching a lot of Links can leave the Pages section shorter than the six it would otherwise show.
+
+The Filter button beside the box narrows results to one section: All, Collections, Items, Links or Pages. Choosing a section with no matches shows "No results" rather than falling back to the others. The filter resets to All every time you reopen the panel.
+
+## It covers every team you belong to
+
+Search Everything is scoped to all the teams your account is a member of, not just the team you currently have selected. If you belong to two teams, one query returns results from both, and the results are not labeled by team — Item rows show the Collection name, which is usually enough to tell them apart. If your account belongs to no team, the search returns nothing.
+
+Clicking a result opens it: a Collection opens its page, an Item opens its Collection with that Item selected, and a Link or Page opens its public address in a new browser tab.
+
+## Recent searches, and the one failure to know about
+
+Before you type, the panel lists your recent searches — up to six terms, most recent first. They are stored in the browser you are using, so they do not follow you to another device and no teammate sees them. A term is only remembered when you click through to a result; typing something and closing the panel saves nothing. **Clear All** deletes the list.
+
+If the search request itself fails, the panel shows "No results for …" — exactly what a genuine miss looks like. If you are confident something should have matched, close the panel and search again before concluding the record is missing.
+
+## Related
+
+- [Item ID](/items/item-id) — the identifier the Items section matches on
+- [What a Slug Is](/links/what-a-slug-is) — the part of a Link's address that Links and Pages match on
+- [Scan Behavior for New Items](/collections/scan-behavior-default) — the Collection setting that decides whether a Link is filed under Links or Pages
+- [Key Concepts](/key-concepts) — one sentence each on Collection, Item, Link and Page

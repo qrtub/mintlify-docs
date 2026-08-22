@@ -1,0 +1,56 @@
+---
+title: "Team Roles"
+description: "The two roles QRtub has — Owner and Editor — what genuinely differs between them, why there is no read-only role, and why the Owner label alone grants nothing"
+---
+
+QRtub has two roles: **Owner** and **Editor**. Editor is the default for anyone you invite. There
+is no third role, and no way to change a member's role after the fact — the role is chosen when
+the invitation is sent.
+
+## There is no read-only role
+
+You cannot give someone view-only access. Every member you invite can create Collections and
+Items, edit any Item's fields, create and edit Links, build and change Pages, and run print
+batches. If a person should not be able to change your data, do not add them to the team.
+
+The word "viewer" appears nowhere in the product, and an Editor cannot be restricted to a single
+Collection either — team membership is all-or-nothing across everything the team owns.
+
+## What the owner can do that an Editor cannot
+
+Permissions key off one thing: whether you are **the team's owner**, the single person recorded as
+owning the team. That is the only distinction the system actually enforces:
+
+| Action | Owner | Editor |
+|--------|-------|--------|
+| Edit team name, slug, logo | Yes | No |
+| Invite members, resend or revoke invitations | Yes | No |
+| Remove members | Yes | No |
+| See the team's Subscription section | Yes | No |
+| Delete a Collection, or delete an Item | Yes | No |
+| Everything else — Collections, Items, fields, Links, Pages, print batches, CSV import and export | Yes | Yes |
+
+Deleting a Media template or a Media batch is owner-only too. Deleting a **Link** is not — any
+member can delete or release Links, including ones somebody else created.
+
+**An Editor's delete of a Collection or an Item fails quietly.** The confirmation goes through and
+you may see no error at all, but the record is still there when the list reloads. If a member
+reports that deletes "don't stick," this is why: they are not the owner. Ask the owner to do it.
+
+## Why the Owner label grants nothing
+
+The invite form lets you pick **Owner** as the role for the person you are inviting. That choice
+only sets the word shown in the members table's **Access** column. It does not make them the
+team's owner and it grants none of the powers in the table above — they still see the Team page as
+a non-owner, with no Edit button, no invite card and no Subscription section.
+
+The team's real owner changes in exactly one place: when the current owner leaves the team, which
+hands ownership to another member as part of leaving. There is no separate transfer-ownership
+screen. See [Leaving a Team](/team/leave-a-team).
+
+## Related
+
+- [Inviting Team Members](/team/invite-members)
+- [Leaving a Team](/team/leave-a-team)
+- [Removing Team Members](/team/remove-members)
+- [Team Overview](/team/overview)

@@ -1,0 +1,42 @@
+---
+title: "Subscribing to a Plan"
+description: "The public checkout path for a brand-new customer: pick a plan and interval, pay with a card at Stripe, and get an account, a first team, and a subscription created together"
+---
+
+If you do not have a QRtub account yet, you get one by buying a plan. Start at [qrtub.com/pricing](https://qrtub.com/pricing), pick a tier, and QRtub creates your login, your first team, and the subscription together once the payment goes through. There is no separate sign-up step to do first.
+
+## What the flow looks like
+
+1. **Choose a plan on the pricing page** and pick monthly or annual. That takes you to a checkout page inside QRtub.
+2. **Confirm or change your choice.** The checkout page shows the plan you picked with its feature list, lets you switch tier or interval, and lists the other plans underneath if you change your mind.
+3. **Enter your email address.** This becomes the login for the account that gets created, so use one you can receive mail at.
+4. **Pay.** The button sends you to Stripe's own hosted payment page — QRtub never sees or stores your card details.
+
+At Stripe's page you enter card details and a billing address. GST is added automatically for Australian billing addresses and not added for addresses outside Australia. If you have a promotion code, there is a field for it there rather than in QRtub.
+
+**Card payments only.** Self-serve checkout takes cards. There is no invoice, bank transfer, or purchase-order path through self-serve checkout — if your business needs one, email hi@qrtub.com rather than working around it.
+
+## What happens after you pay
+
+Stripe confirms the payment to QRtub, and QRtub then creates the account, a first team owned by you, and the subscription attached to that team. The team is named from the first part of your email address — you can rename it afterwards in team settings.
+
+You will get an email with a magic link. Clicking it signs you in for the first time and takes you to a form to set a password. If it has not arrived after a couple of minutes, check your spam folder before contacting us — the account exists either way, and a password reset from the sign-in page will also get you in.
+
+If you close Stripe's page or back out before paying, you land on a cancellation page and nothing is charged.
+
+## If you already have an account, do not use this path
+
+Public checkout always sets out to create a new team. If you are an existing customer and want to put a plan on a team you already own, use the in-app upgrade instead — [Upgrading a Team's Plan](/billing/upgrade-a-team) covers it. Going through public checkout again with the same email address gives you a second team with its own subscription, which is a fine thing to want on purpose and an annoying thing to discover by accident.
+
+## One case to know about: a pending invitation on the same email
+
+If someone has already invited that email address to their team and the invitation has not expired, QRtub treats the incoming payment differently: it adds you to the team that invited you and does **not** create a new team or record a subscription for that payment. Stripe will still have charged you.
+
+That is not a state you can fix from inside the app. If it happens, email hi@qrtub.com with the address you paid with and we will sort it out. If you know an invitation is waiting for you, accept the invitation first and let the team owner handle the plan for that team.
+
+## Related
+
+- [Plans Overview](/billing/plans-overview) — the tiers, intervals, AUD pricing, and GST
+- [Upgrading a Team's Plan](/billing/upgrade-a-team) — the right path when you are already signed in
+- [Billing Is Per-Team](/billing/per-team-billing) — why checkout creates a team, not just a login
+- [Subscription Status](/billing/subscription-status) — what QRtub shows once the subscription is live

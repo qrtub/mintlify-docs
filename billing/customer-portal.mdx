@@ -1,0 +1,38 @@
+---
+title: "Managing Your Subscription"
+description: "The Manage subscription button hands off to Stripe's billing portal for one team — where the payment method, invoices, and cancellation live, and what QRtub itself does not track"
+---
+
+Everything about an existing subscription — the card on file, past invoices, canceling — happens in Stripe's billing portal, not in QRtub. Open it from the team page: **Subscription → Manage subscription**. QRtub creates a one-off session for that team's subscription and sends you to Stripe's own site, and Stripe returns you to the team page when you are done.
+
+## It is scoped to one team, and only the owner can open it
+
+The button only exists for the team owner, and the session it creates is for the subscription belonging to the team whose page you opened it from. If you own several paid teams, open the portal from the team you actually mean — or go to **Profile → Your teams & subscriptions** and press **Manage** next to the team you want, which switches you to that team before landing you on its page.
+
+Asking for the portal on a team that has never been subscribed, or one you do not own, returns an error rather than an empty portal.
+
+## What you can do there
+
+- **Update the payment method** — a new card, or a replacement after one expires.
+- **Download invoices and receipts** — the billing history for that team, which is where to go for anything your accountant needs.
+- **Cancel the subscription.**
+- **Change tier or billing interval**, if the portal is set up to offer it. If you do not see the option, email hi@qrtub.com instead of buying a second subscription for the same team.
+
+Card details are entered on Stripe's pages throughout. QRtub does not receive or store them.
+
+## What QRtub does not track
+
+QRtub records which plan a team is on and the status of its subscription, and nothing else about the billing cycle. It does not store your renewal date, your invoice history, or the fact that a cancellation is scheduled. The portal is the only place those exist.
+
+The consequence worth knowing: **if you cancel at the end of the billing period, the team page keeps showing the plan as normal until the subscription actually ends.** There is no "cancels on the 14th" notice in QRtub, and no countdown. Only when the subscription genuinely lapses does the team page change to show the plan name followed by `(cancelled)`. If you have canceled and want to check the effective date, look in the portal or in Stripe's confirmation email.
+
+## The button stays after you cancel
+
+A canceled team keeps its **Manage subscription** button rather than reverting to a plan picker, which is deliberate — it is how you get back in for old invoices after the subscription has ended. The card shows the plan name with `(cancelled)` next to it so you can tell the two states apart at a glance. If you want that team on a plan again and the portal does not offer a way back, email hi@qrtub.com rather than guessing.
+
+## Related
+
+- [Subscription Status](/billing/subscription-status) — what each status means and where it shows
+- [Upgrading a Team's Plan](/billing/upgrade-a-team) — putting a plan on a team that has none
+- [Billing Is Per-Team](/billing/per-team-billing) — why each team has its own portal session
+- [Plans Overview](/billing/plans-overview) — tiers, intervals, and GST
