@@ -20,7 +20,7 @@ If the Item's Link opens a Page instead, each Destination is a button on that Pa
 
 For a scan that redirects (rather than opening a Page), QRtub checks **only that Item's own destination data**, in this order:
 
-1. **Conditional routing rules**, if the Item has any enabled. Rules are evaluated top to bottom and the first match wins.
+1. **Conditional routing rules**, if the Item has any enabled. Rules are evaluated top to bottom and the first match wins — see [Conditional Destinations & Rule Priority](/destinations/conditional-destinations).
 2. **The Item's Default URL**, with any `{{bindings}}` resolved.
 3. **Nothing.** If neither produces a usable URL, the visitor gets the "not ready yet" page below.
 

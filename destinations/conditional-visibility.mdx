@@ -5,7 +5,7 @@ description: "Show or hide one section on a Page with a CEL condition — includ
 
 Conditional Visibility decides whether a single section on a Page renders at all. You write one CEL expression on the section; it is evaluated at scan time against that Item, that visitor's device, and the current time. True renders the section, false leaves it out entirely.
 
-This is a show/hide decision about one thing on a Page. It is not how you choose between two URLs — that is a different mechanism — the [Destination's own conditional routing rules](/destinations/what-is-a-destination) — and it works even when there is no Page at all.
+This is a show/hide decision about one thing on a Page. It is not how you choose between two URLs — that is a different mechanism — the [Destination's own conditional routing rules](/destinations/conditional-destinations) — and it works even when there is no Page at all.
 
 ## Where the condition lives
 
@@ -94,7 +94,7 @@ Also note that an ActionLink already hides itself when its own URL binding canno
 
 ## Related
 
-- [What Is a Destination?](/destinations/what-is-a-destination) — the other CEL mechanism: conditional routing rules choosing which URL a scan uses
+- [Conditional Destinations & Rule Priority](/destinations/conditional-destinations) — the other CEL mechanism: conditional routing rules choosing which URL a scan uses
 - [Device Detection & Routing](/destinations/device-detection) — the `device.*` fields you can test in a condition
 - [Section Types](/pages/section-types) — every section that can carry a condition
 - [Field Bindings & URL Templates](/destinations/field-bindings) — the `{{ }}` syntax and full namespace reference

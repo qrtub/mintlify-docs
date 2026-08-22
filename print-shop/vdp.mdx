@@ -1,0 +1,38 @@
+---
+title: "Variable Data Printing (VDP)"
+description: "How a digital press images each piece individually and merges a different QR code from your data file live at print time, and what to hand a shop running it"
+---
+
+Variable data printing is a live, per-piece merge: a digital press (laser or inkjet) images every unit individually, so the shop's software can pull a different value from a data file for each one as the run goes. The code changes from one piece to the next without stopping the press. This is the flow for stickers, labels, and anything printed on paper or vinyl at volume.
+
+## Every VDP job is two things merged at print time
+
+**A template.** Your design, with the parts that stay identical on every piece — logo, border, headings, any fixed text — and a marked region for the part that changes. The template is built once.
+
+**A data file.** One row per physical piece, one column per thing that varies. At minimum that means the destination address for each piece, and, if the shop is placing supplied images rather than generating codes itself, a reference to the matching code image.
+
+The merge itself happens inside the press's software during the run. Nothing is flattened in advance, which is why a VDP job is not bounded by sheet size the way a gang sheet is — a run of 5,000 is the same job shape as a run of 50.
+
+## What to give a VDP shop
+
+Export a print list from QRtub: open the Links you want to print, choose **Print List**, select your columns, and download the CSV. One row in that file is one physical piece — that is the convention every VDP toolchain expects.
+
+Include the **Full URL** column. A shop with live variable-data software can render each QR code directly from that text, with no image files involved at all. If that is your situation, you do not need to download the code images and you do not need to solve the filename-matching problem; the CSV alone is the whole handoff.
+
+Add any Item fields you want printed alongside the code — name, description, tags — as extra columns.
+
+## When they do want the images
+
+Some shops place a supplied PNG rather than generating the code themselves. Download the codes as a ZIP from the same Links view. Every file is named `qr-code-<slug>.png`, and matching each one to its CSV row takes a small string transformation, because neither URL column is a byte-for-byte match for the filename.
+
+## Limits worth stating up front
+
+QRtub exports PNG only — 1024 × 1024 pixels, black on white. There is no vector option, no size or color control, and no exposed error-correction setting. For most VDP work on labels and stickers that is fine, because the pieces are small. Where it matters, the answer is not a different export format: hand the shop the **Full URL** column and let them generate the code at the size and format their press wants.
+
+Also worth confirming before the run: which column the shop is treating as the variable field. A column mismatch produces a batch where every code scans perfectly and points at the wrong item. It looks correct until someone scans it.
+
+## Related
+
+- [Choosing Your Print Production Method](/print-shop/choosing-a-method) — the question that tells you whether your job is VDP at all
+- [Matching QR Codes to Data Rows](/print-shop/matching-codes-to-rows) — pairing `qr-code-<slug>.png` with its CSV row
+- [Getting and Scanning a Proof](/print-shop/getting-a-proof) — catching a column mismatch while it is still cheap

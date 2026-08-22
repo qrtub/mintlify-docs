@@ -1,0 +1,43 @@
+---
+title: "Getting and Scanning a Proof"
+description: "Why a print proof must show real records rather than a blank template, and why you have to scan the codes with a phone instead of inspecting them on screen"
+---
+
+Before the full run, ask for a proof of a handful of **real records** — not the blank template — and then **scan the codes with a phone**. Looking at a proof tells you almost nothing about whether the codes are right, because a QR code pointing at the wrong item looks identical to a correct one.
+
+## Ask for real records, not a template
+
+A template proof shows you the layout: fonts, colors, dimensions, where the code sits. Useful, and not the risk.
+
+The risk is in the merge — whether row 47 of your data file ended up on piece 47. A blank template cannot show you that, because there is nothing merged into it. Ask for three to five actual pieces from the actual data, ideally not consecutive rows, so an off-by-one offset has somewhere to show itself.
+
+If the job is a gang sheet, ask for a proof of the composite file with real codes in place, since the whole sheet is produced in one pass and there is no correcting it afterward.
+
+## Scan them, do not look at them
+
+This is the part people skip. Open your phone camera, scan each code on the proof, and confirm the destination that opens is the item you expect for that specific piece.
+
+A QR code is not human-readable. Two codes for two different items look like the same field of black and white squares. Nothing about a wrong code looks wrong. So a batch built from a shifted column, a mis-sorted CSV, or an image-to-row match that slipped by one comes back looking flawless, scans perfectly, and sends every scan to the wrong asset.
+
+Scanning is the only check that tests the thing that actually fails.
+
+## What to confirm on the proof
+
+- **The right destination landed on the right piece.** Scan each proof piece and check it against your data file by hand.
+- **The codes still scan at the real print size**, on the real material, not on a screen or a laser-printed mockup.
+- **The quiet zone survived.** At least 4 modules of clear space on all four sides, with nothing crossing it — not a border, not a mounting hole, not the edge of a laminate.
+- **Scanning works at the distance the piece will actually be read from**, and under the lighting it will live in. A code on a plant room door is not the same test as a code on a desk.
+- **Any printed text near the code is correct too** — including the readable address, if you print one as a fallback.
+
+## Why this is the last cheap moment
+
+A data-column mismatch is a well-documented failure mode in variable data printing generally, and it costs almost nothing to catch on a proof of five pieces. Once 500 plaques are anodized, or the gang sheet has been exposed and cut, the fix is a reprint.
+
+If the codes point at QRtub Links, a wrong *destination* can be repointed later without reprinting. A wrong *code on the wrong physical piece* cannot — the piece is already attached to the wrong asset, and someone has to go find it.
+
+## Related
+
+- [Preparing Your Print Job](/print-shop/preparing-your-job) — the handoff this proof is checking
+- [Matching QR Codes to Data Rows](/print-shop/matching-codes-to-rows) — the step a bad proof usually points back to
+- [What to Expect When a Shop Redraws Your File](/print-shop/shop-redraws-your-file) — why the proof may not look like the file you sent
+- [Print Batches](/print-batches/overview) — tracking the run once the proof is approved

@@ -1,0 +1,41 @@
+---
+title: "Choosing Your Print Production Method"
+description: "Variable data printing versus gang sheets — the two ways a shop produces a batch of unique QR codes, and the one question that tells you which one your job is"
+---
+
+A batch where every code is different gets produced one of two genuinely different ways: **variable data printing (VDP)**, where the machine images each piece individually and pulls a different value from a data file as the run goes; or a **gang sheet**, where every unique code is laid out in one flattened file first, produced in a single pass, then cut, routed, or engraved apart. Neither is a workaround. Which one applies is decided by the material and the equipment, not by preference.
+
+## VDP versus gang sheets, head to head
+
+| | Variable data printing | Gang sheet |
+|---|---|---|
+| **What varies per piece** | The machine changes the code between pieces without stopping | Nothing — one static image per pass |
+| **When the merge happens** | Live, on press | Once, ahead of time, in design software |
+| **Who builds the file** | The shop's software, from your data file | You or your designer, before anything is produced |
+| **Typical materials** | Stickers, labels, paper, vinyl | Photo-anodized aluminum, laser-engraved metal, UV flatbed on rigid panels, screen printing on boards |
+| **Batch size limit** | Bounded by the run, not the sheet | Bounded by physical sheet or bed size |
+| **Separation step** | Pieces come off finished | Cut, routed, or laser-cut apart afterward |
+
+## Ask your shop this one question
+
+**"Does your equipment image each piece individually and merge live from a data file, or do you need one flattened file with everything already laid out, that gets cut or engraved apart afterward?"**
+
+That answer decides everything downstream:
+
+- **Live merge** — hand over a data file and let their software do the rest. There may be no artwork assembly for you to do at all.
+- **Flattened file** — someone has to build the full composite sheet before it goes near the press, engraver, or anodizer. Budget time for that step, and ask what registration or cut marks the artwork needs so the cutting stage lines up with an image that is already permanent.
+
+Ask it early. It changes the quote, the lead time, and how many pieces fit in one run.
+
+## What you export is the same either way
+
+Whichever flow you are in, QRtub gives you the same two things: a print list CSV (one row per physical piece) and the QR code images as PNGs. Nothing about the export changes. What changes is *who* does the merging and *when* — their software on press, or your design tool beforehand.
+
+One caveat worth knowing before you read further: QRtub exports QR codes as PNG only, 1024 × 1024 pixels, black on white. There is no vector export. If a shop needs vector artwork, give them the **Full URL** column from the CSV and let them generate the code themselves — the URL is all a QR generator needs.
+
+## Related
+
+- [Variable Data Printing (VDP)](/print-shop/vdp) — how a live per-piece merge works and what the shop needs from you
+- [Gang Sheets and Composite-Sheet Production](/print-shop/gang-sheets) — building the one flattened file, and the laser-engraving exception
+- [Preparing Your Print Job](/print-shop/preparing-your-job) — the full handoff checklist
+- [Print Batches](/print-batches/overview) — tracking a production run once it is sent

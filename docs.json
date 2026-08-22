@@ -98,6 +98,14 @@
     {
       "source": "/unallocated-links",
       "destination": "/links/unallocated-links"
+    },
+    {
+      "source": "/print-shop-basics",
+      "destination": "/print-shop/choosing-a-method"
+    },
+    {
+      "source": "/preparing-print-job",
+      "destination": "/print-shop/preparing-your-job"
     }
   ],
   "colors": {
@@ -220,6 +228,7 @@
               "destinations/time-fields",
               "destinations/request-fields",
               "destinations/conditional-visibility",
+              "destinations/conditional-destinations",
               "destinations/device-detection",
               "destinations/app-links"
             ]
@@ -259,8 +268,14 @@
           {
             "group": "Working with a Print Shop",
             "pages": [
-              "print-shop-basics",
-              "preparing-print-job"
+              "print-shop/choosing-a-method",
+              "print-shop/vdp",
+              "print-shop/gang-sheets",
+              "print-shop/preparing-your-job",
+              "print-shop/quiet-zone-and-size",
+              "print-shop/matching-codes-to-rows",
+              "print-shop/shop-redraws-your-file",
+              "print-shop/getting-a-proof"
             ]
           }
         ]

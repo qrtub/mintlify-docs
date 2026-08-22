@@ -1,0 +1,46 @@
+---
+title: "Gang Sheets and Composite-Sheet Production"
+description: "Materials that reproduce one static image per pass — anodized aluminum, laser engraving, UV flatbed, screen printing — need every unique code laid out in one file first, then cut apart"
+---
+
+Some of the most durable materials for signage and asset tags can only reproduce **one static image per pass**. There is no live merge happening inside the machine at all. So to get a different QR code on every piece, every unique code has to already be sitting in its final position inside **one file** before that pass runs. That file is a gang sheet. The whole sheet is exposed, printed, or engraved in a single pass, and only afterward is it cut, routed, or laser-cut into individual pieces.
+
+Materials that work this way include photo-anodized aluminum, laser-engraved metal, UV flatbed printing on rigid panels and acrylic, and screen printing on boards.
+
+## Why the file has to be finished first
+
+Photo-anodized aluminum is the clearest illustration: the manufacturer's own guidance is explicit that plates are *imaged first*, with every serial number, barcode, and QR code already baked into the exposure. Cutting is a separate, later step. That has a consequence most people miss — the artwork needs its own registration marks so the cutting tool can line up with an image that is already permanent. Get the marks wrong and you cannot re-image; you have scrap.
+
+The same shape applies to laser engraving run in batch mode, UV flatbed on metal or acrylic, and screen printing on rigid boards. Confirm with your shop what registration or cut marks they want on the artwork, and ask early — it is a change to the file, not a setting on the machine.
+
+## Building the composite file: Multiple Records and N-up
+
+Assembling a gang sheet is usually done in ordinary design software, not anything specialized.
+
+Adobe InDesign's Data Merge has a **Multiple Records** mode built for exactly this. You place a merge-field placeholder once, point it at your data file, and it tiles that placeholder into a grid across the page until the page is full — using your CSV the same way a variable data printing job would, except the output is one flattened file rather than a live merge. A shop running dedicated VDP software has an equivalent step, usually called **N-up** or imposition.
+
+Either way, the merge still happens. It just happens once, ahead of time, in a design tool, instead of live on press.
+
+Two things to plan for that a VDP job does not force you to think about:
+
+- **Sheet and bed size is a hard ceiling.** How many pieces fit on one sheet decides how many passes the job takes and what it costs. Ask before you finalize quantities.
+- **Bleed, spacing, and kerf.** The cutting, routing, or laser step needs room between pieces. Your designer needs those numbers from the shop, not from a guess.
+
+## The laser-engraving exception
+
+Laser engraving can run the *other* way. Some laser software pulls the next serial or code live from a database as each piece is marked, one machine cycle at a time — closer to variable data printing in spirit, even though nothing is printed on a press. In that mode you hand over a data file and skip the composite sheet entirely.
+
+Because the same machine can do both, the material does not tell you which you are getting. **Ask which mode your engraver actually runs.**
+
+## What QRtub gives you for this flow
+
+The **Full URL** column of an exported print list is the source data for the merge — one row per physical piece. If you or your designer are placing supplied code images instead of generating them during the merge, download the codes as a ZIP; each file is named `qr-code-<slug>.png`.
+
+One constraint matters more here than anywhere else: QRtub exports PNG only, at 1024 × 1024 pixels, with no vector option. Gang-sheet materials are often large-format, and a raster code enlarged well past its pixel dimensions can blur enough to stop scanning. Where the finished piece is big, do not go looking for a vector export — there isn't one. Give the shop the **Full URL** column and let them generate each code themselves at the exact size their process needs.
+
+## Related
+
+- [Choosing Your Print Production Method](/print-shop/choosing-a-method) — the one question that tells you whether your job is a gang sheet
+- [Variable Data Printing (VDP)](/print-shop/vdp) — the live-merge alternative, and what a press does differently
+- [QR Code Print Spec: Quiet Zone and Minimum Size](/print-shop/quiet-zone-and-size) — the clear space and minimum size each code on the sheet needs
+- [Matching QR Codes to Data Rows](/print-shop/matching-codes-to-rows) — pairing each image with the right row before you flatten

@@ -1,0 +1,51 @@
+---
+title: "Matching QR Codes to Data Rows"
+description: "Pairing a downloaded qr-code-<slug>.png with its row in an exported print list, and why neither the Short URL nor Full URL column is an exact string match for the filename"
+---
+
+Matching is manual, and it turns on the slug. Every downloaded QR code image is named after its Link's slug — a Link at `qrtub.com/r/aBc12` downloads as `qr-code-aBc12.png`. The same slug appears at the end of the **Short URL** and **Full URL** columns of an exported print list. Match on the slug.
+
+The catch: **neither column is a byte-for-byte match for the filename.** Whoever does the matching has to strip a prefix first.
+
+## What each column actually contains
+
+| Column | Value for a random Link | Value for a numbered or custom Link |
+|---|---|---|
+| Filename | `qr-code-aBc12.png` | `qr-code-cra0042.png` |
+| **Short URL** | `/r/aBc12` | `/cra0042` |
+| **Full URL** | `https://qrtub.com/r/aBc12` | `https://qrtub.com/cra0042` |
+
+So:
+
+- **Short URL** carries a leading slash, and for random Links an additional `/r/` prefix. Numbered and custom Links get the leading slash but no `/r/`.
+- **Full URL** carries the protocol and domain on top of that.
+- The filename carries the bare slug plus `qr-code-` and `.png`.
+
+Nothing in QRtub exports the bare slug as its own column today. Any tool doing the match — a Canva Bulk Create sheet, an Illustrator or Photoshop script, a few lines of Python, or a spreadsheet formula — has to do the transformation itself.
+
+## The transformation
+
+Going from a filename to a slug is the simpler direction: drop the `qr-code-` prefix and the `.png` extension.
+
+Going the other way, from a column to a slug, means stripping the protocol and domain if you started from **Full URL**, then the leading `/`, then `r/` if it is there. In a spreadsheet, the usual approach is a formula that takes everything after the last `/` in the URL — that handles both Link types in one pass, because the slug is always the final path segment.
+
+Whichever direction you go, build the key once in a helper column and match on that, rather than eyeballing hundreds of rows.
+
+## Why the mismatch matters
+
+Because a wrong match is invisible. Two codes are the same size, the same colors, the same visual noise. A batch where rows and images got offset by one produces plaques that look flawless and send every scan to the wrong item. There is no error, no warning, and no way to tell by looking.
+
+That is why the check happens on a proof, with a phone, and not on screen.
+
+## The shortcut: skip the images entirely
+
+If your shop's software can render QR codes directly from text — many variable data printing toolchains can — hand over the CSV alone and let them generate each code from the **Full URL** column. No image files, no filenames, no matching step, and nothing to get offset by one.
+
+Ask whether they can. It removes the single most error-prone part of the handoff.
+
+## Related
+
+- [Preparing Your Print Job](/print-shop/preparing-your-job) — the full handoff this step sits inside
+- [Getting and Scanning a Proof](/print-shop/getting-a-proof) — where a bad match gets caught
+- [Downloading QR Codes](/bulk-links/downloading-qr-codes) — how the PNG and ZIP filenames are built
+- [What a Slug Is](/links/what-a-slug-is) — the identifier both the filename and the URL are built from
