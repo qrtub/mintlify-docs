@@ -18,7 +18,7 @@ Each rule is a numbered card (Rule 1, Rule 2, …) with two fields:
 
 **Else** connectors show the order, and the chevron buttons move a card up or down. That order *is* the priority. The optional **Label** (the tag button) documents a rule for whoever edits it next; it has no effect on matching.
 
-The same editor appears on a Link not yet attached to an Item, in the Access Links area — there only `device.`, `time.`, `request.` and `accessUrl.` values exist, since an Item's fields are unavailable until the Link is assigned.
+The same editor appears on a Link not yet attached to an Item, in the Access Links area — there only `device.`, `time.`, `request.` and `link.` values exist, since an Item's fields are unavailable until the Link is assigned.
 
 ## The order a scan follows
 
@@ -35,10 +35,9 @@ A rule with an empty condition matches everything, so every rule below it is unr
 ```text
 Rule 1  When item.type == "crane"     Then https://forms.example.com/crane?asset={{item.assetID}}
 Rule 2  When "heavy-equipment" in item.tags  Then https://forms.example.com/heavy?asset={{item.assetID}}
-Default                               https://forms.example.com/general?site={{tub.name}}
+Default                               https://forms.example.com/general?site={{collection.name}}
 ```
 
-The Collection binding prefix is `tub.`, not `collection.` — Collections were renamed from Tubs and the binding namespace kept the original word. `{{collection.name}}` never resolves, which by the next section means any rule using it is skipped every time.
 
 ## A rule whose URL does not fully resolve is skipped
 

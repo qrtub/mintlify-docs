@@ -44,21 +44,13 @@ the last three are not available everywhere.
 | Namespace | What it holds | Available in |
 |---|---|---|
 | `item` | The scanned Item's own fields, standard and custom — see [Item Fields Reference](/destinations/item-fields) | Destinations and Pages |
-| `tub` | The Collection the Item belongs to — see [Collection Fields Reference](/destinations/collection-fields) | Destinations and Pages |
+| `collection` | The Collection the Item belongs to — see [Collection Fields Reference](/destinations/collection-fields) | Destinations and Pages |
 | `device` | The scanning device's type, OS and browser — see [Device Detection & Routing](/destinations/device-detection) | Destinations and Pages |
 | `time` | The current hour, day, month and year in UTC — see [Time Fields Reference](/destinations/time-fields) | Destinations and Pages |
 | `request` | Language, referrer and CDN-derived location — see [Request Fields Reference](/destinations/request-fields) | Destinations and Pages |
-| `accessUrl` | The specific Link that was scanned: its slug, strategy and sequence number | Destinations only |
+| `link` | The specific Link that was scanned: its slug, strategy and sequence number | Destinations only |
 | `session` | The signed-in team member viewing the Page, if any | Pages only |
 | `theme` | The Page's accent color and border radius — see [Theming a Page](/pages/page-theming) | Pages only |
-
-Two of those names do not match the words used in the interface, because the underlying data
-was renamed and the binding namespaces were not:
-
-- **The Collection prefix is `tub.`, not `collection.`.** Collections were previously called
-  Tubs. Write `{{tub.name}}`. `{{collection.name}}` is not a namespace and resolves to nothing,
-  with no error message.
-- **The Link prefix is `accessUrl.`, not `link.`.** Same reason.
 
 ## Values are inserted exactly as stored
 

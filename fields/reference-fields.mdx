@@ -55,9 +55,7 @@ field. And remember that values are inserted into a URL exactly as stored, with 
 URL-encoding — a value containing a space or an `&` will break the link.
 
 If what you actually want in the URL is the Collection the Item belongs to, that is a
-Collection binding rather than a reference field: `{{tub.name}}`. **The Collection binding
-prefix is still `tub.`, not `collection.`** — Collections were renamed, the binding namespace
-was not. `{{collection.name}}` returns an empty string with no error.
+Collection binding rather than a reference field: `{{collection.name}}`.
 
 **CSV import cannot fill a reference field.** A UUID field's CSV cell has to be a JSON
 object, so a bare record ID in that column is rejected as invalid. Set reference fields from

@@ -53,7 +53,7 @@ https://example.com/assets/{{item.serial_number}}
 
 Every tag then resolves to its own asset's record without being configured individually. That is what makes the workflow viable at a few thousand tags rather than a few dozen.
 
-Two things to know before you rely on a template across a whole run. Values are inserted **exactly as stored, with no URL-encoding** — a field containing a space or an `&` will break the resulting link, so keep the fields you bind into a URL clean. And Collection-level fields use the `tub.` prefix, not `collection.`: write `{{tub.name}}` even though the entity is called a Collection everywhere else. `{{collection.name}}` produces an empty string with no error. See [Field Bindings & URL Templates](/destinations/field-bindings).
+Two things to know before you rely on a template across a whole run. Values are inserted **exactly as stored, with no URL-encoding** — a field containing a space or an `&` will break the resulting link, so keep the fields you bind into a URL clean. See [Field Bindings & URL Templates](/destinations/field-bindings) for the full syntax.
 
 Because the destination is held by QRtub rather than baked into the code, you can change where every tag points later — a new system, a new URL structure — without touching anything physical.
 

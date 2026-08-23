@@ -21,11 +21,8 @@ Add an AdminToolbar and it arrives with three buttons already configured:
 | **Edit** | This Item, open in the app for editing |
 | **Manage Tub** | This Collection's settings — the default label still carries the old name for a Collection, so rename it |
 
-Those default URLs use bindings — `{{tub.id}}` for the Collection and `{{item.id}}` for the Item —
-so they point at whatever you are looking at rather than at a fixed record. Note the Collection
-prefix is `tub.`, not `collection.`: the entity was renamed and the binding namespace kept the
-original term, and `{{collection.id}}` would resolve to an empty string with no error, producing a
-button that goes nowhere.
+Those default URLs use bindings — `{{collection.id}}` for the Collection and `{{item.id}}` for the Item —
+so they point at whatever you are looking at rather than at a fixed record.
 
 ## Configuring buttons
 

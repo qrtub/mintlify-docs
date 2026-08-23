@@ -22,14 +22,13 @@ Everything the Page itself can bind to is available in a condition:
 | Namespace | Holds |
 |-----------|-------|
 | `item.*` | This Item's fields, standard and custom |
-| `tub.*` | The Collection's name, description, and metadata |
+| `collection.*` | The Collection's name, description, and metadata |
 | `device.*` | Device type, OS, and browser of the person scanning |
 | `time.*` | Hour, day of week, day of month, month, year, weekend flag — all UTC |
 | `request.*` | Path, referrer, language, and CDN-derived country and city |
 | `session.*` | The signed-in viewer, when there is one — null for anonymous scans |
 | `theme.*` | The Page's accent color and radius |
 
-Note the Collection namespace is `tub.`, not `collection.` — Collections were renamed from Tubs, and the binding prefix still uses the original word. `collection.name` does not raise an error; it simply never resolves, which by the rule below means your condition never fires.
 
 ## Working examples
 
@@ -60,7 +59,7 @@ Combine conditions with `&&`, `||`, and `!`, and group with parentheses:
 Restrict a section to one Collection when the Page template is shared:
 
 ```text
-tub.name == "Sydney Depot"
+collection.name == "Sydney Depot"
 ```
 
 ## A wrong condition and an unmet condition look identical

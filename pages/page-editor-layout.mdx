@@ -61,19 +61,14 @@ a namespace:
 ```text
 {{item.name}}
 {{item.serial_number}}
-{{tub.name}}
+{{collection.name}}
 ```
 
 Rather than typing them, open the **Data** tab and drag a field straight onto the setting you want
 it in.
 
-Note the Collection prefix is `tub.`, not `collection.` — Collections were formerly called Tubs and
-the binding namespace kept the original term. `{{collection.name}}` is not a binding; it resolves
-to an empty string with no error.
-
-One namespace in that list is a trap: the **Access URL** group (`accessUrl.*`, the app's older name
-for a Link) is available to Destination URLs and routing rules, but it is not part of what a Page is
-rendered with. Dragging one of those fields into a section leaves you with an empty value and no
+One namespace in that list is a trap: the **Link** group (`link.*`) is available to Destination
+URLs and routing rules, but it is not part of what a Page is rendered with. Dragging one of those fields into a section leaves you with an empty value and no
 error.
 
 Two behaviors to expect: a binding that cannot be resolved renders as empty rather than showing an

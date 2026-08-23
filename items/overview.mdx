@@ -47,9 +47,8 @@ those bindings:
 
 - Values are inserted **exactly as stored**, with no URL encoding. A field containing a space,
   `&`, `?` or `#` will break a Destination URL built from it.
-- Collection fields use the `tub.` prefix, not `collection.` — `{{tub.name}}` returns the
-  Collection's name. Collections were renamed from Tubs and the binding namespace was not, so
-  `{{collection.name}}` silently returns an empty string with no error.
+- Collection fields use the `collection.` prefix — `{{collection.name}}` returns the
+  Collection's name.
 
 Deleting an Item does not delete its Links. They are released back to your unassigned Links, so
 codes already printed and stuck to physical things keep resolving.
