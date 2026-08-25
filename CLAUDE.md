@@ -238,6 +238,17 @@ Planning notes deliberately live in the ops repo, not here. They are full of bin
 double braces and comparisons like "under 150 words", which the MDX parser reads as JSX and which
 broke `mintlify broken-links` on every run. A docs repo should contain only pages.
 
+### The Verified badge is off, deliberately
+
+`tag: "Verified"` and the `<Verified>` callout are switched off on every page as of 26 Aug 2026.
+They were on eight pages at once, which made the badge decoration rather than information. **Turn
+it back on one page at a time, only when that recipe has actually been tested against a live
+account** — its value is entirely in being uncommon.
+
+What HAS been tested is still recorded in frontmatter (`verified`, `verifiedNote`) as data with no
+visual output, so nothing is claimed publicly and nothing is lost. `snippets/verified.mdx` is kept
+for the same reason and carries its own note explaining it is dormant rather than dead.
+
 ### Integration pages: shallow first, and use the app's own words
 
 **The first page for a platform is the trivial case: point a Link at the thing.** Take its share

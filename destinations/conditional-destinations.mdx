@@ -40,7 +40,6 @@ Rule 2  When "heavy-equipment" in item.tags  Then https://forms.example.com/heav
 Default                               https://forms.example.com/general?site={{collection.name}}
 ```
 
-
 ## A rule whose URL does not fully resolve is skipped
 
 If any binding in a matched rule's URL fails to resolve, QRtub discards that rule and continues down the list rather than sending a half-built URL. This is the likeliest cause of a scan going somewhere unexpected: the rule matched, but its URL was never used.

@@ -1,3 +1,17 @@
+{/*
+  DORMANT ON PURPOSE — do not delete as cruft.
+
+  Turned off across every page on 26 Aug 2026. The badge was on eight pages, which made it
+  decoration rather than information. It comes back per page, as each recipe is actually tested
+  against a live account, so that its presence means something.
+
+  The record of what HAS been tested is kept in each page's frontmatter (`verified`,
+  `verifiedNote`) — data with no visual output. Nothing is claimed publicly, nothing is lost.
+
+  To switch a page back on: add `tag: "Verified"` to its frontmatter, import this snippet, and
+  place <Verified platform="..." date="..." /> under the recipe.
+*/}
+
 export const Verified = ({ platform, date }) => (
   <Note>
     <strong>Verified recipe.</strong> The URL formats on this page were tested against {platform} on {date}.

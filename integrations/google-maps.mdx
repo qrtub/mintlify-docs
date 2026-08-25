@@ -4,10 +4,7 @@ icon: "map-pin"
 description: "How to open a location in Google Maps from a scan, including binding coordinates from each Item's own fields."
 verified: "2026-08-25"
 verifiedNote: "Maps URLs api=1 search and dir formats live-tested; Google documents that no API key is needed"
-tag: "Verified"
 ---
-
-import { Verified } from '/snippets/verified.mdx';
 
 ```
 https://www.google.com/maps/search/?api=1&query=-33.8688,151.2093
@@ -24,8 +21,6 @@ https://www.google.com/maps/dir/?api=1&destination={{item.latitude}},{{item.long
 
 `api=1` is required in both. **No Google API key is needed** — these are Maps URLs, not the
 Maps API.
-
-<Verified platform="Google Maps" date="25 August 2026" />
 
 ## Bind coordinates, not place names
 
