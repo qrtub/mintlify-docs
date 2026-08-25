@@ -109,6 +109,10 @@
     {
       "source": "/preparing-print-job",
       "destination": "/print-shop/preparing-your-job"
+    },
+    {
+      "source": "/integrations/cmms-systems",
+      "destination": "/integrations/overview"
     }
   ],
   "colors": {
@@ -121,9 +125,6 @@
     "tabs": [
       {
         "tab": "Help",
-        "pages": [
-          "index"
-        ],
         "groups": [
           {
             "group": "Getting Started",
@@ -131,7 +132,8 @@
               "creating-your-first-link",
               "key-concepts",
               "workspace/search-everything"
-            ]
+            ],
+            "root": "index"
           },
           {
             "group": "Collections & Items",
@@ -359,14 +361,24 @@
         ]
       },
       {
-        "tab": "Integrations",
+        "tab": "Works with",
         "groups": [
           {
-            "group": "Connecting Other Systems",
+            "group": "Platforms",
             "pages": [
+              "integrations/google-forms",
+              "integrations/google-maps",
+              "integrations/google-workspace",
+              "integrations/jotform",
+              "integrations/maintainx",
+              "integrations/microsoft-365",
+              "integrations/notion",
               "integrations/safetyculture",
-              "integrations/cmms-systems"
-            ]
+              "integrations/servicem8",
+              "integrations/whatsapp",
+              "integrations/youtube"
+            ],
+            "root": "integrations/overview"
           }
         ]
       }

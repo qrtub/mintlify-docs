@@ -238,6 +238,75 @@ Planning notes deliberately live in the ops repo, not here. They are full of bin
 double braces and comparisons like "under 150 words", which the MDX parser reads as JSX and which
 broke `mintlify broken-links` on every run. A docs repo should contain only pages.
 
+### Integration pages: shallow first, and use the app's own words
+
+**The first page for a platform is the trivial case: point a Link at the thing.** Take its share
+link, paste it as a Destination, done. Depth is a *separate, later* page — pre-filling a form,
+opening a spreadsheet at a row, starting a video at a timestamp. Get the shallow layer complete
+across every platform before going deep on any of them, because "point to a form / point to a
+video / point to a doc" is what most readers came for.
+
+**Describe the other platform the way the platform describes itself.** On an integration page the
+reader's mental model of that product came from its vendor, not from us. Google says Forms is
+"online forms to get insights quickly… create forms and surveys to gather data" — so *form*,
+*survey*, *responses*. Do not recast someone else's product as an asset-management tool because
+that is the shape of our examples.
+
+**A platform's own nouns beat our glossary when describing that platform.** Mitti has
+**asset profiles**; that is their entity and their word, so the Mitti page says "asset profile"
+even though GLOSSARY maps Asset → Item for QRtub's own concepts. The rule applies to *our* nouns
+only. Do not "correct" a vendor's terminology — it makes the page wrong and unsearchable.
+
+**Use the vocabulary in `../qrtub/GLOSSARY.md`, and check it rather than assuming.** The Destination
+definition already says "an external URL, a qrtub doc library, **a form**, a payment flow" — so
+*form* is the house word. **Never "asset"**: GLOSSARY maps Asset → Item because QRtub does not
+position itself as asset management. Item's own definition offers the usable examples —
+"equipment, location, product".
+
+**The title is the platform name.** Not "Google Forms Integration: Pre-Filled Forms from a QR
+Code". Short enough that `sidebarTitle` is unnecessary.
+
+**The description describes what the page covers. It is not a pitch.** "Point a Link at a Google
+Form that opens already knowing which asset it is about" is selling; "How to use a Google Form as
+a Destination, and what its sharing settings decide about who can submit" is describing.
+
+### Then: the recipe first, in two lines
+
+**Open with the URL and the substitution.** Nothing before it — no "X is a popular platform", no
+paragraph explaining what the tool does. The reader already uses it. They came for the string.
+
+```
+https://x.com/NAME
+```
+
+Replace `NAME` with the handle, or bind it: `https://x.com/{{item.handle}}`
+
+**That is a complete page.** Everything after those two lines is optional and only earns its place
+if it is something the reader would otherwise get wrong:
+
+- **How to get the ID out of the platform**, where it cannot be guessed — and always point at the
+  platform's own "copy link" or "get pre-filled link" button rather than teaching URL construction
+- **What breaks** — unencoded values, ID formats, fields that cannot be pre-filled
+- **Whether the person scanning can get in** without an account or the vendor's app
+
+If a platform has none of those, the page stops after two lines. **Do not pad it to look
+substantial.** Target under 250 words. Mitti is the exception, and only because it genuinely has
+five code types and an access matrix.
+
+Logos live in `images/logos/`, fetched from each vendor's own CDN — see the README there before
+adding one, because a logo.dev image would bring an attribution requirement with it.
+
+**Card grids use `<CardGroup cols={n}>`, not `<Columns>`.** Mintlify's current published docs
+say to group cards with `<Columns>`; this deployment does not render it. The cards themselves
+still appear, so the failure is silent — you get a stack of full-width boxes instead of a grid,
+and `broken-links` cannot see it. When adding a card grid, check the rendered HTML for a wrapper
+carrying a `grid` class immediately around the cards, not just that the cards exist.
+
+**A tab's landing page is set by `root` on its first group, not by the tab's own `pages` array.**
+Mintlify ignores tab-level `pages` when deciding where the tab link points and uses the first page
+of the first group instead — so without `root` the Help tab landed on Creating Your First Link and
+Works with landed on Google Forms. Check the rendered `<a>` href for each tab after changing nav.
+
 **The Help tab nav is an accordion**: 6 top-level groups holding 15 nested collapsed groups.
 Mintlify's `expanded` property only works on *nested* groups — top-level groups always expand —
 so a new group belongs inside a parent, not alongside them.

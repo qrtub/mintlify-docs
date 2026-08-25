@@ -1,11 +1,18 @@
 ---
 title: "Mitti (formerly SafetyCulture / iAuditor)"
 icon: "clipboard-list"
+verified: "2026-08-25"
+verifiedNote: "Deep-link formats and the five generated QR code types checked against help.mitti.com"
+tag: "Verified"
 sidebarTitle: "Mitti"
 description: "Point a Link at any Mitti destination — an inspection, a report, a course, an asset, a file, or issue reporting for people with no Mitti account. Mitti was called SafetyCulture, and iAuditor before that."
 ---
 
+import { Verified } from '/snippets/verified.mdx';
+
 Point a QRtub Link at a Mitti destination and a scan lands straight on the right record — the inspection for this machine, its last report, its asset history, or a form a visitor can use without a Mitti account.
+
+<Verified platform="Mitti" date="25 August 2026" />
 
 ## If you know it as SafetyCulture or iAuditor
 
@@ -84,7 +91,7 @@ Use QRtub's URL Template feature to automatically insert template IDs from your 
 
 **Destination URL:** `iauditor://template/new_audit/{{item.templateID}}`
 
-**Why this matters for bulk deployment:** Configure the Destination once with a template placeholder. Each Item in your Collection can have a different `templateID` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
+**Why this matters at volume:** Configure the Destination once with a template placeholder. Each Item in your Collection can have a different `templateID` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
 
 This allows different Items to use different Mitti templates based on their Item data—no manual configuration per Item.
 
@@ -108,7 +115,7 @@ Where:
 - `8f2f287e-be6e-470c-a2e2-a0fd8ab966ae` is the question item ID in your template
 - `{{item.assetID}}` is the QRtub field binding — replaced with that Item's own asset ID before the link opens
 
-**Bulk deployment benefit:** Configure this URL once. Deploy to 500 pieces of equipment. Each scan substitutes that Item's own asset ID into the link, and Mitti reads the parameter and pre-fills the matching question. No manual setup per Item.
+**At volume:** Configure this URL once for 500 pieces of equipment. Each scan substitutes that Item's own asset ID into the link, and Mitti reads the parameter and pre-fills the matching question. No manual setup per Item.
 
 ### Pre-Fill Multiple Questions
 
@@ -278,7 +285,7 @@ This is the difference that decides how much work a fleet takes.
 - Verify deep link isn't too long (keep it under ~2000 characters)
 
 **Users need access:**
-Deep links only work if users have permission to access the relevant entities in Mitti. Ensure your team has appropriate access before deploying.
+Deep links only work if users have permission to access the relevant entities in Mitti. Ensure your team has appropriate access before you produce a Batch.
 
 ## Resources
 
@@ -292,8 +299,3 @@ Deep links only work if users have permission to access the relevant entities in
 - [Pages Overview](/pages/pages-overview)
 - [Key Concepts](/key-concepts)
 
----
-
-**Ready to get started with QRtub?** [See plans and pricing →](https://qrtub.com/pricing)
-
-Questions? Email us at [hi@qrtub.com](mailto:hi@qrtub.com)

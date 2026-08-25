@@ -1,0 +1,45 @@
+---
+title: "WhatsApp"
+icon: "message-square"
+description: "How to open a WhatsApp conversation from a scan with the message already written, and the exact number format required."
+verified: "2026-08-25"
+verifiedNote: "wa.me with ?text= live-tested; number format per WhatsApp's own click-to-chat documentation"
+tag: "Verified"
+---
+
+import { Verified } from '/snippets/verified.mdx';
+
+```
+https://wa.me/61400000000?text=Fault%20on%20PLANT-0412
+```
+
+Opens a WhatsApp chat to that number with the message already typed. The person scanning still
+presses send, so nothing is sent without them.
+
+<Verified platform="WhatsApp" date="25 August 2026" />
+
+## The number format is strict
+
+Digits only, with the country code, and nothing else:
+
+- **No** `+`, no spaces, no brackets, no dashes
+- **No leading zero** — an Australian `0400 000 000` becomes `61400000000`
+- **No** `00` international prefix either; the country code alone is enough
+
+A wrongly formatted number does not error. It opens WhatsApp on a chat to nobody.
+
+## Encode the words, bind only the ID
+
+`text=` has to be URL-encoded, and QRtub does no encoding. So write the static part already
+encoded, and bind only a value with no spaces in it:
+
+```
+https://wa.me/61400000000?text=Fault%20on%20{{item.itemId}}
+```
+
+`%20` is a space. Never bind a description or a note — the first space breaks the link.
+
+## Related
+
+- [Field Bindings & URL Templates](/destinations/field-bindings)
+- [What Is a Destination?](/destinations/what-is-a-destination)

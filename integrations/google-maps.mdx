@@ -1,0 +1,41 @@
+---
+title: "Google Maps"
+icon: "map-pin"
+description: "How to open a location in Google Maps from a scan, including binding coordinates from each Item's own fields."
+verified: "2026-08-25"
+verifiedNote: "Maps URLs api=1 search and dir formats live-tested; Google documents that no API key is needed"
+tag: "Verified"
+---
+
+import { Verified } from '/snippets/verified.mdx';
+
+```
+https://www.google.com/maps/search/?api=1&query=-33.8688,151.2093
+```
+
+Replace the coordinates with bindings — `query={{item.latitude}},{{item.longitude}}` — and every
+Link opens the map at its own Item's position.
+
+For directions instead of a pin:
+
+```
+https://www.google.com/maps/dir/?api=1&destination={{item.latitude}},{{item.longitude}}
+```
+
+`api=1` is required in both. **No Google API key is needed** — these are Maps URLs, not the
+Maps API.
+
+<Verified platform="Google Maps" date="25 August 2026" />
+
+## Bind coordinates, not place names
+
+`query=` accepts a place name as well, but a name has spaces in it, and spaces have to arrive as
+`+` or `%20`. QRtub does no URL encoding, so a bound place name breaks the link.
+
+Coordinates have no spaces, so they are safe. Store latitude and longitude as their own fields and
+bind those.
+
+## Related
+
+- [Field Bindings & URL Templates](/destinations/field-bindings)
+- [What Is a Destination?](/destinations/what-is-a-destination)

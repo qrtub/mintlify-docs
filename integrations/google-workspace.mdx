@@ -1,0 +1,36 @@
+---
+title: "Google Drive, Docs and Sheets"
+icon: "file-text"
+description: "How to use a Drive file, folder, Doc, Sheet or Slides deck as a Destination, and what the file's General access setting decides about who can open it."
+---
+
+```
+https://docs.google.com/document/d/FILE_ID/edit
+```
+
+Do not build this by hand. Open the file, choose **Share → Copy link**, and paste that in as the
+Destination. The same applies to a Sheet, a Slides deck, and to any file or folder in Drive.
+
+Swapping `/edit` for `/preview` opens a Doc read-only, without the editing toolbar — usually what
+you want on a tag.
+
+## Who can open it
+
+The file's **General access** setting decides this, and it is the only thing that matters here:
+
+- **Restricted** — only named people. Anyone else scanning the tag gets a request-access screen.
+  This is the default for a new file, and it is the most common reason a tag "does not work".
+- **Anyone with the link** — what a tag needs if people outside your organisation will scan it.
+
+Set the role to **Viewer** unless you genuinely want scanners editing the file.
+
+<Note>
+A locked file behind a public tag is the single most common failure in this whole section. It looks
+fine when you test it, because you are signed in and you own the file. Test it in a private window
+before you produce a Batch.
+</Note>
+
+## Related
+
+- [What Is a Destination?](/destinations/what-is-a-destination)
+- [Microsoft 365](/integrations/microsoft-365) — the same job, the same trap

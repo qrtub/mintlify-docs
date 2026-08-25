@@ -1,0 +1,30 @@
+---
+title: "Microsoft 365"
+icon: "file"
+description: "How to use a SharePoint or OneDrive file or folder as a Destination, and why the sharing scope usually decides whether a scan works."
+---
+
+Open the file in SharePoint or OneDrive, choose **Share → Copy link**, and paste it in as the
+Destination. The link already carries everything it needs; there is nothing to construct.
+
+## The sharing scope is the whole problem
+
+The dialog offers something like **Anyone with the link**, **People in *your organisation***,
+**People with existing access**, and **Specific people**. Only the first works for someone outside
+your tenant.
+
+**And "Anyone with the link" is frequently switched off at tenant level**, which is the difference
+between Microsoft 365 and Google Drive here: with Drive you can usually fix a locked file yourself,
+whereas in a managed Microsoft tenant you may need IT to permit anonymous links at all.
+
+So decide who is going to scan before you commit to this Destination:
+
+- **Your own staff, signed in** — works well, and the link survives file moves within the site.
+- **Contractors, visitors, the public** — check with whoever administers the tenant first. If
+  anonymous links are blocked, put the public-facing copy somewhere else and keep the controlled
+  copy here.
+
+## Related
+
+- [Google Drive, Docs and Sheets](/integrations/google-workspace) — the same job, fewer obstacles
+- [What Is a Destination?](/destinations/what-is-a-destination)
