@@ -167,7 +167,7 @@ Not accurate: "syncs with SafetyCulture" / "test results update automatically".
 
 ## Writing patterns
 
-### Problem-solution (preferred for landing and industry pages)
+### Problem-solution (landing pages only — see the warning under Industry pages)
 
 ```
 [PROBLEM — specific and recognisable]
@@ -190,16 +190,31 @@ Not accurate: "syncs with SafetyCulture" / "test results update automatically".
 
 ### Industry pages
 
-QRtub is industry-agnostic. When writing for a vertical:
+**An industry is an audience, not a concept, so an industry page can never be atomic on its
+own.** That is the trap. The previous version of this section said *"change the nouns, not the
+verbs — same capabilities, different context"*, and following it produced five pages that were
+one template filled in five times: "The Challenge" ×5, "Real-World Example" ×5, "Why X Choose
+QRtub" ×5. 6,522 words of which maybe 2,000 was industry-specific, and a fix to one left four
+stale. Do not reintroduce that instruction.
 
-1. **Change the nouns, not the verbs** — same capabilities, different context
-2. **Use industry terminology** for the customer's own domain (an electrician's "test and
-   tag", a council's "assets"), but use QRtub's glossary terms for QRtub's own concepts
-3. **Lead with industry-specific pain points**
-4. **Reference the real tools they use** — without implying QRtub integrates with them
+**Write the mechanism once, as a workflow page**, and let industry pages route to it. A
+compliance register is the same mechanism for an electrician, a council and an arborist — one
+page, three referrers.
 
-Industry pages have historically been the worst offenders for overclaiming. Before
-publishing one, check every capability sentence against the app source.
+An industry page is a short entry point, roughly 400 words:
+
+1. **What is being tagged**, physically and specifically
+2. **The Collection shape** that fits — the fields that actually matter here
+3. **The one or two things genuinely different** about this industry
+4. **Links out** to the workflow pages and the atomic Help pages
+
+Then:
+
+- **Use industry terminology** for the customer's own domain (an electrician's "test and tag",
+  a council's "assets"), but QRtub's glossary terms for QRtub's own concepts
+- **Reference the real tools they use** — without implying QRtub integrates with them
+- Industry pages have historically been the worst offenders for overclaiming. Check every
+  capability sentence against the app source before publishing.
 
 ---
 
@@ -211,9 +226,21 @@ help.qrtub.com
 ├── /<page>               How-to guides for QRtub features — root-level, no /help/ prefix
 │                         (the subdomain already says "help"; repeating it in every path
 │                         was redundant, dropped August 2026 — old /help/* links redirect)
-├── /industries/*         Vertical landing pages
+├── /industries/*         Vertical pages — CURRENTLY HIDDEN FROM NAV, see planning/docs-status.md
 └── /integrations/*       Guides for connecting QRtub to third-party tools
 ```
+
+**Progress is tracked in `../qrtub-ops/docs-planning/docs-status.md`.** Read it before starting
+docs work and update it in the same commit. It carries the decisions log, what shipped, and what
+is next. The atomic IA design sits beside it in `../qrtub-ops/docs-planning/atomic-ia/`.
+
+Planning notes deliberately live in the ops repo, not here. They are full of binding examples in
+double braces and comparisons like "under 150 words", which the MDX parser reads as JSX and which
+broke `mintlify broken-links` on every run. A docs repo should contain only pages.
+
+**The Help tab nav is an accordion**: 6 top-level groups holding 15 nested collapsed groups.
+Mintlify's `expanded` property only works on *nested* groups — top-level groups always expand —
+so a new group belongs inside a parent, not alongside them.
 
 There is no blog. Two stale posts were removed in August 2026; do not reintroduce the
 section without a decision to maintain it.

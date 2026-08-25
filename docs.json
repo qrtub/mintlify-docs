@@ -126,211 +126,231 @@
             "group": "Getting Started",
             "pages": [
               "creating-your-first-link",
-              "key-concepts"
+              "key-concepts",
+              "workspace/search-everything"
             ]
           },
           {
-            "group": "Collections",
+            "group": "Collections & Items",
             "pages": [
-              "collections/overview",
-              "collections/creating-a-collection",
-              "collections/starter-templates",
-              "collections/collection-details",
-              "collections/link-generation-modes",
-              "collections/item-id-mask",
-              "collections/scan-behavior-default",
-              "collections/default-destination",
-              "collections/export-backup",
-              "collections/import-backup",
-              "collections/new-collection-from-backup",
-              "collections/deleting-a-collection"
-            ]
-          },
-          {
-            "group": "Fields",
-            "pages": [
-              "fields/core-vs-custom",
-              "fields/field-types",
-              "fields/allowed-values",
-              "fields/allow-new-values",
-              "fields/reference-fields",
-              "fields/field-defaults",
-              "fields/required-fields",
-              "fields/creating-a-field",
-              "fields/renaming-a-field",
-              "fields/deleting-and-disabling"
-            ]
-          },
-          {
-            "group": "Items",
-            "pages": [
-              "items/overview",
-              "items/name-and-description",
-              "items/item-id",
-              "items/tags",
-              "items/duplicating"
-            ]
-          },
-          {
-            "group": "Import & Export",
-            "pages": [
-              "import-export/importing-items",
-              "import-export/exporting-items"
+              {
+                "group": "Collections",
+                "expanded": false,
+                "pages": [
+                  "collections/overview",
+                  "collections/creating-a-collection",
+                  "collections/starter-templates",
+                  "collections/collection-details",
+                  "collections/link-generation-modes",
+                  "collections/item-id-mask",
+                  "collections/scan-behavior-default",
+                  "collections/default-destination",
+                  "collections/export-backup",
+                  "collections/import-backup",
+                  "collections/new-collection-from-backup",
+                  "collections/deleting-a-collection"
+                ]
+              },
+              {
+                "group": "Fields",
+                "expanded": false,
+                "pages": [
+                  "fields/core-vs-custom",
+                  "fields/field-types",
+                  "fields/allowed-values",
+                  "fields/allow-new-values",
+                  "fields/reference-fields",
+                  "fields/field-defaults",
+                  "fields/required-fields",
+                  "fields/creating-a-field",
+                  "fields/renaming-a-field",
+                  "fields/deleting-and-disabling"
+                ]
+              },
+              {
+                "group": "Items",
+                "expanded": false,
+                "pages": [
+                  "items/overview",
+                  "items/name-and-description",
+                  "items/item-id",
+                  "items/tags",
+                  "items/duplicating"
+                ]
+              },
+              {
+                "group": "Import & Export",
+                "expanded": false,
+                "pages": [
+                  "import-export/importing-items",
+                  "import-export/exporting-items"
+                ]
+              }
             ]
           },
           {
             "group": "Links",
             "pages": [
-              "links/what-a-link-is",
-              "links/what-a-slug-is",
-              "links/choosing-a-link-type",
-              "links/random-links",
-              "links/numbered-links",
-              "links/custom-links",
-              "links/unallocated-links",
-              "links/claim-on-scan",
-              "links/deleting-and-releasing-links"
+              {
+                "group": "Working with Links",
+                "expanded": false,
+                "pages": [
+                  "links/what-a-link-is",
+                  "links/what-a-slug-is",
+                  "links/choosing-a-link-type",
+                  "links/random-links",
+                  "links/numbered-links",
+                  "links/custom-links",
+                  "links/unallocated-links",
+                  "links/claim-on-scan",
+                  "links/deleting-and-releasing-links"
+                ]
+              },
+              {
+                "group": "Bulk Operations",
+                "expanded": false,
+                "pages": [
+                  "bulk-links/csv-import",
+                  "bulk-links/assign-unassign-delete",
+                  "bulk-links/downloading-qr-codes"
+                ]
+              }
             ]
           },
           {
-            "group": "Bulk Link Operations",
+            "group": "Pages & Destinations",
             "pages": [
-              "bulk-links/csv-import",
-              "bulk-links/assign-unassign-delete",
-              "bulk-links/downloading-qr-codes"
+              {
+                "group": "Pages",
+                "expanded": false,
+                "pages": [
+                  "pages/pages-overview",
+                  "pages/direct-mode-vs-page-mode",
+                  "pages/page-privacy",
+                  "pages/page-editor-layout",
+                  "pages/section-types",
+                  "pages/action-link",
+                  "pages/admin-toolbar",
+                  "pages/image-display-controls",
+                  "pages/page-theming",
+                  "pages/previewing-a-page",
+                  "pages/page-overrides",
+                  "pages/page-template-versions",
+                  "pages/page-metadata"
+                ]
+              },
+              {
+                "group": "Destinations",
+                "expanded": false,
+                "pages": [
+                  "destinations/what-is-a-destination",
+                  "destinations/field-bindings",
+                  "destinations/item-fields",
+                  "destinations/collection-fields",
+                  "destinations/time-fields",
+                  "destinations/request-fields",
+                  "destinations/conditional-visibility",
+                  "destinations/conditional-destinations",
+                  "destinations/device-detection",
+                  "destinations/app-links"
+                ]
+              }
             ]
           },
           {
-            "group": "Pages",
+            "group": "Producing Tags",
             "pages": [
-              "pages/pages-overview",
-              "pages/direct-mode-vs-page-mode",
-              "pages/page-privacy",
-              "pages/page-editor-layout",
-              "pages/section-types",
-              "pages/action-link",
-              "pages/admin-toolbar",
-              "pages/image-display-controls",
-              "pages/page-theming",
-              "pages/previewing-a-page",
-              "pages/page-overrides",
-              "pages/page-template-versions",
-              "pages/page-metadata"
+              {
+                "group": "Tags",
+                "expanded": false,
+                "pages": [
+                  "media/what-is-media",
+                  "media/media-types"
+                ]
+              },
+              {
+                "group": "Print Batches",
+                "expanded": false,
+                "pages": [
+                  "print-batches/overview",
+                  "print-batches/creating-a-batch",
+                  "print-batches/batch-status",
+                  "print-batches/archiving-and-deleting",
+                  "print-batches/batch-details",
+                  "print-batches/editing-columns",
+                  "print-batches/editing-links",
+                  "print-batches/deployment-status",
+                  "print-batches/csv-download",
+                  "print-batches/finding-batches",
+                  "print-batches/link-print-history"
+                ]
+              },
+              {
+                "group": "Print-First Workflow",
+                "expanded": false,
+                "pages": [
+                  "print-first/overview",
+                  "print-first/scanner",
+                  "print-first/claim-on-scan",
+                  "print-first/tips"
+                ]
+              },
+              {
+                "group": "Working with Suppliers",
+                "expanded": false,
+                "pages": [
+                  "print-shop/choosing-a-method",
+                  "print-shop/vdp",
+                  "print-shop/gang-sheets",
+                  "print-shop/preparing-your-job",
+                  "print-shop/quiet-zone-and-size",
+                  "print-shop/matching-codes-to-rows",
+                  "print-shop/shop-redraws-your-file",
+                  "print-shop/getting-a-proof"
+                ]
+              }
             ]
           },
           {
-            "group": "Destinations",
+            "group": "Account & Billing",
             "pages": [
-              "destinations/what-is-a-destination",
-              "destinations/field-bindings",
-              "destinations/item-fields",
-              "destinations/collection-fields",
-              "destinations/time-fields",
-              "destinations/request-fields",
-              "destinations/conditional-visibility",
-              "destinations/conditional-destinations",
-              "destinations/device-detection",
-              "destinations/app-links"
-            ]
-          },
-          {
-            "group": "Media",
-            "pages": [
-              "media/what-is-media",
-              "media/media-types"
-            ]
-          },
-          {
-            "group": "Print Batches",
-            "pages": [
-              "print-batches/overview",
-              "print-batches/creating-a-batch",
-              "print-batches/batch-status",
-              "print-batches/archiving-and-deleting",
-              "print-batches/batch-details",
-              "print-batches/editing-columns",
-              "print-batches/editing-links",
-              "print-batches/deployment-status",
-              "print-batches/csv-download",
-              "print-batches/finding-batches",
-              "print-batches/link-print-history"
-            ]
-          },
-          {
-            "group": "Print-First Workflow",
-            "pages": [
-              "print-first/overview",
-              "print-first/scanner",
-              "print-first/claim-on-scan",
-              "print-first/tips"
-            ]
-          },
-          {
-            "group": "Working with a Print Shop",
-            "pages": [
-              "print-shop/choosing-a-method",
-              "print-shop/vdp",
-              "print-shop/gang-sheets",
-              "print-shop/preparing-your-job",
-              "print-shop/quiet-zone-and-size",
-              "print-shop/matching-codes-to-rows",
-              "print-shop/shop-redraws-your-file",
-              "print-shop/getting-a-proof"
-            ]
-          },
-          {
-            "group": "Account",
-            "pages": [
-              "account/overview",
-              "account/change-password"
-            ]
-          },
-          {
-            "group": "Team",
-            "pages": [
-              "team/overview",
-              "team/switching-teams",
-              "team/create-a-team",
-              "team/team-settings",
-              "team/roles",
-              "team/invite-members",
-              "team/pending-invitations",
-              "team/accept-invitation",
-              "team/remove-members",
-              "team/leave-a-team"
-            ]
-          },
-          {
-            "group": "Billing",
-            "pages": [
-              "billing/per-team-billing",
-              "billing/plans-overview",
-              "billing/subscribe",
-              "billing/upgrade-a-team",
-              "billing/customer-portal",
-              "billing/subscription-status",
-              "billing/plan-limits"
-            ]
-          },
-          {
-            "group": "Workspace",
-            "pages": [
-              "workspace/search-everything"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Use Cases",
-        "groups": [
-          {
-            "group": "By Industry",
-            "pages": [
-              "industries/civil-construction",
-              "industries/contract-cleaning",
-              "industries/arboriculture-tree-management",
-              "industries/electrical-test-and-tag",
-              "industries/local-government-councils"
+              {
+                "group": "Account",
+                "expanded": false,
+                "pages": [
+                  "account/overview",
+                  "account/change-password"
+                ]
+              },
+              {
+                "group": "Team",
+                "expanded": false,
+                "pages": [
+                  "team/overview",
+                  "team/switching-teams",
+                  "team/create-a-team",
+                  "team/team-settings",
+                  "team/roles",
+                  "team/invite-members",
+                  "team/pending-invitations",
+                  "team/accept-invitation",
+                  "team/remove-members",
+                  "team/leave-a-team"
+                ]
+              },
+              {
+                "group": "Billing",
+                "expanded": false,
+                "pages": [
+                  "billing/per-team-billing",
+                  "billing/plans-overview",
+                  "billing/subscribe",
+                  "billing/upgrade-a-team",
+                  "billing/customer-portal",
+                  "billing/subscription-status",
+                  "billing/plan-limits"
+                ]
+              }
             ]
           }
         ]
