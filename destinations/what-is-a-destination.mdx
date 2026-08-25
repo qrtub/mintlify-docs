@@ -56,6 +56,17 @@ Who sees what:
 
 An Item that was never explicitly set to Destination Link does not show this page — it falls through to its Page instead. So a blank-looking Page and a not-ready page are two different symptoms: the first means no Destination buttons resolved, the second means the Item is meant to redirect and has nowhere to send anyone.
 
+## A code changes where people go, not what they can see
+
+QRtub keeps no copy of another system's data and makes no API connection to it. It stores the
+address and nothing else, so **every Destination keeps its own permissions exactly as they are**.
+
+Putting a code on something grants nobody anything they did not already have. Someone who scans a
+Link to a restricted document meets that system's sign-in, because protecting it is that system's
+job and it is still doing it. That makes a tag for a mixed audience a design decision — publish
+what the public should have on a [Page](/pages/pages-overview) and list the internal Destinations
+alongside it — rather than a risk.
+
 ## Unsafe URLs are refused
 
 QRtub blocks script-executing URL schemes — `javascript:`, `data:`, and `vbscript:` — wherever a Destination is used. Whitespace and control characters are stripped before the check, so tricks like `java\tscript:` are caught too.

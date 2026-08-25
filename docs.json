@@ -370,40 +370,37 @@
       },
       {
         "tab": "Works with",
-        "groups": [
+        "pages": [
+          "integrations/overview",
           {
-            "group": "Platforms",
+            "group": "Google Forms",
+            "expanded": false,
             "pages": [
-              {
-                "group": "Google Forms",
-                "expanded": false,
-                "pages": [
-                  "integrations/google-forms/overview",
-                  "integrations/google-forms/prefill"
-                ]
-              },
-              "integrations/google-maps",
-              "integrations/google-workspace",
-              "integrations/jotform",
-              "integrations/maintainx",
-              "integrations/microsoft-365",
-              {
-                "group": "Mitti",
-                "expanded": false,
-                "pages": [
-                  "integrations/mitti/setup",
-                  "integrations/mitti/entities",
-                  "integrations/mitti/prefilling",
-                  "integrations/mitti/troubleshooting"
-                ]
-              },
-              "integrations/notion",
-              "integrations/servicem8",
-              "integrations/whatsapp",
-              "integrations/youtube"
+              "integrations/google-forms/overview",
+              "integrations/google-forms/prefill"
             ],
-            "root": "integrations/overview"
-          }
+            "icon": "/images/logos/google-forms.png"
+          },
+          "integrations/google-maps",
+          "integrations/google-workspace",
+          "integrations/jotform",
+          "integrations/maintainx",
+          "integrations/microsoft-365",
+          {
+            "group": "Mitti",
+            "expanded": false,
+            "pages": [
+              "integrations/mitti/setup",
+              "integrations/mitti/entities",
+              "integrations/mitti/prefilling",
+              "integrations/mitti/troubleshooting"
+            ],
+            "icon": "/images/logos/mitti.png"
+          },
+          "integrations/notion",
+          "integrations/servicem8",
+          "integrations/whatsapp",
+          "integrations/youtube"
         ]
       }
     ]
