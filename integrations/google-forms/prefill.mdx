@@ -1,0 +1,53 @@
+---
+title: "Pre-filling a Google Form"
+icon: "pencil"
+description: "How to open a Google Form with answers already filled in from each Item's own fields, and which question types accept it."
+verified: "2026-08-25"
+verifiedNote: "usp=pp_url and the entry.<id> parameter confirmed against Google's Get pre-filled link flow"
+tag: "Verified"
+---
+
+import { Verified } from '/snippets/verified.mdx';
+
+```
+https://docs.google.com/forms/d/e/FORM_ID/viewform?usp=pp_url&entry.1234567890={{item.itemId}}
+```
+
+Every Link in the Collection then opens the same form carrying its own Item's data, so whoever
+scans only answers what is actually new.
+
+<Verified platform="Google Forms" date="25 August 2026" />
+
+## Get the entry IDs from Google
+
+You cannot guess them and should not try. In the form, open the three-dot menu, choose
+**Get pre-filled link**, type anything into the questions you want pre-filled, then **Get link**.
+Google hands you a complete working URL — swap your placeholder values for bindings.
+
+`usp=pp_url` tells Google the URL carries pre-filled values. Each `entry.1234567890` is one
+question, and the number is unique to that question in that form.
+
+Several at once, joined by `&`:
+
+```
+...&entry.1234567890={{item.itemId}}&entry.987654321={{item.location}}
+```
+
+## Bind IDs, not sentences
+
+QRtub inserts the value character for character and does **no URL encoding**, so a value
+containing a space, `&`, `?` or `#` breaks the link. Bind an Item ID, a serial or a code — never a
+description or a note.
+
+If a binding cannot resolve, QRtub drops the Destination rather than opening a malformed form.
+
+## What will not pre-fill
+
+**File upload** — Google blocks it. And for multiple choice, checkbox and dropdown the value must
+match one of the form's own options exactly, including capitalisation; a near miss silently
+pre-fills nothing.
+
+## Related
+
+- [Google Forms](/integrations/google-forms/overview)
+- [Field Bindings & URL Templates](/destinations/field-bindings)

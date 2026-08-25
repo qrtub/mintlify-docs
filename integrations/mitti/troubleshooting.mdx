@@ -1,0 +1,66 @@
+---
+title: "Fallbacks and Troubleshooting"
+icon: "wrench"
+description: "What to set when the Mitti app is not installed, and what to check when a scan does not land where you expect."
+---
+
+## App Not Installed? Set a Fallback URL
+
+`iauditor://` deep links only work if Mitti is installed on the device. If someone scans and doesn't have the app, the link does nothing.
+
+QRtub handles this automatically. When you enter an `iauditor://` URL as a Destination, an amber notice appears in the editor prompting you to configure a fallback.
+
+**Recommended setup:**
+
+| Field | Value |
+|-------|-------|
+| App link (Destination URL) | `iauditor://template/new_audit/{{item.templateID}}` |
+| Fallback URL | `https://app.mitti.com/inspection/new?templateId={{item.templateID}}` |
+
+**What happens at scan time:**
+- Mitti installed → app opens directly to the inspection template
+- Mitti not installed → after 2.5 seconds, QRtub redirects to the web version
+
+The Fallback URL supports `{{item.field}}` bindings, so you configure it once and it adapts to each Item automatically — just like the app link itself.
+
+You can also set a **Fallback Message** instead of a URL if there's no web equivalent (e.g. "Please install Mitti to access this inspection template").
+
+See [App Links & Fallback URLs](/destinations/app-links) for full details on how fallbacks work.
+
+## Troubleshooting
+
+**Mobile app doesn't open:**
+- Ensure Mitti app is installed on the device
+- Verify Template ID format is correct
+- Check that the user has access to the template in Mitti
+
+**Web link doesn't work:**
+- Verify user is logged into Mitti web app
+- Check that the user has permission to access the entity (template, inspection, asset)
+- Confirm the entity ID is correct
+
+**Data not pre-filling:**
+- You need the specific **question item ID** from your Mitti template (not arbitrary field names)
+- Ensure Item fields in QRtub contain data
+- Test that URL encoding is correct for special characters
+- Verify deep link isn't too long (keep it under ~2000 characters)
+
+**Users need access:**
+Deep links only work if users have permission to access the relevant entities in Mitti. Ensure your team has appropriate access before you produce a Batch.
+
+## Resources
+
+- [Mitti deep link documentation](https://help.mitti.com/en-US/000149/)
+- [Get Mitti entity IDs](https://help.mitti.com/en-US/000076/)
+- [Create issue QR codes](https://help.mitti.com/000165) — the one Mitti destination that needs no account
+- [Create asset profile QR codes](https://help.mitti.com/002882)
+- [Create QR codes for files and folders](https://help.mitti.com/005378) — note the access requirements
+- [Share inspection QR codes](https://help.mitti.com/002257)
+- [App Links & Fallback URLs](/destinations/app-links)
+- [Pages Overview](/pages/pages-overview)
+- [Key Concepts](/key-concepts)
+
+## Related
+
+- [Setting Up Mitti](/integrations/mitti/setup)
+- [App Links & Fallback URLs](/destinations/app-links)

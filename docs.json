@@ -113,6 +113,14 @@
     {
       "source": "/integrations/cmms-systems",
       "destination": "/integrations/overview"
+    },
+    {
+      "source": "/integrations/google-forms",
+      "destination": "/integrations/google-forms/overview"
+    },
+    {
+      "source": "/integrations/safetyculture",
+      "destination": "/integrations/mitti/setup"
     }
   ],
   "colors": {
@@ -366,14 +374,30 @@
           {
             "group": "Platforms",
             "pages": [
-              "integrations/google-forms",
+              {
+                "group": "Google Forms",
+                "expanded": false,
+                "pages": [
+                  "integrations/google-forms/overview",
+                  "integrations/google-forms/prefill"
+                ]
+              },
               "integrations/google-maps",
               "integrations/google-workspace",
               "integrations/jotform",
               "integrations/maintainx",
               "integrations/microsoft-365",
+              {
+                "group": "Mitti",
+                "expanded": false,
+                "pages": [
+                  "integrations/mitti/setup",
+                  "integrations/mitti/entities",
+                  "integrations/mitti/prefilling",
+                  "integrations/mitti/troubleshooting"
+                ]
+              },
               "integrations/notion",
-              "integrations/safetyculture",
               "integrations/servicem8",
               "integrations/whatsapp",
               "integrations/youtube"

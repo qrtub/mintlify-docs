@@ -1,0 +1,123 @@
+---
+title: "What a Scan Can Open in Mitti"
+icon: "list"
+description: "Every Mitti destination a Link can point at, what each one is useful for, and which of them a person without a Mitti account can open."
+verified: "2026-08-25"
+verifiedNote: "Deep-link formats and the five generated QR code types checked against help.mitti.com"
+tag: "Verified"
+---
+
+import { Verified } from '/snippets/verified.mdx';
+
+## What a scan can open in Mitti
+
+Starting an inspection is the common case, but a Link can point at any of these. Pick by what the
+person holding the phone actually needs.
+
+| What it opens | A concrete use | Who can open it |
+|---|---|---|
+| **A new inspection** | The pre-start checklist for this excavator | Mitti user, template access, app |
+| **A new inspection, pre-filled** | Serial, site and asset number already answered before the operator starts | Mitti user, template access, app |
+| **An existing inspection** | Resume the half-finished handover form on the crane | Mitti user |
+| **One question inside an inspection** | The plate on the switchboard opens its own question, not page 1 of 90 | Mitti user |
+| **The latest report** | A hire client scans the plate and reads the last check before signing for it | Mitti user, report access |
+| **A training course** | The plate on the boom lift opens its operating course before anyone gets in | Mitti user |
+| **An asset profile** | Service history and open actions for this pump | Mitti user, **mobile app** |
+| **A file or folder** | The current SOP for this machine, always the latest version | Mitti user, file access, **mobile app** |
+| **Issue reporting** | A visitor or a delivery driver reports a damaged bollard | **Anyone — no account** |
+
+<Warning>
+**Only issue reporting works for someone without a Mitti account.** Everything else in that table
+needs a Mitti login, and asset profiles and files also need the mobile app installed.
+
+This matters most when you are producing a tag for a mixed audience. A plate in a public place, on
+a hire item, or anywhere a contractor or visitor might scan it should not have a Mitti document as
+its only Destination — they will reach a wall. Put the public-facing version on a QRtub
+[Page](/pages/pages-overview) and keep the controlled copy in Mitti. One tag, both audiences.
+</Warning>
+
+### An existing inspection
+
+**Mobile:** `iauditor://audit/<inspection_id>`
+**Web:** `https://app.mitti.com/inspection/<inspection_id>`
+
+**Use it for:** a long handover or commissioning form that gets finished over several visits. The
+tag on the unit reopens the same inspection instead of starting a new one.
+
+### One question, or one page, inside an inspection
+
+**Web:** `https://app.mitti.com/inspection/<inspection_id>?item=<item_id>`
+**Web:** `https://app.mitti.com/inspection/<inspection_id>?page=<page_number>`
+**Mobile:** `iauditor://audit/<audit_id>/item/<item_id>`
+
+**Use it for:** one long inspection covering a whole plant room, with a tag on each item of
+equipment that opens its own question. Nobody scrolls, and nobody answers the wrong row.
+
+### The latest inspection report
+
+**Web:** `https://app.mitti.com/report/audit/<inspection_id>`
+
+**With a URL template:**
+```
+https://app.mitti.com/report/audit/{{item.inspectionID}}
+```
+
+Store the current inspection ID in each Item's `inspectionID` field, and every tag resolves to its
+own item's most recent report.
+
+**Use it for:** proving a check happened. A client or an auditor scans the plate and reads the last
+inspection without anyone fetching a file for them.
+
+### A training course
+
+**Web:** `https://app.mitti.com/training/learn/course/<course_id>`
+**Mobile:** `iauditor://training/learn/course/<course_id>`
+
+**Use it for:** the induction or operating course for the machine the tag is on — reachable at the
+machine, at the moment somebody is about to use it, rather than in an email from six months ago.
+
+### An asset profile
+
+**Mobile:** `iauditor://asset/profile/<asset_id>`
+**Web:** `https://app.mitti.com/assets/<asset_id>`
+
+**Use it for:** history and open actions. A fitter scanning a pump sees what has been done to it
+and what is outstanding.
+
+### A file or folder
+
+**Web:** `https://app.mitti.com/documents/document/<document_id>`
+
+**Use it for:** the manual, SOP or safe-work method that has to be the current version. Mitti
+serves the latest one, so re-issuing the document never means re-producing the tag.
+
+### Issue reporting
+
+Issue QR codes are made in Mitti under **Issues → QR codes**, and they are the one Mitti
+destination a stranger can use. They have no URL pattern to build — create the code, copy its
+link, and use that link as your Destination.
+
+**Use it for:** the fault-reporting button on anything the public or a visitor can reach — a
+council bin, a bollard, a lift lobby, a hire item on a customer site.
+
+<Note>
+Because there is no URL pattern, an issue link cannot be built per Item with
+[field bindings](/destinations/field-bindings) the way the others can. Every Item pointed at one
+issue code shares it, unless you create a separate code in Mitti for each site or asset. Issue
+codes can be pre-filled in Mitti with a category, site or asset when you create them.
+</Note>
+
+## Which ones bindings can build for you
+
+This is the difference that decides how much work a fleet takes.
+
+- **Templates, inspections, questions, reports, courses, assets and files** all have a URL with an
+  ID in it. So you write one URL template with a binding — `{{item.assetID}}` — and every Link in
+  the Collection resolves to its own record. One rule, whole fleet.
+- **Issue codes** have no pattern. You paste a link, one at a time.
+
+## Related
+
+- [Setting Up Mitti](/integrations/mitti/setup)
+- [Pre-filling a Mitti Inspection](/integrations/mitti/prefilling)
+- [Field Bindings & URL Templates](/destinations/field-bindings)
