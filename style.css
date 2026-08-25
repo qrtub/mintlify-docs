@@ -1,0 +1,34 @@
+/* ---------------------------------------------------------------------------
+   QRtub docs — custom styling
+
+   Mintlify loads any .css file in the content directory on every page. Their
+   own docs warn that "the references and styling of common elements are
+   subject to change", so everything here is matched on IDs and attributes —
+   never on their Tailwind class names — and every rule says what it is for.
+   If a Mintlify release breaks something, this file is the first place to look.
+   --------------------------------------------------------------------------- */
+
+/* Sidebar group chevrons.
+   Shipped at gray-400 in light mode and gray-600 in dark. On the near-black
+   sidebar that reads as almost absent, so the collapsed groups do not look
+   openable. One step of extra contrast each way, and 2.5 stroke because 2 at
+   12px is thin. Remove the stroke-width line alone if it looks heavy.
+   #sidebar is a documented Mintlify hook; [aria-expanded] is what marks a
+   group toggle, so this cannot catch a page link or a page icon. */
+#sidebar button[aria-expanded] svg {
+  color: #52525b; /* zinc-600 */
+  stroke-width: 2.5;
+}
+
+#sidebar button[aria-expanded]:hover svg {
+  color: #18181b; /* zinc-900 — keeps the hover cue, which the rule above
+                     would otherwise outrank on specificity */
+}
+
+html.dark #sidebar button[aria-expanded] svg {
+  color: #a1a1aa; /* zinc-400 */
+}
+
+html.dark #sidebar button[aria-expanded]:hover svg {
+  color: #e4e4e7; /* zinc-200 */
+}
