@@ -7,22 +7,23 @@ description: "How to use a SharePoint or OneDrive file or folder as a Destinatio
 Open the file in SharePoint or OneDrive, choose **Share → Copy link**, and paste it in as the
 Destination. The link already carries everything it needs; there is nothing to construct.
 
-## The sharing scope is the whole problem
+## Your tenant's sharing rules still apply
 
-The dialog offers something like **Anyone with the link**, **People in *your organisation***,
-**People with existing access**, and **Specific people**. Only the first works for someone outside
-your tenant.
+The share dialog offers something like **Anyone with the link**, **People in *your organisation***,
+**People with existing access** and **Specific people**. Whichever you pick is what a scan gets —
+a QRtub Link carries the address, not permission, so the file stays exactly as protected as it is
+today.
 
-**And "Anyone with the link" is frequently switched off at tenant level**, which is the difference
-between Microsoft 365 and Google Drive here: with Drive you can usually fix a locked file yourself,
-whereas in a managed Microsoft tenant you may need IT to permit anonymous links at all.
+Two consequences worth planning around:
 
-So decide who is going to scan before you commit to this Destination:
+- **Your own staff, signed in** — works well, and the link survives the file moving within the site.
+- **Contractors, visitors, the public** — they need **Anyone with the link**, and many tenants
+  switch that off centrally. That is a deliberate policy, not an obstacle to route around: if IT
+  has blocked anonymous links, publish the public-facing version somewhere you control and keep
+  the governed copy here.
 
-- **Your own staff, signed in** — works well, and the link survives file moves within the site.
-- **Contractors, visitors, the public** — check with whoever administers the tenant first. If
-  anonymous links are blocked, put the public-facing copy somewhere else and keep the controlled
-  copy here.
+This is the practical difference from Google Drive, where you can usually change a file's access
+yourself.
 
 ## Related
 
