@@ -20,7 +20,7 @@ One QR code can serve the right experience for everyone.
 
 ### 1. Mobile App vs Web App
 
-**Scenario:** You have a mobile app for field staff and a web app for office staff.
+**Scenario:** You have a mobile app and a web app, and you want each device to open the one that works on it.
 
 **Setup:**
 - Create a "Mobile App" Destination with your app's deep link
@@ -28,7 +28,15 @@ One QR code can serve the right experience for everyone.
 - Create a "Web Portal" Destination with your web app URL
   - Set condition: `device.isDesktop`
 
-**Result:** Field staff see "Mobile App" button. Office staff see "Web Portal" button. Same QR code.
+**Result:** A phone shows the "Mobile App" button; a desktop shows "Web Portal". Same QR code.
+
+<Note>
+This is a condition on the **device**, not on the person. Someone in the field on a laptop gets
+the web button, and someone at a desk on their phone gets the app button. If the distinction you
+need is really about *who* is scanning rather than *what they are holding*, device conditions are
+the wrong tool — see [Conditional Visibility](/destinations/conditional-visibility) for what a
+condition can actually read.
+</Note>
 
 ### 2. Platform-Specific App Downloads
 

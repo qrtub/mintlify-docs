@@ -1,9 +1,9 @@
 ---
 title: "Mitti (formerly SafetyCulture / iAuditor)"
-description: "Open Mitti inspections straight from a scan, pre-filled with the item's data. Mitti was called SafetyCulture, and iAuditor before that."
+description: "Point a Link at any Mitti destination — an inspection, a report, a course, an asset, a file, or issue reporting for people with no Mitti account. Mitti was called SafetyCulture, and iAuditor before that."
 ---
 
-Connect your QRtub Links to Mitti inspections, so staff can scan an item and land straight on the right inspection template.
+Point a QRtub Link at a Mitti destination and a scan lands straight on the right record — the inspection for this machine, its last report, its asset history, or a form a visitor can use without a Mitti account.
 
 ## If you know it as SafetyCulture or iAuditor
 
@@ -19,12 +19,15 @@ Nothing you have already set up stops working:
 
 ## Overview
 
-Mitti (formerly SafetyCulture) is a mobile inspection platform. Used with QRtub, you can:
+Mitti (formerly SafetyCulture) is a workplace operations platform. Used with QRtub, you can:
 
-- Open specific inspection templates by scanning equipment
-- Carry each Item's own data into the inspection link, which Mitti uses to pre-fill answers
-- Route different users to different inspection types
-- Maintain inspection access even if you switch platforms later
+- Open a specific inspection template by scanning the equipment it belongs to
+- Carry each Item's own data into the link, which Mitti uses to pre-fill answers
+- Offer several Mitti destinations on one code, so whoever scans picks what they came for
+- Reach destinations Mitti has a URL for but does not make a QR code for — a training course, a
+  report, or one question inside a long inspection
+- Change which record a code opens without producing the tag again, including if you switch
+  platforms later
 
 ## Integration Method
 
@@ -147,55 +150,112 @@ You can also set a **Fallback Message** instead of a URL if there's no web equiv
 
 See [App Links & Fallback URLs](/destinations/app-links) for full details on how fallbacks work.
 
-## Additional Deep Link Options
+## What a scan can open in Mitti
 
-Beyond starting new inspections, you can create Destinations for other Mitti actions:
+Starting an inspection is the common case, but a Link can point at any of these. Pick by what the
+person holding the phone actually needs.
 
-### View Inspection Report
+| What it opens | A concrete use | Who can open it |
+|---|---|---|
+| **A new inspection** | The pre-start checklist for this excavator | Mitti user, template access, app |
+| **A new inspection, pre-filled** | Serial, site and asset number already answered before the operator starts | Mitti user, template access, app |
+| **An existing inspection** | Resume the half-finished handover form on the crane | Mitti user |
+| **One question inside an inspection** | The plate on the switchboard opens its own question, not page 1 of 90 | Mitti user |
+| **The latest report** | A hire client scans the plate and reads the last check before signing for it | Mitti user, report access |
+| **A training course** | The plate on the boom lift opens its operating course before anyone gets in | Mitti user |
+| **An asset profile** | Service history and open actions for this pump | Mitti user, **mobile app** |
+| **A file or folder** | The current SOP for this machine, always the latest version | Mitti user, file access, **mobile app** |
+| **Issue reporting** | A visitor or a delivery driver reports a damaged bollard | **Anyone — no account** |
 
-**Mobile:** `iauditor://audit/<inspection_id>`
-**Web:** `https://app.mitti.com/report/audit/<inspection_id>`
+<Warning>
+**Only issue reporting works for someone without a Mitti account.** Everything else in that table
+needs a Mitti login, and asset profiles and files also need the mobile app installed.
 
-**With QRtub URL Template:**
-```
-https://app.mitti.com/report/audit/{{item.inspectionID}}
-```
+This matters most when you are producing a tag for a mixed audience. A plate in a public place, on
+a hire item, or anywhere a contractor or visitor might scan it should not have a Mitti document as
+its only Destination — they will reach a wall. Put the public-facing version on a QRtub
+[Page](/pages/pages-overview) and keep the controlled copy in Mitti. One tag, both audiences.
+</Warning>
 
-Store the latest inspection ID in each Item's `inspectionID` field. When someone scans, they're automatically routed to that Item's most recent inspection report.
-
-### Edit Existing Inspection
+### An existing inspection
 
 **Mobile:** `iauditor://audit/<inspection_id>`
 **Web:** `https://app.mitti.com/inspection/<inspection_id>`
 
-### Open Asset Profile
+**Use it for:** a long handover or commissioning form that gets finished over several visits. The
+tag on the unit reopens the same inspection instead of starting a new one.
+
+### One question, or one page, inside an inspection
+
+**Web:** `https://app.mitti.com/inspection/<inspection_id>?item=<item_id>`
+**Web:** `https://app.mitti.com/inspection/<inspection_id>?page=<page_number>`
+**Mobile:** `iauditor://audit/<audit_id>/item/<item_id>`
+
+**Use it for:** one long inspection covering a whole plant room, with a tag on each item of
+equipment that opens its own question. Nobody scrolls, and nobody answers the wrong row.
+
+### The latest inspection report
+
+**Web:** `https://app.mitti.com/report/audit/<inspection_id>`
+
+**With a URL template:**
+```
+https://app.mitti.com/report/audit/{{item.inspectionID}}
+```
+
+Store the current inspection ID in each Item's `inspectionID` field, and every tag resolves to its
+own item's most recent report.
+
+**Use it for:** proving a check happened. A client or an auditor scans the plate and reads the last
+inspection without anyone fetching a file for them.
+
+### A training course
+
+**Web:** `https://app.mitti.com/training/learn/course/<course_id>`
+**Mobile:** `iauditor://training/learn/course/<course_id>`
+
+**Use it for:** the induction or operating course for the machine the tag is on — reachable at the
+machine, at the moment somebody is about to use it, rather than in an email from six months ago.
+
+### An asset profile
 
 **Mobile:** `iauditor://asset/profile/<asset_id>`
 **Web:** `https://app.mitti.com/assets/<asset_id>`
 
-**Example use case:** Link QRtub Items directly to their Mitti asset profiles.
+**Use it for:** history and open actions. A fitter scanning a pump sees what has been done to it
+and what is outstanding.
 
-### View Document/File
+### A file or folder
 
-**Web:** `https://app.mitti.com/documents/<document_id>`
+**Web:** `https://app.mitti.com/documents/document/<document_id>`
 
-## Use Cases
+**Use it for:** the manual, SOP or safe-work method that has to be the current version. Mitti
+serves the latest one, so re-issuing the document never means re-producing the tag.
 
-**Equipment Inspections**
-- Excavators, forklifts, vehicles
-- Pre-start checklists
-- Daily safety inspections
+### Issue reporting
 
-**Facility Inspections**
-- Fire extinguishers
-- Emergency equipment
-- Building systems
+Issue QR codes are made in Mitti under **Issues → QR codes**, and they are the one Mitti
+destination a stranger can use. They have no URL pattern to build — create the code, copy its
+link, and use that link as your Destination.
 
-**One Code, Every Option**
-Create a Page carrying multiple Destinations. Everyone who scans sees the same set and picks the one they came for — QRtub does not identify the scanner:
-- **Start Inspection** → start a new inspection
-- **View Report** → the latest report
-- **Asset History** → the Mitti asset profile
+**Use it for:** the fault-reporting button on anything the public or a visitor can reach — a
+council bin, a bollard, a lift lobby, a hire item on a customer site.
+
+<Note>
+Because there is no URL pattern, an issue link cannot be built per Item with
+[field bindings](/destinations/field-bindings) the way the others can. Every Item pointed at one
+issue code shares it, unless you create a separate code in Mitti for each site or asset. Issue
+codes can be pre-filled in Mitti with a category, site or asset when you create them.
+</Note>
+
+## Which ones bindings can build for you
+
+This is the difference that decides how much work a fleet takes.
+
+- **Templates, inspections, questions, reports, courses, assets and files** all have a URL with an
+  ID in it. So you write one URL template with a binding — `{{item.assetID}}` — and every Link in
+  the Collection resolves to its own record. One rule, whole fleet.
+- **Issue codes** have no pattern. You paste a link, one at a time.
 
 ## Troubleshooting
 
@@ -222,6 +282,10 @@ Deep links only work if users have permission to access the relevant entities in
 
 - [Mitti deep link documentation](https://help.mitti.com/en-US/000149/)
 - [Get Mitti entity IDs](https://help.mitti.com/en-US/000076/)
+- [Create issue QR codes](https://help.mitti.com/000165) — the one Mitti destination that needs no account
+- [Create asset profile QR codes](https://help.mitti.com/002882)
+- [Create QR codes for files and folders](https://help.mitti.com/005378) — note the access requirements
+- [Share inspection QR codes](https://help.mitti.com/002257)
 - [App Links & Fallback URLs](/destinations/app-links)
 - [Pages Overview](/pages/pages-overview)
 - [Key Concepts](/key-concepts)
