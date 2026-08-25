@@ -35,15 +35,13 @@ Note that an Item carrying enabled conditional rules always routes, even when it
 
 ## Values go into a URL exactly as stored
 
-Destinations can pull Item data straight into the URL with double-brace bindings, so one URL template serves every Item in a Collection:
+A Destination can pull Item data into the URL with double-brace bindings, so one template serves every Item in a Collection:
 
 ```text
 https://app.example.com/inspect?id={{item.serial_number}}&site={{collection.name}}
 ```
 
-Two limits worth knowing before you build one:
-
-- **There is no automatic URL encoding.** The stored value is inserted character for character. A field containing a space, an `&`, or a `?` will break the link. Keep values that feed a URL simple, or use a field that holds an ID rather than a description.
+**There is no automatic URL encoding.** The stored value is inserted character for character. A field containing a space, an `&`, or a `?` will break the link. Keep values that feed a URL simple, or use a field that holds an ID rather than a description.
 
 Full syntax and the available namespaces are in [Field Bindings & URL Templates](/destinations/field-bindings).
 

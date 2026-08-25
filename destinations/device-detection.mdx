@@ -1,262 +1,76 @@
 ---
 title: "Device Detection & Routing"
 icon: "smartphone"
-description: "Route users to different Destinations based on their device type, operating system, or browser"
+description: "The device, OS and browser fields a condition can read, what they are reliably good for, and where they are the wrong tool."
 ---
 
-QRtub automatically detects what device someone is using when they scan your QR code. You can use this information to show device-specific Destinations or route users to apps that work best on their platform.
-
-## Why Device Detection Matters
-
-Different devices need different experiences:
-
-- **Mobile users** might have your app installed—send them to the app with deep links
-- **Desktop users** can't install mobile apps—send them to your web app instead
-- **iOS users** have different app stores than Android users
-- **Tablet users** might need a different layout than phone users
-
-One QR code can serve the right experience for everyone.
-
-## Common Use Cases
-
-### 1. Mobile App vs Web App
-
-**Scenario:** You have a mobile app and a web app, and you want each device to open the one that works on it.
-
-**Setup:**
-- Create a "Mobile App" Destination with your app's deep link
-  - Set condition: `device.isMobile`
-- Create a "Web Portal" Destination with your web app URL
-  - Set condition: `device.isDesktop`
-
-**Result:** A phone shows the "Mobile App" button; a desktop shows "Web Portal". Same QR code.
+QRtub reads the device from the User-Agent on every scan, so a condition can show one Destination
+on a phone and a different one on a desktop.
 
 <Note>
-This is a condition on the **device**, not on the person. Someone in the field on a laptop gets
-the web button, and someone at a desk on their phone gets the app button. If the distinction you
-need is really about *who* is scanning rather than *what they are holding*, device conditions are
-the wrong tool — see [Conditional Visibility](/destinations/conditional-visibility) for what a
-condition can actually read.
+These are conditions on the **device**, not on the person. Someone in the field on a laptop gets
+the desktop branch; someone at a desk on their phone gets the mobile one. If the distinction you
+need is about *who* is scanning, see [Conditional
+Visibility](/destinations/conditional-visibility) for what a condition can actually read.
 </Note>
 
-### 2. Platform-Specific App Downloads
+## What you can read
 
-**Scenario:** You want people to download your app from the right app store.
+| Field | Values | Convenience flags |
+|---|---|---|
+| `device.type` | `mobile` · `tablet` · `desktop` | `device.isMobile` · `device.isTablet` · `device.isDesktop` |
+| `device.os` | `ios` · `android` · `windows` · `macos` · `linux` · `unknown` | `device.isIOS` · `device.isAndroid` |
+| `device.browser` | `chrome` · `safari` · `firefox` · `edge` · `opera` · `unknown` | — |
 
-**Setup:**
-- Create "Download on App Store" Destination
-  - URL: `https://apps.apple.com/app/yourapp`
-  - Condition: `device.isIOS`
-- Create "Get it on Google Play" Destination
-  - URL: `https://play.google.com/store/apps/details?id=com.yourapp`
-  - Condition: `device.isAndroid`
-
-**Result:** iPhone users see App Store link. Android users see Google Play link.
-
-### 3. iOS Safari Deep Link Workaround (Mitti Example)
-
-**Scenario:** Mitti (formerly SafetyCulture) app deep links (`iauditor://`) only work in Safari on iOS. Users on iOS in Chrome or other browsers need the web version instead.
-
-**Note:** If your concern is simply "what if the app isn't installed?", the [Fallback URL feature](/destinations/app-links) handles that automatically — no device routing needed. Device routing is for the specific case where the app is installed but the browser blocks deep links (iOS Chrome/Firefox).
-
-**Setup - Create Two Destinations:**
-
-**Destination 1: "Start Inspection (Mobile App)"**
-- URL: `iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2`
-- Fallback URL: `https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
-- Condition: `device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")`
-
-**Destination 2: "Start Inspection (Web)"**
-- URL: `https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e4be53bdf2`
-- Condition: `device.isIOS && device.browser != "safari"`
-
-**Breaking down the conditions:**
-
-Destination 1 shows for:
-- `device.isDesktop` - Desktop users (app links won't work anyway, but Mitti handles this)
-- `!device.isIOS` - Non-iOS mobile users (Android, etc. — app links work fine)
-- `device.isIOS && device.browser == "safari"` - iOS users in Safari (app links work here)
-
-Destination 2 shows for:
-- `device.isIOS && device.browser != "safari"` - iOS users NOT in Safari (app links blocked, use web)
-
-**Result:**
-- Desktop users: See mobile app Destination (Mitti redirects appropriately)
-- Android users: See mobile app Destination (opens Mitti app)
-- iOS Safari users: See mobile app Destination (opens Mitti app)
-- iOS Chrome/Firefox users: See web Destination (opens in browser, avoiding iOS restriction)
-
-### 4. Tablet-Optimized Experience
-
-**Scenario:** You have a special interface optimized for tablets.
-
-**Setup:**
-- Create "Tablet Interface" Destination
-  - Condition: `device.isTablet`
-- Create "Standard Interface" Destination
-  - Condition: `!device.isTablet`
-
-**Result:** Tablet users get the optimized experience automatically.
-
-### 5. Browser-Specific Features
-
-**Scenario:** A feature only works in certain browsers.
-
-**Setup:**
-- Create "Use Advanced Feature" Destination
-  - Condition: `device.browser == "chrome" || device.browser == "firefox"`
-- Create "Standard Version" Destination
-  - Condition: `device.browser != "chrome" && device.browser != "firefox"`
-
-**Result:** Chrome and Firefox users see the advanced feature. Others see the standard version.
-
-## Available Device Information
-
-### Device Type
-
-**Field:** `device.type`
-
-**Values:**
-- `'mobile'` - Smartphone
-- `'tablet'` - Tablet device
-- `'desktop'` - Desktop or laptop computer
-
-**Convenience flags:**
-- `device.isMobile` - True if smartphone
-- `device.isTablet` - True if tablet
-- `device.isDesktop` - True if desktop/laptop
-
-**Examples:**
 ```
-device.type == "mobile"
-device.isTablet
-device.isDesktop
-```
-
-### Operating System
-
-**Field:** `device.os`
-
-**Values:**
-- `'ios'` - iPhone or iPad
-- `'android'` - Android device
-- `'windows'` - Windows PC
-- `'macos'` - Mac computer
-- `'linux'` - Linux system
-- `'unknown'` - Could not detect OS
-
-**Convenience flags:**
-- `device.isIOS` - True if iPhone/iPad
-- `device.isAndroid` - True if Android
-
-**Examples:**
-```
+device.isMobile
 device.os == "ios"
-device.isAndroid
-device.os == "windows" || device.os == "macos"
-```
-
-### Browser
-
-**Field:** `device.browser`
-
-**Values:**
-- `'chrome'` - Google Chrome
-- `'safari'` - Apple Safari
-- `'firefox'` - Mozilla Firefox
-- `'edge'` - Microsoft Edge
-- `'opera'` - Opera browser
-- `'unknown'` - Could not detect browser
-
-**Examples:**
-```
-device.browser == "safari"
 device.browser == "chrome" || device.browser == "edge"
-device.browser != "unknown"
 ```
 
-## How to Set Up Device Routing
+**When the device cannot be detected**, QRtub assumes `desktop`, `unknown`, `unknown`. So a
+desktop-conditioned Destination is what an unrecognised device falls into — worth knowing when you
+choose which branch carries the fallback.
 
-1. **Create your Destinations** - One for each device scenario
-2. **Add conditions** - Use device fields in each Destination's visibility condition
-3. **Test on multiple devices** - Scan your QR code from phone, tablet, desktop to verify
+## The two cases worth using it for
 
-**Example Page:**
+**The right app store.** One Destination at `apps.apple.com/...` with `device.isIOS`, another at
+`play.google.com/...` with `device.isAndroid`.
+
+**iOS deep links outside Safari.** An app scheme like `iauditor://` only opens from Safari on iOS,
+so an iPhone user in Chrome needs the web URL instead:
+
 ```
-Page: Equipment Inspector
-├── "Open Mobile App"
-│   └── Condition: device.isMobile
-├── "Open Web Portal"
-│   └── Condition: device.isDesktop
-└── "Equipment Manual" (PDF)
-    └── Condition: (none - always visible)
+device.isIOS && device.browser != "safari"        → the web Destination
+device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")
+                                                   → the app Destination
 ```
 
-## Combining Device Detection with Item Data
+This is narrower than it looks. If your worry is just *"what if the app is not installed?"*, that
+is already handled — see [App Links & Fallback URLs](/destinations/app-links), no device condition
+needed. Device routing is for the case where the app *is* installed but the browser blocks the
+scheme.
 
-You can combine device detection with Item fields for powerful routing:
+## Combining with Item data
 
-**Example:** Mobile crane operators get the mobile app. Desktop users get web portal. But both only see these if the equipment type is "crane".
+Device conditions and Item fields go in the same expression:
 
-**Mobile App Destination condition:**
 ```
 device.isMobile && item.type == "crane"
 ```
 
-**Web Portal Destination condition:**
-```
-device.isDesktop && item.type == "crane"
-```
+## Where it is the wrong tool
 
-## Important Notes
+- **Never for access control.** User-Agent is self-reported, users can change it, and privacy
+  browsers mask it. Use authentication.
+- **Not to force a choice.** If showing both options is simpler, show both.
+- **Not as a stand-in for identity.** See the note at the top.
 
-**User-Agent Detection:**
-Device detection uses browser User-Agent strings. These are generally reliable but:
-- Users can modify their User-Agent (rare)
-- Some privacy browsers mask device info
-- New devices/browsers might be detected as "unknown"
-
-**Not for Security:**
-Device detection is for routing and user experience, NOT security. Don't rely on it to restrict access to sensitive data—use proper authentication instead.
-
-**Fallback Behavior:**
-If device can't be detected, QRtub assumes:
-- Type: `desktop`
-- OS: `unknown`
-- Browser: `unknown`
-
-**Always Provide Options:**
-Consider having at least one Destination without device conditions—a fallback that everyone can access regardless of device.
-
-## Testing Your Setup
-
-Before deploying QR codes with device routing:
-
-1. **Test on iPhone** - Verify iOS-specific Destinations appear
-2. **Test on Android** - Verify Android-specific Destinations appear
-3. **Test on Desktop** - Verify desktop Destinations appear
-4. **Test different browsers** - Safari, Chrome, Firefox if you're using browser conditions
-5. **Test tablets** - If you have tablet-specific routing
-
-Scan the same QR code from each device. Verify you see the Destinations you expect.
-
-## When NOT to Use Device Detection
-
-**Don't use device detection for:**
-- Restricting access to sensitive information (use proper authentication)
-- Forcing users into one specific app (let them choose)
-- Scenarios where showing all options is simpler
-
-**DO use device detection for:**
-- App store routing (right store for each platform)
-- Mobile app vs web app routing
-- Platform-specific deep links
-- Optimized experiences per device type
+**Always leave one Destination with no device condition**, so an unrecognised device still has
+somewhere to go.
 
 ## Related
 
-- [App Links & Fallback URLs](/destinations/app-links) - Automatic fallback when a mobile app isn't installed
-- [Field Bindings & URL Templates](/destinations/field-bindings) - Complete field reference including device fields
-- [Conditional Visibility](/destinations/conditional-visibility) - Using device detection in visibility conditions
-- [Pages Overview](/pages/pages-overview) - Setting up Pages with multiple Destinations
-- [Key Concepts](/key-concepts) - Understanding Destinations and Links
+- [App Links & Fallback URLs](/destinations/app-links)
+- [Conditional Visibility](/destinations/conditional-visibility)
+- [Field Bindings & URL Templates](/destinations/field-bindings)
