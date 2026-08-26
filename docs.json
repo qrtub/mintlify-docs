@@ -370,37 +370,58 @@
       },
       {
         "tab": "Works with",
-        "pages": [
-          "integrations/overview",
+        "groups": [
           {
-            "group": "Google Forms",
-            "expanded": false,
+            "group": "Start here",
+            "root": "integrations/overview",
             "pages": [
-              "integrations/google-forms/overview",
-              "integrations/google-forms/prefill"
-            ],
-            "icon": "/images/logos/google-forms.png"
+              "integrations/overview"
+            ]
           },
-          "integrations/google-maps",
-          "integrations/google-workspace",
-          "integrations/jotform",
-          "integrations/maintainx",
-          "integrations/microsoft-365",
           {
-            "group": "Mitti",
-            "expanded": false,
+            "group": "Operations platforms",
             "pages": [
-              "integrations/mitti/setup",
-              "integrations/mitti/entities",
-              "integrations/mitti/prefilling",
-              "integrations/mitti/troubleshooting"
-            ],
-            "icon": "/images/logos/mitti.png"
+              {
+                "group": "Mitti",
+                "expanded": false,
+                "pages": [
+                  "integrations/mitti/setup",
+                  "integrations/mitti/entities",
+                  "integrations/mitti/prefilling",
+                  "integrations/mitti/troubleshooting"
+                ],
+                "icon": "/images/logos/mitti.png"
+              },
+              "integrations/maintainx",
+              "integrations/servicem8"
+            ]
           },
-          "integrations/notion",
-          "integrations/servicem8",
-          "integrations/whatsapp",
-          "integrations/youtube"
+          {
+            "group": "Forms and messages",
+            "pages": [
+              {
+                "group": "Google Forms",
+                "expanded": false,
+                "pages": [
+                  "integrations/google-forms/overview",
+                  "integrations/google-forms/prefill"
+                ],
+                "icon": "/images/logos/google-forms.png"
+              },
+              "integrations/jotform",
+              "integrations/whatsapp"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "integrations/google-workspace",
+              "integrations/microsoft-365",
+              "integrations/notion",
+              "integrations/google-maps",
+              "integrations/youtube"
+            ]
+          }
         ]
       }
     ]
