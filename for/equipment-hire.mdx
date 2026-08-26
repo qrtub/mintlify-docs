@@ -1,0 +1,78 @@
+---
+title: "Equipment hire"
+icon: "truck"
+description: "Where QRtub fits for hire fleets: what gets tagged, when it is worth it, and how one code serves your yard and somebody else's site."
+---
+
+Hire is the trade where the same machine is scanned by two different companies in the same month,
+and neither has a login to the other's systems.
+
+## Where QRtub fits
+
+Hire software is built around the contract — on hire, off hire, pre-hire and post-hire inspection,
+damage at collection, sign-off on delivery. All of that assumes the person doing it works for you.
+
+The gap is the fortnight in between, when the machine is on a site you do not control and the
+person standing next to it is the hirer's operator. QRtub holds the address on the machine, so what
+that code opens can be your fitter's view today and the hirer's pre-start form tomorrow.
+
+## What gets tagged
+
+- Plant and access equipment out on hire
+- Attachments and ancillaries, which go missing more often than the machine
+- Generators, compressors, pumps, power leads
+- Workshop and service items not currently on hire
+- Cross-hired equipment you do not own
+
+## QRtub is particularly useful when
+
+- **The same machine goes out to several companies a quarter**, each running different software.
+- **You cross-hire in and out.** Somebody else's machine on your contract, or yours on theirs. See
+  [An on-hire flag](/how/on-hire-flag).
+- **A pre-start check has to be possible for someone with no account.** A hirer's operator will not
+  be set up in your system for a two-week hire, and should not need to be.
+- **Damage disputes turn on what condition it left in.** A form the hirer can fill in, with photos,
+  from the machine itself, is worth more than a signature on a delivery docket.
+- **Attachments outnumber machines** and are the hardest thing to keep a register of.
+- **The fleet changes constantly** — bought, sold, written off, cross-hired — so a tag population is
+  never in step with the asset register.
+
+## The problems you'll hit
+
+1. [An on-hire flag](/how/on-hire-flag) — the same tag showing your buttons in the yard and the
+   hirer's on site
+2. [One tag, your team and the public](/how/team-and-public) — your fitter and the hirer's operator
+   from one code
+3. [Let anyone report a fault](/how/report-a-fault) — damage reported from the site, not at
+   collection
+4. [Make the installation earn its keep](/how/earn-its-keep) — a plate on a machine with your name
+   on it, in front of somebody else's crew
+
+## Works with
+
+The URL detail for each is on its own page. This is which tool does what.
+
+| Tool | What a scan opens |
+|---|---|
+| **Jotform** | A pre-start or damage form the hirer can complete with no account, with photos and a signature — [guide](/integrations/jotform) |
+| **Google Forms** | The same, free, but **file upload requires a Google sign-in** — see [Google Forms](/integrations/google-forms/overview) |
+| **Mitti** | Your own inspection templates and asset records — [guide](/integrations/mitti/setup) |
+| **MaintainX** | A maintenance request from the site, no account needed — [guide](/integrations/maintainx) |
+| **Your hire system** | The asset or contract record. Anything with a per-asset URL works |
+
+That Google Forms limitation matters here more than anywhere: damage evidence is photos, and a form
+that demands a sign-in before accepting one will not get used on somebody else's site.
+
+## Typical Item fields
+
+Fleet number · make and model · serial · **on hire** (Yes/No) · current hirer · off-hire date ·
+last inspection · next service due · workshop status · owned or cross-hired
+
+Fleet number and on hire are the two that earn a [Field Default](/fields/field-defaults) — the
+first because it is what everyone calls the machine, the second because an unset flag behaves
+differently from a false one.
+
+## Related
+
+- [What Is a Tag?](/tags/what-is-a-tag) — surviving a wash-down and a fortnight on site
+- [Reserve Links in bulk](/links/numbered-links)

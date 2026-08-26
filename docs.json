@@ -385,7 +385,11 @@
           {
             "group": "By trade",
             "pages": [
-              "for/arboriculture"
+              "for/marine",
+              "for/equipment-hire",
+              "for/construction",
+              "for/arboriculture",
+              "for/facilities"
             ]
           }
         ]

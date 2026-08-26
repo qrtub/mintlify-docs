@@ -1,0 +1,77 @@
+---
+title: "Marine and workboats"
+sidebarTitle: "Marine"
+icon: "anchor"
+description: "Where QRtub fits for a workboat fleet: why stickers do not survive, why one code has to reach several systems, and why the boat has to be tagged before it exists in software."
+---
+
+A workboat is inspected by its master, serviced by a mechanic, surveyed by a regulator and audited
+by a client — four groups, three systems, and one hull.
+
+## Where QRtub fits
+
+A fleet of around thirty aluminum workboats runs like this. The boats are assets in one platform,
+where masters record pre-operation checks and raise actions and in-house mechanics record outboard
+services. The compliance documents — survey and survey-exemption certificates — live in an entirely
+different system, which most staff have no easy access to.
+
+So the code on the hull has to reach both. That is the shape QRtub is for: one address per boat,
+several destinations behind it, and the choice of which is a setting rather than something decided
+when the plate was made.
+
+## What gets tagged
+
+- Hulls, at the helm and at the transom
+- Outboards and inboard engines, serviced on their own cycle
+- Trailers, which move between boats
+- Safety equipment with expiry dates — lifejackets, EPIRBs, extinguishers
+- Ancillary gear that leaves the boat and comes back
+
+## QRtub is particularly useful when
+
+- **Nothing adhesive survives.** Salt water, UV, wash-down and hard use mean stickers last weeks.
+  Photo-anodized aluminum riveted to the hull is the only reliable answer — and it is not
+  economical to produce one at a time.
+- **The boat has to be tagged before it exists in software.** A new vessel cannot be given a code
+  that points at an asset record and a compliance file it does not yet have.
+- **Compliance lives somewhere most staff cannot reach.** A certificate everyone needs, in a system
+  only administrators use, is a certificate nobody reads.
+- **People pick the wrong asset.** Navigating an inspection app by hand to find one of thirty
+  similar boats produces inspections filed against the wrong hull — which is worse than a missing
+  inspection, because it looks like compliance and is not. A scan of that boat's own plate cannot
+  choose wrongly.
+- **The fleet is spread across the country** and the person holding the phone is not the person who
+  set the system up.
+
+## The problems you'll hit
+
+1. [One tag, your team and the public](/how/team-and-public) — masters, mechanics, surveyors and
+   clients from one plate
+2. [Make the installation earn its keep](/how/earn-its-keep) — a plate that reaches the certificate,
+   not just the asset record
+3. [Let anyone report a fault](/how/report-a-fault) — a defect raised from the water
+
+## Works with
+
+| Tool | What a scan opens |
+|---|---|
+| **Mitti** | The boat's asset profile, a pre-operation check, or a service template — [guide](/integrations/mitti/setup) |
+| **A compliance system** | The survey or exemption certificate. Store its per-boat URL in a field and bind it — see [Field Bindings](/destinations/field-bindings) |
+| **Google Drive or SharePoint** | Manuals and schematics — [Drive](/integrations/google-workspace) · [Microsoft 365](/integrations/microsoft-365) |
+| **Google Forms or Jotform** | A defect report anyone aboard can send |
+
+The pattern worth copying from that fleet: **one text field per external system**, holding that
+boat's own URL or ID, with the Destination built from it. Adding a second system later is a field
+and a button, not a re-plate.
+
+## Typical Item fields
+
+Vessel name · fleet number · hull identification · asset ID in your inspection platform ·
+compliance record URL · survey expiry · engine hours · home port · last pre-operation check
+
+## Related
+
+- [What Is a Tag?](/tags/what-is-a-tag) — anodizing, engraving and what survives salt water
+- [Produce before you know where they go](/links/numbered-links) — reserving codes for boats not yet
+  in any system
+- [Choosing a Method](/suppliers/choosing-a-method) — why one plate at a time is uneconomical
