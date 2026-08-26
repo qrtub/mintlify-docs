@@ -41,7 +41,7 @@ html.dark #sidebar button[aria-expanded]:hover svg {
    card-image is one of Mintlify's own data-component-part hooks, which is as stable as their
    markup gets — see the header of this file. */
 [data-component-part='card-image'] {
-  height: 80px;
+  height: 120px;
   object-fit: contain;
-  padding: 14px 14px 0;
+  padding: 18px 18px 0;
 }
