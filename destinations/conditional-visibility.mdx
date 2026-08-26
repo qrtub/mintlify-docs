@@ -72,7 +72,7 @@ That makes these three situations indistinguishable at a glance:
 - A typo — `item.tpye == "forklift"`, or a field name whose capitalization does not match (field names are case-sensitive).
 - An invented value — `today > item.dueDate`. There is no `today`. **`time` exposes only the parts listed above — no absolute date and no date arithmetic**, so "show this when the inspection is overdue" cannot be expressed. Use a status field you maintain (`item.testStatus == "expired"`) instead of comparing dates.
 
-The practical defense is to build conditions by picking fields from the editor's suggestions rather than typing them, and to verify against a real Item that you know should match before deploying.
+The practical defense is to build conditions by picking fields from the editor's suggestions rather than typing them, and to verify against a real Item that you know should match before installing.
 
 ## Expression limits
 

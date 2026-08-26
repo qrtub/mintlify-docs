@@ -21,9 +21,9 @@ From the Links page, open a Link's row menu and choose **Delete**. There is no a
 
 Delete a Link when it was created in error and never printed. If the code has already been produced, unassigning is almost always what you actually want, because the physical tag outlives the record.
 
-**Deletion is blocked for Links in a live print batch.** If a Link belongs to a print batch that has moved past Draft — Printing, Printed or Deployed — QRtub refuses the delete. That guard exists so an accidental click cannot orphan a code that is already on a machine. In a bulk delete it applies to the whole selection: if any Link in it sits in a protected batch, the entire operation is rejected and nothing is deleted, rather than some rows disappearing silently.
+**Deletion is blocked for Links in a live print batch.** If a Link belongs to a print batch that has moved past Draft — Printing, Printed or Installed — QRtub refuses the delete. That guard exists so an accidental click cannot orphan a code that is already on a machine. In a bulk delete it applies to the whole selection: if any Link in it sits in a protected batch, the entire operation is rejected and nothing is deleted, rather than some rows disappearing silently.
 
-Two things about that block are worth knowing before you go looking for a way around it. Archiving the batch does not lift it — the check looks at the batch's status, and archiving is a separate flag. And status only steps one stage at a time, so a Printing batch can go back to Draft, a Printed batch can go back via Printing, but **Deployed is terminal**: a Link in a Deployed batch cannot be deleted at all. Unassign it instead, which is the action that fits a code already in service anyway.
+Two things about that block are worth knowing before you go looking for a way around it. Archiving the batch does not lift it — the check looks at the batch's status, and archiving is a separate flag. And status only steps one stage at a time, so a Printing batch can go back to Draft, a Printed batch can go back via Printing, but **Installed is terminal**: a Link in a Installed batch cannot be deleted at all. Unassign it instead, which is the action that fits a code already in service anyway.
 
 ## Unassigning keeps the Link and frees it up
 

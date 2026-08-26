@@ -37,13 +37,13 @@ such cap, because the server does the selecting.
 
 The column picker has two groups:
 
-- **Item Fields** — the fields defined on the Collection, so a printer can put a serial number
+- **Item Fields** — the fields defined on the Collection, so a supplier can put a serial number
   or a location on the label next to the code.
 - **Link Fields** — **Full URL** (the complete `qrtub.com/...` address), **Short URL** (the path
   only) and **Active**.
 
 Toggle a column with the eye icon, drag to reorder, or use **Show all** / **Hide all**. Full URL
-is included by default, and it is the one column a print shop genuinely needs — most shops
+is included by default, and it is the one column a supplier genuinely needs — most shops
 generate the QR image themselves from that value rather than working from image files.
 
 One row equals one link, which in practice means one physical piece. Keep that convention and
@@ -63,7 +63,7 @@ batch, and you download it whenever you need it — see
 **CSV** — labeled "Download CSV without creating a batch" — is a genuinely neutral download.
 Nothing is tracked, no batch appears in Print Batches, and there is no later record that those
 codes were ever printed. Use it for a quick look at the data; use the draft batch for anything
-you are actually sending to a printer.
+you are actually sending to a supplier.
 
 New batches are named automatically as `Print list — Aug 18, 2026`. Rename it to something you
 will recognize later, like "Depot 2 replacements, March" — see
@@ -79,7 +79,7 @@ will recognize later, like "Depot 2 replacements, March" — see
 
 ## Related
 
-- [Batch Status: Draft to Deployed](/print-batches/batch-status)
+- [Batch Status: Draft to Installed](/print-batches/batch-status)
 - [Editing a Batch's Columns](/print-batches/editing-columns)
 - [Adding and Removing Links in a Batch](/print-batches/editing-links)
 - [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download)

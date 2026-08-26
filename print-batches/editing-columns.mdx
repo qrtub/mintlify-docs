@@ -5,7 +5,7 @@ description: "Change which Item and Link columns a Draft batch's CSV contains; s
 ---
 
 While a batch is still in **Draft** you can change which columns its CSV contains — useful when
-the print shop comes back asking for a serial number you left out. Saving rebuilds the stored CSV
+the supplier comes back asking for a serial number you left out. Saving rebuilds the stored CSV
 so the file matches the new selection.
 
 Open the batch and choose **Edit included columns**. The button only exists while the batch is a
@@ -15,7 +15,7 @@ Draft.
 
 The **CSV Columns** dialog is the same picker used when you first exported, with two groups:
 
-- **Link Fields** — **Full URL**, **Short URL** and **Active**. Full URL is the column a printer
+- **Link Fields** — **Full URL**, **Short URL** and **Active**. Full URL is the column a supplier
   normally needs.
 - **Item Fields** — the fields defined on the Collection the batch came from.
 
@@ -45,9 +45,9 @@ Advance the batch to Printing and the **Edit included columns** button disappear
 change anyway is rejected with "Can only edit column config on draft batches."
 
 The reason is the same one that protects the rest of the batch: past Draft, the CSV is the record
-of what the printer actually received. Silently rewriting it would leave you unable to tell what
+of what the supplier actually received. Silently rewriting it would leave you unable to tell what
 was produced. If a run genuinely needs different columns, revert the batch to Draft first (see
-[Batch Status: Draft to Deployed](/print-batches/batch-status)) — Printing can step back, Deployed
+[Batch Status: Draft to Installed](/print-batches/batch-status)) — Printing can step back, Installed
 cannot.
 
 Adding or removing links regenerates the CSV in exactly the same way, under the same Draft-only
@@ -58,4 +58,4 @@ rule.
 - [Adding and Removing Links in a Batch](/print-batches/editing-links)
 - [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download)
 - [Creating a Print Batch](/print-batches/creating-a-batch)
-- [Batch Status: Draft to Deployed](/print-batches/batch-status)
+- [Batch Status: Draft to Installed](/print-batches/batch-status)
