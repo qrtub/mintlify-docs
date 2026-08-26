@@ -32,3 +32,16 @@ html.dark #sidebar button[aria-expanded] svg {
 html.dark #sidebar button[aria-expanded]:hover svg {
   color: #e4e4e7; /* zinc-200 */
 }
+
+/* Card images used as platform logos.
+   Mintlify renders a card image as `w-full object-cover`, so a square logo becomes a block as
+   tall as the card is wide — several hundred pixels, dwarfing the title and description under
+   it. Capping the height turns it into a logo strip, and `contain` is required so a square mark
+   is scaled rather than cropped.
+   card-image is one of Mintlify's own data-component-part hooks, which is as stable as their
+   markup gets — see the header of this file. */
+[data-component-part='card-image'] {
+  height: 80px;
+  object-fit: contain;
+  padding: 14px 14px 0;
+}
