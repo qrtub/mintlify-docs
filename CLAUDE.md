@@ -307,6 +307,42 @@ five code types and an access matrix.
 Logos live in `images/logos/`, fetched from each vendor's own CDN — see the README there before
 adding one, because a logo.dev image would bring an attribution requirement with it.
 
+### URL segments: what the reader wants, not what the page is
+
+```
+/collections/  /fields/  /links/  /pages/  /destinations/  /tags/  ...   reference, named by entity
+/how/<goal>          how to achieve something using several features
+/for/<trade>         whether and where QRtub fits a trade
+/integrations/<tool> the URL format for one platform
+```
+
+**`/how/` and `/for/` are named after the reader's question.** `/how/report-a-fault` and
+`/for/arboriculture` read as sentences, they are the plainest words available, and they pair as one
+voice. Alternatives considered and rejected: `/workflows/` and `/processes/` are plainer still but
+honestly describe only three or four of the ten pages, since the set is heterogeneous — some are
+configurations, some are properties. `/patterns/` collides with numbered patterns, a real product
+concept. `/problems/` inverts pages that are mostly solution. `/use-cases/` fits everything and
+says nothing.
+
+**There is no collision between `/how/` and Help, even though Help is full of how-tos.** Help
+paths are named after entities, so they read as reference-by-noun; `/how/` reads as goal-by-phrase.
+Help explains how a *feature* works; `/how/` explains how to achieve an *outcome* across several.
+
+**A `/how/` slug must be a goal phrase, not a noun.** `/how/registers` is wrong;
+`/how/a-register-that-survives` is right. A bare noun makes the segment read as a category and the
+distinction from Help collapses.
+
+**One segment, one kind of thing.** This is the rule `/use-cases/` broke by holding both problems
+and trades, which is why it was split. It will be tempting to break again — the pull is always to
+file something convenient rather than correct.
+
+**Cap depth at three levels.** `integrations/mitti/setup` is the deepest shape that should exist.
+A fourth level means a page needs splitting into a *sibling*, not a child.
+
+**Naming inside a segment: noun-first for reference, verb-first for a task.** `field-types` and
+`core-vs-custom` alongside `creating-a-field` and `renaming-a-field`. Roughly what is already
+there; stated so it stays that way.
+
 **Card grids use `<CardGroup cols={n}>`, not `<Columns>`.** Mintlify's current published docs
 say to group cards with `<Columns>`; this deployment does not render it. The cards themselves
 still appear, so the failure is silent — you get a stack of full-width boxes instead of a grid,

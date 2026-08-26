@@ -1,0 +1,97 @@
+---
+title: "Change what a tag does when the machine goes out on hire"
+sidebarTitle: "An on-hire flag"
+icon: "toggle-left"
+description: "One tick box on the Item hides your internal buttons and shows a form the hirer can use, then puts everything back when the machine returns."
+---
+
+A machine leaves your yard for a fortnight. While it is away, the person scanning it is not your
+fitter — it is somebody at another company, running different software, who has no login to
+anything of yours.
+
+The tag on the machine cannot change. What it does can.
+
+## How it works
+
+Add one Yes/No field to the Item, then let two groups of buttons watch it.
+
+| The field | |
+|---|---|
+| Label | **On hire** |
+| Type | **Yes/No** — a tick box, made for flags |
+| Field key | `on_hire`, which gives you `{{item.on_hire}}` |
+
+Then, in the [Page Editor](/pages/page-editor-layout), put your internal buttons inside one
+**Container** and the hire buttons inside another, and give each container a condition in the
+**Visibility** group:
+
+```text
+Internal container    Show When:  item.on_hire != true
+Hire container        Show When:  item.on_hire == true
+```
+
+A Container hides its children with it, so that is two conditions for the whole page rather than
+one per button.
+
+Now the tag reads differently depending on one tick box:
+
+```
+In the yard                        Out on hire
+├── Start pre-start check          ├── Pre-start check  (a form, no login)
+├── Service history                ├── Operator manual
+├── Asset record                   └── Report a problem
+└── Report a problem
+```
+
+Tick the box when the machine goes out. Untick it when it comes back. Nothing physical is touched
+and nothing is produced again.
+
+## What goes where
+
+| | What it does | Options |
+|---|---|---|
+| **Your internal buttons** | Where your own team records work | Your asset system, CMMS or inspection app — [Mitti](/integrations/mitti/setup) · [MaintainX](/integrations/maintainx) |
+| **The hire buttons** | Something the hirer can actually open | [Jotform](/integrations/jotform) · [Google Forms](/integrations/google-forms/overview) · a PDF manual on any file host |
+| **The flag** | Which set is showing | One Yes/No field on the Item |
+| **Always visible** | Things both sides need | A reporting route, and what the machine is |
+
+The hire buttons are the point: a form on [Jotform](/integrations/jotform) or
+[Google Forms](/integrations/google-forms/overview) can be filled in by anyone, so the hirer's
+crew can complete a pre-start check without you setting up a single account for them.
+
+## Set a default, or existing Items will surprise you
+
+Add a Yes/No field to a Collection that already has Items and those Items have no value for it —
+not `false`, nothing. A condition testing `== false` would then hide your internal buttons on every
+machine you already own.
+
+Two things avoid it:
+
+- Give the field a **[Field Default](/fields/field-defaults)** so no Item is ever unset.
+- Write the internal condition as `item.on_hire != true` rather than `== false`, so anything that
+  is not explicitly ticked counts as in the yard.
+
+Check it before you rely on it. The Visibility field shows a **Visible** or **Hidden** badge against
+whichever Item you have selected, so switch to a real machine rather than trusting the base
+template — see [Conditional Visibility](/destinations/conditional-visibility).
+
+## What it needs
+
+- One Yes/No field on the Collection, with a default
+- Two Containers on the Page, one condition each
+- A form the hirer can open without an account
+- Somebody to tick the box. This is the real cost: it is a step in your hire-out process, and a
+  machine that goes out with the box unticked shows the hirer buttons they cannot use
+
+## Why not just give them a login
+
+You can, and for a long-term hire you probably should. This is for the fortnight — where setting up
+an account, having it approved, and remembering to remove it costs more than the hire earns, and
+where the machine is going to three different companies this quarter.
+
+## Related
+
+- [One tag, your team and the public](/how/team-and-public)
+- [Conditional Visibility](/destinations/conditional-visibility)
+- [Field Defaults](/fields/field-defaults)
+- [Equipment hire](/for/equipment-hire)

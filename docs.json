@@ -304,7 +304,7 @@
                 "pages": [
                   "print-first/overview",
                   "print-first/scanner",
-                  "print-first/claim-on-scan",
+                  "print-first/adopting-a-code",
                   "print-first/tips"
                 ]
               },
@@ -318,7 +318,7 @@
                   "suppliers/preparing-your-job",
                   "suppliers/quiet-zone-and-size",
                   "suppliers/matching-codes-to-rows",
-                  "suppliers/shop-redraws-your-file",
+                  "suppliers/when-a-supplier-redraws",
                   "suppliers/getting-a-proof"
                 ]
               }
@@ -364,6 +364,28 @@
                   "billing/plan-limits"
                 ]
               }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "In Practice",
+        "groups": [
+          {
+            "group": "Common problems",
+            "root": "how/team-and-public",
+            "pages": [
+              "how/team-and-public",
+              "how/report-a-fault",
+              "how/earn-its-keep",
+              "how/on-hire-flag",
+              "how/app-store-link"
+            ]
+          },
+          {
+            "group": "By trade",
+            "pages": [
+              "for/arboriculture"
             ]
           }
         ]

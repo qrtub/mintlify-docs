@@ -1,0 +1,66 @@
+---
+title: "Send iPhone and Android to the right app store"
+sidebarTitle: "The right app store"
+icon: "smartphone"
+description: "One code that opens the App Store on an iPhone and Google Play on an Android, instead of showing both badges and hoping."
+---
+
+Every app on the web is advertised with two badges side by side, because a printed link cannot know
+what phone is holding it. One of the two is always wrong for whoever is looking.
+
+A scan can know. The phone tells you what it is.
+
+## How it works
+
+Two Destinations on the same code, each shown only to the phone it suits.
+
+| Destination | URL | Show When |
+|---|---|---|
+| Download on the App Store | `https://apps.apple.com/app/yourapp` | `device.isIOS` |
+| Get it on Google Play | `https://play.google.com/store/apps/details?id=com.yourapp` | `device.isAndroid` |
+
+An iPhone sees one button. An Android sees the other. Nobody sees a choice they cannot use.
+
+The conditions go in the **Visibility** group when you select the section — see
+[Conditional Visibility](/destinations/conditional-visibility) and
+[Device Detection & Routing](/destinations/device-detection) for everything a condition can read
+about the device.
+
+## Add a third for everyone else
+
+A desktop browser, a tablet, or a phone QRtub cannot identify all fall outside both conditions and
+would see nothing at all. Leave one Destination with **no condition** on it:
+
+```
+├── Download on the App Store     device.isIOS
+├── Get it on Google Play         device.isAndroid
+└── Open in your browser          (no condition — always shows)
+```
+
+**When the device cannot be identified, QRtub assumes desktop.** So the unconditioned button is not
+a nicety; it is what an unrecognised phone gets.
+
+## What it needs
+
+- Two store URLs, which you already have
+- One condition on each
+- One button with no condition, as the fallback
+
+Nothing about the code changes, so a tag already printed can be given this by editing its
+[Page](/pages/pages-overview).
+
+## Where this stops being the right tool
+
+This is a good use of a device condition because the answer really is about the *device*. Your app
+genuinely only installs from one store.
+
+It is the wrong tool the moment the question is about the *person* — which staff see one thing and
+customers another. A device condition cannot tell those apart: someone in the field on a laptop
+gets the desktop branch, and someone at a desk on their phone gets the mobile one. For that, see
+[One tag, your team and the public](/how/team-and-public).
+
+## Related
+
+- [Device Detection & Routing](/destinations/device-detection)
+- [Conditional Visibility](/destinations/conditional-visibility)
+- [App Links & Fallback URLs](/destinations/app-links) — for opening an app you have already installed

@@ -1,0 +1,68 @@
+---
+title: "Let anyone report a fault"
+icon: "triangle-alert"
+description: "Giving the person who spots a problem a way to tell you, without an account, an app, or knowing who to email."
+---
+
+Whoever notices a fault is usually not on your team. A resident sees a broken gate, a driver finds
+a damaged roller door, a tenant reports a tap. They are standing in front of the thing, they know
+exactly which one it is, and they have no way to tell you.
+
+Most of them will not look up a phone number. They will take a photo and forget.
+
+## How it works
+
+Put a form on the tag, and make sure the form already knows which thing it is about.
+
+```
+Gate 7 — North car park
+├── Report a problem        → a form anyone can submit
+└── About this gate         → what it is, who maintains it
+```
+
+The person taps once, describes the problem, and sends it. They never sign in and never choose
+which asset it was, because the code told the form.
+
+## What goes where
+
+Whatever you already run. The examples are not a closed list.
+
+| | Options |
+|---|---|
+| **The form** | [Google Forms](/integrations/google-forms/overview) · [Jotform](/integrations/jotform) · a Mitti issue code · a [MaintainX](/integrations/maintainx) request portal |
+| **A conversation instead of a form** | [WhatsApp](/integrations/whatsapp), with the message already written |
+| **Where the report lands** | Wherever that tool already sends things — an inbox, a spreadsheet, a requests queue |
+
+## Say which thing it was
+
+This is the part worth getting right. A form that arrives saying only "the gate is broken" costs
+someone a phone call. A form that arrives knowing it was Gate 7 does not.
+
+Carry the identifier into the form with a [field binding](/destinations/field-bindings) so every
+tag opens the same form pre-filled with its own Item's details — see
+[Pre-filling a Google Form](/integrations/google-forms/prefill).
+
+Bind an identifier, never a description. Values go into a URL exactly as stored, so a field
+containing a space or an `&` breaks the link.
+
+## What it needs
+
+- One form, open to anyone. Check that: a Workspace form restricted to your organisation, or one
+  limited to a single response, will turn people away.
+- One Destination on the tag.
+- Nothing produced twice. A tag already installed can be given a reporting route by editing
+  its [Page](/pages/pages-overview).
+
+## What to expect
+
+Reports from people you cannot identify, which is the point and also the cost. Some will be
+duplicates, a few will be wrong, and one will be the thing you needed to know a week earlier than
+you would have.
+
+If that becomes a problem, the answer is a required field on the form rather than a barrier in
+front of it.
+
+## Related
+
+- [One tag, your team and the public](/how/team-and-public)
+- [Make the installation earn its keep](/how/earn-its-keep)

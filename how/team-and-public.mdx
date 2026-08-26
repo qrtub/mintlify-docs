@@ -1,0 +1,67 @@
+---
+title: "One tag, your team and the public"
+icon: "users"
+description: "A pattern for a tag anyone can scan: the operational buttons your crew needs, and a route for whoever else finds it, on the same Page."
+---
+
+A tag installed somewhere public gets scanned by people you did not plan for. A resident, a
+delivery driver, a client's site manager, someone who simply noticed it.
+
+The common failure is a permanent tag that opens one thing only your team can use. The tag is
+installed, expensive and idle: everyone else meets a sign-in screen and leaves, and nothing is
+captured from the one moment they were paying attention.
+
+## The shape
+
+One [Page](/pages/pages-overview), carrying every Destination either audience might want. Everyone
+who scans sees the same buttons and picks what they came for.
+
+```
+Playground 14 — Riverside Park
+├── Start inspection        → your team's tool
+├── Works history           → your team's tool
+├── Report a problem        → open to anyone, no account
+└── About this asset        → text and a photo on the Page itself
+```
+
+Your crew taps through to the tools they already use. Anyone else reads what you published and
+uses the reporting route.
+
+## The slots
+
+Each row is a role in the pattern. Fill it with whatever you already run — the examples are not a
+closed list.
+
+| Slot | What goes here | Examples |
+|---|---|---|
+| **The team's tool** | Where work gets recorded | [Mitti](/integrations/mitti/setup) · [MaintainX](/integrations/maintainx) · [ServiceM8](/integrations/servicem8) · any CMMS or inspection app |
+| **The public's route** | Somewhere anyone can submit with no account | [Google Forms](/integrations/google-forms/overview) · [Jotform](/integrations/jotform) · a Mitti issue code · a [MaintainX](/integrations/maintainx) request portal · [WhatsApp](/integrations/whatsapp) |
+| **The reference** | Something people need to read | [Google Drive](/integrations/google-workspace) · [Microsoft 365](/integrations/microsoft-365) · [Notion](/integrations/notion) · Dropbox · any file host |
+| **The context** | What the thing is, in plain words | Text, an image and Item fields on the Page itself — no external tool |
+
+## Nothing is exposed by putting the buttons side by side
+
+The reflex is to worry that a public tag showing operational buttons leaks something. It does not.
+
+QRtub holds the address, never the data, so **every Destination keeps its own permissions exactly
+as they are.** Someone outside your organisation who taps the inspection button meets your tool's
+sign-in, because protecting those records is that tool's job and it is still doing it. Putting a
+code on something grants nobody anything they did not already have.
+
+So the decision is not about risk. It is about **what you want to offer** the people you did not
+plan for. See [What Is a Destination?](/destinations/what-is-a-destination).
+
+## What it costs
+
+One Page and one open form. No extra Links, no second tag, and nothing produced twice — a tag
+already in the field can be given the public route by editing its Page.
+
+The one thing worth deciding before you produce a Batch: whether the reference slot is readable by
+an outsider. A file set to your organisation only is fine as the team's copy, but it should not be
+the *only* thing a public scan can reach.
+
+## Related
+
+- [Make the installation earn its keep](/how/earn-its-keep)
+- [Let anyone report a fault](/how/report-a-fault)
+- [Pages Overview](/pages/pages-overview)
