@@ -1,0 +1,44 @@
+---
+title: "What Is a Tag?"
+icon: "sticker"
+description: "A Tag is the physical material a QR code is displayed on — a third entity alongside the Item and the Link, and the one QRtub tracks least"
+---
+
+A **Tag** is the physical thing a QR code sits on: a vinyl sticker, an engraved metal plaque, a rigid sign, a billboard, a real-estate sign, a printed ad, an NFC inlay. Most tools stop at generating the digital pattern. QRtub treats the material that pattern gets printed on as its own thing, because it has its own cost and its own lifespan — usually a longer one than the equipment it is attached to.
+
+## The three entities
+
+QRtub keeps three separate things in view whenever codes go into the physical world:
+
+| Entity | What it is | Example |
+|--------|-----------|---------|
+| **Item** | The thing being represented | An excavator, a fire extinguisher, a meeting room, a product |
+| **Link** | The QRtub-managed URL — the digital pattern | `qrtub.com/r/x5fgd` |
+| **Tag** | The physical material displaying the code | A vinyl sticker, a metal plaque, a billboard, an NFC inlay |
+
+Keeping them separate is what makes the rest of QRtub work. The Link is not baked into the Tag, so a plaque outlives whatever system it currently points at. The Item is not baked into the Link, so a Tag can be moved to a different machine with an edit instead of a reprint. And the Tag is not baked into either, so a damaged sticker can be replaced with a new one carrying the same Link, and the Item connection survives — the new sticker just has to encode the same URL.
+
+## What QRtub tracks today
+
+**Production runs, not individual pieces.** Exporting a print list from a Collection creates a **print batch** — a record of exactly which links went to the printer, what stage the run is at (Draft → Printing → Printed → Deployed), and a per-code Printed / Deployed / Retired status so you can find the sixty stickers out of five hundred that never left the box. A batch carries a name, notes, tags and a photo of the finished Tags, keeps the CSV that was sent, and can be archived when the run is done.
+
+That is the whole of what is recorded about the physical layer. See [Print Batches](/print-batches/overview).
+
+## What is not tracked
+
+There is no record of what an individual QR code is printed *on*. No material type, no cost, no durability rating, no installation location, and no per-piece inventory. These are planned, not built:
+
+- Tags as a stored entity, with a type and material per piece
+- Tag Templates — reusable design templates for production
+- Tag inventory and cost reporting
+- A replacement workflow that supersedes one Tag with another
+- Suppliers — a program of vetted producers you can order through
+
+So production runs are tracked; individual Tags are not. Today you produce Tags through whichever supplier you already use, and any cost or material record lives in your own accounting, not in QRtub.
+
+## Related
+
+- [Choosing a Tag Type](/tags/choosing-a-tag-type) — comparing materials by environment, lifespan and cost
+- [Print Batches](/print-batches/overview) — what is actually recorded about a production run
+- [The Print-First Workflow](/print-first/overview) — why the Tags usually get made before the Items exist
+- [Choosing Your Print Production Method](/print-shop/choosing-a-method) — getting a batch of unique codes actually produced

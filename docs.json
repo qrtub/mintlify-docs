@@ -24,7 +24,7 @@
     },
     {
       "source": "/help/media-basics",
-      "destination": "/media/what-is-media"
+      "destination": "/tags/what-is-a-tag"
     },
     {
       "source": "/help/custom-fields",
@@ -92,7 +92,7 @@
     },
     {
       "source": "/media-basics",
-      "destination": "/media/what-is-media"
+      "destination": "/tags/what-is-a-tag"
     },
     {
       "source": "/print-first-workflow",
@@ -187,7 +187,7 @@
                   "items/overview",
                   "items/name-and-description",
                   "items/item-id",
-                  "items/tags",
+                  "items/keywords",
                   "items/duplicating"
                 ]
               },
@@ -277,8 +277,8 @@
                 "group": "Tags",
                 "expanded": false,
                 "pages": [
-                  "media/what-is-media",
-                  "media/media-types"
+                  "tags/what-is-a-tag",
+                  "tags/choosing-a-tag-type"
                 ]
               },
               {

@@ -1,0 +1,68 @@
+---
+title: "Keywords"
+icon: "tags"
+description: "The core Keywords field: entering multiple values, why the chips are colored, and the comma-versus-semicolon difference between the form and CSV"
+---
+
+Keywords is the core field that holds a list of values rather than a single one. It is where
+cross-cutting labels go — `site-a`, `hired-in`, `needs-service` — the kind of thing you would
+not create a dedicated field for.
+
+## Entering keywords
+
+By default Keywords is a plain text box and you type your values separated by commas:
+
+```text
+site-a, hired-in, needs-service
+```
+
+Each value is trimmed, empty entries are dropped, and duplicates are removed, so
+`site-a, , site-a` is stored as the single keyword `site-a`.
+
+## Turning Keywords into a picker
+
+Add Allowed Values to the Keywords field in the Collection's Fields tab and the text box becomes a
+multi-select list of those options. This is what you want once a team is sharing a Collection —
+it stops `site-a`, `Site A` and `sitea` from all existing at once.
+
+Keywords ships with **Allow new values** turned on, so even as a picker it keeps an "Add new..."
+box in the dropdown: someone can still add a value that is not on the list, and it is registered
+for everyone to reuse. Turn Allow new values off and both the item form and CSV import reject
+any value outside the list.
+
+## Why the chips are colored
+
+Chip colors come from the Allowed Values list, not from the Item. Each allowed value can be given
+a color, and that color is used wherever the value is rendered — the items table and the Page
+someone sees after scanning. Configure the color once on the field and it applies everywhere.
+
+A value that was typed freely and has no matching allowed value simply renders with no color. That
+is the usual reason a chip looks plain next to colored siblings.
+
+On a Page, both the Keywords section and the ItemHeader section's chips default to the
+`{{item.tags}}` binding, so keywords show up without you configuring anything.
+
+## Keywords in CSV files
+
+Keywords use a **semicolon** in CSV, not a comma — commas separate columns:
+
+```text
+name,tags
+Excavator 203,site-a; hired-in
+```
+
+Exports join the values with `; `, and imports accept them with or without the space after the
+semicolon. A cell with no semicolon is imported as a single-value list.
+
+## Related
+
+- [What Is an Item?](/items/overview)
+- [Allowed Values](/fields/allowed-values)
+- [Allow New Values](/fields/allow-new-values)
+- [Importing Items from CSV](/import-export/importing-items)
+
+<Note>
+The field is labelled **Keywords**, but its binding keeps the stable code name — write
+`{{item.tags}}`, not `{{item.keywords}}`. Renaming a user-facing label never changes a binding;
+see [Renaming a Field](/fields/renaming-a-field).
+</Note>
