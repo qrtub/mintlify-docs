@@ -2,7 +2,7 @@
 title: "QRtub QR Code Standards"
 sidebarTitle: "QR Code Standards"
 icon: "shield-check"
-description: "What to choose when you export a code and why: SVG for print, Q error correction, a 4-module quiet zone, black on white, and the logo beside the code rather than inside it."
+description: "What to choose when you export a code and why: SVG for print, why L is never worth choosing, a 4-module quiet zone, black on white, and the logo beside the code rather than inside it."
 ---
 
 A QR code on a plate is a decision you make once and live with for years. These are the settings
@@ -14,7 +14,7 @@ them.
 | Setting | Our standard | Because |
 |---|---|---|
 | Format | **SVG** for anything printed. PNG only for screens | Vector scales to any plate size with no soft edges |
-| Error correction | **Q** for printed tags. **H** if it will be damaged, obscured or scanned from close up | Q survives about 25% damage and, for QRtub addresses, usually costs nothing |
+| Error correction | Never **L**. **M** is the floor, **Q** for printed tags, **H** if it will be damaged or obscured | For a random Link, L is no smaller than M — so L gives away damage tolerance for nothing |
 | Quiet zone | **4 modules**, with nothing crossing it | Below 4 the scanner can lose the code's edges |
 | Printed size | **20–25 mm minimum**, larger with scanning distance | Below that, focus and material texture start to decide the outcome |
 | Color | **Black on white** | Contrast is what a camera actually reads |
@@ -30,30 +30,48 @@ PNG is a fixed grid of pixels — QRtub exports it at 1024 × 1024. That is roug
 which is fine for a tag or a sticker and not enough for a sign. Enlarge a PNG well past that and
 the module edges soften until the code stops decoding. Use PNG for a web page, an email, a slide.
 
-## Error correction: Q, and it is usually free
+## Error correction: never L, and Q for anything printed
 
 Error correction is how much of the code can be destroyed and still scan — roughly 7% at L, 15% at
 M, 25% at Q and 30% at H. Higher levels need more modules to carry the same address, so the usual
 advice is that raising it makes the code bigger.
 
-**For QRtub addresses, that is often not true.** Our addresses are short, so the next level up
-frequently lands on the same module count and costs nothing at all:
+Take a **random Link** as the reference, because it is the default type and the only one with a
+fixed length — every random address is exactly 25 characters, so it always produces exactly the
+same code:
 
-| Address | L | M | Q | H |
-|---|---|---|---|---|
-| `qrtub.com/r/x5fgd` | 25×25 | **25×25** | 29×29 | 33×33 |
-| `qrtub.com/cra001` | 25×25 | **25×25** | 29×29 | **29×29** |
-| `qrtub.com/cra0042tl` | 25×25 | 29×29 | **29×29** | 33×33 |
-| `qrtub.com/boardroom` | 25×25 | 29×29 | **29×29** | 33×33 |
+| Level | Survives | A random Link |
+|---|---|---|
+| L | ~7% | 25×25 |
+| **M** | ~15% | **25×25 — the same** |
+| Q | ~25% | 29×29 |
+| H | ~30% | 29–33 |
 
-Bold means the same size as the level to its left — a straight upgrade for nothing.
+**So L is never worth choosing.** It is not smaller than M — it is the same code with less than half
+the damage tolerance. Treat M as the floor.
 
-So on a typical numbered Link, **Q is the same size as M** and survives 25% damage instead of 15%.
-On a random Link, M is the same size as L. The step that is free depends on how long the address
-is, so the honest rule is: **pick Q, and only drop to M if the code has to be smaller than Q allows.**
+**Q is a real step up, and worth taking for anything printed.** It costs one size increment, 25
+modules to 29. On a 25 mm plate that is a module going from about 1.0 mm to 0.86 mm — no problem for
+a phone camera, in exchange for surviving 25% damage instead of 15%. On something bolted outdoors for
+a decade, that is the right trade.
 
-Raise it to **H** when the code will be scratched, painted over, partly covered by a label, or
-scanned from a few centimeters where a phone sees only part of the frame.
+Go to **H** when the code will be scratched, painted over, partly covered by a label, or scanned
+from a few centimeters where a phone sees only part of the frame.
+
+### On other Link types the free step moves
+
+Numbered and custom Links vary in length, so where the free step falls depends on the address:
+
+| Address | chars | L | M | Q | H |
+|---|---|---|---|---|---|
+| `qrtub.com/r/x5fgd` | 25 | 25×25 | **25×25** | 29×29 | 33×33 |
+| `qrtub.com/cra001` | 24 | 25×25 | **25×25** | 29×29 | **29×29** |
+| `qrtub.com/cra0042tl` | 27 | 25×25 | 29×29 | **29×29** | 33×33 |
+| `qrtub.com/boardroom` | 27 | 25×25 | 29×29 | **29×29** | 33×33 |
+
+Bold means the same size as the level to its left. On a longer numbered Link, Q is free where M was
+not — so if you are size-constrained and curious, it is worth generating one code at two levels and
+comparing. The rule that holds everywhere is the simple one: **M or better, and Q for print.**
 
 Note that error correction protects against damage, not against a code that was printed too small.
 A pristine 10 mm code at H still will not scan reliably. Size first, then error correction.
