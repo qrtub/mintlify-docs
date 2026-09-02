@@ -62,9 +62,10 @@ code at H still will not scan reliably. Size first, then error correction.
 The blank border around the code is what the scanner uses to find its edges. Four modules on all
 four sides, and nothing in it — no logo, no border, no text, no mounting hole, no laminate edge.
 
-**Do not rely on the margin built into the exported file.** QRtub currently exports a 2-module
-margin, not 4. Add clear space around the placed image in your layout, or spec it explicitly to
-the shop. Full detail in [Quiet Zone and Minimum Size](/suppliers/quiet-zone-and-size).
+QRtub exports a 4-module margin, so a placed file already carries its quiet zone. **What it cannot
+do is protect it.** Anything your layout puts inside that border — a rule, a rivet, a trim edge —
+takes the clear space back. Mark the boundary on the spec, not just the code's position. Full detail
+in [Quiet Zone and Minimum Size](/suppliers/quiet-zone-and-size).
 
 ## Color: black on white
 
@@ -72,9 +73,16 @@ Black on white is the only combination guaranteed to work, because a camera read
 than color. QRtub exports black on white and does not offer brand colors — a code in your brand's
 mid-tone on a light background can look right and fail in poor light.
 
-The white background is not decoration. **It is the quiet zone, made physical.** A transparent
-background hands responsibility for the quiet zone to whoever places the artwork, and the failure
-arrives late: a transparent code looks correct on a white screen and disappears into a dark plate.
+### Transparent background
+
+The export offers a transparent background as a deliberate choice. It removes the QR code's
+background so it can be placed over other artwork — a colored substrate, an anodized plate, an
+existing label design.
+
+Take it only when you control what ends up behind the code, because **the white background is not
+decoration. It is the quiet zone, made physical.** Turning it off hands responsibility for both
+contrast and clear space to whoever places the artwork, and the failure arrives late: a transparent
+code looks correct on a white screen and disappears into a dark plate.
 
 ## Where the logo goes
 

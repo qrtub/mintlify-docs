@@ -15,9 +15,11 @@ Nothing can cross into it. Not a logo, not a border, not a line of text, not a *
 
 Mark the quiet zone on your spec as a boundary, not an afterthought — the shop needs to know where the clear space ends, not only where the code sits. This matters most on small tags, where a fixing hole and the code are competing for the same few millimeters.
 
-### The exported margin is 2 modules, not 4
+### The exported margin is the quiet zone — protect it
 
-Worth knowing if you are laying codes out yourself: every code QRtub exports carries a margin **two modules** wide around it, not four — SVG and PNG alike. Print specs commonly ask for four. So do not treat the image's built-in border as the quiet zone — add clear space around the placed image in your layout, or hand the shop a spec that tells them to.
+Every code QRtub exports carries a **4-module** margin, SVG and PNG alike, which is what print specs ask for. So a placed file arrives with its quiet zone intact.
+
+What the file cannot do is defend it. A rule, a border, a fixing hole or a trim edge that sits inside that margin takes the clear space back, and the code still looks correct. Mark the boundary on your spec rather than assuming the built-in margin survives layout.
 
 ## Minimum size: about 20–25 mm
 
