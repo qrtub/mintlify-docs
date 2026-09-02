@@ -2,7 +2,7 @@
 title: "QR Code Print Spec: Quiet Zone and Minimum Size"
 icon: "ruler"
 sidebarTitle: "Quiet Zone and Size"
-description: "The 4-module quiet zone nothing may cross, the 20-25mm practical minimum for phone scanning, and why a 1024px PNG limits how large you can print a QRtub code"
+description: "The 4-module quiet zone nothing may cross, the 20-25mm practical minimum for phone scanning, and why the exported margin is not the quiet zone"
 ---
 
 Two numbers belong on every print spec you hand a shop: a quiet zone of at least **4 modules** on all four sides, and a printed size of at least about **20–25 mm (roughly 1 inch)** square. Both are about whether a phone camera can decode the code at all — and both fail silently, producing a piece that looks perfect and does not scan.
@@ -15,9 +15,9 @@ Nothing can cross into it. Not a logo, not a border, not a line of text, not a *
 
 Mark the quiet zone on your spec as a boundary, not an afterthought — the shop needs to know where the clear space ends, not only where the code sits. This matters most on small tags, where a fixing hole and the code are competing for the same few millimeters.
 
-### The exported PNG has a 2-module margin, not 4
+### The exported margin is 2 modules, not 4
 
-Worth knowing if you are laying codes out yourself: the PNG QRtub exports carries a white margin **two modules** wide around the code, not four. Print specs commonly ask for four. So do not treat the image's built-in border as the quiet zone — add clear space around the placed image in your layout, or hand the shop a spec that tells them to.
+Worth knowing if you are laying codes out yourself: every code QRtub exports carries a margin **two modules** wide around it, not four — SVG and PNG alike. Print specs commonly ask for four. So do not treat the image's built-in border as the quiet zone — add clear space around the placed image in your layout, or hand the shop a spec that tells them to.
 
 ## Minimum size: about 20–25 mm
 
@@ -25,24 +25,32 @@ As a rule of thumb, do not print a code smaller than about 20–25 mm square if 
 
 Scanning distance pushes that number up, not down. A code on a plant room door read from two meters away needs to be much larger than one on a handheld tool.
 
-## The PNG scaling constraint
+## Size, format, and what error correction can and cannot do
 
-QRtub exports QR codes as PNG only: **1024 × 1024 pixels, black on white**. There is no vector option, no control over size or colors, and no exposed error-correction setting — QRtub uses the generator's default and does not surface the level.
+QRtub exports **SVG or PNG**, black on white, with the error-correction level of your choice. Two
+practical consequences for a print spec.
 
-That has two practical consequences.
+**Use SVG for anything printed.** It is vector, so one file covers a 20 mm tool tag and a 400 mm
+door sign with identical edges. PNG is a fixed 1024 × 1024 pixels — roughly 87 mm at 300 dpi, which
+is comfortable for a tag or a sticker, tight for a plaque, and not enough for a sign. Enlarged well
+past that, a PNG's module edges soften enough to stop scanning. If a shop only has the PNG and needs
+it larger, give them the **Full URL** column from your print list and let them regenerate at press
+size — that is normal practice, not a workaround.
 
-**Do not scale a PNG much past 1024 pixels of print area.** At 300 dpi, 1024 pixels is roughly 87 mm — comfortable for a tag or a sticker, tight for a plaque, and not enough for a sign. Enlarged well beyond that, the code's edges soften enough to stop scanning.
+**Error correction is a real lever now, but it is not a substitute for size.** For a piece that will
+live outdoors, be laminated, or get scratched, raise the level — **Q** for most printed tags and
+**H** where the code will be damaged or partly covered. For QRtub's short addresses the step up is
+often free, so this usually costs nothing; see [QR Code
+Standards](/suppliers/qr-code-standards).
 
-**You cannot compensate for damage with error correction.** For a piece that will live outdoors, be laminated, or get scratched, there is no level to raise. Compensate with size instead: print the code larger than you otherwise would, and print its address in readable text nearby so someone can type it when the code is damaged.
-
-## When you need it bigger than a PNG allows
-
-Do not go looking for a vector export — QRtub does not have one. Give the shop the **Full URL** column from your exported print list and let them generate each code themselves at the exact size their press needs.
-
-That is normal practice rather than a workaround. The URL is everything a QR generator needs, and it puts the format and rendering choices with the people who know the press.
+What it cannot do is rescue a code that was printed too small. A pristine 10 mm code at H still will
+not scan reliably, because the failure there is the camera resolving individual modules, not missing
+data. Size first, then error correction — and print the address in readable text nearby either way,
+so someone can type it when the code is beyond saving.
 
 ## Related
 
 - [Preparing Your Print Job](/suppliers/preparing-your-job) — where this spec fits in the full handoff
 - [When a Supplier Redraws Your File](/suppliers/when-a-supplier-redraws) — why they will often regenerate the code themselves
-- [Downloading QR Codes](/bulk-links/downloading-qr-codes) — what the PNG and ZIP exports actually contain
+- [Downloading QR Codes](/bulk-links/downloading-qr-codes) — the export dialog and what the files contain
+- [QR Code Standards](/suppliers/qr-code-standards) — every setting we recommend, and why

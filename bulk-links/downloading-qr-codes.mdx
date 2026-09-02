@@ -1,40 +1,76 @@
 ---
 title: "Downloading QR Codes"
 icon: "qr-code"
-description: "Exporting QR code images from QRtub: a single PNG or a ZIP of PNGs, at one fixed size and appearance — there is no SVG export and no error-correction setting today"
+description: "Exporting QR code images from QRtub: choosing SVG or PNG and an error-correction level, what a single download and a ZIP contain, and the appearance settings that are still fixed"
 ---
 
-QRtub generates QR code images from your Links on demand. One Link gives you a PNG; several give you a ZIP of PNGs. There are no appearance options — every code comes out the same size, the same colors, and the same format.
+QRtub generates QR code images from your Links on demand. One Link gives you a single file; several
+give you a ZIP. Before it generates, you choose two things — the **format** and the **error
+correction level**.
+
+For what to pick and why, see [QR Code Standards](/suppliers/qr-code-standards). The short version:
+SVG and Q for anything printed.
 
 ## Downloading one code
 
-Open a Link's row menu and choose **Download QR Code**. You get a single PNG named after the slug, like `qr-code-cra0042.png`.
+Open a Link's row menu and choose **Download QR Code**. The dialog asks for format and error
+correction, then hands you one file named after the slug — `qr-code-cra0042.svg` or
+`qr-code-cra0042.png`.
 
-What is encoded is the Link's full public address — `https://qrtub.com/r/x5fgd` for a random Link, `https://qrtub.com/cra0042` for a numbered or custom one — not the slug on its own. That is what makes the image scannable by any phone camera.
+A single code is never zipped, and it honors the same format choice, so asking for SVG gives you
+SVG rather than a PNG.
+
+What is encoded is the Link's full public address — `https://qrtub.com/r/x5fgd` for a random Link,
+`https://qrtub.com/cra0042` for a numbered or custom one — not the slug on its own. That is what
+makes the image scannable by any phone camera.
 
 ## Downloading many at once
 
-Select the Links you want and choose **Download QR Codes** from the bulk menu. With more than one selected you always get a ZIP archive named for the day, like `qr-codes-2026-08-22.zip`, containing one PNG per Link named the same way as a single download. There is no option to receive many separate files instead.
+Select the Links you want and choose **Download QR Codes** from the bulk menu. The dialog shows how
+many codes are about to be produced. With more than one selected you always get a ZIP named for the
+day, like `qr-codes-2026-09-02.zip`, containing one file per Link named the same way as a single
+download. There is no option to receive many separate files instead.
 
-Because the filenames carry the slug, they line up with the **Short URL** and **Full URL** columns of an exported print list — which is how a supplier matches each image to its data row. Neither column is a byte-for-byte match for the filename, though: **Short URL** adds a leading slash and, for random Links, an `/r/` prefix, and **Full URL** adds the protocol and domain. Whoever does the matching has to strip those.
+Because the filenames carry the slug, they line up with the **Short URL** and **Full URL** columns
+of an exported print list — which is how a supplier matches each image to its data row. Neither
+column is a byte-for-byte match for the filename, though: **Short URL** adds a leading slash and,
+for random Links, an `/r/` prefix, and **Full URL** adds the protocol and domain. Whoever does the
+matching has to strip those.
 
-The images are generated in your browser, in batches of fifty, with a progress indicator counting up as it goes. A few dozen codes is instant. Several thousand takes minutes, and the tab has to stay open for the whole time — if you close it, you get nothing and have to start again. If you used "select all", QRtub fetches the full matching set of Links first, so the total you see counts every match, not just the page on screen.
+The images are generated in your browser, in batches of fifty, with a progress toast counting up as
+it goes and a packaging step at the end. A few dozen codes is instant. Several thousand takes
+minutes, and the tab has to stay open for the whole time — if you close it, you get nothing and
+have to start again. If you used "select all", QRtub fetches the full matching set of Links first,
+so the total you see counts every match, not just the page on screen.
+
+## What you choose
+
+**Format — SVG or PNG.** SVG is vector and prints at any size, which is why it is the default and
+the right answer for a supplier. PNG is a fixed 1024 × 1024 grid, suited to screens.
+
+**Error correction — L, M, Q or H.** How much of the code can be destroyed and still scan, roughly
+7%, 15%, 25% and 30%. Higher levels can need more modules to carry the same address, though for
+QRtub's short addresses the next level up is often the same size — the table in
+[QR Code Standards](/suppliers/qr-code-standards) shows where it is free.
 
 ## What you cannot change
 
-This is worth being explicit about, because most QR generators expose these settings and QRtub does not:
+Worth being explicit about, because most QR generators expose these:
 
-- **Format is PNG only.** There is no SVG, PDF or EPS export anywhere in QRtub today. If your supplier needs vector artwork, they will regenerate the code from the URL — which is normal practice, and the URL is all they need.
-- **Size is fixed** at 1024 × 1024 pixels. Big enough to print at any realistic tag size, and not adjustable.
-- **Colors are fixed** at black on white. No brand color, no inverted version, no transparent background.
-- **Error correction is not exposed.** There is no setting for it, so you cannot raise it for codes that will be scratched or partly obscured. Design around it instead: print bigger, and print the address in readable text under the code so it can be typed when the code is damaged.
-- **Nothing is added to the image.** No logo, no caption, no border, no slug printed underneath. Whatever surrounds the code is your layout's job.
-
-The PNG includes a white margin two modules wide around the code. Print specifications commonly ask for a quiet zone of four modules, so if you are laying these images out yourself, keep clear space around them rather than assuming the exported margin is enough.
+- **PNG size is fixed** at 1024 × 1024 pixels. Not adjustable — but SVG makes it mostly moot, since
+  vector art has no fixed size.
+- **Colors are fixed** at black on white. No brand color, no inverted version, no transparent
+  background.
+- **Nothing is added to the image.** No logo, no caption, no border, no slug printed underneath.
+  Whatever surrounds the code is your layout's job — and a logo belongs beside the code rather than
+  inside it, for reasons covered in [QR Code Standards](/suppliers/qr-code-standards).
+- **The quiet zone is not adjustable.** Exports carry a margin **two modules** wide. Print
+  specifications ask for **four**, so if you are laying these images out yourself, keep clear space
+  around them rather than assuming the exported margin is enough.
 
 ## Related
 
+- [QR Code Standards](/suppliers/qr-code-standards) — which format and error-correction level to choose
 - [Bulk Assigning, Unassigning, and Deleting Links](/bulk-links/assign-unassign-delete) — how selection and "select all" work
-- [QR Code Print Spec: Quiet Zone and Minimum Size](/suppliers/quiet-zone-and-size) — the clear space and minimum size a printed code needs, and how far a 1024px PNG scales
+- [Quiet Zone and Minimum Size](/suppliers/quiet-zone-and-size) — the clear space and minimum size a printed code needs
 - [Matching QR Codes to Data Rows](/suppliers/matching-codes-to-rows) — how these filenames pair each image with its CSV row
-- [Creating a Print Batch](/print-batches/creating-a-batch) — exporting the data list these images accompany

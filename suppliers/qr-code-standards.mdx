@@ -1,0 +1,110 @@
+---
+title: "QRtub QR Code Standards"
+sidebarTitle: "QR Code Standards"
+icon: "shield-check"
+description: "What to choose when you export a code and why: SVG for print, Q error correction, a 4-module quiet zone, black on white, and the logo beside the code rather than inside it."
+---
+
+A QR code on a plate is a decision you make once and live with for years. These are the settings
+QRtub recommends, and the reasoning behind each — so you can put them on a print spec and defend
+them.
+
+## The standards, in short
+
+| Setting | Our standard | Because |
+|---|---|---|
+| Format | **SVG** for anything printed. PNG only for screens | Vector scales to any plate size with no soft edges |
+| Error correction | **Q** for printed tags. **H** if it will be damaged, obscured or scanned from close up | Q survives about 25% damage and, for QRtub addresses, usually costs nothing |
+| Quiet zone | **4 modules**, with nothing crossing it | Below 4 the scanner can lose the code's edges |
+| Printed size | **20–25 mm minimum**, larger with scanning distance | Below that, focus and material texture start to decide the outcome |
+| Color | **Black on white** | Contrast is what a camera actually reads |
+| Logo | **Beside the code, never inside it** | A logo inside spends the damage budget on decoration |
+| The address | **Printed as readable text nearby** | It can be typed when the code is unreadable |
+
+## Format: SVG unless it is going on a screen
+
+SVG is vector, so the same file prints at 20 mm on a tool tag or 400 mm on a plant room door with
+identical edges. It is the right choice for every supplier handoff.
+
+PNG is a fixed grid of pixels — QRtub exports it at 1024 × 1024. That is roughly 87 mm at 300 dpi,
+which is fine for a tag or a sticker and not enough for a sign. Enlarge a PNG well past that and
+the module edges soften until the code stops decoding. Use PNG for a web page, an email, a slide.
+
+## Error correction: Q, and it is usually free
+
+Error correction is how much of the code can be destroyed and still scan — roughly 7% at L, 15% at
+M, 25% at Q and 30% at H. Higher levels need more modules to carry the same address, so the usual
+advice is that raising it makes the code bigger.
+
+**For QRtub addresses, that is often not true.** Our addresses are short, so the next level up
+frequently lands on the same module count and costs nothing at all:
+
+| Address | L | M | Q | H |
+|---|---|---|---|---|
+| `qrtub.com/r/x5fgd` | 25×25 | **25×25** | 29×29 | 33×33 |
+| `qrtub.com/cra001` | 25×25 | **25×25** | 29×29 | **29×29** |
+| `qrtub.com/cra0042tl` | 25×25 | 29×29 | **29×29** | 33×33 |
+| `qrtub.com/boardroom` | 25×25 | 29×29 | **29×29** | 33×33 |
+
+Bold means the same size as the level to its left — a straight upgrade for nothing.
+
+So on a typical numbered Link, **Q is the same size as M** and survives 25% damage instead of 15%.
+On a random Link, M is the same size as L. The step that is free depends on how long the address
+is, so the honest rule is: **pick Q, and only drop to M if the code has to be smaller than Q allows.**
+
+Raise it to **H** when the code will be scratched, painted over, partly covered by a label, or
+scanned from a few centimeters where a phone sees only part of the frame.
+
+Note that error correction protects against damage, not against a code that was printed too small.
+A pristine 10 mm code at H still will not scan reliably. Size first, then error correction.
+
+## Quiet zone: 4 modules, and nothing crosses it
+
+The blank border around the code is what the scanner uses to find its edges. Four modules on all
+four sides, and nothing in it — no logo, no border, no text, no mounting hole, no laminate edge.
+
+**Do not rely on the margin built into the exported file.** QRtub currently exports a 2-module
+margin, not 4. Add clear space around the placed image in your layout, or spec it explicitly to
+the shop. Full detail in [Quiet Zone and Minimum Size](/suppliers/quiet-zone-and-size).
+
+## Color: black on white
+
+Black on white is the only combination guaranteed to work, because a camera reads contrast rather
+than color. QRtub exports black on white and does not offer brand colors — a code in your brand's
+mid-tone on a light background can look right and fail in poor light.
+
+The white background is not decoration. **It is the quiet zone, made physical.** A transparent
+background hands responsibility for the quiet zone to whoever places the artwork, and the failure
+arrives late: a transparent code looks correct on a white screen and disappears into a dark plate.
+
+## Where the logo goes
+
+**Beside the code, above it, or below it — not inside it.**
+
+A logo in the middle of a QR code works by destroying modules and relying on error correction to
+reconstruct them. That is the same budget you provisioned for grit, scratches and a decade of UV.
+Spending it on branding means the code leaves the shop already partly consumed, and the first real
+damage is the damage that breaks it.
+
+There is no reserved space in the middle of a QR code. Unlike the three corner squares, the center
+is live data.
+
+A logo outside the code costs nothing, can be considerably larger, and stays legible from further
+away than the code can be scanned from anyway. On a plate with room for both, that is the better
+design as well as the more durable one.
+
+## Print the address as text too
+
+Put the Link's address in readable text near the code — `qrtub.com/cra0042tl` under a code, or
+`CRA0042TL` as the plate's own number.
+
+It is the fallback when the code is unreadable, and with a numbered Link it does double duty: the
+plate number and the web address are the same string, so there is one identifier instead of two
+and nothing to map back to a spreadsheet. See [Choosing a Link Type](/links/choosing-a-link-type).
+
+## Related
+
+- [Quiet Zone and Minimum Size](/suppliers/quiet-zone-and-size) — the two numbers for a print spec
+- [Downloading QR Codes](/bulk-links/downloading-qr-codes) — the export dialog and what it produces
+- [Preparing Your Print Job](/suppliers/preparing-your-job) — where these standards go in the handoff
+- [Choosing a Tag Type](/tags/choosing-a-tag-type) — what to print them on
