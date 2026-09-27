@@ -17,14 +17,18 @@ The length and the alphabet are fixed. There is no setting for a longer slug, a 
 different character set anywhere in QRtub — if you send a request asking for one, it is ignored
 and the standard six-letter slug is minted instead.
 
-**Two slugs can never clash.** QRtub does not draw at random and check whether the result is
-free; it derives each name from a counter through a cipher, and a cipher is a one-to-one mapping.
-Two Links cannot arrive at the same name, so creating five hundred at once never asks you to
-resolve a conflict and never fails partway through.
+**Two random slugs can never clash.** QRtub does not draw at random and check whether the result
+is free; it derives each name from a counter through a cipher, and a cipher is a one-to-one
+mapping. Two Links cannot arrive at the same name, so creating five hundred at once never asks you
+to resolve a conflict.
 
-**A random slug can never collide with a numbered pattern either.** Numbered slugs always contain
-digits, and random ones never do, so the two can share one address space without any reservation
-scheme keeping them apart.
+**A random slug can never clash with a numbered one either.** Numbered slugs always contain
+digits and random ones never do, so the two shapes cannot meet.
+
+The one case that is possible is a custom slug that happens to look like a random one — `bepjov`
+is a legal custom slug. QRtub handles it without telling you: the database refuses the duplicate
+and the mint retries with new names. You will not see an error, and you cannot end up with two
+Links on one address.
 
 ## Creating them
 

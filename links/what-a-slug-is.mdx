@@ -42,9 +42,11 @@ Slugs are checked against every Link in QRtub, not just your team's. If another 
 `boardroom`, you cannot have it, and QRtub tells you it is in use rather than quietly giving you
 something else. The check ignores case, so `Boardroom` is not available either.
 
-Random slugs never enter that contest. They are letters only and numbered slugs always contain
-digits, so the two shapes cannot meet — and a random name is derived through a cipher rather than
-drawn and checked, so two random Links can never land on the same slug in the first place.
+Random slugs mostly sit outside that contest. They are letters only and numbered slugs always
+contain digits, so those two shapes cannot meet, and a random name is derived through a cipher
+rather than drawn and checked, so two random Links can never land on the same slug. A custom slug
+*can* take a random-looking name — `bepjov` is legal — and if one has, QRtub simply mints a
+different random name instead. That happens silently; there is nothing to resolve.
 
 A slug is fixed once the Link exists. There is no rename: the point of the whole system is that a
 printed code keeps resolving, and renaming a slug would break every code already in the field. If
