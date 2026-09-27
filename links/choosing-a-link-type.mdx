@@ -13,19 +13,19 @@ Pick **Random** unless you have a reason not to. Pick **Numbered** when the tag 
 | | Random | Numbered | Custom |
 |---|---|---|---|
 | Who picks the slug | QRtub | You define the pattern; QRtub fills in the number | You, exactly |
-| Example address | `qrtub.com/r/x5fgd` | `qrtub.com/cra0042tl` | `qrtub.com/boardroom` |
-| Slug shape | 5 characters, letters and digits | `prefix` + zero-padded number + `suffix` | 3–50 characters, lowercase letters, digits, `-` and `_` |
-| Typing it by hand | Must match lowercase exactly | Case doesn't matter | Case doesn't matter |
+| Example address | `qrtub.com/bepjov` | `qrtub.com/cra0042tl` | `qrtub.com/boardroom` |
+| Slug shape | 6 lowercase letters, no digits | `prefix` + zero-padded number + `suffix` | 3–50 characters, lowercase letters, digits, `-` and `_` |
+| Typing it by hand | Case doesn't matter | Case doesn't matter | Case doesn't matter |
 | Setup needed | None | Claim a pattern first (QRtub can claim it for you on first use) | None |
 | How many at once | Up to 100 per request in the create form | Up to 1,000 numbers in one range request | One at a time |
-| Can fail because it's taken | No — QRtub retries | Yes, if another team already owns the pattern | Yes, if the slug is in use or reserved |
+| Can fail because it's taken | No — never possible | Yes, if another team already owns the pattern | Yes, if the slug is in use or reserved |
 | Included in | Every plan | Professional and Scale | Every plan |
 
 ## When Random is right
 
 Anything that is scanned rather than read. Codes on a sheet of stickers, spares in a drawer, a batch going out for print where nobody cares what the address says. It is the fastest route — nothing to configure, nothing that can collide, and it is the mode QRtub uses when a new Collection mints a Link automatically for each new Item.
 
-The trade-off is that a random slug carries no meaning and is unforgiving to type: it is matched case-sensitively, so someone entering it by hand has to get it exactly right.
+The trade-off is simply that a random slug carries no meaning — `bepjov` tells nobody which machine it is on. It is easy enough to type: six lowercase letters, no digits to confuse with letters, and case does not matter.
 
 ## When Numbered is right
 

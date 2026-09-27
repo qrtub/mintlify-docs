@@ -4,7 +4,7 @@ icon: "table"
 description: "Pairing a downloaded qr-code-<slug>.png with its row in an exported print list, and why neither the Short URL nor Full URL column is an exact string match for the filename"
 ---
 
-Matching is manual, and it turns on the slug. Every downloaded QR code image is named after its Link's slug — a Link at `qrtub.com/r/aBc12` downloads as `qr-code-aBc12.png`. The same slug appears at the end of the **Short URL** and **Full URL** columns of an exported print list. Match on the slug.
+Matching is manual, and it turns on the slug. Every downloaded QR code image is named after its Link's slug — a Link at `qrtub.com/bepjov` downloads as `qr-code-bepjov.svg`. The same slug appears at the end of the **Short URL** and **Full URL** columns of an exported print list. Match on the slug.
 
 The catch: **neither column is a byte-for-byte match for the filename.** Whoever does the matching has to strip a prefix first.
 
@@ -13,12 +13,12 @@ The catch: **neither column is a byte-for-byte match for the filename.** Whoever
 | Column | Value for a random Link | Value for a numbered or custom Link |
 |---|---|---|
 | Filename | `qr-code-aBc12.png` | `qr-code-cra0042.png` |
-| **Short URL** | `/r/aBc12` | `/cra0042` |
-| **Full URL** | `https://qrtub.com/r/aBc12` | `https://qrtub.com/cra0042` |
+| **Short URL** | `/bepjov` | `/cra0042` |
+| **Full URL** | `https://qrtub.com/bepjov` | `https://qrtub.com/cra0042` |
 
 So:
 
-- **Short URL** carries a leading slash, and for random Links an additional `/r/` prefix. Numbered and custom Links get the leading slash but no `/r/`.
+- **Short URL** carries a leading slash. Every Link type has the same shape, so stripping that one character gives you the filename.
 - **Full URL** carries the protocol and domain on top of that.
 - The filename carries the bare slug plus `qr-code-` and `.png`.
 

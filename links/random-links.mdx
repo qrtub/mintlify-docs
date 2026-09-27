@@ -1,38 +1,67 @@
 ---
 title: "Random Links"
 icon: "shuffle"
-description: "The default Link type: a five-character slug QRtub draws for you, served under /r/, with no length or charset options to configure"
+description: "The default Link type: a six-letter name QRtub draws for you, resolving at the root, with nothing to configure and no chance of a clash"
 ---
 
-A Random Link is one whose slug QRtub picks: five characters of letters and digits, served at `qrtub.com/r/{slug}`. You cannot choose the slug, and there is nothing to configure — which is exactly why it is the default and the fastest way to get printable codes.
+A Random Link is one whose slug QRtub picks: six lowercase letters, resolving at
+`qrtub.com/{slug}`. You cannot choose the slug, and there is nothing to configure — which is
+exactly why it is the default and the fastest way to get printable codes.
 
 ## How the slug is generated
 
-QRtub draws five characters from a base62 alphabet (`A–Z`, `a–z`, `0–9`) and stores the result in lowercase, so the address you see and print is always lowercase letters and digits, like `qrtub.com/r/x5fgd`.
+Six letters from `a` to `z`, like `qrtub.com/bepjov`. No digits, no capitals, no punctuation.
+That is 26⁶ — a little over 308 million addresses.
 
-The length and the alphabet are fixed. There is no setting for a longer slug, a shorter one, or a different character set anywhere in QRtub — if you send a request asking for one, it is ignored and the standard five-character slug is minted instead.
+The length and the alphabet are fixed. There is no setting for a longer slug, a shorter one, or a
+different character set anywhere in QRtub — if you send a request asking for one, it is ignored
+and the standard six-letter slug is minted instead.
 
-Before using a slug, QRtub checks that it is free. If the first draw is taken it tries again, up to a hundred times, and only fails if it somehow cannot find an unused slug in that many attempts. In practice you never see this; it is why creating five hundred random Links never asks you to resolve a conflict.
+**Two slugs can never clash.** QRtub does not draw at random and check whether the result is
+free; it derives each name from a counter through a cipher, and a cipher is a one-to-one mapping.
+Two Links cannot arrive at the same name, so creating five hundred at once never asks you to
+resolve a conflict and never fails partway through.
+
+**A random slug can never collide with a numbered pattern either.** Numbered slugs always contain
+digits, and random ones never do, so the two can share one address space without any reservation
+scheme keeping them apart.
 
 ## Creating them
 
-On the Links page, open the create form and choose **Random** as the strategy. Set **Number of Links** — the form accepts up to 100 in one request — and create. Each Link comes into existence unattached: a real, resolvable address with no Item, no Page and no destination until you give it one.
+On the Links page, open the create form and choose **Random** as the strategy. Set **Number of
+Links** — the form accepts up to 100 in one request — and create. Each Link comes into existence
+unattached: a real, resolvable address with no Item, no Page and no destination until you give it
+one.
 
-Random is also the type QRtub uses when a Collection is set to mint a Link automatically for each new Item. That is a Collection-level setting rather than a property of the Link itself.
+Random is also the type QRtub uses when a Collection is set to mint a Link automatically for each
+new Item. That is a Collection-level setting rather than a property of the Link itself.
 
-## The one gotcha: case matters
+## Case does not matter
 
-Random slugs are matched case-sensitively. `qrtub.com/r/x5fgd` resolves; `qrtub.com/r/X5FGD` does not — it returns "page not found", not a helpful redirect. Because slugs are stored lowercase, the practical rule is simple: print and type random addresses entirely in lowercase.
+`qrtub.com/bepjov` and `QRTUB.COM/BEPJOV` resolve to the same Link, as do numbered and custom
+slugs. How a code is printed is a typography decision, not a correctness one — set it in capitals
+on a plate if that reads better at distance.
 
-This is the only Link type with that behavior. Numbered and custom slugs resolve regardless of case, which is worth remembering if the people using your codes are likely to type addresses instead of scanning them.
+QRtub writes the address in lowercase everywhere it displays one, so that is the form you will see
+in the app and in an export.
 
-## Don't forget the `/r/`
+## Older codes still work
 
-A random slug lives under `/r/`, and the prefix is part of the address. `qrtub.com/x5fgd` is not the same URL as `qrtub.com/r/x5fgd` and will not find the Link. When you print a readable address underneath a QR code — and you should, because codes get scratched and painted over — print the whole thing including `/r/`.
+Two things changed in September 2026, and neither breaks a code already in the field.
+
+- **Random slugs used to be five characters** of letters and digits. Those addresses still
+  resolve. Only newly minted ones are six letters.
+- **Random Links used to sit under a `/r/` prefix** — `qrtub.com/r/x5fgd`. That address
+  permanently redirects to the slug at the root, query string intact, so a tag produced before
+  the change scans exactly as it always did. The prefix is gone from the interface and from
+  anything QRtub generates now.
+
+You do not need to replace anything. If you are printing a readable address under a code, print
+what the app shows you today.
 
 ## Related
 
 - [Choosing a Link Type](/links/choosing-a-link-type) — when a numbered or custom slug is the better call
-- [What a Slug Is](/links/what-a-slug-is) — address shapes and case rules across all three types
+- [What a Slug Is](/links/what-a-slug-is) — address shapes across all three types
 - [Downloading QR Codes](/bulk-links/downloading-qr-codes) — turning a batch of new Links into printable images
 - [Unallocated Links](/links/unallocated-links) — what a freshly created Link does before you attach anything
