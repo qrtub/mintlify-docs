@@ -7,7 +7,7 @@ verifiedNote: "usp=pp_url and the entry.<id> parameter confirmed against Google'
 ---
 
 ```
-https://docs.google.com/forms/d/e/FORM_ID/viewform?usp=pp_url&entry.1234567890={{item.itemId}}
+https://docs.google.com/forms/d/e/FORM_ID/viewform?usp=pp_url&entry.1234567890={{item.item_id}}
 ```
 
 Every Link in the Collection then opens the same form carrying its own Item's data, so whoever
@@ -25,7 +25,7 @@ question, and the number is unique to that question in that form.
 Several at once, joined by `&`:
 
 ```
-...&entry.1234567890={{item.itemId}}&entry.987654321={{item.location}}
+...&entry.1234567890={{item.item_id}}&entry.987654321={{item.location}}
 ```
 
 ## Bind IDs, not sentences

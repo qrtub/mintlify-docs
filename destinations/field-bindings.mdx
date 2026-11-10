@@ -1,7 +1,7 @@
 ---
 title: "Field Bindings & URL Templates"
 icon: "braces"
-description: "The double-curly-brace syntax for inserting live data into a Destination URL, the eight namespaces you can read from, and the encoding and missing-value rules"
+description: "The double-curly-brace syntax for inserting live data into a Destination URL, the nine namespaces you can read from, and the encoding and missing-value rules"
 ---
 
 A field binding is a placeholder you write inside a Destination URL that QRtub replaces with real
@@ -39,8 +39,8 @@ Braces build a value; a bare reference tests one.
 
 ## The namespaces
 
-Eight namespaces exist. Each one is only readable where the data behind it exists, which is why
-the last three are not available everywhere.
+Nine namespaces exist. Each one is only readable where the data behind it exists, which is why
+the last four are not available everywhere.
 
 | Namespace | What it holds | Available in |
 |---|---|---|
@@ -50,8 +50,9 @@ the last three are not available everywhere.
 | `time` | The current hour, day, month and year in UTC — see [Time Fields Reference](/destinations/time-fields) | Destinations and Pages |
 | `request` | Language, referrer and CDN-derived location — see [Request Fields Reference](/destinations/request-fields) | Destinations and Pages |
 | `link` | The specific Link that was scanned: its slug, strategy and sequence number | Destinations only |
-| `session` | The signed-in team member viewing the Page, if any | Pages only |
+| `session` | Whoever is signed in to QRtub while they scan, if anyone: any QRtub account, not only your team's | Destinations and Pages |
 | `theme` | The Page's accent color and border radius — see [Theming a Page](/pages/page-theming) | Pages only |
+| `team` | The team that owns the Page: `{{team.name}}`, and `{{team.logo}}`, its logo's address for an image field — see [Team Settings](/team/team-settings) | Pages only |
 
 ## Values are inserted exactly as stored
 
@@ -86,18 +87,23 @@ that the Item you are testing with actually has a value in that field.
 
 ## Session fields
 
-`session` describes the signed-in team member looking at a Page, and is empty for an ordinary
-anonymous scan. There are two usable values, `session.user.id` and `session.user.email`, plus the
-`session.user` object itself, which is what the common test uses:
+`session` describes whoever is signed in to QRtub while they scan, and is empty for an ordinary
+anonymous scan. It is any QRtub account, not only your team's: nothing checks that the person
+belongs to the team that owns the Page. There are three values, `session.user.id`,
+`session.user.email` and `session.user.name`, plus the `session.user` object itself, which is what
+the common test uses:
 
 ```text
 session.user != null
 ```
 
-That expression is true only for a signed-in member of your team, which is how the AdminToolbar
-section keeps owner-only shortcuts off the version of the Page the public sees. `session` is not
-part of the data available when a Direct-Mode scan resolves a Destination, so it cannot be used
-to route a redirect.
+That expression is false for every anonymous scan, which is how the AdminToolbar section (its
+default rule) keeps your shortcuts off the Page the public sees. Because it is true for anyone
+signed in to QRtub, use it to tidy a Page, never to protect anything: the tools behind your buttons
+keep their own sign-in. Your field crew only sees such a section if they are signed in to QRtub.
+
+`session` is also available when a Direct-Mode scan resolves its Destination, so a rule can route
+a signed-in person somewhere else.
 
 ## Renaming a field does not break a binding
 

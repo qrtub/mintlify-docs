@@ -15,7 +15,8 @@ different person editing the team, ownership has to move — see [Leaving a Team
 ## Renaming the team
 
 Type a new name and save. The name updates everywhere at once: the switcher, the Team page header,
-your Profile's team list, and the invitation emails sent from then on. Existing Links, Collections
+your Profile's team list, the invitation emails sent from then on, and any Page that shows it with
+`{{team.name}}`. Existing Links, Collections
 and printed QR codes are unaffected — nothing physical depends on the team's name.
 
 **Watch the slug field while you rename.** As long as you have not touched the slug yourself, it
@@ -40,6 +41,12 @@ code or a saved bookmark.
 Upload a JPEG, PNG, GIF or WebP file up to 50 MB. SVG files are rejected. The logo appears in the
 team switcher and in the Team page header; teams without one show the first letter of the team name
 instead. Uploading a new file replaces the old one on save.
+
+The logo can go on your Pages too. Bind `{{team.logo}}` in an image field, such as the Hero's image,
+and `{{team.name}}` in any text, such as "Cleaned by {{team.name}}". Both are under **Team** in the
+binding picker. They are read each time someone scans, so a new logo or name reaches every Page
+that uses them without editing a Page. A wide logo is cropped by the default square frame: set
+**Frame Shape** to **Natural Size** ([Image Display Controls](/pages/image-display-controls)).
 
 ## What is not here
 
