@@ -1,42 +1,54 @@
 ---
 title: "Subscription Status"
 icon: "activity"
-description: "The status values QRtub records from Stripe for a team's subscription, what each one factually means, and exactly how each appears on the team page and in your profile"
+description: "The status values QRtub records from Stripe for a team's subscription, how each appears on the team page and in your profile, and what a team without an active subscription can still do"
 ---
 
-Every team with a subscription carries a status that QRtub receives from Stripe and stores against that team. It is the answer to "is this team's payment in good order right now", and it is the only billing state QRtub keeps besides the plan name.
+Every team with a subscription carries a status that QRtub receives from Stripe and stores against that team. It is the answer to "is this team's payment in good order right now". Alongside it QRtub keeps the plan name, the end of the current billing period, and whether a cancellation or plan change is scheduled (see [Managing Your Subscription](/billing/customer-portal)).
 
 ## What each status means
 
-| Status | What it means | What you see in QRtub |
-|--------|---------------|-----------------------|
-| `active` | Paid and current. | The plan name on the team page; a green badge in your profile. |
-| `trialing` | Inside a trial period. QRtub does not sell trials, so you would not normally see this. | The plan name; a green badge. |
-| `past_due` | An invoice failed and Stripe is retrying it. | The plan name, with no warning of any kind. |
-| `canceled` | The subscription has ended. | The plan name followed by `(cancelled)`; an amber badge. |
+`active`, `trialing` and `past_due` count as paying: the team works normally. Every other status makes the team read-only (see below).
 
-Stripe can also report `incomplete`, `unpaid`, or `paused`. QRtub stores those values as it receives them but has no specific display for them: the team page still shows the plan name, the profile badge turns gray rather than green, and the **Upgrade** prompt reappears in the top bar. If you see that combination, the subscription is not in good standing and the billing portal will tell you why.
+| Status | What it means | What the Subscription card shows |
+|--------|---------------|-----------------------|
+| `active` | Paid and current. | The plan name. |
+| `trialing` | Inside a trial period. QRtub does not sell trials, so you would not normally see this. | The plan name. |
+| `past_due` | An invoice failed and Stripe is retrying it. | The plan name, with no warning of any kind. |
+| `unpaid` | Stripe's retries ran out without a payment. | The plan name followed by `(payment failed)`, and advice to update your card in the billing portal. |
+| `incomplete` | The first payment was never confirmed. | `(payment incomplete)`, and advice to get in touch for a new checkout. |
+| `incomplete_expired` | The first payment was not completed in time, so the subscription never started. | `(payment expired)`, and advice to choose a plan to try again. |
+| `paused` | The subscription is paused. | `(paused)`, and advice to get in touch to resume it. |
+| `canceled` | The subscription has ended. | `(cancelled)`, and "subscribe to make changes again." |
+
+Each of the read-only states also says "Your existing codes keep working".
 
 ## Where it shows
 
 Two places, both for the team owner only:
 
-- **The team page**, under **Subscription** — the plan name, or `No active subscription` if the team has never been subscribed.
-- **Profile → Your teams & subscriptions** — one row per team you own with a colored badge: green for a subscription in good order, amber for one that has been canceled, gray for a team with no subscription.
+- **The team page**, under **Subscription** — the plan name with any of the labels above, or **No active subscription** if the team has never been subscribed.
+- **Profile → Your teams & subscriptions** — one row per team you own, with a badge using the same words: green for a subscription in good order (and for **Complimentary access**), amber for any of the read-only states, gray for a team with no subscription.
+
+A team that QRtub has given free access by hand shows **Complimentary access** instead of a plan name, with the date the access ends if it has one.
 
 ## A failed payment is quiet inside QRtub
 
 This is the one to plan around. When a payment fails, Stripe emails you and starts retrying, and QRtub records the team as `past_due` — but the team page still shows the plan name with no banner, no color change, and no notification. Nothing in the app tells you a card has bounced.
 
-So a failed payment reaches you through Stripe's email, not through QRtub. Make sure the address on the subscription is one somebody actually reads, and if you suspect a card has expired, open the billing portal and check rather than looking for a warning in the app. [Managing Your Subscription](/billing/customer-portal) covers how to get there.
+So a failed payment reaches you through Stripe's email, not through QRtub, until Stripe gives up: then the status becomes `unpaid`, the card says `(payment failed)` and the team is read-only. Make sure the address on the subscription is one somebody actually reads, and if you suspect a card has expired, open the billing portal and check rather than waiting for a warning in the app. [Managing Your Subscription](/billing/customer-portal) covers how to get there.
 
 ## Status changes arrive when Stripe reports them
 
 QRtub does not poll Stripe. It updates a team's status when Stripe notifies it of a change — normally within a few seconds of the event. That means a payment you have just made, or a change you have just made in the billing portal, can take a moment to appear on the team page. Reload the page rather than repeating the action.
 
-## The one thing status changes in the app
+## A team without an active subscription is read-only
 
-Status decides whether the **Upgrade** button appears in the top bar. It is hidden while a team's subscription is `active`, `trialing`, or `past_due`, and shown otherwise — including for a team that has never been subscribed. That prompt is the visible effect of status; what a plan covers is described in [Plan Limits & Quotas](/billing/plan-limits).
+When a team's status is anything other than `active`, `trialing` or `past_due`, or it has never been subscribed, nobody on it can create or edit Collections, Items, Links or Pages, change a Print Batch, or invite anyone. Its Links keep resolving, so codes already out in the world keep working, and you can still view and export everything, including production lists (each export still records its Print Batch). Membership stays open too: accepting or rejecting an invitation, leaving, removing a member and revoking an invitation all still work.
+
+Every member sees a banner across the top of the app: **This team is read-only.** for a team that had a subscription, or **This team is not active yet.** for one that never did. The owner gets a **Choose a plan** link in it; other members are told "Ask the team owner to set one up."
+
+For the owner, the **Upgrade** button also appears in the top bar. For a team that was never subscribed, or whose subscription is `canceled` or `incomplete_expired`, it opens the plan picker; for `unpaid`, `incomplete` or `paused` it opens the billing portal instead, because that subscription can still be brought back. A new subscription, or a recovered one, makes the team editable again as soon as Stripe reports it.
 
 ## Related
 

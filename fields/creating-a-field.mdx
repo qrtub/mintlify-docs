@@ -13,7 +13,7 @@ appears on every Item in that Collection immediately, empty until someone fills 
 2. Click **Create Custom Field**.
 3. Type a **Display Label** — the wording people see on forms and tables, e.g. "Warranty End
    Date".
-4. Check the **Field Key** underneath. It is generated from your label (`warranty_end_date`)
+4. Check the **Field Key** next to it. It is generated from your label (`warranty_end_date`)
    and you can edit it. It is validated as you type, and the form shows you the binding it
    produces: `{{ item.warranty_end_date }}`.
 5. Choose a **Field Type**. See [Custom Field Types](/fields/field-types) for what each one
@@ -37,13 +37,13 @@ The key is what you write in bindings and conditions, so it is deliberately stri
 - no leading, trailing, or repeated underscores,
 - not a core field name (`name`, `item_id`, `description`, `tags`),
 - not a name QRtub uses internally (`id`, `created_at`, `updated_at`, `image`,
-  `destination_url` and similar),
+  `destination_url`, `keywords` and similar),
 - not a programming keyword such as `class`, `function`, or `return`,
 - unique within the Collection.
 
-Whatever the rule, the form tells you which one you broke and suggests a way out — a suffix
-like `status_2`, for instance. Because the label auto-generates the key, most of the time you
-never type one.
+The form tells you which rule you broke, and for a key that is already taken or a programming
+keyword it suggests a way out — a suffix like `status_2`, for instance. Because the label
+auto-generates the key, most of the time you never type one.
 
 ## Adding a ready-made field instead
 
@@ -63,8 +63,9 @@ to reorder, then **Save changes**. New fields land at the end.
 
 ## Reset to Defaults
 
-**Reset to Defaults** strips the Collection back to the four core fields, removing every
-custom field from the configuration. It does not ask for confirmation. Nothing is written
+**Reset to Defaults** strips the Collection back to the four core fields, all enabled and back
+to their original settings, removing every custom field from the configuration. It does not ask
+for confirmation. Nothing is written
 until you press **Save changes**, so leaving the settings form without saving undoes it — but
 save, and the fields are gone under the same terms as
 [deleting one](/fields/deleting-and-disabling).

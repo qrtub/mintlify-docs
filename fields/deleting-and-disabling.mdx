@@ -1,7 +1,7 @@
 ---
 title: "Deleting and Disabling Fields"
 icon: "eye-off"
-description: "Core fields can only be disabled and always keep their data; a custom field can be deleted permanently, which leaves broken bindings and unreachable values behind."
+description: "Core fields can only be disabled, which keeps their data but takes them off forms, tables, Pages and Destinations; a custom field can be deleted permanently, stranding its stored values."
 ---
 
 There are two ways to get a field off your Items, and which one you get depends on the kind of
@@ -12,7 +12,7 @@ neither takes effect until you press **Save changes**.
 
 ## Disabling a core field
 
-Name, Item ID, Description, and Tags cannot be deleted — the × on the chip disables them
+Name, Item ID, Description, and Keywords cannot be deleted — the × on the chip disables them
 instead. Disabling is a display decision, not a data one:
 
 - the field disappears from the Item form and the Items table,
@@ -21,22 +21,24 @@ instead. Disabling is a display decision, not a data one:
 - its default value stops being applied to new Items,
 - you can turn it back on any time from **Add More Fields**, values intact.
 
-Because they map to real database columns, the four core fields stay available to page
-bindings even while disabled — disabling hides the field from the people editing Items, not
-from the Page. A *custom* field that is switched off is a different story: it is dropped from
-the data a Page renders against, so a binding to it inserts an empty string and a condition
-referencing it evaluates to `false` with no error shown.
+Disabling also takes the field away from your Pages and Destinations. While a core field is
+off, its stored values are left out of the data they read: a Page section bound to it shows
+nothing, a Destination URL built from it no longer resolves (the scan moves on to the next
+conditional rule, or shows "This link isn't ready yet"), and a condition referencing it
+evaluates to `false` with no error shown. Switching off Item ID, for instance, stops every
+Destination URL that uses `{{item.item_id}}`. Turn the field back on and its values are used
+again.
 
 ## Deleting a custom field
 
-A custom field's chip carries a trash icon, and it means it. QRtub asks you to confirm, and
-the warning is accurate on both counts:
+A custom field's chip carries a trash icon, and it means it. QRtub asks you to confirm, with
+two warnings:
 
-- **Page templates and Destinations that reference this field will show broken or unresolved
-  bindings.** Nothing rewrites them for you the way a
+- **Page templates and destination links that reference this field will show broken or
+  unresolved bindings.** Nothing rewrites them for you the way a
   [rename](/fields/renaming-a-field) does.
-- **Existing Item data stored for this field becomes inaccessible.** The values are no longer
-  readable anywhere: not in the table, not in an export, not by a binding.
+- **Existing item data stored for this field will become inaccessible.** The values leave the
+  Items table, the Item form and every CSV export.
 
 Creating a new field with the same key afterward does not recover them. A new field gets a new
 internal storage ID, so it starts empty — the old values stay stranded under the ID that was
@@ -57,8 +59,8 @@ switch.
 ## Before you delete
 
 1. Search your Destinations and Page sections for the field's key and remove or repoint those
-   bindings. A binding left pointing at a deleted field inserts an empty string, so a URL built
-   from it silently becomes wrong rather than visibly failing.
+   bindings. A Destination URL left pointing at a deleted field no longer resolves, so the
+   scan silently moves on to the next conditional rule or shows "This link isn't ready yet".
 2. Export the Collection's Items to CSV first if the values are worth keeping. That export is
    the only copy you will have.
 3. Then delete, and **Save changes**.

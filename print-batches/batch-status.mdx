@@ -2,11 +2,11 @@
 title: "Batch Status: Draft to Installed"
 icon: "activity"
 sidebarTitle: "Batch Status"
-description: "The single status carried by a whole print run — Draft, Printing, Printed, Installed — what each stage unlocks, and why Installed is the end of the line."
+description: "The single status carried by a whole production run — Draft, In Production, Ready, Installed — what each stage unlocks, and why Installed is the end of the line."
 ---
 
-Every batch carries **one** status covering the entire run: Draft, Printing, Printed or
-Installed. It describes where the order is, not where any individual sticker ended up. The
+Every batch carries **one** status covering the entire run: Draft, In Production, Ready or
+Installed. It describes where the order is, not where any individual Tag ended up. The
 per-code equivalent is a separate thing entirely — see
 [Tracking Status Per Code](/print-batches/per-code-status).
 
@@ -17,27 +17,27 @@ primary button for the next step.
 
 | Status | Meaning |
 |---|---|
-| **Draft** | Prepared, not yet sent to the supplier. The only stage where the batch can still be edited. |
-| **Printing** | With the supplier. |
-| **Printed** | Received, not yet installed. |
+| **Draft** | Prepared, not yet sent to the supplier. The only stage where its links and columns can still change. |
+| **In Production** | With the supplier, or being made in-house. |
+| **Ready** | Made or received, not yet installed. |
 | **Installed** | Out in the field. |
 
 ## Moving forward
 
 Each stage has one named action, and it only ever moves one step:
 
-- Draft → Printing: **Finalise and print**
-- Printing → Printed: **Mark as printed**
-- Printed → Installed: **Move to installed**
+- Draft → In Production: **Finalise and produce**
+- In Production → Ready: **Mark as ready**
+- Ready → Installed: **Mark as installed**
 
 You cannot skip a stage. There is no way to take a Draft batch straight to Installed.
 
 ## Stepping back
 
-Printing and Printed each offer a **Revert to draft** / **Revert to printing** button — one stage
-back, no further.
+In Production and Ready each offer a revert button — **Revert to draft** and **Revert to in
+production** respectively — one stage back, no further.
 
-**Installed is terminal.** There is no revert out of it, and no way to reopen a Installed batch
+**Installed is terminal.** There is no revert out of it, and no way to reopen an Installed batch
 for editing. Advance to Installed once the codes are genuinely out, because that decision is
 permanent for that batch.
 
@@ -55,12 +55,13 @@ The status is not just a label — it gates what the batch will let you do:
 
 Two more stage-specific behaviors:
 
-- **Printing** adds a **Share with Supplier** shortcut, which is simply a download of the
+- **In Production** adds a **Share with supplier** shortcut, which is simply a download of the
   stored CSV.
 - Past Draft, the links inside the batch are protected from deletion — a code may already be
-  printed and stuck to something, so removing it from QRtub would strand the physical item.
+  on a Tag fixed to something, so removing it from QRtub would strand the physical item.
 
-Name, notes, tags, the cover photo, archiving and the CSV download are available at every stage.
+Name, notes, keywords, the cover photo, archiving, and the CSV and QR code downloads are available
+at every stage.
 
 ## Related
 

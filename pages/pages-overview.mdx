@@ -9,7 +9,7 @@ Collection, and every Item in that Collection renders that layout with its own f
 two hundred machines share one design and each shows its own name, serial number and buttons.
 
 Because a Page can hold several Destination buttons, one physical code can serve the inspection
-app, the maintenance system and the operator manual at once, instead of three stickers.
+app, the maintenance system and the operator manual at once, instead of three QR tags.
 
 ## One Page design per Collection
 
@@ -25,9 +25,9 @@ Page Overrides](/pages/page-overrides).
 
 Pages are switched on per Collection, not per Link.
 
-1. **Turn pages on.** In the Collection's settings, open the **Scan behavior** tab, turn on
-   **Show a profile page**, and press **Save changes**. This reveals the Collection's page tab,
-   where you can preview the design and open the Page Editor. Left off, scans pass straight
+1. **Turn pages on.** In the Collection's settings, open the **Scan behaviour** tab, turn on
+   **Show a profile page**, and press **Save changes**. This reveals the Collection's **Profile
+   page** tab, where you can preview the design and open the Page Editor. Left off, scans pass straight
    through to a single Destination and there is no page to edit.
 2. **Create an Item.** The Page renders an Item's field values, so until a Collection has at
    least one Item there is nothing for the layout to fill in.
@@ -37,7 +37,7 @@ Pages are switched on per Collection, not per Link.
    usually a vendor URL with an Item field folded into it, like
    `https://cmms.example.com/asset/{{item.serial_number}}`.
 
-Switching a Collection between modes later never requires reprinting: the printed code encodes
+Switching a Collection between modes later never means producing new Tags: the QR code encodes
 the Link, not the Destination.
 
 ## Assigning a Link does not create a Page
@@ -53,7 +53,7 @@ direction — see [Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode).
 
 A Page is one page. It is not targeted per viewer: an operator, a customer and a contractor
 scanning the same code all get the same layout, and they self-select from the Destinations on
-offer. That is usually the point — one code, every option, no wrong sticker.
+offer. That is usually the point — one code, every option, no wrong Tag.
 
 If you need a section to appear only sometimes, that is a separate, explicit mechanism: a
 condition on the section, evaluated against Item fields, device, time and whether the viewer is

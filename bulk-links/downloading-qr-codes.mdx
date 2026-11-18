@@ -1,20 +1,22 @@
 ---
 title: "Downloading QR Codes"
 icon: "qr-code"
-description: "Getting QR code images out of QRtub: the panel for one code, the ZIP for many, and the file settings behind the door — format, error correction, transparency and one size per batch"
+description: "Getting QR code images out of QRtub: the dialog for one code, the ZIP for many, and the file settings behind the door — format, error correction and transparency"
 ---
 
-QRtub generates QR code images from your Links on demand. One Link gives you a panel showing the
+QRtub generates QR code images from your Links on demand. One Link gives you a dialog showing the
 code; several give you a ZIP.
 
 The defaults are chosen for a Tag that has to last, so most exports need nothing changed. Everything
-adjustable sits behind **Advanced**. For what each setting does and when to deviate, see
-[QR Code Standards](/suppliers/qr-code-standards).
+adjustable sits behind **Change QR code file settings**, which opens the **Advanced** view. For what
+each setting does and when to deviate, see [QR Code Standards](/suppliers/qr-code-standards).
 
 ## One code
 
-Open a Link's row menu and choose **QR Code**. You get a panel showing the code itself, its full
-address with a **Copy** button, and **Download** as a secondary action.
+Open a Link's row menu and choose **Download QR code**. You get a dialog titled **QR code** with the
+Link's slug, its full address with a **Copy URL** button beside it, the code itself, and a summary
+of the file settings, such as `SVG · Q · white background`. **Download** saves the file; **Close**
+leaves without one.
 
 Scan it straight off the screen to check where the Link goes — usually faster than downloading a
 file to look at it.
@@ -26,27 +28,39 @@ after the slug, like `qr-code-bar002.svg`.
 
 ## Downloading many at once
 
-Select the Links you want and choose **Download QR Codes** from the bulk menu. The dialog shows how
-many codes are about to be produced. With more than one selected you always get a ZIP named for the
-day, like `qr-codes-2026-09-02.zip`, containing one file per Link named the same way as a single
-download. There is no option to receive many separate files instead.
+Select the Links you want and choose **Download QR codes** from the **⋮** menu in the list's header
+row. The dialog shows how many codes are about to be produced. With more than one selected you
+always get a ZIP named for the date (in UTC), like `qr-codes-2026-09-02.zip`, containing one file per
+Link named the same way as a single download. Every file sits at the top level of the ZIP; if an
+older Link's name contains a slash, its file uses an underscore instead, and if two files would end
+up with the same name, the later one gets `-2`, `-3` added. There is no option to receive many
+separate files instead. (Tick just one Link and you get a single file, not a ZIP.)
 
-Because the filenames carry the slug, they line up with the **Short URL** and **Full URL** columns
-of an exported print list — which is how a supplier matches each image to its data row. Neither
-column is a byte-for-byte match for the filename, though: **Short URL** adds a leading slash and,
-and **Full URL** adds the protocol and domain. Whoever does the
-matching has to strip those.
+The **Production List** dialog on the Links page has a **QR codes** button too: it closes that
+dialog and opens this one for the same selection.
 
-The images are generated in your browser, in batches of fifty, with a progress toast counting up as
-it goes and a packaging step at the end. A few dozen codes is instant. Several thousand takes
-minutes, and the tab has to stay open for the whole time — if you close it, you get nothing and
-have to start again. If you used "select all", QRtub fetches the full matching set of Links first,
-so the total you see counts every match, not just the page on screen.
+A Print Batch has its own download button: open the **Production History** panel on the Links page
+and hover the batch's row to show its tag icon, whose tooltip reads "Download this batch's QR
+codes". It opens the same dialog, and the ZIP holds every Link in the batch at that moment, named
+after the batch, like `Excavator-plates-qr-codes.zip`.
+
+Because the filenames carry the slug, they line up with the **Link** and **Short URL** columns of an
+exported production list — which is how a supplier matches each image to its data row. Neither
+column is a byte-for-byte match for the filename, though: **Short URL** adds a leading slash, and
+**Link** adds the protocol and domain. Whoever does the matching has to strip those.
+
+The images are generated in your browser. SVG is close to instant, even for thousands of codes. PNG
+is much slower: it is generated fifty at a time, and a PNG download of more than 150 codes shows a
+progress toast counting up as it goes, then a packaging step. Either way the tab has to stay open
+until the file arrives — if you close it, you get nothing and have to start again. If you used
+"select all", QRtub fetches the full matching set of Links first, so the total you see counts every
+match, not just the page on screen.
 
 ## What you can change
 
-The dialog opens with no controls — it states what you are about to get, and everything else sits
-behind **Advanced**. The defaults suit a durable Tag, so most exports need nothing touched.
+The dialog opens with no settings showing — it states what you are about to get, and everything sits
+behind **Change QR code file settings**. The defaults suit a durable Tag, so most exports need
+nothing touched.
 
 **Format — SVG or PNG.** SVG is the default: sharp at any size and fast for bulk downloads. Choose
 PNG when the software receiving it does not support SVG — Google Docs and Slides, most email
@@ -57,8 +71,9 @@ while it can still be read: 7%, 15%, 25% and 30%. **Q is the default**, and righ
 produced as a physical Tag. Higher levels give more protection but may require a larger or denser
 code. See [QR Code Standards](/suppliers/qr-code-standards).
 
-**Transparent background.** Off by default. It removes the code's background so it can sit over
-other artwork — only take it when you control what ends up behind the code, because the white
+**Transparent background.** Off by default, and not offered in the one-Link dialog, which always
+exports a white background. It removes the code's background so it can sit
+over other artwork — only take it when you control what ends up behind the code, because the white
 background is what guarantees the quiet zone.
 
 ## What you cannot change

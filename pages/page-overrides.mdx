@@ -39,19 +39,24 @@ are **pushed into the base template** and the Item's override record is deleted.
 is labeled "Apply to All Items", which is exactly what happens.
 
 The dialog lists which sections are about to be applied, so read the list before confirming. It also
-offers "Don't show this warning again for this tub" — that preference is remembered per Collection
-in your own browser, so dismissing it does not affect your colleagues, and does not carry to your
-other devices.
+offers "Don't show this warning again for this collection" — that preference is remembered per
+Collection in your own browser, so dismissing it does not affect your colleagues, and does not carry
+to your other devices.
 
 ## Undoing an override
 
-Two levels, both from the editor while viewing that Item:
+Two levels, both from the editor while viewing that Item with Override on:
 
 - **One section** — select an overridden section (they carry an orange outline) and press the revert
-  button in the Properties panel header. That section goes back to the base template version;
-  everything else the Item overrides stays.
-- **Everything** — press **Revert All** in the top bar. It appears only when the Item actually has
-  overrides, and it deletes the whole override record, putting the Item back on the base template.
+  button in the Properties panel header. That section goes back to the base template version (a
+  section that exists only on this Item is removed); everything else the Item overrides stays.
+- **Everything** — press **Revert All** in the top bar, or **Revert all overrides** in the
+  Properties panel. It appears only when the Item has overridden sections, and it deletes the whole
+  override record, putting the Item back on the base template.
+
+A base template section you deleted on this Item can be brought back on its own, if it sat at the
+top level of the page rather than inside a Container or Card: the **Structure** tab lists it struck
+through and marked **Deleted**, with a restore button beside it.
 
 There is also an automatic case: if you edit an Item's page back to match the base template exactly,
 the now-empty override record is deleted for you rather than left behind as an empty exception.

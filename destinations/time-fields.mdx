@@ -1,7 +1,7 @@
 ---
 title: "Time Fields Reference"
 icon: "clock"
-description: "The time.* values — hour, dayOfWeek, dayOfMonth, month, year, isWeekend — computed in UTC at every scan, and why they cannot express whether something is overdue"
+description: "The time.* values — hour, dayOfWeek, dayOfMonth, month, year, isWeekend — computed in UTC at every scan, and how to check whether something is overdue"
 ---
 
 The `time` namespace exposes the current moment as a handful of separate numbers, so a Destination
@@ -48,22 +48,34 @@ day rolls over part-way through the local working day, so a weekday rule can mis
 morning or late evening. If exact local-time accuracy matters, treat `time` as a rough
 convenience rather than a scheduling engine.
 
-## Why you can't check if something is overdue
+## Checking whether something is overdue
 
-**You cannot.** This is the most common thing people try to build with `time`, and it is not
-possible today.
+This is the most common thing people try to build with `time`, and `time` cannot do it.
 
 `time` exposes only the parts listed above. There is no full date value — no `time.today`, no
 `time.date`, no `time.now` — and there is no date arithmetic, no way to subtract one date from
-another, and no way to compare a stored date field against the current date. A condition like
-`item.inspection_due < time.today` refers to something that does not exist.
+another or add days to one. A condition like `item.inspection_due < time.today` refers to
+something that does not exist.
 
 It also fails quietly. An undefined identifier makes the entire condition evaluate to `false`, with
 no error raised at scan time — so the rule simply never fires, and the Destination you attached it
 to never appears. Nothing in the scan itself tells you the expression was invalid rather than
 merely unmatched.
 
-**Do this instead: keep a status field that you maintain.** Add a field to the Collection such as
+The one current date a condition can read is `request.timestamp`, the moment of the scan as UTC
+text such as `2026-11-18T09:30:00.000Z`. A Date field is stored as text too (`2026-11-30`), and
+comparing two pieces of text compares them character by character, which for these two formats
+gives the same answer as comparing the dates:
+
+```text
+request.timestamp > item.inspection_due
+```
+
+That is true from the start of the due date (in UTC, not your local time) and false while the date
+is still ahead; an Item with no date never matches. It only works for a field of type Date, or a
+text field written exactly as `YYYY-MM-DD`.
+
+**The sturdier option is a status field that you maintain.** Add a field to the Collection such as
 `inspection_status` with allowed values like `current` and `expired`, and write the condition
 against that:
 

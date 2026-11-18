@@ -8,14 +8,14 @@ description: "What to set when the Mitti app is not installed, and what to check
 
 `iauditor://` deep links only work if Mitti is installed on the device. If someone scans and doesn't have the app, the link does nothing.
 
-QRtub handles this automatically. When you enter an `iauditor://` URL as a Destination, an amber notice appears in the editor prompting you to configure a fallback.
+QRtub prompts you for one. When you enter an `iauditor://` URL as a Destination, an amber panel headed **IAUDITOR Link Detected** appears in the editor, with fields for a fallback.
 
 **Recommended setup:**
 
 | Field | Value |
 |-------|-------|
-| App link (Destination URL) | `iauditor://template/new_audit/{{item.templateID}}` |
-| Fallback URL | `https://app.mitti.com/inspection/new?templateId={{item.templateID}}` |
+| App link (**Default URL**, or an ActionLink's **Link URL**) | `iauditor://template/new_audit/{{item.template_id}}` |
+| Fallback URL | `https://app.mitti.com/inspection/new?templateId={{item.template_id}}` |
 
 **What happens at scan time:**
 - Mitti installed → app opens directly to the inspection template
@@ -23,7 +23,7 @@ QRtub handles this automatically. When you enter an `iauditor://` URL as a Desti
 
 The Fallback URL supports `{{item.field}}` bindings, so you configure it once and it adapts to each Item automatically — just like the app link itself.
 
-You can also set a **Fallback Message** instead of a URL if there's no web equivalent (e.g. "Please install Mitti to access this inspection template").
+You can also fill in **Custom Message** instead of a URL if there's no web equivalent (e.g. "Please install Mitti to access this inspection template"). With neither set, a direct scan shows QRtub's "App not available" message, with **Try Again** and **Go Back** buttons.
 
 See [App Links & Fallback URLs](/destinations/app-links) for full details on how fallbacks work.
 

@@ -1,12 +1,11 @@
 ---
 title: "Team Roles"
 icon: "shield"
-description: "The two roles QRtub has — Owner and Editor — what genuinely differs between them, why there is no read-only role, and why the Owner label alone grants nothing"
+description: "The two roles QRtub has — Owner and Editor — what genuinely differs between them, why there is no read-only role, and how ownership changes hands"
 ---
 
-QRtub has two roles: **Owner** and **Editor**. Editor is the default for anyone you invite. There
-is no third role, and no way to change a member's role after the fact — the role is chosen when
-the invitation is sent.
+QRtub has two roles: **Owner** and **Editor**. Everyone you invite joins as an Editor. There is no
+third role, and no way to change a member's role.
 
 ## There is no read-only role
 
@@ -31,23 +30,29 @@ owning the team. That is the only distinction the system actually enforces:
 | Delete a Collection, or delete an Item | Yes | No |
 | Everything else — Collections, Items, fields, Links, Pages, print batches, CSV import and export | Yes | Yes |
 
-Deleting a Tag Template or a Print Batch is owner-only too. Deleting a **Link** is not — any
-member can delete or release Links, including ones somebody else created.
+Deleting a **Link** is not owner-only — any member can delete or release Links, including ones
+somebody else created. Neither is deleting a Draft Print Batch.
 
-**An Editor's delete of a Collection or an Item fails quietly.** The confirmation goes through and
-you may see no error at all, but the record is still there when the list reloads. If a member
-reports that deletes "don't stick," this is why: they are not the owner. Ask the owner to do it.
+**An Editor cannot delete Items or Collections, and the app does not say why.** Deleting Items gets
+the error *Those items no longer exist.* (or *That item no longer exists.* for one), and nothing is
+deleted: despite the wording, the Items are still there. Deleting a whole Collection fails quietly:
+the confirmation goes through with no error, but the Collection is still there when the list
+reloads. If a member reports either, this is why: they are not the owner. Ask the owner to do it.
 
-## Why the Owner label grants nothing
+## How ownership changes
 
-The invite form lets you pick **Owner** as the role for the person you are inviting. That choice
-only sets the word shown in the members table's **Access** column. It does not make them the
-team's owner and it grants none of the powers in the table above — they still see the Team page as
-a non-owner, with no Edit button, no invite card and no Subscription section.
+The owner is the one person recorded as owning the team. An invitation cannot make anyone the owner:
+the invite form offers no role, and the server refuses any role but Editor with *Members can be
+invited as Editor only. To make someone the owner, transfer ownership.*
 
-The team's real owner changes in exactly one place: when the current owner leaves the team, which
-hands ownership to another member as part of leaving. There is no separate transfer-ownership
-screen. See [Leaving a Team](/team/leave-a-team).
+The team's owner changes in exactly one place: when the current owner leaves the team, which hands
+ownership to another member as part of leaving. There is no separate transfer-ownership screen. See
+[Leaving a Team](/team/leave-a-team).
+
+Some older memberships may still show **Owner** in the members table's **Access** column, from when
+the invite form offered it. That label grants none of the powers in the table above — the person
+still sees the Team page as a non-owner, with no Edit button, no invite card and no Subscription
+section. Their row has no **X** either; to remove them, tick their row and use **Remove Selected**.
 
 ## Related
 

@@ -2,7 +2,7 @@
 title: "QR Code Print Spec: Quiet Zone and Minimum Size"
 icon: "ruler"
 sidebarTitle: "Quiet Zone and Size"
-description: "The 4-module quiet zone nothing may cross, the 20-25mm practical minimum for phone scanning, and why the exported margin is not the quiet zone"
+description: "The 4-module quiet zone nothing may cross, the 20-25mm practical minimum for phone scanning, and why the quiet zone built into every export still needs protecting"
 ---
 
 Two numbers belong on every print spec you hand a shop: a quiet zone of at least **4 modules** on all four sides, and a printed size of at least about **20–25 mm (roughly 1 inch)** square. Both are about whether a phone camera can decode the code at all — and both fail silently, producing a piece that looks perfect and does not scan.
@@ -36,13 +36,13 @@ practical consequences for a print spec.
 door sign with identical edges. PNG is a fixed 1024 × 1024 pixels — roughly 87 mm at 300 dpi, which
 is comfortable for a tag or a sticker, tight for a plaque, and not enough for a sign. Enlarged well
 past that, a PNG's module edges soften enough to stop scanning. If a shop only has the PNG and needs
-it larger, give them the **Full URL** column from your print list and let them regenerate at press
+it larger, give them the **Link** column from your production list and let them regenerate at press
 size — that is normal practice, not a workaround.
 
-**Error correction is a real lever now, but it is not a substitute for size.** For a piece that will
-live outdoors, be laminated, or get scratched, raise the level — **Q** for most printed tags and
-**H** where the code will be damaged or partly covered. For QRtub's short addresses the step up is
-often free, so this usually costs nothing; see [QR Code
+**Error correction is a real lever, but it is not a substitute for size.** The export defaults to
+**Q**, which suits a piece that will live outdoors, be laminated, or get scratched; raise it to **H**
+where the code will be damaged or partly covered. Whether a higher level adds modules depends on the
+address, so choose by where the code is going rather than by size; see [QR Code
 Standards](/suppliers/qr-code-standards).
 
 What it cannot do is rescue a code that was printed too small. A pristine 10 mm code at H still will

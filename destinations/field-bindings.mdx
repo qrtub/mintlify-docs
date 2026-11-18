@@ -1,7 +1,7 @@
 ---
 title: "Field Bindings & URL Templates"
 icon: "braces"
-description: "The double-curly-brace syntax for inserting live data into a Destination URL, the nine namespaces you can read from, and the encoding and missing-value rules"
+description: "The double-curly-brace syntax for inserting live data into a Destination URL, which namespaces a Destination and a Page can each read, and the encoding and missing-value rules"
 ---
 
 A field binding is a placeholder you write inside a Destination URL that QRtub replaces with real
@@ -39,20 +39,25 @@ Braces build a value; a bare reference tests one.
 
 ## The namespaces
 
-Nine namespaces exist. Each one is only readable where the data behind it exists, which is why
-the last four are not available everywhere.
+A Destination and a Page do not read the same set. Two of them also have different names on each
+side: a Destination URL or routing rule still uses the older names, `tub` for the Collection and
+`accessUrl` for the Link, where a Page uses `collection` and `link`. A namespace used where it does
+not exist resolves to nothing, with no error.
 
 | Namespace | What it holds | Available in |
 |---|---|---|
 | `item` | The scanned Item's own fields, standard and custom — see [Item Fields Reference](/destinations/item-fields) | Destinations and Pages |
-| `collection` | The Collection the Item belongs to — see [Collection Fields Reference](/destinations/collection-fields) | Destinations and Pages |
+| `tub` | The Collection the Item belongs to, under its older name — see [Collection Fields Reference](/destinations/collection-fields) | Destinations (Pages still read it) |
+| `collection` | The same Collection, under its current name | Pages only |
+| `accessUrl` | The specific Link that was scanned: `accessUrl.url` is its slug, plus `strategy` and `sequence_number` | Destinations only |
+| `link` | The specific Link that was scanned: `slug`, `url` (its full address), `path`, `strategy` and `sequence_number` | Pages only |
 | `device` | The scanning device's type, OS and browser — see [Device Detection & Routing](/destinations/device-detection) | Destinations and Pages |
 | `time` | The current hour, day, month and year in UTC — see [Time Fields Reference](/destinations/time-fields) | Destinations and Pages |
 | `request` | Language, referrer and CDN-derived location — see [Request Fields Reference](/destinations/request-fields) | Destinations and Pages |
-| `link` | The specific Link that was scanned: its slug, strategy and sequence number | Destinations only |
 | `session` | Whoever is signed in to QRtub while they scan, if anyone: any QRtub account, not only your team's | Destinations and Pages |
-| `theme` | The Page's accent color and border radius — see [Theming a Page](/pages/page-theming) | Pages only |
+| `theme` | The accent color and border radius of the Item's Page — see [Theming a Page](/pages/page-theming) | Destinations and Pages (the Page Editor no longer offers it) |
 | `team` | The team that owns the Page: `{{team.name}}`, and `{{team.logo}}`, its logo's address for an image field — see [Team Settings](/team/team-settings) | Pages only |
+| `ref` | The records an Item's reference fields point at: the person, Item or Collection itself, not just its ID — see [Reference Fields](/fields/reference-fields) | Pages only |
 
 ## Values are inserted exactly as stored
 
@@ -77,8 +82,8 @@ yet" screen instead of a broken URL. The same rule applies to a binding that res
 or a nested object rather than a single value — `{{item.tags}}` is an array, so a URL containing
 it never resolves.
 
-**In a Page section, an empty field renders as an empty string** and most sections then hide
-themselves rather than display a blank. The exception is the ActionLink section, which checks its
+**In a Page section, an empty field renders as an empty string**, and some sections, such as
+KeyValue, then leave out the empty row or hide altogether rather than display a blank. The exception is the ActionLink section, which checks its
 own `href` first and hides itself entirely if a binding there cannot be resolved.
 
 Neither case produces an error message. A Destination that quietly never fires is almost always a

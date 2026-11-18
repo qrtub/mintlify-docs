@@ -58,10 +58,10 @@ equipment that opens its own question. Nobody scrolls, and nobody answers the wr
 
 **With a URL template:**
 ```
-https://app.mitti.com/report/audit/{{item.inspectionID}}
+https://app.mitti.com/report/audit/{{item.inspection_id}}
 ```
 
-Store the current inspection ID in each Item's `inspectionID` field, and every tag resolves to its
+Store the current inspection ID in each Item's `inspection_id` field, and every tag resolves to its
 own item's most recent report.
 
 **Use it for:** proving a check happened. A client or an auditor scans the plate and reads the last
@@ -111,7 +111,7 @@ codes can be pre-filled in Mitti with a category, site or asset when you create 
 This is the difference that decides how much work a fleet takes.
 
 - **Templates, inspections, questions, reports, courses, assets and files** all have a URL with an
-  ID in it. So you write one URL template with a binding — `{{item.assetID}}` — and every Link in
+  ID in it. So you write one URL template with a binding — `{{item.asset_id}}` — and every Link in
   the Collection resolves to its own record. One rule, whole fleet.
 - **Issue codes** have no pattern. You paste a link, one at a time.
 

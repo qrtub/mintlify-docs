@@ -20,7 +20,7 @@ underneath, and a chevron on the right. Tapping anywhere on the card follows the
 | **Description (Optional)** | A line of supporting text. Long text is truncated with a more/less control |
 | **Icon Image** | Bindable. Defaults to the Item's image |
 | **Open in new tab** | Off by default, so the Destination replaces the page |
-| **Fallback URL** / **Fallback Message** | Only used when the Link URL is an app deep link and the app does not open. See [App Links & Fallback URLs](/destinations/app-links) |
+| **Fallback URL** / **Custom Message** | Appear under Link URL only when it is an app deep link, and are used only if the app does not open. See [App Links & Fallback URLs](/destinations/app-links) |
 
 A new ActionLink arrives pre-bound to the Item — label from `{{item.name}}`, description from
 `{{item.description}}`, icon from `{{item.image}}` — and with a placeholder Link URL that points at
@@ -37,8 +37,9 @@ This is specific to ActionLink. Button and Link sections do not do it — they w
 dead control.
 
 In the editor, a hidden ActionLink is not invisible: it stays on the canvas with a dimmed orange
-outline so you can see it and fix the missing field. Switch on **Preview** and it disappears, the
-same as it would for a real visitor.
+outline and a **Hidden** badge so you can see it and fix the missing field, and its **Link URL**
+setting says **Link will be hidden** and names the field that is missing. Switch on **Preview** and
+it disappears, the same as it would for a real visitor.
 
 Two consequences worth planning for:
 

@@ -9,9 +9,9 @@ a panel on each side does the work.
 
 ## Opening the editor
 
-From the Collection's settings, open the page tab and choose **Edit profile page**. The editor
-opens in a new browser tab. (That tab only appears when pages are switched on for the Collection —
-see [Pages Overview](/pages/pages-overview).)
+From the Collection's settings, open the **Profile page** tab and choose **Edit profile page**. The
+editor opens in a new browser tab. (That tab only appears when pages are switched on for the
+Collection — see [Pages Overview](/pages/pages-overview).)
 
 You can also open it against one specific Item: from the Item's **Page** tab, press **Edit Page**.
 That matters, because opening from an Item puts you in override mode — see [Per-Item Page
@@ -24,7 +24,7 @@ Only one tab is visible at a time.
 | Tab | What it does |
 |-----|--------------|
 | **Components** | The palette of sections you can add — searchable, grouped into Data Display, Layout, Content, Media and Interactive |
-| **Data** | The fields you can bind, grouped by namespace: Item Properties, Tub Properties, Device & Platform, Time & Date, Request Info, Access URL, User & Session, Theme Properties |
+| **Data** | The fields you can bind, grouped by namespace: Item Properties, Linked Records (only when the Collection has reference fields), Collection Properties, Device & Platform, Time & Date, Request Info, Link, Team, User & Session |
 | **Structure** | The page as a tree — reorder, nest, expand containers, and see which sections carry a condition |
 
 The Structure tab is the fastest way to work on a long page: each row shows the section type, a
@@ -68,15 +68,18 @@ a namespace:
 Rather than typing them, open the **Data** tab and drag a field straight onto the setting you want
 it in.
 
-One namespace in that list is a trap: the **Link** group (`link.*`) is available to Destination
-URLs and routing rules, but it is not part of what a Page is rendered with. Dragging one of those fields into a section leaves you with an empty value and no
-error.
+The tab offers only the namespaces a page is rendered with. The trap is copying a binding between a
+page and a Destination rule: rules use older names for two of them — `tub.*` for the Collection
+and `accessUrl.*` for the Link — and a page has no `accessUrl`, so `{{accessUrl.slug}}` in a
+section leaves you with an empty value and no error. On a page, use `collection.*` and `link.*`.
 
 Two behaviors to expect: a binding that cannot be resolved renders as empty rather than showing an
-error, and most sections hide themselves when their content is empty. Values are also inserted
-exactly as stored, with no URL encoding — so a field containing a space or an `&` will break a URL
-you build from it. The full syntax reference is [Field Bindings & URL
-Templates](/destinations/field-bindings).
+error, and many sections hide themselves when their content is empty. The canvas flags that
+combination: a section whose every binding comes up empty for the Item you are viewing carries a
+**No data** badge, because sections such as KeyValue, SpecGrid and Tags will then not appear on the
+published page at all. Values are also inserted exactly as stored, with no URL encoding — so a
+field containing a space or an `&` will break a URL you build from it. The full syntax reference is
+[Field Bindings & URL Templates](/destinations/field-bindings).
 
 ## Undo, redo, and the history gotcha
 

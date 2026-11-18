@@ -1,16 +1,16 @@
 ---
 title: "Creating a Print Batch"
 icon: "plus"
-description: "Export a print list from a Collection or the Access Links page — and choose between a tracked draft batch and a plain CSV download that records nothing."
+description: "Export a production list from a Collection or the Links page — and choose between a tracked draft batch and a plain CSV download that records nothing."
 ---
 
-You create a batch by exporting a print list. The export screen offers two outcomes, and the
+You create a batch by exporting a production list. The export screen offers two outcomes, and the
 choice matters: one creates a tracked batch, the other just hands you a CSV file and keeps no
 record.
 
 ## Before you start
 
-You need links to print. Every Item with a Link already has one; unassigned links work too, and
+You need links to export. Every Item with a Link already has one; unassigned links work too, and
 are the normal starting point for a print-first run where the codes are made before the
 equipment arrives.
 
@@ -18,64 +18,77 @@ equipment arrives.
 
 1. Open the Collection and select the Items you want. If you select nothing, the export uses
    whatever your current search, filters and sort produce.
-2. Open the **Print Batches** menu and choose **Print list**.
-3. Pick your columns (below).
+2. Open the **Produce Tags** menu and choose **Production list**.
+3. Pick your columns in the **Produce Tag batch** dialog (below).
 4. Choose **Create draft batch** or **CSV**.
 
-## Exporting from the Access Links page
+## Exporting from the Links page
 
-The Access Links page has a **Print List** button in the toolbar and in the row-actions menu.
-It stays disabled until you select links — this path always works from a selection, or from
-"select all pages", which hands the server your current filters instead of a list of IDs.
+The Links page has a **Production List** button in the toolbar and in the bulk-actions menu
+(the ⋮ in the table header). It stays disabled until you select links — this path always works
+from a selection. Ticking the header checkbox selects every matching link, and hands the server
+your current filters instead of a list of IDs.
 
 On either path, an export built from ticked rows is capped at **5,000 selected rows** — Items from
-a Collection, links from the Access Links page. Past that, exporting from the current filters
-instead (leave the Collection selection empty, or use "select all pages" on Access Links) has no
-such cap, because the server does the selecting.
+a Collection, links from the Links page. Past that, export everything your filters match instead:
+tick the header checkbox and leave every row ticked (in a Collection, selecting nothing does the
+same). That has no cap, because the server does the selecting.
 
 ## Choosing columns
 
 The column picker has two groups:
 
 - **Item Fields** — the fields defined on the Collection, so a supplier can put a serial number
-  or a location on the label next to the code.
-- **Link Fields** — **Full URL** (the complete `qrtub.com/...` address), **Short URL** (the path
+  or a location on the label next to the code. From the Links page this group offers only
+  **Name**, **Item Id**, **Description** and **Tags** (the Item's keywords).
+- **Link Fields** — **Link** (the complete `qrtub.com/...` address), **Short URL** (the path
   only) and **Active**.
 
-Toggle a column with the eye icon, drag to reorder, or use **Show all** / **Hide all**. Full URL
-is included by default, and it is the one column a supplier genuinely needs — most shops
+Toggle a column with the eye icon, drag to reorder, or use **Show all** / **Hide all**. **Link**
+is ticked by default, and it is the one column a supplier genuinely needs — most shops
 generate the QR image themselves from that value rather than working from image files.
 
-One row equals one link, which in practice means one physical piece. Keep that convention and
-the shop's data merge lines up with your order quantity.
+In the file, an export from a Collection puts the Item columns first and the link columns last;
+an export from the Links page does the opposite. Dragging sets the order of the Item columns. The
+link columns are always written in the order Link, Short URL, Active.
+
+One row equals one link, which in practice means one physical piece. The exception is an export
+from a Collection: a selected Item with no Link still gets a row, with the link columns empty.
+Assign Links first, or leave those Items out, and the shop's data merge lines up with your order
+quantity.
 
 ## The two export buttons
 
 | Button | What happens | Record kept |
 |---|---|---|
-| **Create draft batch** | The CSV is generated and stored server-side, a batch is created in Draft, and you land on **Print Batches** with the new batch open | Yes |
+| **Create draft batch** | The CSV is generated and stored server-side, a batch is created in Draft, and you land on **Tags & Labels** with the new batch open | Yes |
 | **CSV** | The file downloads to your computer immediately | No |
 
 **Create draft batch** does not download anything at that moment. The file is kept with the
 batch, and you download it whenever you need it — see
 [The Batch CSV: Downloading and Reprinting](/print-batches/csv-download).
 
-**CSV** — labeled "Download CSV without creating a batch" — is a genuinely neutral download.
-Nothing is tracked, no batch appears in Print Batches, and there is no later record that those
-codes were ever printed. Use it for a quick look at the data; use the draft batch for anything
-you are actually sending to a supplier.
+**CSV** — its tooltip reads "Download CSV without creating a batch" — is a genuinely neutral
+download. Nothing is tracked, no batch appears under Tags & Labels, and there is no later record
+that those codes were ever produced. Use it for a quick look at the data; use the draft batch for
+anything you are actually sending to a supplier.
 
-New batches are named automatically as `Print list — Aug 18, 2026`. Rename it to something you
-will recognize later, like "Depot 2 replacements, March" — see
-[Naming, Tagging and Photographing a Batch](/print-batches/batch-details).
+Exporting from the Links page adds a third button, **QR codes**. It closes the dialog and opens the
+QR code download for the selected links, and like **CSV** it records nothing — see
+[Downloading QR Codes](/bulk-links/downloading-qr-codes).
+
+New batches are named automatically as `Production list — Aug 18, 2026`. Rename it to something
+you will recognize later, like "Depot 2 replacements, March" — see
+[Naming, Describing and Photographing a Batch](/print-batches/batch-details).
 
 ## Failure modes worth knowing
 
-- **An empty export is rejected.** Exporting with no links selected returns an error rather than
-  an empty batch.
-- **Tracking can fail silently.** If batch creation fails after the CSV is built, you still get
-  the file — as a download, with a success message. If you asked for a draft batch and got a
-  file download instead of landing on Print Batches, nothing was recorded. Re-export.
+- **A batch needs at least one link.** If nothing you exported has a Link, **Create draft batch**
+  is refused with an error rather than creating an empty batch.
+- **Tracking can fail.** If the batch cannot be recorded after the CSV is built, you still get the
+  file as a download, with the message "The list downloaded, but the Batch was not recorded, so it
+  will not appear under Tags & Labels. Run the export again to create one." If you asked for a
+  draft batch and got a file download instead of landing on Tags & Labels, re-export.
 
 ## Related
 

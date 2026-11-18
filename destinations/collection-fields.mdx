@@ -1,7 +1,7 @@
 ---
 title: "Collection Fields Reference"
 icon: "layers"
-description: "The collection.* catalog — why the Collection binding prefix is still tub, which Collection values resolve, and the two metadata paths the editor offers that never populate"
+description: "The collection.* catalog — why a Destination still writes the Collection as tub, which Collection values resolve, and the metadata paths the editor offers that never populate"
 ---
 
 The Collection namespace reads the Collection that the scanned Item belongs to — its name, its
@@ -9,7 +9,15 @@ description, its cover image. Every Item in the Collection sees the same values,
 makes these bindings useful for branding a URL or a Page and largely useless for identifying a
 specific Item.
 
+**The prefix depends on where you write it.** On a Page — a section's text or properties, or a
+visibility condition — the namespace is `collection.`. In a Destination URL, a routing rule or a
+Destination's fallback URL it is still `tub.`, the Collection's older name: write `{{tub.name}}`
+there, because `{{collection.name}}` resolves to nothing in a Destination, with no error. A Page
+still reads `tub.` as well, so a Page template written that way keeps working.
+
 ## Available fields
+
+Each field exists under both prefixes: `collection.name` on a Page is `tub.name` in a Destination.
 
 | Binding | Type | Notes |
 |---|---|---|
@@ -27,20 +35,22 @@ belong to its Items, so they are read as `item.*` — see
 
 ## `collection.metadata` is not a binding surface
 
-`collection.metadata` exists, but it holds QRtub's own configuration for the Collection — its field
-definitions, its Link generation rule, its scan-behavior defaults. Nothing in it is a stable,
-documented value to bind against, and its internal structure can change between releases.
+`collection.metadata` (`tub.metadata` in a Destination) exists, but it holds QRtub's own
+configuration for the Collection — its field definitions, its Link generation rule, its
+scan-behavior defaults. Nothing in it is a stable, documented value to bind against, and its
+internal structure can change between releases.
 
-Two paths under it deserve a specific warning, because the editor's property picker offers them
-as if they were real data:
+Three paths under it deserve a specific warning, because the suggestions in a routing rule or a
+visibility condition offer them as if they were real data:
 
-- `collection.metadata.page.is_public`
-- `collection.metadata.organizationName`
+- `tub.metadata.page.is_public`
+- `tub.metadata.organizationName`
+- `tub.metadata.lastUpdated`
 
-**Neither is ever populated.** No part of QRtub stores a value at either path, so both resolve to
-nothing. In a condition that means the whole expression evaluates to `false` and the rule never
-fires; in a Destination URL it means every binding in that URL counts as unresolved and the
-Destination is skipped. If you need to know whether a Page is private, check the Collection's
+**None is ever populated.** No part of QRtub stores a value at any of these paths, so they resolve
+to nothing. In a condition that means the whole expression evaluates to `false` and the rule never
+fires; in a Destination URL it means the whole URL counts as unresolved and the Destination is
+skipped. If you need to know whether a Page is private, check the Collection's
 privacy setting in the interface rather than trying to read it from a binding.
 
 ## When Collection fields are worth using
@@ -49,7 +59,7 @@ The honest answer is: less often than Item fields. A `collection.*` value is ide
 the Collection, so it cannot identify anything. The cases where it does earn its place are:
 
 - **Passing your own grouping to another system**, so a work-order URL arrives tagged with the
-  Collection it came from: `https://cmms.example.com/wo/new?asset={{item.item_number}}&group={{collection.name}}`.
+  Collection it came from: `https://cmms.example.com/wo/new?asset={{item.item_number}}&group={{tub.name}}`.
 - **Labeling a shared Page template** with `{{collection.name}}` so one template reads correctly across
   several Collections.
 

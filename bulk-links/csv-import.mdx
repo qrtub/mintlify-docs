@@ -21,7 +21,7 @@ Use it when the addresses already exist somewhere else — a list of asset numbe
 
 This is exactly the shape the Links **Export** produces, so the fastest way to get a valid file is to export, edit, and import the same file back. Every column is read as text, which matters for numbered slugs: leading zeros in `cra0042` survive rather than being turned into `42`.
 
-`destination_url` can be a URL template with field bindings, like `app.com/inspect?id={{item.assetID}}`. Bindings are inserted exactly as stored with no URL-encoding, so a field containing a space or an `&` produces a broken address — check the fields you reference before importing hundreds of rows that use them.
+`destination_url` is the Link's own destination, and a scan uses it only while the Link has no Item — once the Link is assigned, the Item's Destination takes over. So it can be a URL template using details of the scan, like `https://example.com/{{device.os}}`, but not `{{item.…}}` values. Bindings are inserted exactly as stored with no URL-encoding, so a value containing a space or an `&` produces a broken address.
 
 ## What each type needs on a create
 
@@ -29,11 +29,11 @@ This is exactly the shape the Links **Export** produces, so the fastest way to g
 
 **Numbered** — `url` is required, and it must match a numbering pattern your team already owns. `cra0042` is accepted if you hold `cra` + 4 digits; otherwise the row is rejected with "does not match any numbering pattern owned by this team". The import does not claim new patterns for you.
 
-**Custom** — `url` is required and must satisfy the custom-slug rules: 3–50 characters, lowercase letters, digits, hyphens and underscores, not a reserved word, not already in use, and not inside a numbered pattern your team owns.
+**Custom** — `url` is required and must satisfy the custom-slug rules: 3–50 characters, lowercase letters, digits, hyphens and underscores, not a reserved word, not already in use, and not inside any team's numbered pattern.
 
 ## How a row becomes an update instead of a create
 
-By its `url`. If the slug already exists on one of your team's Links, the row updates that Link instead of creating one — whatever `link_type` says. Matching follows each type's own case rules: numbered and custom slugs match without regard to case, random slugs match exactly.
+By its `url`. If the slug already exists on one of your team's Links, the row updates that Link instead of creating one — whatever `link_type` says. Matching ignores case, whatever the type.
 
 Only your team's Links are eligible. If you belong to several teams and a slug in the file exists in a different one, it is never treated as an update to that other team's Link.
 
@@ -41,7 +41,9 @@ On an update, **columns absent from the file are left alone**, so a two-column f
 
 ## The dry run
 
-Choosing **Import** and picking a file runs the preview automatically. It performs the same classification and the same checks as the real thing — pattern matching, reserved-by-pattern, the random-slug rule, and duplicate detection — without writing anything, so the created and updated counts you see are honest rather than optimistic.
+Choosing **Import** and picking a file runs the preview automatically. It classifies every row the same way the real thing does and runs most of the same checks — pattern matching, reserved-by-pattern, the random-slug rule, and duplicate detection — without writing anything. Some checks on custom slugs run only when you confirm: the character and reserved-word rules, whether the slug is already in use anywhere in QRtub, and whether it falls inside another team's numbered pattern. A custom row the preview counted can still fail there.
+
+If the new Links would take your team past its plan's Link allowance, or close to it, the preview also shows a note saying how many Links are left.
 
 Two rows creating the same new slug are caught here too: the first is counted, the second is rejected as a duplicate. Without that, the preview would promise two Links and the commit would deliver one plus an error.
 

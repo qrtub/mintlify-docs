@@ -5,8 +5,8 @@ description: "The two free-text core fields on every Item: what Name is used for
 ---
 
 Name and Description are the two free-text core fields every Item ships with. Both accept any
-text, neither has to be unique, and both live in fixed database columns that can be relabeled
-but never renamed.
+text, neither has to be unique, and both live in fixed database columns whose labels and keys
+are locked.
 
 ## Name
 
@@ -33,18 +33,18 @@ a label. It is optional unless you mark it Required.
 
 Description earns its keep on Pages. The Text section's content defaults to
 `{{item.description}}`, and several of the starter page templates already bind it, so dropping a
-Text section onto a page shows the Item's description without you typing a binding. The item
-picker inside the item form also searches Description alongside Name and Item ID.
+Text section onto a page shows the Item's description without you typing a binding.
 
-## Relabeling, requiring, and turning them off
+## Requiring and turning them off
 
-Both fields are configured on the Collection, in its Fields tab. You can change the label a
-field shows in forms and as its CSV column header, tick Required, or turn the field off.
+Both fields are configured on the Collection, in its Fields tab. You can tick Required or turn the
+field off. The label cannot be changed: core fields are database columns, and both the label and
+the key are locked.
 
 Because these are core fields, they can only be **disabled**, never deleted — the stored values
-are untouched and come back if you re-enable the field. Note that a disabled core field still
-resolves in Page bindings: turning Description off hides it from the item form and the items
-table, but `{{item.description}}` on a Page keeps rendering whatever was already stored.
+are untouched and come back if you re-enable the field. While it is off, its values are left out
+of what Pages and Destinations read too: turn Description off and `{{item.description}}` on a
+Page shows nothing until you turn it back on.
 
 ## Related
 

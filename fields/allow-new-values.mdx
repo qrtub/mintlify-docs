@@ -8,29 +8,35 @@ description: "The per-field toggle deciding whether a value outside the Allowed 
 [Allowed Values](/fields/allowed-values) list, or can add one that is not there yet. It is a
 checkbox on the field itself, in the Collection's **Fields** tab.
 
-The checkbox only applies to **List** fields. On any other type it stays disabled, and the
-editor tells you why: switch the Field Type to List first. Tags, the core list field on every
-Item, ships with Allow New Values already on, which is why you can type any tag you like
-without configuring anything.
+You can only change the checkbox on a **List** field. On any other type it stays disabled, and
+the editor tells you why: switch the Field Type to List first. Some
+[starter templates](/collections/starter-templates) switch it on for Text fields such as
+Category and Status, and it works the same there; the box shows
+ticked but disabled, so to turn it off, change the Field Type to List, untick it, change the
+type back, and click **Save**. Keywords, the core list field on every Item, ships with Allow New
+Values already on and an empty list, which is why you can type any keyword you like without
+configuring anything.
 
 ## With it off
 
 The list is the whole vocabulary:
 
 - The Item form offers the list and nothing else.
-- A CSV import checks every cell in that column against the list and **rejects any row with
-  a value that is not on it**, naming the offending value and listing what is allowed. Other
-  rows in the file still import.
+- A CSV import checks every cell in that column against the list's stored values (`in_repair`,
+  not "In Repair") and **rejects any row with a value that is not on it**, naming the offending
+  value and listing what is allowed. Other rows in the file still import.
 
 This is the setting to keep for anything you filter, route, or condition on. A status column
 with three real values stays three values.
 
 ## With it on
 
-- In the Item form, the picker gains an "Add" box. Type a value, choose a color, and it is
-  added to the Collection's Allowed Values list immediately — that one action saves straight
+- In the Item form, the picker gains an **Add new...** box. Type a value, choose a color, and it
+  is added to the Collection's Allowed Values list immediately — that one action saves straight
   away, unlike the rest of the Fields tab, which waits for **Save changes**. From then on
-  the value is a normal option for every Item in the Collection, colored chip included.
+  the value is a normal option for every Item in the Collection, colored chip included. The
+  picker only appears once the field has at least one allowed value; until then a List field
+  is a plain comma-separated box, and nothing typed there is added to the list.
 - Like values added in settings, a value typed here is stored lowercased with spaces turned
   into underscores, while the text you typed is kept as its label.
 

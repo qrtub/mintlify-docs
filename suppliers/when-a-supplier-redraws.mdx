@@ -11,7 +11,7 @@ Expect the shop to rebuild your design in their own software rather than use you
 
 **Color separation for their press.** Your file's colors have to be converted to whatever their specific press, ink set, or substrate actually uses. That conversion is easier and more predictable in a file their software built than in an imported one, and it is their job to get right, not yours.
 
-**Regenerating the QR code at the correct size and quiet zone.** Shops routinely prefer to generate the code from your data rather than trust a pasted-in image, so it renders at exactly the right module size and with the exact clear space their process needs. A supplied PNG has a fixed pixel size and only a two-module margin; a code they generate has neither limitation.
+**Regenerating the QR code at the correct size and quiet zone.** Shops routinely prefer to generate the code from your data rather than trust a pasted-in image, so it renders at exactly the right module size and with the exact clear space their process needs. A supplied PNG has a fixed pixel size; an SVG, or a code they generate, does not.
 
 **Their production files are built for their equipment.** Imposition, registration marks, bleed, and cut paths are set up the way their machines expect. Rebuilding is often faster than adapting someone else's file to that.
 
@@ -21,7 +21,7 @@ Not your source file, necessarily. What they need is:
 
 - **A visual and a spec to rebuild from** — a reference image of the finished piece, plus final dimensions, bleed, and the QR code's minimum size and quiet zone.
 - **The data file**, one row per physical piece.
-- **The QR code for each piece, or just its URL** — the **Full URL** column is enough if their software renders codes itself.
+- **The QR code for each piece, or just its URL** — the **Link** column is enough if their software renders codes itself.
 - **Confirmation of which column is which.** This is the one that gets skipped, and it is the one that causes wrong-destination batches.
 
 ## A worked example

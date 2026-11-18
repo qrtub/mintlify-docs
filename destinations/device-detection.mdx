@@ -22,14 +22,14 @@ Visibility](/destinations/conditional-visibility) for what a condition can actua
 | `device.os` | `ios` · `android` · `windows` · `macos` · `linux` · `unknown` | `device.isIOS` · `device.isAndroid` |
 | `device.browser` | `chrome` · `safari` · `firefox` · `edge` · `opera` · `unknown` | — |
 
-```
+```text
 device.isMobile
 device.os == "ios"
 device.browser == "chrome" || device.browser == "edge"
 ```
 
 **When the device cannot be detected**, QRtub assumes `desktop`, `unknown`, `unknown`. So a
-desktop-conditioned Destination is what an unrecognised device falls into — worth knowing when you
+desktop-conditioned Destination is what an unrecognized device falls into — worth knowing when you
 choose which branch carries the fallback.
 
 ## The two cases worth using it for
@@ -40,7 +40,7 @@ choose which branch carries the fallback.
 **iOS deep links outside Safari.** An app scheme like `iauditor://` only opens from Safari on iOS,
 so an iPhone user in Chrome needs the web URL instead:
 
-```
+```text
 device.isIOS && device.browser != "safari"        → the web Destination
 device.isDesktop || !device.isIOS || (device.isIOS && device.browser == "safari")
                                                    → the app Destination
@@ -55,7 +55,7 @@ scheme.
 
 Device conditions and Item fields go in the same expression:
 
-```
+```text
 device.isMobile && item.type == "crane"
 ```
 
@@ -66,7 +66,7 @@ device.isMobile && item.type == "crane"
 - **Not to force a choice.** If showing both options is simpler, show both.
 - **Not as a stand-in for identity.** See the note at the top.
 
-**Always leave one Destination with no device condition**, so an unrecognised device still has
+**Always leave one Destination with no device condition**, so an unrecognized device still has
 somewhere to go.
 
 ## Related

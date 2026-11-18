@@ -17,9 +17,9 @@ Pick **Random** unless you have a reason not to. Pick **Numbered** when the tag 
 | Slug shape | 6 lowercase letters, no digits | `prefix` + zero-padded number + `suffix` | 3–50 characters, lowercase letters, digits, `-` and `_` |
 | Typing it by hand | Case doesn't matter | Case doesn't matter | Case doesn't matter |
 | Setup needed | None | Claim a pattern first (QRtub can claim it for you on first use) | None |
-| How many at once | Up to 100 per request in the create form | Up to 1,000 numbers in one range request | One at a time |
-| Can fail because it's taken | No — never possible | Yes, if another team already owns the pattern | Yes, if the slug is in use or reserved |
-| Included in | Every plan | Professional and Scale | Every plan |
+| How many at once | Several per request in the create form | Up to 1,000 numbers in one range request | One at a time in the create form |
+| Can fail because it's taken | No — never possible | Yes, if another team holds the pattern or one that overlaps it, or already uses an address inside it | Yes, if the slug is in use or reserved |
+| Included in | Every paid plan | Professional and Scale | Every paid plan |
 
 ## When Random is right
 
@@ -29,15 +29,15 @@ The trade-off is simply that a random slug carries no meaning — `bepjov` tells
 
 ## When Numbered is right
 
-When the physical tag already has a number, or should have one. A plate that reads `CRA0042TL` and resolves at `qrtub.com/cra0042tl` gives your crew one identifier instead of two — no mapping back to a spreadsheet, nothing to mistype twice. It is also the only type that mints in real bulk: one range request can create up to a thousand sequential codes.
+When the physical tag already has a number, or should have one. A plate that reads `CRA0042TL` and resolves at `qrtub.com/cra0042tl` gives your crew one identifier instead of two — no mapping back to a spreadsheet, nothing to mistype twice. It also mints in real bulk: one range request can create up to a thousand sequential codes.
 
-The cost is that a pattern is a commitment. A prefix, digit count and suffix combination is claimed exclusively, and once Links exist against it you cannot delete the pattern without deleting those Links first.
+The cost is that a pattern is a commitment. A prefix, digit count and suffix combination is claimed exclusively, and the app has no control for releasing one: once your team holds a pattern, it keeps it, and it counts toward your plan's pattern limit.
 
 ## When Custom is right
 
-When a human is the interface. A meeting-room sign, a poster, a business card, anything where someone might say "go to qrtub.com/boardroom". Custom slugs are the only type you fully control, and the only type validated against a reserved-word list — QRtub blocks slugs that would collide with its own routes and brand terms.
+When a human is the interface. A meeting-room sign, a poster, a business card, anything where someone might say "go to qrtub.com/boardroom". Custom slugs are the only type you fully control, which is why they are checked against a reserved-word list — QRtub blocks slugs that would collide with its own routes and brand terms.
 
-They are also the slowest: one at a time, each one checked for availability, so they are a poor fit for a print run of five hundred.
+They are also the slowest: the create form makes them one at a time, each one checked for availability, so for a print run of five hundred list them in a [CSV import](/bulk-links/csv-import) instead.
 
 ## Mixing types is normal
 

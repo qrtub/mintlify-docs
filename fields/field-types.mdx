@@ -33,12 +33,13 @@ greyed out:
 - **Multiple Values** and **Allow New Values** — List only. Both checkboxes stay disabled
   until you switch the Field Type to List; the tooltip on each says the same thing. See
   [Allow New Values](/fields/allow-new-values).
-- **Reference configuration** — offered on a new field only when the type is UUID. See
+- **Reference configuration** — offered on a new field only when the type is UUID; when you
+  edit an existing field it is offered whatever the type. See
   [Reference Fields](/fields/reference-fields).
 
-Multiple Values is what separates a single-select from a multi-select. With it off, a List
-field still uses a picker but keeps only the last value you choose; with it on, the field
-holds as many values as you select.
+In the Item form, a List field with allowed values is a multi-select picker whether or not
+Multiple Values is on, and it keeps every value you pick. For one value per Item, use a Text
+field with allowed values instead.
 
 ## Which type do I need?
 
@@ -48,7 +49,7 @@ Start with what the value *is*:
   a number on CSV import; a Text field accepts whatever gets typed, typos included.
 - **A date** → Date, not Text, so it gets a date picker and a consistent stored format.
 - **One of a short, known set of options** → Text with allowed values (one value per Item),
-  or List with allowed values and Multiple Values on (several per Item).
+  or List with allowed values (several per Item).
 - **Free text nobody will filter on** → Text with no allowed values.
 - **Another record already in QRtub** → UUID with a reference type. Anything else means
   retyping a name that will eventually go stale.

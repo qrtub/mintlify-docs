@@ -20,16 +20,17 @@ Add an AdminToolbar and it arrives with three buttons already configured:
 |--------|---------|
 | **QR Codes** | Your Links list |
 | **Edit** | This Item, open in the app for editing |
-| **Manage Tub** | This Collection's settings — the default label still carries the old name for a Collection, so rename it |
+| **Manage collection** | This Collection's settings |
 
-Those default URLs use bindings — `{{collection.id}}` for the Collection and `{{item.id}}` for the Item —
-so they point at whatever you are looking at rather than at a fixed record.
+Those default URLs use bindings — `{{tub.id}}` for the Collection and `{{item.id}}` for the Item —
+so they point at whatever you are looking at rather than at a fixed record. (`tub` is the
+Collection's name from before the rename; it still works on a page, and so does `{{collection.id}}`.)
 
 ## Configuring buttons
 
 Each button has three parts: a **label**, a **URL**, and an **icon** chosen from a curated set of
-around 110 common icons (tools, arrows, documents, devices, brands). An icon name the app does not
-recognize falls back to a plain circle rather than failing.
+just over 100 common icons (tools, documents, devices, brands and more). An icon name the app does
+not recognize falls back to a plain circle rather than failing.
 
 The URL can be anything a link can be — an app page, an external system, an app deep link. Bindings
 work in it, with the same no-URL-encoding rule as everywhere else: a field value containing a space
@@ -59,8 +60,8 @@ See [Conditional Visibility](/destinations/conditional-visibility).
 **Being signed in is not the same as being on your team.** The default condition asks whether
 anyone is signed in to QRtub, not whether they belong to the team that owns the Collection. Do not
 put anything genuinely sensitive behind it. If a page must not be seen by outsiders at all, make
-the Item private instead — that is a real membership check. See [Page Privacy: Public vs.
-Private](/pages/page-privacy).
+the Item private instead — that is a real membership check, available on the Scale plan. See
+[Page Privacy: Public vs. Private](/pages/page-privacy).
 
 ## It always renders last
 

@@ -10,7 +10,9 @@ is why two people on the same team see exactly the same Collections and the same
 
 Every team also holds its own member list and its own subscription. Nothing is shared between
 two teams: a Link created in one team cannot be assigned to an Item in another, and a plan bought
-for one team does not cover the other.
+for one team does not cover the other. A team without an active subscription is read-only for
+every member: its codes keep working, but nothing can be created or changed until the owner
+subscribes. See [Subscription Status](/billing/subscription-status).
 
 ## Where your team came from
 
@@ -40,11 +42,12 @@ member can do. Details in [Team Roles](/team/roles).
 
 Open **Team** in the left sidebar. The header shows the team's logo, name, slug and member count,
 with an **Edit** button for the owner. Below it, four tiles: **Members** (accepted members),
-**Pending** (invitations sent to people without a QRtub account), **Owners** and the date the team
-was created.
+**Pending** (unexpired invitations sent to people without a QRtub account), **Owners** and
+**Created**, the date the team was created.
 
-Then the members table — **People with access**, **Last Seen**, **Status** and **Access** —
-followed by a **Danger Zone** with the **Leave Team** button. One thing worth knowing about that
+The owner then sees the **Subscription** section and the **Invite Member** and **Pending
+Invitations** cards. Everyone sees the members table — **People with access**, **Last Seen**,
+**Status** and **Access** — followed by a **Danger Zone** with the **Leave Team** button. One thing worth knowing about that
 table: the **Last Seen** column does not track activity. It shows when the person joined the team,
 or when they were invited if they have not joined yet. Nobody's last sign-in or last edit is
 recorded anywhere in QRtub.

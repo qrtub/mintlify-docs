@@ -31,15 +31,16 @@ Several at once, joined by `&`:
 ## Bind IDs, not sentences
 
 QRtub inserts the value character for character and does **no URL encoding**, so a value
-containing a space, `&`, `?` or `#` breaks the link. Bind an Item ID, a serial or a code — never a
-description or a note.
+containing `&` or `#` breaks the link, and a space can too. Bind an Item ID, a serial or a
+code — never a description or a note.
 
-If a binding cannot resolve, QRtub drops the Destination rather than opening a malformed form.
+If a binding cannot resolve, or the field is empty on that Item, QRtub drops the Destination
+rather than opening a malformed form.
 
 ## What will not pre-fill
 
 **File upload** — Google blocks it. And for multiple choice, checkbox and dropdown the value must
-match one of the form's own options exactly, including capitalisation; a near miss silently
+match one of the form's own options exactly, including capitalization; a near miss silently
 pre-fills nothing.
 
 ## Related

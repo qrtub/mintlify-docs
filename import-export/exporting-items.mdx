@@ -8,8 +8,8 @@ Exporting writes a Collection's Items to a CSV file you can open in a spreadshee
 upload back. Open the Collection, use the **Download / Upload List** menu above the items table,
 and pick one of the two download options.
 
-This is the Item list. It is not the print list a [print batch](/print-batches/csv-download)
-produces — that file describes Links and codes for a supplier and contains different columns.
+This is the Item list. It is not the production list a [print batch](/print-batches/csv-download)
+stores — that file describes Links and codes for a supplier and contains different columns.
 
 ## The two options
 
@@ -37,7 +37,7 @@ exported, not just the page you can see.
 - **Headers use each field's configured label** — a field relabeled to "Plant No." exports under
   that heading. If two fields would produce the same heading, the second falls back to its field
   key so no two columns collide. Import recognizes either form.
-- **List values, such as Tags, are joined with `; `** in a single cell.
+- **List values, such as Keywords, are joined with `; `** in a single cell.
 - **Dates export as ISO `YYYY-MM-DD`**, regardless of how they are displayed on screen, and
   yes/no fields export as `true` or `false`.
 - **Fields no longer on the Collection are left out.** Data left behind by a deleted field is not
@@ -53,15 +53,15 @@ A Collection with no Items still exports a file with the full header row when yo
 backup option. That is a convenient starting template: download it, fill in the rows, and
 [import it](/import-export/importing-items).
 
-## One thing to fix before re-importing
+## Why some cells start with an apostrophe
 
-Values beginning with `=`, `+`, `-`, `@`, `|` or a tab are exported with a leading apostrophe, so
-a spreadsheet cannot execute them as formulas. The apostrophe is not removed on import, because
-QRtub cannot tell it apart from an apostrophe you meant to store.
+Values beginning with `=`, `+`, `-`, `@`, `|`, a tab or an apostrophe are exported with one extra
+leading apostrophe, so a spreadsheet shows them as text instead of running them as formulas.
+Spreadsheets hide that apostrophe.
 
-The practical consequence: a negative number such as `-40` exports as `'-40`, and re-importing it
-into a number field is rejected as an invalid number for that row. Strip the apostrophe from
-those cells before uploading.
+Import removes exactly one leading apostrophe from every cell, so a file QRtub exported comes back
+unchanged: a negative number such as `-40` exports as `'-40` and imports as `-40`. Nothing needs
+fixing before you upload it again.
 
 ## Related
 

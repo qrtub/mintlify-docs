@@ -2,11 +2,11 @@
 title: "Tracking Status Per Code"
 icon: "circle-check"
 sidebarTitle: "Per-Code Status"
-description: "Each code in a batch carries its own Printed / Installed / Retired state — one value per code, independent of the batch's own status — so you can find the ones still in the box."
+description: "Each code in a batch carries its own Ready / Installed / Retired state — one value per code, independent of the batch's own status — so you can find the ones still in the box."
 ---
 
-Every code inside a batch has its own installation status: **Printed**, **Installed** or
-**Retired**. A run of 500 stickers has 500 of these values, moving independently. This is what
+Every code inside a batch has its own installation status: **Ready**, **Installed** or
+**Retired**. A run of 500 Tags has 500 of these values, moving independently. This is what
 tells you which sixty codes from a run of five hundred never made it out of the box.
 
 Do not confuse this with the batch's own status, which is a single value describing the whole
@@ -16,24 +16,24 @@ one never changes the other.
 
 ## Where to find it
 
-The installation tracker appears in the batch panel **once the batch's status reaches Installed**.
-Before that the codes are not physically out yet, so the question does not apply and the tracker
-is hidden.
+The installation tracker, headed **Installation status**, appears in the batch panel **once the
+batch's status reaches Installed**. Before that the codes are not physically out yet, so the
+question does not apply and the tracker is hidden.
 
 ## The three states
 
 | State | Meaning |
 |---|---|
-| **Printed** | Produced, not installed yet. Every code starts here. |
+| **Ready** | Produced, not installed yet. Every code starts here. |
 | **Installed** | Installed and in service. |
 | **Retired** | No longer in service — damaged, removed, or the item is gone. |
 
 Retiring a code is a record, not a deletion. The Link keeps working, and the code stays in the
-batch and in its own print history.
+batch and in its own production history.
 
 ## Reading the tracker
 
-At the top, a segmented bar shows the mix — printed, installed and retired as proportions of the
+At the top, a segmented bar shows the mix — ready, installed and retired as proportions of the
 batch — with a count beside each color and the batch total on the right. Only states that
 actually occur get a segment, so a batch nobody has touched is a single bar.
 
@@ -48,7 +48,7 @@ when you want the Items' own data rather than their installation state.
 
 ## Changing statuses
 
-**One at a time:** each row has a three-way Printed / Installed / Retired control. Click a state
+**One at a time:** each row has a three-way Ready / Installed / Retired control. Click a state
 and it saves immediately.
 
 **In bulk:** **Mark all as installed** and **Retire all** sit under the tracker.
@@ -57,8 +57,9 @@ One caution about the bulk buttons: they apply to **every code in the batch**, n
 currently showing. The filter box is a view, not a selection — filtering to twelve codes and then
 clicking **Retire all** retires the whole batch. To act on a subset, use the per-row controls.
 
-There is no undo prompt on either bulk action, but nothing is destroyed: run the other bulk
-button, or set individual rows back, and you are where you were.
+There is no undo prompt on either bulk action, and no bulk button that returns codes to Ready.
+Nothing is destroyed, but a bulk change overwrites every code's status, so getting back an earlier
+mix means setting rows back one at a time.
 
 ## What is not recorded
 
@@ -75,6 +76,6 @@ run installed after installation and then retire the handful that never got used
 ## Related
 
 - [Batch Status: Draft to Installed](/print-batches/batch-status)
-- [Viewing a Link's Print History](/print-batches/link-print-history)
+- [Viewing a Link's Production History](/print-batches/link-print-history)
 - [Finding and Filtering Your Batches](/print-batches/finding-batches)
 - [The Print-First Workflow](/print-first/overview)

@@ -1,30 +1,32 @@
 ---
 title: "Upgrading a Team's Plan"
 icon: "trending-up"
-description: "How a signed-in owner puts a plan on one specific team from inside the app, why only the owner can complete it, and why a team that already has a subscription shows a different button"
+description: "How a signed-in owner puts a plan on one specific team from inside the app, why only the owner can do it, and why a team that is already paying changes plan in the billing portal instead"
 ---
 
-When you are already signed in, you subscribe a team from inside the app rather than through public checkout. Two places open the same plan picker: the **Upgrade** button in the top bar, which applies to whichever team you are currently in, and the **Choose a plan** button on the Subscription card on that team's page. Both attach the new subscription to that one team.
+When you are already signed in, you subscribe a team from inside the app rather than through public checkout. Two places open the same plan picker: the **Upgrade** button in the top bar, which applies to whichever team you are currently in, and the **Choose a plan** button on the Subscription card on that team's page. A **See plans** link beside a plan limit opens it too. All of them attach the new subscription to that one team.
 
 ## Picking a plan
 
-The picker shows the three self-serve tiers side by side with a monthly / annual toggle, opens with annual selected and Professional highlighted, and has a **Need more than Scale?** panel at the bottom that leads to a contact form for Enterprise.
+The picker is titled **Upgrade** followed by the team's name. It shows the three self-serve tiers side by side with a monthly / annual toggle, opens with annual selected and Professional marked as the popular choice, and has a **Need more than Scale?** panel at the bottom whose **Contact us** button leads to a contact form for Enterprise.
 
-Choosing a tier sends you to Stripe's hosted payment page with the team recorded against the transaction. After payment, QRtub attaches the subscription to that existing team — it does not create another one, which is the difference between this path and [public checkout](/billing/subscribe).
+Pressing **Choose this plan** on a tier sends you to Stripe's hosted payment page with the team recorded against the transaction, billed to the email address you sign in with. After payment, QRtub attaches the subscription to that existing team — it does not create another one, which is the difference between this path and [public checkout](/billing/subscribe).
 
 You land on a confirmation page afterwards. Activation is automatic, but Stripe's confirmation reaching QRtub takes a few seconds, so if the team page still shows the old state immediately after paying, reload it.
 
-## Only the owner can finish it
+## Only the owner can do it
 
-The **Upgrade** button in the top bar appears for anyone on a team without an active subscription, including members who do not own it. Choosing a plan, though, is checked against team ownership on the server: if you are not the owner, the attempt stops with an error saying only the team owner can do that, and nothing is charged.
+The **Upgrade** button in the top bar, the Subscription card and the **See plans** links are all shown to the team owner only. Other members of a team without an active subscription see a banner saying the team is read-only or not active yet, with "Ask the team owner to set one up."; beside a plan limit they see "Ask the team owner to upgrade." The server checks too: a checkout request from anyone but the owner stops with the error "You do not own this team" and nothing is charged.
 
-If that happens to you, you are on someone else's team. Ask whoever owns it to subscribe it — the Subscription card and the billing portal are both owner-only, so there is nothing you can do from your own account. Owners can confirm which teams are theirs under **Profile → Your teams & subscriptions**.
+If you see those messages, you are on someone else's team. Ask whoever owns it to subscribe it — the Subscription card and the billing portal are both owner-only, so there is nothing you can do from your own account. Owners can confirm which teams are theirs under **Profile → Your teams & subscriptions**.
 
-## A team that already has a subscription shows a different button
+## A team that is already paying changes plan in the portal
 
-The plan picker only appears for a team with no subscription attached. Once a team has one, the Subscription card shows the plan name and a **Manage subscription** button instead, which hands off to the Stripe billing portal — see [Managing Your Subscription](/billing/customer-portal).
+The plan picker is for a team with no subscription, or one whose subscription has ended (`canceled`, or a first payment that expired). For any team Stripe can still bill — paying, or `unpaid`, `incomplete` or `paused` — the Subscription card shows the plan name and a **Manage subscription** button, which hands off to the Stripe billing portal; see [Managing Your Subscription](/billing/customer-portal). Prompts that would otherwise say **See plans** say **Change your plan** for such a team and open the portal in a new tab, and the top-bar **Upgrade** button does the same for an unpaid, incomplete or paused team.
 
-That means a genuine tier change on a paid team is a portal action, not an in-app one. QRtub records the new tier when Stripe reports the change, so the team page will show the new plan name shortly after the change goes through. What the portal actually offers depends on how it is configured, so if you cannot find an option to change tier there, email hi@qrtub.com rather than starting a second subscription for the same team.
+QRtub will not sell the same team a second subscription. If a checkout is started for a team Stripe can still bill, it is refused with "This team already has an active subscription. Use “Manage subscription” on the Team page to change plans."
+
+So a tier change on a paid team is a portal action, not an in-app one. QRtub records the new tier when Stripe reports the change, so the team page shows the new plan name shortly after the change takes effect; a change scheduled for a later date shows first as a **Scheduled: Changing to** line on the Subscription card. What the portal actually offers depends on how it is configured, so if you cannot find an option to change tier there, email hi@qrtub.com.
 
 ## Upgrading several teams
 

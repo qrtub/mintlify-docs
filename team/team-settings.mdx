@@ -5,19 +5,23 @@ description: "Renaming a team, changing its slug and replacing its logo from the
 ---
 
 Open **Team** in the sidebar and click **Edit** next to the team name. A **Team Settings** panel
-opens with three fields — Team Name, Team Slug and Team Logo — plus **Save Changes** and
+opens with three fields — **Team Name**, **Team Slug** and **Team logo** — plus **Save Changes** and
 **Cancel**. Nothing is saved until you click **Save Changes**.
 
 The **Edit** button only appears for the team's owner. Other members see the Team page without it,
 and the change is refused at the server as well, so there is no way around it. If you need a
 different person editing the team, ownership has to move — see [Leaving a Team](/team/leave-a-team).
 
+Saving also needs an active subscription. On a team without one, the panel still opens, but a save
+is refused with the same message as any other change on a read-only team. See
+[Subscription Status](/billing/subscription-status).
+
 ## Renaming the team
 
 Type a new name and save. The name updates everywhere at once: the switcher, the Team page header,
 your Profile's team list, the invitation emails sent from then on, and any Page that shows it with
 `{{team.name}}`. Existing Links, Collections
-and printed QR codes are unaffected — nothing physical depends on the team's name.
+and Tags already produced are unaffected — nothing physical depends on the team's name.
 
 **Watch the slug field while you rename.** As long as you have not touched the slug yourself, it
 rewrites itself from the name on every keystroke. Rename "Northside Plumbing" to "Northside
@@ -33,14 +37,16 @@ taken" — pick another and save again.
 
 What the slug is actually for is narrower than it looks. It is a readable identifier shown under
 the team name on the Team page and beside each team on your Profile page. It is **not** part of any
-Link address, any scanned URL, or any dashboard address, so changing it cannot break a printed QR
-code or a saved bookmark.
+Link address, any scanned URL, or any dashboard address, so changing it cannot break a QR code on a
+Tag or a saved bookmark.
 
 ## The logo
 
-Upload a JPEG, PNG, GIF or WebP file up to 50 MB. SVG files are rejected. The logo appears in the
-team switcher and in the Team page header; teams without one show the first letter of the team name
-instead. Uploading a new file replaces the old one on save.
+Upload a JPG, PNG, GIF or WebP file up to 2 MB. SVG files are rejected. A file that does not qualify
+is refused as soon as you pick it, with a message under the field, and the current logo stays. The
+logo appears in the team switcher and in the Team page header; without one, the Team page shows the
+first letter of the team name and the switcher a people icon. Uploading a new file replaces the old
+one on save.
 
 The logo can go on your Pages too. Bind `{{team.logo}}` in an image field, such as the Hero's image,
 and `{{team.name}}` in any text, such as "Cleaned by {{team.name}}". Both are under **Team** in the

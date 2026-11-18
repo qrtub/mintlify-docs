@@ -1,7 +1,7 @@
 ---
 title: "Setting Up Mitti"
 icon: "dot"
-description: "Connecting a Link to Mitti with deep links, where to find a template ID, and the three naming eras of the product."
+description: "Connecting a Link to Mitti with deep links, where to find a template ID, the SafetyCulture starter template, and the three naming eras of the product."
 verified: "2026-08-25"
 verifiedNote: "Deep-link formats and the five generated QR code types checked against help.mitti.com"
 ---
@@ -40,7 +40,7 @@ URL and Mitti handles the rest.
 
 Mitti supports two deep link formats:
 - **Mobile app** (`iauditor://`) — opens the Mitti app. The scheme still carries the old name
-- **Web app** (`https://app.mitti.com/`) — opens in a browser. `app.mitti.com` also works
+- **Web app** (`https://app.mitti.com/`) — opens in a browser. `app.safetyculture.com` also works
 
 ## Getting Your Template ID
 
@@ -57,10 +57,13 @@ See [Mitti's guide on getting entity IDs](https://help.mitti.com/en-US/000076/) 
 
 ### Mobile App Deep Link
 
-In your Item's Page, add a new Destination:
+On the Page, add an ActionLink section and fill in:
 
-**Destination Name:** Start Inspection
-**Destination URL:** `iauditor://template/new_audit/<template_id>`
+**Label:** Start Inspection
+**Link URL:** `iauditor://template/new_audit/<template_id>`
+
+For a code that opens Mitti directly, with no Page, put the same URL in the Item's **Default URL**
+on its **Destination** tab instead.
 
 **Example:**
 ```
@@ -71,8 +74,8 @@ iauditor://template/new_audit/template_fcbc86fd41a74180921347e4be53bdf2
 
 Alternatively, use a web app deep link for users who prefer desktop/browser access:
 
-**Destination Name:** Start Inspection (Web)
-**Destination URL:** `https://app.mitti.com/inspection/new?templateId=<template_id>`
+**Label:** Start Inspection (Web)
+**Link URL:** `https://app.mitti.com/inspection/new?templateId=<template_id>`
 
 **Example:**
 ```
@@ -83,11 +86,22 @@ https://app.mitti.com/inspection/new?templateId=template_fcbc86fd41a74180921347e
 
 Use QRtub's URL Template feature to automatically insert template IDs from your Item data:
 
-**Destination URL:** `iauditor://template/new_audit/{{item.templateID}}`
+**Link URL:** `iauditor://template/new_audit/{{item.template_id}}`
 
-**Why this matters at volume:** Configure the Destination once with a template placeholder. Each Item in your Collection can have a different `templateID` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
+**Why this matters at volume:** Configure the Destination once with a template placeholder. Each Item in your Collection can have a different `template_id` field value—some use the forklift inspection template, others use the excavator template. One Destination configuration serves all equipment types, with each QR code routing to its specific inspection template automatically.
 
 This allows different Items to use different Mitti templates based on their Item data—no manual configuration per Item.
+
+A field labeled **Template ID** gets the key `template_id`; field keys are always lowercase with
+underscores, so `{{item.templateID}}` would never resolve.
+
+### Starting from the SafetyCulture template
+
+To open each Item's asset record, you can skip the setup above: the **SafetyCulture asset QR
+codes** [starter template](/collections/starter-templates) creates a Collection in Direct Mode
+whose default destination is
+`https://app.safetyculture.com/assets/{{item.safetyculture_asset_id}}`. Fill in each Item's
+**SafetyCulture asset ID** and its code opens that asset in Mitti.
 
 ## Related
 

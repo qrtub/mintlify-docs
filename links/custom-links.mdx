@@ -6,7 +6,7 @@ description: "Choosing your own slug: the exact character rules QRtub enforces, 
 
 A Custom Link is one where you type the slug yourself: `qrtub.com/boardroom`, `qrtub.com/site-office`, `qrtub.com/menu_2026`. Use it when a person will read the address aloud or type it from memory — a room sign, a poster, a card — rather than scan it.
 
-Custom Links are created one at a time. Each one is checked for availability as it is created, so they are the wrong tool for a print run of hundreds; use Random or Numbered for that.
+The create form makes Custom Links one at a time, each one checked for availability as it is created, so it is the wrong tool for a print run of hundreds; use Random or Numbered for that, or list the slugs in a [CSV import](/bulk-links/csv-import).
 
 ## The character rules
 
@@ -38,7 +38,7 @@ The check ignores case, so `Admin` is blocked for the same reason `admin` is. Th
 
 **It is already in use.** Slugs are unique across every team in QRtub, compared without regard to case. If someone else holds `boardroom`, you cannot have it, and QRtub says so rather than quietly giving you a variant.
 
-**It falls inside a numbered pattern your team owns.** This is the one that looks like a bug and is not. If your team has claimed the pattern `cra` + 4 digits, then `cra0042` is reserved for that pattern's use — even though no Link has been minted at that number yet, and nothing appears in your Links list using it. QRtub rejects the custom slug because minting it would let a hand-typed address hijack a slot the numbering scheme is counting on. Pick a slug outside the pattern's shape, or use a Numbered Link if that number is genuinely what you want.
+**It falls inside a numbered pattern.** This is the one that looks like a bug and is not. If your team has claimed the pattern `cra` + 4 digits, then `cra0042` is reserved for that pattern's use — even though no Link has been minted at that number yet, and nothing appears in your Links list using it. The same goes for a pattern another team has claimed. QRtub rejects the custom slug because minting it would let a hand-typed address hijack a slot the numbering scheme is counting on. Pick a slug outside the pattern's shape, or use a Numbered Link if that number is genuinely what you want.
 
 ## The slug is permanent
 

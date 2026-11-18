@@ -17,11 +17,11 @@ The sections built around Item and Collection data. This category is expanded by
 
 | Section | What it is |
 |---------|------------|
-| **ItemHeader** | Card-style header: image, title, type and subtype, status, chips and a note. The usual top of an Item's page. Its image controls are shared — see [Image Display Controls](/pages/image-display-controls) |
+| **ItemHeader** | Card-style header: image, title, type and subtype, status, keywords and a note. The usual top of an Item's page. Its image controls are shared — see [Image Display Controls](/pages/image-display-controls) |
 | **ActionLink** | The button that sends someone to a Destination. Card-style, with an optional icon and description. See [ActionLink: The Destination Button](/pages/action-link) |
 | **KeyValue** | A titled card of label-and-value rows. Good for a handful of details |
 | **SpecGrid** | The same label-and-value pairs laid out as a grid — one or two columns on a phone, up to three on a wider screen |
-| **Tags** | Inline tag pills, usually bound to the Item's `tags` field |
+| **Tags** | Inline keyword pills, usually bound to the Item's **Keywords** field (`{{item.tags}}`) |
 | **ContactInfo** | A contact card: name, title, phone, company with an optional link, address |
 | **TubInfo** | A card showing the Collection's own name, subtitle, description and image |
 
@@ -42,8 +42,8 @@ in the tree.
 
 | Section | What it is |
 |---------|------------|
-| **Hero** | A compact hero block: image, a number, title, description, status, a details list and tags — a denser alternative to ItemHeader |
-| **Text** | A text block with control over the HTML element (paragraph or `h1`–`h6`), size, weight, color role and alignment |
+| **Hero** | A compact hero block: image, a number, title, description, status, a details list and keywords — a denser alternative to ItemHeader |
+| **Text** | A text block with control over the HTML element (paragraph, `h1`–`h6`, `span` or `div`), size, weight, color role and alignment |
 | **Banner** | A full-width strip of text for a status or a message |
 
 ## Media
@@ -75,9 +75,9 @@ URLs](/destinations/app-links).
 
 ## What is not a section
 
-`Initials` and `ExpandableText` show up inside other sections — the avatar fallback when an Item
-has no image, and the truncate-with-more control on long descriptions. They are internal pieces,
-not separate section types, and they are not in the palette.
+`ExpandableText` shows up inside other sections — the truncate-with-more control on long
+descriptions in ActionLink and Hero. It is an internal piece, not a separate section type, and it
+is not in the palette.
 
 Every section, whatever its type, also carries an optional visibility condition; that is a
 mechanism of its own, covered in [Conditional

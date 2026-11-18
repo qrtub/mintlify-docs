@@ -8,15 +8,19 @@ Claim-on-scan is what happens when you scan a QR code QRtub has never seen — a
 
 It is how you bring existing labels into QRtub without relabeling anything.
 
+Adoption happens in the in-app scanner, which is built but not switched on yet, so there is no way to adopt a code from the interface today. See [The In-App QR Scanner](/print-first/scanner).
+
 ## How a foreign code gets recognized again
 
 QRtub cannot store the third-party code's text as a slug — it isn't a QRtub address, and it may be any length or format. So it stores a fingerprint instead: a SHA-256 hash of the decoded text, with the surrounding whitespace trimmed.
 
-That hash is the lookup key. Scan the same sticker next month and QRtub hashes what it reads, finds the match, and opens the Link you already have. QRtub also keeps the original decoded text alongside the hash, so the Link's details panel can show you what the code actually says — a hash can't be reversed, so without that copy you'd have no way to recognize the code again.
+That hash is the lookup key. Scan the same sticker next month and QRtub hashes what it reads, finds the match, and opens the Link you already have. QRtub also keeps the original decoded text alongside the hash, because a hash can't be reversed: without that copy, nobody could tell what the code actually says. The Link's details panel does not show that text today: like the scanner, the view that does is not switched on yet.
 
 ## Scanning twice is safe
 
-Adoption is idempotent. Before minting anything, QRtub checks whether the scanned code already resolves — either as one of its own slugs, or by that hash — and if it does, it returns the existing Link and creates nothing. Two people scanning the same tag on the same morning end up with one Link, not two.
+Adoption is idempotent. Before minting anything, QRtub checks whether the scanned code already resolves — first by that hash, among the codes your team has adopted, then as one of its own slugs — and if it does, it returns the existing Link and creates nothing. Two people on the same team scanning the same tag end up with one Link, not two, even if they scan at the same moment.
+
+Adoption belongs to a team. Adopting the same sticker while you are working in a different team creates that team's own Link.
 
 ## What you get is an ordinary Link
 

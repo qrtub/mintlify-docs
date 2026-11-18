@@ -8,7 +8,7 @@ A CSV import creates and updates Items in one Collection in bulk. Open the Colle
 **Download / Upload List** menu above the items table, and choose **Upload CSV**.
 
 This is the Item list — the same data the items table shows. It is a different feature from the
-print list a [print batch](/print-batches/overview) produces: that CSV describes Links and codes
+production list a [print batch](/print-batches/overview) stores: that CSV describes Links and codes
 to send to a supplier and is never uploaded back here.
 
 ## File requirements
@@ -68,8 +68,8 @@ then shows what actually happened.
 - **Required fields** — a blank required value rejects that row.
 - **Allowed values** — a value outside a field's Allowed Values list is rejected, unless that
   field has Allow new values switched on, in which case anything is accepted.
-- **Item ID** — must be unique in the Collection, and must match the Collection's Item ID mask if
-  it generates Links from Item IDs.
+- **Item ID** — must be unique in the Collection. If the Collection generates Links from Item IDs,
+  it is also required and must match the Collection's numbered pattern.
 - **Cell format** — numbers as `123` or `123.45`; yes/no as `true`, `false`, `1` or `0`; dates as
   ISO `YYYY-MM-DD` only, so `31/12/2026` is rejected; list values separated by semicolons; and
   every row must have the same number of columns as the header.
@@ -82,18 +82,21 @@ several problems reports all of them at once so you can fix it in a single pass.
 `image`, `created_at`, `updated_at` and internal columns are skipped on import. In particular, a
 CSV cannot set, change, or clear an Item's photo.
 
-One gotcha when you re-import a file QRtub exported: values beginning with `=`, `+`, `-`, `@` or
-a tab are exported with a leading apostrophe so spreadsheets do not read them as formulas, and
-the apostrophe is not stripped on the way back in. A negative number such as `-40` comes back as
-`'-40` and is rejected as an invalid number for that column. Delete the apostrophe before
-importing.
+Cells in a file QRtub exported may begin with an apostrophe, added so spreadsheets do not read them
+as formulas. Import removes exactly one leading apostrophe from every cell, so those values come
+back as they were (`'-40` imports as `-40`). In a file you made yourself, a value that should
+really start with an apostrophe needs two.
 
 ## Links for newly created Items
 
 A row that creates an Item also mints a Link for it, following the Collection's rule for new
-Items — exactly as if you had added the Item by hand. If a Link cannot be minted, the Item is
-still created and the row gets a warning telling you why, such as an Item ID that does not match
-the Collection's mask.
+Items. If a Link cannot be minted, the Item is still created and the row gets a warning telling
+you why, such as your team having used every Link its plan includes, or an Item ID whose number
+is already held by another Item's Link. Unlike the item form, an import adopts an unassigned Link
+that already has the Item ID's address instead of refusing it.
+
+The preview counts the Links the import would create, and warns before you confirm when they
+would take your team near or past its plan's Link allowance.
 
 ## Related
 

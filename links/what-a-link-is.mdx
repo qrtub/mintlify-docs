@@ -20,10 +20,10 @@ What QRtub adds is everything around that redirect: the destination is stored on
 
 ## What a Link can carry
 
-- **A destination URL.** One address, optionally built from a template that inserts an Item's own field values, like `app.com/inspect?id={{item.assetID}}`. Values are inserted exactly as stored — QRtub does not URL-encode them, so a field containing a space, `&`, `?` or `#` produces a broken address.
+- **A destination URL.** One address, used while no Item is attached — once the Link is assigned to an Item, a scan follows the Item's Destination instead. It can be a template that inserts details of the scan itself, like `https://example.com/{{device.os}}`, but not an Item's field values. Values are inserted exactly as stored — QRtub does not URL-encode them, so a value containing a space, `&`, `?` or `#` produces a broken address.
 - **An assignment to one Item.** A Link points at no more than one Item, though one Item can have several Links pointing at it.
 - **A Page.** With an Item attached, the Link can open a Page listing multiple Destinations instead of redirecting to a single one.
-- **An active/inactive switch.** Switching a Link off does not show a friendly notice — an inactive Link returns a plain "page not found" to anyone who scans it. If you want a code to stay polite while you decide what it does, leave it active and unattached instead.
+- **An active/inactive switch.** Switching a Link off does not show a notice of its own — an inactive Link gets the same "Page not found" page as an address that never existed, which only suggests the owner may have switched the Link off. If you want a code to stay polite while you decide what it does, leave it active and unattached instead.
 
 ## Where Links live
 

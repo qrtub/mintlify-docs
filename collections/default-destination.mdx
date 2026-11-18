@@ -6,9 +6,10 @@ description: "The URL template every new Item in a pass-through Collection start
 ---
 
 A Collection in Direct Mode can carry a **Default destination**: one URL template that every new
-Item starts with, so you configure the destination once instead of 500 times. It sits in
-**Settings → Scan behavior**, directly under the scan toggle, and only appears when pages are
-off — a Collection whose Items open a page has no single destination to default.
+Item starts with, so you configure the destination once instead of 500 times. It sits at the
+bottom of **Settings → Scan behaviour**, below the scan toggle and **Who can see these pages**,
+and only appears when pages are off — a Collection whose Items open a page has no single
+destination to default.
 
 ## Building the URL
 
@@ -25,13 +26,14 @@ The builder previews the result live against **a real Item from this Collection*
 picks an Item that has a value for every field the template references, so the preview shows a URL
 that actually resolves; if no Item has all of them, it uses the first one.
 
-Two rules to keep in mind, because neither produces an error:
+Two rules to keep in mind, because neither stops you saving:
 
 - **Values are inserted exactly as stored, with no URL encoding.** A field containing a space,
   `&`, `?` or `#` produces a broken link. Keep the fields you use inside URLs free of those
   characters.
-- **A missing or empty field inserts an empty string**, so the URL is still built — just wrong.
-  That is what the warning below is for.
+- **A missing or empty field leaves the URL unresolved.** QRtub will not open a half-built link:
+  when a scan finds a token with no value, it does not redirect, and the person scanning sees a
+  "This link isn't ready yet" page instead. That is what the warning below is for.
 
 ## The missing-value warning
 
@@ -39,8 +41,9 @@ If the template references a field that some Items have left blank, a warning ap
 field and counting them: *"Uses Serial, but 12 of 40 items don't have a value yet — their codes
 won't resolve until filled,"* with a link straight to the Item grid.
 
-Take it seriously before a print run. Those Items have QR codes that will resolve to a truncated
-URL, and nothing about the code itself will look wrong.
+Take it seriously before you produce Tags. Until the field is filled, scanning those Items' codes
+shows the "This link isn't ready yet" page instead of the destination, and nothing about the code
+itself will look wrong.
 
 ## App links and their fallback
 
@@ -57,8 +60,9 @@ This is the one behavior worth being precise about.
 
 The default is **copied onto each Item when the Item is created**. Adding an Item through the form
 prefills its destination with the Collection default, where you can edit or clear it before
-saving; CSV imports and API calls get the same copy applied when the row does not supply a
-destination of its own.
+saving. CSV imports and API calls get the same copy only when the destination column is missing
+altogether: a blank Destination URL cell counts as a deliberate blank, so the default is not
+applied — and the **Download All Columns (Backup)** export always includes that column.
 
 Two consequences follow:
 
@@ -68,8 +72,8 @@ Two consequences follow:
 2. **There is no scan-time fallback.** Nothing looks up the Collection default when a code is
    scanned. An Item whose own destination is blank resolves to nothing, by design.
 
-This is the one exception to how field defaults normally work; see [Field
-Defaults](/fields/field-defaults) for the general rule.
+Other field defaults are also applied at creation, but they fill any blank value rather than
+only a missing one; see [Field Defaults](/fields/field-defaults) for the general rule.
 
 ## Related
 

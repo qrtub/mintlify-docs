@@ -16,8 +16,8 @@ By default Keywords is a plain text box and you type your values separated by co
 site-a, hired-in, needs-service
 ```
 
-Each value is trimmed, empty entries are dropped, and duplicates are removed, so
-`site-a, , site-a` is stored as the single keyword `site-a`.
+Each value is trimmed and empty entries are dropped, so `site-a, , hired-in` is stored as the two
+keywords `site-a` and `hired-in`.
 
 ## Turning Keywords into a picker
 
@@ -39,8 +39,12 @@ someone sees after scanning. Configure the color once on the field and it applie
 A value that was typed freely and has no matching allowed value simply renders with no color. That
 is the usual reason a chip looks plain next to colored siblings.
 
-On a Page, both the Keywords section and the ItemHeader section's chips default to the
-`{{item.tags}}` binding, so keywords show up without you configuring anything.
+In the items table a Keywords cell stays on one line: the first two chips, then a count such as
+`+3` for the rest. Hover the cell to see them all.
+
+On a Page, both the **Tags** section (listed under that name in the Page Editor, with a setting
+labeled Keywords) and the ItemHeader section's Keywords chips default to the `{{item.tags}}`
+binding, so keywords show up without you configuring anything.
 
 ## Keywords in CSV files
 
@@ -62,7 +66,8 @@ semicolon. A cell with no semicolon is imported as a single-value list.
 - [Importing Items from CSV](/import-export/importing-items)
 
 <Note>
-The field is labelled **Keywords**, but its binding keeps the stable code name — write
-`{{item.tags}}`, not `{{item.keywords}}`. Renaming a user-facing label never changes a binding;
-see [Renaming a Field](/fields/renaming-a-field).
+The field is labeled **Keywords**, but its binding keeps the stable code name — write
+`{{item.tags}}`, which works everywhere. On a Page `{{item.keywords}}` also works, as an alias,
+but a Destination URL or routing rule only understands `{{item.tags}}`. Renaming a user-facing
+label never changes a binding; see [Renaming a Field](/fields/renaming-a-field).
 </Note>

@@ -9,9 +9,9 @@ Collection's page design rather than overwriting the old one. Versions are numbe
 up per Collection, and exactly one is active at a time — the newest. That active version is what
 every scan renders.
 
-You can see the number in the Page Editor: with nothing selected, **Page Settings → Page Info**
-shows a read-only **Version** field. If it reads v14, this Collection's page has been saved
-fourteen times.
+The app does not show this number anywhere. The read-only **Version** field under **Page Settings →
+Page Info** in the Page Editor is something else: it reads v1 on pages made in QRtub and does not
+change when you save, so it is not a count of saves.
 
 Each version is stamped with who saved it and when. Saves are manual — there is no autosave, so a
 version appears when you press Save and not before.
@@ -27,9 +27,9 @@ These two are easy to confuse, and the difference is *when they act*:
 - A **page template version** is created **every time you save this Collection's page**, from then
   on. It is the ongoing history of the design that the starter template began.
 
-So a Collection created from the IT Assets starter template has one starter template forever and a
-growing pile of versions — v1 being roughly what the starter gave it, and v9 being what it looks
-like after nine rounds of editing.
+So a Collection created from the IT asset tracking starter template has one starter template forever
+and a growing pile of versions — v1 being roughly what the starter gave it, and v10 being what it
+looks like after nine rounds of editing.
 
 ## What versioning does and does not give you
 
@@ -39,8 +39,8 @@ record.
 
 What it does not give you today:
 
-- **There is no version history screen.** The editor shows the current number, not a list, and
-  there is no way to browse or preview an earlier version.
+- **There is no version history screen.** The editor shows neither the version number nor a list,
+  and there is no way to browse or preview an earlier version.
 - **There is no restore button.** An older version cannot be rolled back to from the app.
 - **There is no "copy this page to another Collection" action.**
 
@@ -66,13 +66,14 @@ everything above, arrives as a new version rather than as an edit to the current
 ## What is not versioned
 
 - **Per-Item overrides.** An Item's exceptions are stored separately and carry no version history at
-  all; the only recovery from a bad override is to revert it. See [Per-Item Page
+  all. Short of importing a backup taken before the change (backups include overrides), the only
+  recovery from a bad override is to revert it. See [Per-Item Page
   Overrides](/pages/page-overrides).
 - **Item data.** Versions cover the design, never the field values it renders.
 
 Deleting a Collection permanently deletes its page templates along with it, every version. Its Links
-survive and return to your unassigned pool, so printed codes keep working — but the design does not
-come back.
+survive and return to your unassigned pool, so Tags already produced keep working — but the design
+does not come back.
 
 ## Related
 

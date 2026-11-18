@@ -14,7 +14,7 @@ In the Page Editor, select a section, then open the **Visibility** group in the 
 
 Any section type can carry a condition — not just Destination buttons. A Text block, a Banner, a whole Container (which hides its children with it), an ImageSection: all of them accept one. Leaving the field empty means the section is always visible.
 
-As you type, a **Preview** badge next to the field reads **Visible** or **Hidden**, evaluated against whichever Item you have selected in the editor. Switch the previewed Item to check the condition against real data instead of your base template.
+As you type, a **Preview** line under the field shows a **Visible** or **Hidden** badge, evaluated against whichever Item you have selected in the editor. Switch the previewed Item to check the condition against real data instead of your base template.
 
 ## What a condition can look at
 
@@ -24,11 +24,17 @@ Everything the Page itself can bind to is available in a condition:
 |-----------|-------|
 | `item.*` | This Item's fields, standard and custom |
 | `collection.*` | The Collection's name, description, and metadata |
+| `link.*` | The Link the visitor scanned: `slug`, `url`, `path`, `strategy`, `sequence_number` |
+| `ref.*` | The records the Item's reference fields point at, such as the person in `ref.owner` |
+| `team.*` | The team that owns the Page: `name` and `logo` |
 | `device.*` | Device type, OS, and browser of the person scanning |
 | `time.*` | Hour, day of week, day of month, month, year, weekend flag — all UTC |
-| `request.*` | Path, referrer, language, and CDN-derived country and city |
+| `request.*` | Timestamp, path, referrer, language, and CDN-derived country and city |
 | `session.*` | The signed-in viewer, when there is one — null for anonymous scans |
 | `theme.*` | The Page's accent color and radius |
+
+Do not take `accessUrl.` from the field's suggestions: it is the routing-rule name for the scanned
+Link and resolves to nothing on a Page, where the Link is `link.`.
 
 ## Working examples
 
@@ -38,7 +44,7 @@ Show a section only for one equipment type:
 item.type == "forklift"
 ```
 
-Show a section only for Items carrying a tag:
+Show a section only for Items with a keyword:
 
 ```text
 "heavy-equipment" in item.tags
@@ -47,7 +53,7 @@ Show a section only for Items carrying a tag:
 Show a warning banner only when a status field says so:
 
 ```text
-item.testStatus == "expired"
+item.test_status == "expired"
 ```
 
 Combine conditions with `&&`, `||`, and `!`, and group with parentheses:
@@ -64,26 +70,26 @@ collection.name == "Sydney Depot"
 
 ## A wrong condition and an unmet condition look identical
 
-If a condition references something that does not exist, the whole expression evaluates to **false** — silently. The visitor sees no error; the section simply is not there. Even in the editor, the Preview badge reads **Hidden** rather than **Error**, because a failed lookup is treated as a false result rather than as a failure.
+If a condition references something that does not exist, the whole expression evaluates to **false** — silently. The visitor sees no error; the section simply is not there. Even in the editor, the Preview badge reads **Hidden** rather than **Error**, because a failed lookup is treated as a false result rather than as a failure. The one place it shows is the line under that badge: when the condition names something the previewed Item's data does not contain, the editor prints the evaluator's message there, starting `Error: Identifier "tpye" not found`.
 
-That makes these three situations indistinguishable at a glance:
+On the published Page, that makes these three situations indistinguishable:
 
 - A genuine miss — this Item really is not a forklift.
 - A typo — `item.tpye == "forklift"`, or a field name whose capitalization does not match (field names are case-sensitive).
-- An invented value — `today > item.dueDate`. There is no `today`. **`time` exposes only the parts listed above — no absolute date and no date arithmetic**, so "show this when the inspection is overdue" cannot be expressed. Use a status field you maintain (`item.testStatus == "expired"`) instead of comparing dates.
+- An invented value — `today > item.due_date`. There is no `today`. **`time` exposes only the parts listed above — no absolute date and no date arithmetic.** To show something once a date has passed, use a status field you maintain (`item.test_status == "expired"`), or compare the date field with `request.timestamp` as described in [Time Fields Reference](/destinations/time-fields).
 
 The practical defense is to build conditions by picking fields from the editor's suggestions rather than typing them, and to verify against a real Item that you know should match before installing.
 
 ## Expression limits
 
-Every condition is validated before it is evaluated, and a condition that breaks a limit is rejected in the editor rather than silently ignored:
+The editor checks every condition against these limits and shows an error under the Preview badge when one is broken:
 
 - Maximum 500 characters
 - Maximum nesting depth of 10 for brackets and parentheses
 - Maximum 20 operators
 - Parentheses and brackets must balance
 
-If you are anywhere near these ceilings, the logic almost certainly belongs in a field on the Item rather than in an expression on the Page.
+The check is a warning only: the condition is still saved, and the published Page evaluates it as written. If you are anywhere near these ceilings, the logic almost certainly belongs in a field on the Item rather than in an expression on the Page.
 
 ## Before you add a condition
 

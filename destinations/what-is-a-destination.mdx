@@ -6,7 +6,7 @@ description: "Where a scan is routed, the exact order QRtub checks when someone 
 
 A Destination is where a scan ends up. It is a URL that QRtub either redirects to immediately or shows as a button on a Page — an inspection form, a maintenance system, a PDF manual, a phone number, a mobile app deep link.
 
-The QR code itself never contains the Destination. It contains a Link, and the Link resolves to a Destination at the moment of the scan. That indirection is the whole point: you can change where a code goes without reprinting anything.
+The QR code itself never contains the Destination. It contains a Link, and the Link resolves to a Destination at the moment of the scan. That indirection is the whole point: you can change where a code goes without replacing the QR tag it is on.
 
 ## Where Destinations are set
 
@@ -27,7 +27,7 @@ For a scan that redirects (rather than opening a Page), QRtub checks **only that
 
 Two consequences catch people out:
 
-**A URL whose bindings do not all resolve counts as no URL at all.** If your Default URL is `https://cmms.example.com/asset/{{item.equipmentID}}` and this Item's `equipmentID` is empty, QRtub does not send a half-built URL — it skips that URL and moves to the next step in the order. The same applies per rule.
+**A URL whose bindings do not all resolve counts as no URL at all.** If your Default URL is `https://cmms.example.com/asset/{{item.equipment_id}}` and this Item's `equipment_id` is empty, QRtub does not send a half-built URL — it skips that URL and moves to the next step in the order. The same applies per rule.
 
 **The Collection's default destination pattern is not consulted at scan time.** That pattern is stamped onto each Item when the Item is created and then belongs to the Item. Editing the pattern later changes nothing about Items that already exist. See [Default Destination for New Items](/collections/default-destination).
 
@@ -38,23 +38,25 @@ Note that an Item carrying enabled conditional rules always routes, even when it
 A Destination can pull Item data into the URL with double-brace bindings, so one template serves every Item in a Collection:
 
 ```text
-https://app.example.com/inspect?id={{item.serial_number}}&site={{collection.name}}
+https://app.example.com/inspect?id={{item.serial_number}}&site={{tub.name}}
 ```
+
+In a Destination URL the Collection is still read as `tub`, its older name; `{{collection.name}}` works only on a Page and resolves to nothing here.
 
 **There is no automatic URL encoding.** The stored value is inserted character for character. A field containing a space, an `&`, or a `?` will break the link. Keep values that feed a URL simple, or use a field that holds an ID rather than a description.
 
 Full syntax and the available namespaces are in [Field Bindings & URL Templates](/destinations/field-bindings).
 
-## "This access link isn't ready yet"
+## "This link isn't ready yet"
 
-When a scan resolves to an Item that is explicitly set to **Destination Link** but has no usable Destination, QRtub shows a plain page headed "This access link isn't ready yet". It displays the Link's own public URL and nothing else — never an internal Item, Collection, or team ID — plus an **Open in QRtub** button.
+When a scan resolves to an Item that is explicitly set to **Destination** but has no usable Destination, QRtub shows a plain page headed "This link isn't ready yet". It displays the Link's own public URL and nothing else — never an internal Item, Collection, or team ID — plus an **Open in QRTub** button.
 
 Who sees what:
 
-- **Anonymous visitors** see the not-ready page. It tells them the code is assigned but has no destination yet, and that the owner may still be configuring it.
-- **Signed-in members of the owning team** are sent instead to the authenticated view for that Link, where the Destination can be set. Membership is checked on the server before anything is revealed.
+- **Anyone who scans a public Item** sees the not-ready page, signed in or not. It tells them the code is assigned but has no destination yet, and that the owner may still be configuring it. **Open in QRTub** asks them to sign in if they are not, checks on the server that they belong to the owning team, and only then opens the Item at its **Destination** tab, where the Destination can be set. Anyone else is sent to their own dashboard and shown nothing about the Item.
+- **If the Item is private** (see [Page Privacy](/pages/page-privacy)), the not-ready page never appears: an anonymous visitor is asked to sign in first, a signed-in member of the owning team goes straight to the Item's **Destination** tab, and anyone else gets a not-found page.
 
-An Item that was never explicitly set to Destination Link does not show this page — it falls through to its Page instead. So a blank-looking Page and a not-ready page are two different symptoms: the first means no Destination buttons resolved, the second means the Item is meant to redirect and has nowhere to send anyone.
+An Item that was never explicitly set to Destination does not show this page — it falls through to its Page instead. So a blank-looking Page and a not-ready page are two different symptoms: the first means no Destination buttons resolved, the second means the Item is meant to redirect and has nowhere to send anyone.
 
 ## A code changes where people go, not what they can see
 
@@ -63,7 +65,7 @@ address and nothing else, so **every Destination keeps its own permissions exact
 
 Putting a code on something grants nobody anything they did not already have. Someone who scans a
 Link to a restricted document meets that system's sign-in, because protecting it is that system's
-job and it is still doing it. That makes a tag for a mixed audience a design decision — publish
+job and it is still doing it. That makes a Tag for a mixed audience a design decision — publish
 what the public should have on a [Page](/pages/pages-overview) and list the internal Destinations
 alongside it — rather than a risk.
 
@@ -71,7 +73,9 @@ alongside it — rather than a risk.
 
 QRtub blocks script-executing URL schemes — `javascript:`, `data:`, and `vbscript:` — wherever a Destination is used. Whitespace and control characters are stripped before the check, so tricks like `java\tscript:` are caught too.
 
-What you see if one is stored: on a Page, the button renders with a dead `#` link; on a direct scan, the request returns a 404 rather than executing anything. A fallback URL using one of these schemes is discarded the same way. Ordinary app schemes such as `tel:`, `mailto:`, and `myapp://` are unaffected — those are [app links](/destinations/app-links) and are handled deliberately.
+An Item will not save with one. Its Default URL and each routing rule's URL and fallback URL are checked when you save, and the message names the one at fault, for example "The URL on rule 1 fallback cannot be used: javascript links can run code in a visitor browser."
+
+What you see if one is stored anyway (saved before that check existed, or somewhere it does not cover, such as a Page button or a Link's own Destination): on a Page, the button renders with a dead `#` link; on a direct scan, the request returns a 404 rather than executing anything. A fallback URL using one of these schemes is discarded the same way. Ordinary app schemes such as `tel:`, `mailto:`, and `myapp://` are unaffected — those are [app links](/destinations/app-links) and are handled deliberately.
 
 ## Related
 

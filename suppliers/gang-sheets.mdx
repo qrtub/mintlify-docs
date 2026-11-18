@@ -36,9 +36,9 @@ Because the same machine can do both, the material does not tell you which you a
 
 ## What QRtub gives you for this flow
 
-The **Full URL** column of an exported print list is the source data for the merge — one row per physical piece. If you or your designer are placing supplied code images instead of generating them during the merge, download the codes as a ZIP; each file is named `qr-code-<slug>.png`.
+The **Link** column of an exported production list is the source data for the merge — one row per physical piece. If you or your designer are placing supplied code images instead of generating them during the merge, download the codes as a ZIP; each file is named `qr-code-<slug>.svg`, or `.png` if you choose PNG.
 
-One constraint matters more here than anywhere else: QRtub exports PNG only, at 1024 × 1024 pixels, with no vector option. Gang-sheet materials are often large-format, and a raster code enlarged well past its pixel dimensions can blur enough to stop scanning. Where the finished piece is big, do not go looking for a vector export — there isn't one. Give the shop the **Full URL** column and let them generate each code themselves at the exact size their process needs.
+One choice matters more here than anywhere else: keep the format at SVG, the default. Gang-sheet materials are often large-format, and SVG is vector, so each code stays sharp at whatever size the sheet needs. A PNG is fixed at 1024 × 1024 pixels, and a raster code enlarged well past its pixel dimensions can blur enough to stop scanning. If the shop would rather generate each code itself at the exact size its process needs, give it the **Link** column instead.
 
 ## Related
 

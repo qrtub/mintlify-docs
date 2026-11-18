@@ -5,24 +5,25 @@ description: "A worked end-to-end path: create a Collection, add an Item, get a 
 ---
 
 This walks one complete path from an empty account to a QR code you can print and scan. It is
-not the only order that works — Collections, Items, Links and Pages are independent, so
+not the only order that works — Links do not depend on Collections, Items or Pages, so
 creating a hundred Links first and connecting them months later is equally valid.
 
 **Before you start:** you need a QRtub account and a team selected in the team switcher at the
-top of the sidebar. Parts of the app still say "tub" where these docs say "Collection" — the
-entity was renamed and the labels have not all caught up.
+top of the sidebar. The team needs a subscription: until it has one, the app shows **This team
+is not active yet** and nothing can be created.
 
 ## Create a Collection
 
-In the sidebar, click the **+** next to the section labeled **Tub** — the old name for
-Collections, still on the button. The **New tub** screen it opens offers two cards —
-*Connects to one destination* and *Connects to several* — plus a row of starter templates.
+In the sidebar, click the **+** next to **Collections**. The **New collection** screen it opens
+offers two cards — *Connects to one destination* and *Connects to several* — plus a row of
+starter templates.
 
 Picking any of them creates the Collection immediately. There is no form: the Collection gets
-an automatic sequential name (`Tub1`, `Tub2`, and so on) and you land on its empty grid, where
-the name, description and cover image are all editable in place. The two cards set what a
-scanned code does by default — pass through to one destination, or open a Page listing
-several — and that is changeable later in settings.
+an automatic sequential name (`Collection1`, `Collection2`, and so on) and you land on its grid,
+empty if you picked a card and holding three sample Items if you picked a template. Click the
+name to rename it; the description and image are in the Collection's settings. The two cards
+set what a scanned code does by default — pass through to one destination, or open a Page
+listing several — and that is changeable later in settings.
 
 ## Add an Item and get a Link
 
@@ -30,29 +31,32 @@ Click **Add your first item**, give it a name, and save. Collections created thi
 to random link generation, so QRtub mints a Link at the moment the Item is saved and confirms
 it with a message naming the new slug.
 
-To see it, open the Item and switch to its **Access Links** tab — the full URL is listed there,
+To see it, open the Item and switch to its **Links** tab — the full URL is listed there,
 in the form `qrtub.com/bepjov`. An Item can hold more than one Link.
 
-If a Collection's link generation is set to *None* — the default for older Collections — saving
+If a Collection is set to **Don't create a link** — the default for older Collections — saving
 an Item mints no Link, and you attach one yourself as below.
 
 ## Or start from a Link you already printed
 
-Open **Access Link** in the sidebar and click **Create Link**. Choose a strategy — Random,
-Numbered, or Custom — and for Random you can create up to 100 in one request. Nothing needs to
+Open **Links** in the sidebar and click **Create Link**. Choose a strategy — Random,
+Numbered, or Custom — and for Random, set **Number of Links** to create several at once. Nothing needs to
 exist first: a Link with no Item and no destination is a valid, permanent, printable
 Link.
 
 To connect one, use the row menu on any Link and choose **Assign to Item**; the picker searches
-the whole team, so the Item can live in any Collection. An Item's **Access Links** tab works
-from the other direction, listing the team's unassigned Links so you can attach a pre-printed
-code there.
+the whole team, so the Item can live in any Collection. An Item's **Links** tab works from the
+other direction: its **Unassigned Links Pool** lists the team's unassigned Links so you can
+attach a pre-printed code there.
 
 ## Download the QR code
 
-From a Link's row menu, choose **Download QR Code**. You get a single PNG at 1024 px, black on
-white, with a 2-module quiet zone; select several Links first and you get a zip of PNGs
-instead. There is no SVG export and no error-correction setting today.
+From a Link's row menu, choose **Download QR code**. The dialog shows a live preview you can scan
+straight off the screen, and **Download** saves a single SVG named after the slug, like
+`qr-code-bepjov.svg`: black on white, a 4-module quiet zone, error correction level Q.
+**Change QR code file settings** switches to PNG (1024 px) or another error-correction level.
+To get several at once, tick them and choose **Download QR codes** from the **⋮** menu in the
+list's header row; they arrive as one zip. See [Downloading QR Codes](/bulk-links/downloading-qr-codes).
 
 ## Point the Link at something
 

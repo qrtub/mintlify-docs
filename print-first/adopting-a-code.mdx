@@ -21,10 +21,10 @@ change, and we would rather change it on the strength of what you tell us.
 ## What Create & open does
 
 1. A new random Link is created in your **currently selected team**, bound to the scanned code. If no team is active you get "Pick an active team first" and nothing is created.
-2. The binding is a stored hash of the code's decoded text, so scanning that same physical code again later resolves to the same Link. It is idempotent — a second scan never creates a duplicate. The mechanics of that binding, including what happens to the original decoded text, belong to [Claim-on-Scan](/links/claim-on-scan).
+2. The binding is a stored hash of the code's decoded text, so scanning that same physical code again later, in the same team, resolves to the same Link. It is idempotent — a second scan never creates a duplicate. Adoption is per team: a code that another of your teams adopted is not found while you work in this one, and you can adopt it here as well. The mechanics of that binding, including what happens to the original decoded text, belong to [Claim-on-Scan](/links/claim-on-scan).
 3. The new Link's details panel opens immediately. At this point the Link exists but has nothing attached, so treat the panel as the place to finish the job: give it a destination, or connect it to an Item.
 
-The Link you get is a normal random Link. It behaves like any other from then on — you can reassign it, put a Page behind it, include it in a print batch.
+The Link you get is a normal random Link. It behaves like any other from then on — you can reassign it, put a Page behind it, include it in a batch.
 
 ## The reference photo
 
@@ -39,7 +39,7 @@ The photo is captured at the moment of adoption or not at all — the scanner ha
 
 ## When to use it, and when not to
 
-Use it when the physical code already exists and is staying put: you are adopting the label rather than replacing it. The tradeoff is that the code's meaning now lives in a hash QRtub holds, not in anything readable on the tag, so a code that gets replaced or reprinted by its original owner will no longer match.
+Use it when the physical code already exists and is staying put: you are adopting the label rather than replacing it. The tradeoff is that the code's meaning now lives in a hash QRtub holds, not in anything readable on the tag, so if its original owner replaces it with a code carrying different text, the new one will not match.
 
 Where you control the tags, printing QRtub's own Links is the more durable route — see [The Print-First Workflow](/print-first/overview).
 

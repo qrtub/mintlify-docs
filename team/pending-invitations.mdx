@@ -1,12 +1,13 @@
 ---
 title: "Managing Pending Invitations"
 icon: "clock"
-description: "The Pending Invitations card — resending or revoking an emailed invitation, the 7-day expiry, and where the other kind of pending invite hides"
+description: "The Pending Invitations card — resending or revoking an emailed invitation, the 7-day expiry, the editor seat each one holds, and where the other kind of pending invite hides"
 ---
 
-The **Pending Invitations** card on the Team page lists invitations you have sent, with the
-person's email address, the role they were invited as, and the date the invitation expires. Each row
-has two buttons: **Resend** and **Revoke**. The card is visible to the team's owner only.
+The **Pending Invitations** card on the Team page lists invitations you have sent that have not
+expired yet, with the person's email address, the role they were invited as, and the date the
+invitation expires. Each row has two buttons: **Resend** and **Revoke**. The card is visible to the
+team's owner only.
 
 ## What this card does and does not list
 
@@ -25,11 +26,11 @@ Pending row still sits in the members table.
 ## Resend
 
 **Resend** emails the person a fresh sign-in link and pushes the expiry out to 7 days from now. Use
-it when the original never arrived, went to spam, or has expired.
+it when the original never arrived or went to spam.
 
-Resending is limited to **10 times per hour for any one invitation**. Past that, the button reports
-too many requests and tells you when to try again. Resending never creates a second invitation —
-there is only ever one per email address per team.
+Resending is limited to **10 times per hour for any one invitation**. Past that, you get *Too many
+requests. Please try again later.* Resending never creates a second invitation — there is only ever
+one per email address per team.
 
 ## Revoke
 
@@ -44,10 +45,17 @@ You can re-invite the same address afterwards from the **Invite Member** card.
 
 Email invitations expire **7 days** after they are sent, and again 7 days after each resend.
 
-Expired invitations are not cleaned up automatically. They stay in this card with a past expiry date
-until you revoke them, so the list is worth a scan occasionally. An expired invitation no longer
-adds anyone to the team, even if they click the old link and create an account — but a **Resend**
-brings it back to life with a new 7-day window, so you never need to delete and recreate it.
+An expired invitation drops off this card and out of the **Pending** count. It no longer adds
+anyone to the team, even if they click the old link and create an account. To send it again, invite
+the same address from the **Invite Member** card: QRtub revives the existing invitation with a new
+7-day window rather than creating a second one.
+
+## Seats
+
+Every invitation in this card holds one of your plan's editor seats until it is accepted, revoked or
+expires. An expired one frees its seat, and reviving it needs a free seat again: on a full plan the
+invite is refused. Revoking an invitation you no longer need is the quickest way to free a seat. See
+[Plan Limits & Quotas](/billing/plan-limits).
 
 ## Related
 

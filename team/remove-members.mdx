@@ -15,20 +15,21 @@ button, and the removal is refused at the server too, so there is no way around 
 
 ## Be careful with the owner's own row
 
-The owner's row has no **X**, so it cannot be removed one row at a time. Its checkbox is still
-selectable, though — and the header checkbox that selects everyone includes it.
+The owner's row has no **X**. Its checkbox is still selectable, though — and the header checkbox that
+selects everyone includes it.
 
-Removing the owner's own row that way does go through, and it is not something you want: the team
-stops appearing in your team switcher, because a team only shows up for people with an active
-membership in it. Select rows individually rather than using the select-all checkbox.
+QRtub refuses to remove the team's owner. If the owner's row is in your selection, the whole
+**Remove Selected** is refused with *Transfer ownership before removing the owner from the team.*
+and nobody is removed, not even the other people you ticked. Untick the owner's row and try again.
 
 An owner who wants to hand the team over should use **Leave Team** in the Danger Zone instead, which
 transfers ownership on the way out — see [Leaving a Team](/team/leave-a-team).
 
 ## What removal actually does
 
-Access ends immediately. The team disappears from their team switcher, and its Collections, Items,
-Links, Pages, print batches and Tags are no longer reachable by them.
+Access ends immediately: the team's Collections, Items, Links, Pages, print batches and Tags are no
+longer reachable by them, and the team drops out of their team switcher the next time their
+dashboard loads.
 
 **Nothing they made is deleted.** Everything in QRtub belongs to the team, not to the person who
 created it, so the Items they added, the Links they generated and the Pages they built all stay
@@ -37,10 +38,13 @@ exactly where they are. Removing someone is never a way to clean up data.
 Their QRtub account itself is untouched, along with any other teams they belong to. If your team was
 their only one, they will see "No team selected" and can create a team of their own.
 
+Removing someone frees the editor seat they held, so you can invite someone else in their place.
+
 ## Removing a pending member
 
 A row with the status **Pending** is someone who was invited but has not accepted yet. Removing that
-row cancels the invitation. They keep no access, and the notification in their bell stops working.
+row cancels the invitation and frees its seat. They keep no access, and the invitation disappears
+from their bell.
 
 That only applies to people who already had a QRtub account. An invitation sent to an address with no
 account is not in this table at all — cancel those with **Revoke** in the Pending Invitations card.
@@ -49,8 +53,7 @@ See [Managing Pending Invitations](/team/pending-invitations).
 ## Adding someone back
 
 There is no undo and no archive of past members. To bring someone back, invite them again from the
-**Invite Member** card; they will need to accept the new invitation. Their old role is not remembered,
-so pick it again.
+**Invite Member** card; they will need to accept the new invitation, and they rejoin as an Editor.
 
 ## Related
 

@@ -28,14 +28,16 @@ Without a fallback, a scan that ends in a blank screen is a failed interaction. 
 
 ## How QRtub Handles App Links
 
-QRtub detects when a Destination URL is an app link (any non-`https://` scheme). At scan time:
+QRtub detects when a Destination URL is an app link (any scheme other than `http://` and `https://`, including `tel:` and `mailto:`). At scan time:
 
 1. QRtub attempts to open the app link
 2. A 2.5-second timer starts
 3. **If the app opens** — the timer is canceled, the user is in their app
 4. **If the page is still visible after 2.5 seconds** — the app wasn't installed, QRtub navigates to your Fallback URL
 
-If no Fallback URL is set, QRtub shows a message instead — either your custom Fallback Message, or a default "App not available" notice.
+If no Fallback URL is set, QRtub shows a message instead — either your custom message, or a default "App not available" notice — with **Try Again** and **Go Back** buttons.
+
+A button on a Page (an ActionLink, Button or Link section) behaves the same way when tapped, using its own **Fallback URL** and **Fallback Message** properties from the **Behavior** group in the Page Editor. On a Page the message appears as a browser alert, and a button with neither set shows nothing more.
 
 ## Setting a Fallback URL
 
@@ -44,7 +46,7 @@ When you add or edit a Destination with an app link URL, QRtub automatically sho
 **In the Destination editor:**
 
 1. Enter your app link URL (e.g. `iauditor://template/new_audit/template_abc123`)
-2. An amber notice appears: "This is an app link — set a fallback for users without the app installed"
+2. An amber panel appears, headed with the scheme in capitals — **IAUDITOR Link Detected** — and the note "App links may not work if the app isn't installed. Add a web fallback URL or a custom message."
 3. Enter a **Fallback URL** — the web page to open if the app isn't available
 
 **Example (Mitti):**
@@ -55,43 +57,43 @@ Users with Mitti installed go straight to the app. Users without it land on the 
 
 ## Setting a Custom Fallback Message
 
-If there's no web equivalent to fall back to, set a **Fallback Message** instead of a URL.
+If there's no web equivalent to fall back to, fill in **Custom Message** (shown if no fallback URL) in the same panel instead of a URL.
 
 **Example:**
-- App link: `myapp://asset/{{item.assetID}}`
-- Fallback Message: `"Please install the Asset Manager app from the App Store to access this equipment record."`
+- App link: `myapp://asset/{{item.asset_id}}`
+- Custom Message: `"Please install the Asset Manager app from the App Store to access this equipment record."`
 
 When someone without the app scans, they see your message rather than a confusing blank screen.
 
-If neither Fallback URL nor Fallback Message is set, QRtub shows a default "App not available" notice.
+If neither a Fallback URL nor a Custom Message is set, QRtub shows a default "App not available" notice.
 
 ## Using Bindings in Fallback URLs
 
-Fallback URLs support `{{item.field}}` bindings — the same way Destination URLs can include Item data automatically.
+Fallback URLs support `{{item.field}}` bindings — the same way Destination URLs can include Item data automatically. They follow the same rule, too: a fallback URL whose bindings do not all resolve is dropped rather than opened half-built.
 
 **Example:**
 
 App link:
-```
-iauditor://template/new_audit/template_abc123?8f2f287e={{item.assetID}}
+```text
+iauditor://template/new_audit/template_abc123?8f2f287e={{item.asset_id}}
 ```
 
 Fallback URL:
-```
-https://app.mitti.com/inspection/new?templateId=template_abc123&asset={{item.assetID}}
+```text
+https://app.mitti.com/inspection/new?templateId=template_abc123&asset={{item.asset_id}}
 ```
 
 Configure both once. Roll out to 500 items. Each scan routes to the right app screen (or web equivalent) for that specific item — no per-item configuration.
 
 ## Where Fallback Settings Live
 
-Fallback URL and Fallback Message can be set at three levels:
+A fallback URL and message can be set at three levels:
 
 | Level | Where to set it | When it applies |
 |-------|----------------|-----------------|
-| **Destination** | In the Destination editor, per-rule | Most specific — overrides everything |
-| **Link** | In the Link settings | Applies to all Destinations on this Link |
-| **Item** | In the Item editor | Applies across all Links for this Item |
+| **Destination** | On a routing rule, in that rule's own amber panel | Most specific — overrides everything |
+| **Link** | On the Links page, in the Link's **Edit Details** while it is unassigned, or with a Links CSV import | Applies to all Destinations on this Link |
+| **Item** | On the Item's **Destination** tab, in the panel under **Default URL** | Applies across all Links for this Item |
 
 The most specific setting wins. Destination-level fallback takes priority over Link-level, which takes priority over Item-level.
 
@@ -99,24 +101,24 @@ The most specific setting wins. Destination-level fallback takes priority over L
 
 ### Mitti (iAuditor)
 
-**App link:** `iauditor://template/new_audit/{{item.templateID}}`
-**Fallback URL:** `https://app.mitti.com/inspection/new?templateId={{item.templateID}}`
+**App link:** `iauditor://template/new_audit/{{item.template_id}}`
+**Fallback URL:** `https://app.mitti.com/inspection/new?templateId={{item.template_id}}`
 
 See the [Mitti Integration guide](/integrations/mitti/setup) for full setup instructions.
 
 ### Generic Enterprise App
 
-**App link:** `mycompanyapp://workorder/create?asset={{item.assetID}}`
-**Fallback URL:** `https://app.mycompany.com/workorders/new?asset={{item.assetID}}`
-**Fallback Message:** `"Open the MyCompany app to create a work order."`
+**App link:** `mycompanyapp://workorder/create?asset={{item.asset_id}}`
+**Fallback URL:** `https://app.mycompany.com/workorders/new?asset={{item.asset_id}}`
+**Custom Message:** `"Open the MyCompany app to create a work order."`
 
-Set both Fallback URL and Fallback Message — QRtub uses the URL if set, otherwise shows the message.
+Set both Fallback URL and Custom Message — QRtub uses the URL if set, otherwise shows the message.
 
 ### App Download Link (No Web Version)
 
-**App link:** `myapp://asset/{{item.assetID}}`
+**App link:** `myapp://asset/{{item.asset_id}}`
 **Fallback URL:** `https://apps.apple.com/app/myapp` *(or Google Play)*
-**Fallback Message:** `"This feature requires the MyApp mobile app."`
+**Custom Message:** `"This feature requires the MyApp mobile app."`
 
 Alternatively, combine with [Device Detection](/destinations/device-detection) to route iOS users to the App Store and Android users to Google Play.
 

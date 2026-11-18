@@ -16,13 +16,14 @@ creating a Collection is the first thing you do in QRtub.
 
 ## What a Collection owns
 
-Five things are set once on the Collection and then apply to every Item inside it:
+Five things are set once on the Collection, in its settings (the gear icon beside its name in the
+sidebar), and then apply to every Item inside it:
 
 | Setting | What it decides |
 |---------|-----------------|
 | **Fields** | The columns every Item carries — the four core fields plus any custom fields you define. See [Core Fields vs. Custom Fields](/fields/core-vs-custom). |
 | **Link generation** | Whether a Link is minted automatically when an Item is created, and how its address is built. See [Link Generation for New Items](/collections/link-generation-modes). |
-| **Scan behavior** | Whether a new Item starts in Direct Mode (straight to one Destination) or Page Mode (opens a page of several). See [Scan Behavior for New Items](/collections/scan-behavior-default). |
+| **Scan behavior** | Whether a new Item starts in Direct Mode (straight to one Destination) or Page Mode (opens a page of several), and whether the Collection's pages ask visitors to sign in (**Private pages**). See [Scan Behavior for New Items](/collections/scan-behavior-default). |
 | **Page template** | The one page design every Item in the Collection renders when scanned, unless that Item has its own override. |
 | **Details** | Name, description, what to call one Item, and a cover image. See [Collection Details](/collections/collection-details). |
 
@@ -32,8 +33,8 @@ template apply Collection-wide.
 
 ## What sits outside a Collection
 
-**Links live at the team level, not inside a Collection.** A Link can be created, printed and
-installed before any Item exists, and later assigned to an Item in any Collection on the team.
+**Links live at the team level, not inside a Collection.** A Link can be created, put on a Tag
+and installed before any Item exists, and later assigned to an Item in any Collection on the team.
 That separation is what makes the print-first workflow possible — and it is also why deleting a
 Collection does not destroy its Links.
 

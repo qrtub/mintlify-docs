@@ -19,22 +19,27 @@ A fresh Link like `qrtub.com/bepjov` is minted and attached to the Item automati
 not choose the address, and there is nothing to configure.
 
 This is the default for Collections created through the current flow, and the right choice when
-you are adding Items first and printing codes afterward.
+you are adding Items first and producing Tags afterward.
 
 ### Create an ID-based link
 
-The Link's address is built from the Item's own Item ID, wrapped in a prefix and suffix you
-define — so an Item ID of `CRA0042TL` becomes `qrtub.com/cra0042tl`. If that address already
-exists but is unattached (a pre-printed code, for instance), the existing Link is adopted rather
-than a duplicate minted.
+The Link's address is the Item's own Item ID, which must follow a numbered pattern your team
+reserves: an optional prefix, a fixed number of digits and an optional suffix, such as
+`CRA####TL`. An Item with the Item ID `CRA0042TL` gets the Link `qrtub.com/CRA0042TL`. If that
+address already exists as an unattached Link (a Tag produced in advance, for instance), a CSV
+import adopts the existing Link rather than minting a duplicate.
 
-This mode has its own editor, including an option to fix the digit count so the whole team shares
-one numbered format. See [Building an Item ID Mask](/collections/item-id-mask) for how to set it
-up and what it then requires of every Item ID you type.
+Because it uses a numbered pattern, this mode needs a plan that includes numbered patterns: on a
+plan without them, choosing it shows an upgrade panel instead of the editor, and the setting will
+not save.
+
+This mode has its own editor, where you set the pattern or pick one your team already holds. See
+[Building an Item ID Mask](/collections/item-id-mask) for how to set it up and what it then
+requires of every Item ID you type.
 
 ### Don't create a link
 
-Items start with no Link. Attach one later from the Item, or scan a pre-printed code in the field
+Items start with no Link. Attach one later from the Item, or scan a code already in the field
 and match it up then.
 
 This is the sensible setting while you are still building out a Collection, and it is the default
@@ -48,14 +53,16 @@ already exist keep whatever Link they have, or keep having none.
 
 **It does not govern deletion.** Deletion behavior is fixed and not configurable: deleting an Item
 (or a whole Collection) releases its Link back to your unassigned pool instead of destroying it,
-so printed codes keep working and can be reused. See
+so Tags already produced keep working and their Links can be reused. See
 [Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links).
 
 ## When minting fails
 
-Random mode has nothing to fail on. ID-based mode does — an Item with a blank Item ID, an Item ID
-that does not match the Collection's required format, or an address already attached to a
-different Item all stop the Link from being created.
+Random mode fails only when your team has used every Link its plan includes. ID-based mode has
+more to check. An Item ID that does not match the Collection's pattern is refused before anything
+is saved — by the item form, the API and CSV import alike. Once the Item is saved, its Link can
+still fail: the team's Link limit is reached, the Item has no Item ID (a duplicate of an Item
+that had none, for instance), or, on a CSV import, another Item's Link already holds that number.
 
 **The Item is still created.** QRtub saves the Item and reports the reason the Link could not be
 built; it does not roll the Item back. Fix the Item ID or attach a Link by hand, then carry on.

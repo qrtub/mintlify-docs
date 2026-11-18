@@ -8,8 +8,8 @@ A field can carry a default value, set once on the Collection and applied to Ite
 created. If the new Item leaves that field blank, the default fills it in. If the Item has a
 value of its own, the default is ignored.
 
-Set it in the Collection's settings, on the **Fields** tab: click the field's chip and fill in
-**Default value**. Press **Save changes** to store it.
+Set it in the Collection's settings, on the **Fields** tab: click the field's chip, fill in
+**Default value (collection-level)** and click **Save**, then press **Save changes** to store it.
 
 ## What "blank" means
 
@@ -19,8 +19,8 @@ The default only fills a genuine gap. These all count as blank:
 - an empty text box,
 - a list field with no values selected.
 
-Anything else is a real value and wins. A `0` in a number field or a deliberately cleared
-field is a value, not a gap.
+Anything else is a real value and wins — a `0` in a number field included. A field you typed
+in and then cleared is blank again, so the default fills it.
 
 ## Defaults apply at creation only
 
@@ -35,15 +35,16 @@ never revisited.
 - A disabled field's default is skipped entirely.
 
 If you need existing Items brought in line with a new default, that is an edit to those
-Items: change them in the table, or export, edit, and re-import them.
+Items: change them one by one from the Items table, or export, edit, and re-import them.
 
-## Two fields that never take a default
+## Two fields that work differently
 
-**Item ID** cannot have one. It has to be unique within the Collection, so a shared default
-would collide on the second Item created.
+**Item ID** never takes one. The field editor lets you type a default, but it is ignored: Item
+ID has to be unique within the Collection, so a shared default would collide on the second Item
+created.
 
-**The Destination URL** has a default, but it belongs to the Scan tab rather than the Fields
-tab, and it behaves slightly differently: when a new Item arrives without a destination of
+**The Destination URL** has a default, but it belongs to the **Scan behaviour** tab rather than
+the **Fields** tab, and it behaves slightly differently: when a new Item arrives without a destination of
 its own, the template is copied onto that Item, so each Item ends up owning its own copy. Editing the Collection's default afterward
 changes what new Items get and leaves existing ones alone. Field bindings inside that template
 — `{{item.item_id}}` and the like — are not frozen: they are resolved fresh on every scan

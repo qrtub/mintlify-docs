@@ -25,7 +25,8 @@ Maps API.
 ## Bind coordinates, not place names
 
 `query=` accepts a place name as well, but a name has spaces in it, and spaces have to arrive as
-`+` or `%20`. QRtub does no URL encoding, so a bound place name breaks the link.
+`+` or `%20`. QRtub does no URL encoding, so a bound place name can break the link, and one
+containing `&` or `#` always does.
 
 Coordinates have no spaces, so they are safe. Store latitude and longitude as their own fields and
 bind those.

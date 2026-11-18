@@ -1,7 +1,7 @@
 ---
 title: "Equipment hire"
 icon: "forklift"
-description: "Where QRtub fits for hire fleets: what gets tagged, when it is worth it, and how one code serves your yard and somebody else's site."
+description: "Where QRtub fits for hire fleets: what gets a tag, when it is worth it, and how one code serves your yard and somebody else's site."
 ---
 
 Hire is the trade where the same machine is scanned by two different companies in the same month,
@@ -16,7 +16,7 @@ The gap is the fortnight in between, when the machine is on a site you do not co
 person standing next to it is the hirer's operator. QRtub holds the address on the machine, so what
 that code opens can be your fitter's view today and the hirer's pre-start form tomorrow.
 
-## What gets tagged
+## What gets a tag
 
 - Plant and access equipment out on hire
 - Attachments and ancillaries, which go missing more often than the machine
@@ -68,11 +68,11 @@ that demands a sign-in before accepting one will not get used on somebody else's
 Fleet number · make and model · serial · **on hire** (Yes/No) · current hirer · off-hire date ·
 last inspection · next service due · workshop status · owned or cross-hired
 
-Fleet number and on hire are the two that earn a [Field Default](/fields/field-defaults) — the
-first because it is what everyone calls the machine, the second because an unset flag behaves
-differently from a false one.
+On hire is the one that needs a [Field Default](/fields/field-defaults), set to `false`, because an
+unset flag behaves differently from a false one: a machine with no value shows neither set of
+buttons. See [An on-hire flag](/how/on-hire-flag).
 
 ## Related
 
-- [What Is a Tag?](/tags/what-is-a-tag) — surviving a wash-down and a fortnight on site
+- [Choosing a Tag Type](/tags/choosing-a-tag-type) — surviving a wash-down and a fortnight on site
 - [Reserve Links in bulk](/links/numbered-links)

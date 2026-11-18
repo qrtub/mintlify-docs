@@ -1,7 +1,7 @@
 ---
 title: "Collection Details"
 icon: "info"
-description: "The four general settings — name, what one Item is called, description and cover image — where each one shows up, and their collection.* bindings"
+description: "The four general settings — name, what one Item is called, description and cover image — where each one shows up, and how to bind them on a Page or in a Destination URL"
 ---
 
 Four settings identify a Collection: its name, a word for what one of its Items is called, a
@@ -21,30 +21,33 @@ above the Item grid, and it is used to name the file when you export a backup
 so you can rename a Collection at any time without consequence. You can rename inline from the
 grid heading as well as from settings.
 
-## What is one Item called?
+## What is one item called?
 
 An optional singular word for one Item in this Collection — "Machine", "Vehicle", "Room". Use
 the singular, not the plural.
 
-It shows on the Collection's card in the Collections list and dashboard, and it feeds the
-`{{collection.items_name}}` binding used as the subtitle on the built-in default page. Leaving it blank
+It shows on the Collection's card in the Collections list and dashboard, and it is the subtitle
+on the built-in default page; pages can bind it as `{{collection.items_name}}`. Leaving it blank
 is fine; nothing falls back to a broken label.
 
 ## Description
 
 Free text describing what the Collection is for. It shows in the Collections list, is searchable
-there, and is bindable on pages. Nobody outside your team sees it unless you put it on a page.
+there, and is bindable on pages. Nobody outside your team sees it unless a page shows it — and
+the built-in default page does, for a Collection in Page Mode that has no page design of its own.
 
 ## Cover image
 
-An image file, up to **2 MB**. It shows beside the Collection's name in the sidebar, so it is
-read at roughly icon size — a simple, high-contrast image works better than a detailed photo.
-Uploading a new image replaces the old one when you save; if the upload fails, the previous
-image is kept and the rest of your changes still save.
+A JPG, PNG, GIF or WebP file, up to **2 MB**, set with **Collection image**; any other file is
+refused on the spot and the current image stays. It shows beside the Collection's
+name in the sidebar, where it is read at roughly icon size — a simple, high-contrast image works
+better than a detailed photo — and across the top of the Collection's card in the Collections
+list and dashboard. Uploading a new image replaces the old one when you save; if the upload
+fails, the save stops with an error and nothing is changed.
 
 ## Using these in bindings
 
-All four are available to page sections and Destination URLs:
+All four are available to page sections:
 
 | Binding | Value |
 |---------|-------|
@@ -53,7 +56,13 @@ All four are available to page sections and Destination URLs:
 | `{{collection.items_name}}` | The "what is one Item called" word |
 | `{{collection.image_url}}` | The cover image URL |
 
-One caution if you put `{{collection.name}}` inside a Destination URL: values are inserted exactly as
+In a Destination URL — a Collection's default destination, an Item's own destination or a
+routing rule — the same four use the Collection's older prefix, `tub.`: `{{tub.name}}`,
+`{{tub.description}}`, `{{tub.items_name}}` and `{{tub.image_url}}`. `{{collection.name}}`
+resolves to nothing there, which leaves the whole URL unresolved; see [Field Bindings & URL
+Templates](/destinations/field-bindings).
+
+One caution if you put `{{tub.name}}` inside a Destination URL: values are inserted exactly as
 stored, with **no URL encoding**. A Collection named `Site A & B` will break the link it is
 inserted into. Keep names you intend to use in URLs free of spaces, `&`, `?` and `#`.
 

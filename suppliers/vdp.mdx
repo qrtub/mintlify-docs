@@ -16,24 +16,24 @@ The merge itself happens inside the press's software during the run. Nothing is 
 
 ## What to give a VDP shop
 
-Export a print list from QRtub: open the Links you want to print, choose **Print List**, select your columns, and download the CSV. One row in that file is one physical piece — that is the convention every VDP toolchain expects.
+Export a production list from QRtub: on the **Links** page, select the Links you want to produce, choose **Production List**, select your columns, and click **CSV** to download it. One row in that file is one physical piece — that is the convention every VDP toolchain expects.
 
-Include the **Full URL** column. A shop with live variable-data software can render each QR code directly from that text, with no image files involved at all. If that is your situation, you do not need to download the code images and you do not need to solve the filename-matching problem; the CSV alone is the whole handoff.
+Include the **Link** column, which holds each Link's full address. A shop with live variable-data software can render each QR code directly from that text, with no image files involved at all. If that is your situation, you do not need to download the code images and you do not need to solve the filename-matching problem; the CSV alone is the whole handoff.
 
-Add any Item fields you want printed alongside the code — name, description, tags — as extra columns.
+Add any Item fields you want printed alongside the code — name, description, tags — as extra columns. If a value starts with `=`, `+`, `-`, `@` or `|` (a phone number like `+1 555 0100`, say), the file carries an extra apostrophe in front of it. A spreadsheet may hide it, but VDP software will print it, so check those fields on the proof.
 
 ## When they do want the images
 
-Some shops place a supplied PNG rather than generating the code themselves. Download the codes as a ZIP from the same Links view. Every file is named `qr-code-<slug>.png`, and matching each one to its CSV row takes a small string transformation, because neither URL column is a byte-for-byte match for the filename.
+Some shops place a supplied image rather than generating the code themselves. Download the codes as a ZIP from the same Links view. Every file is named `qr-code-<slug>.svg`, or `.png` if you choose PNG, and matching each one to its CSV row takes a small string transformation, because neither URL column is a byte-for-byte match for the filename.
 
 ## Limits worth stating up front
 
-QRtub exports PNG only — 1024 × 1024 pixels, black on white. There is no vector option, no size or color control, and no exposed error-correction setting. For most VDP work on labels and stickers that is fine, because the pieces are small. Where it matters, the answer is not a different export format: hand the shop the **Full URL** column and let them generate the code at the size and format their press wants.
+QRtub exports SVG (the default, and vector) or PNG at a fixed 1024 × 1024 pixels, black on white, with a choice of error-correction level (Q unless you change it). There is no size or color control beyond a transparent-background option. For most VDP work on labels and stickers either format is fine, because the pieces are small. Where it matters, hand the shop the **Link** column and let them generate the code at the size and format their press wants.
 
 Also worth confirming before the run: which column the shop is treating as the variable field. A column mismatch produces a batch where every code scans perfectly and points at the wrong item. It looks correct until someone scans it.
 
 ## Related
 
 - [Choosing Your Print Production Method](/suppliers/choosing-a-method) — the question that tells you whether your job is VDP at all
-- [Matching QR Codes to Data Rows](/suppliers/matching-codes-to-rows) — pairing `qr-code-<slug>.png` with its CSV row
+- [Matching QR Codes to Data Rows](/suppliers/matching-codes-to-rows) — pairing `qr-code-<slug>.svg` with its CSV row
 - [Getting and Scanning a Proof](/suppliers/getting-a-proof) — catching a column mismatch while it is still cheap

@@ -2,16 +2,24 @@
 title: "Page Privacy: Public vs. Private"
 icon: "lock"
 sidebarTitle: "Page Privacy"
-description: "The per-Item setting that makes a scan require a signed-in team member, what a stranger sees instead, and why it is checked before any redirect"
+description: "The Collection default and per-Item setting that make a scan require a signed-in team member, what a stranger sees instead, and why it is checked before any redirect"
 ---
 
-By default a Page is public: anyone who scans the code sees it, no sign-in, no account. Marking an
-Item private changes that — the page is only viewable by a signed-in member of the team that owns
-the Collection.
+By default a Page is public: anyone who scans the code sees it, no sign-in, no account. Making it
+private changes that — the page is only viewable by a signed-in member of the team that owns the
+Collection.
 
-Privacy is set per Item. Open the Item, go to its **Destination** tab, choose **Landing Page**,
-and tick the checkbox that appears beneath it: **Private Landing page**. (That is the literal label
-in the current app; the canonical name for what it protects is a Page.) New Items start public.
+Private pages are part of the Scale plan, and there are two places to set them:
+
+- **For a whole Collection** — in the Collection's settings, open the **Scan behaviour** tab, turn
+  on **Private pages** under **Who can see these pages**, and press **Save changes**. This sets the
+  default for every Item in the Collection.
+- **For one Item** — open the Item, go to its **Destination** tab, choose **Page**, and tick
+  **Private Page** beneath it. The line under the checkbox says whether the Item is following the
+  Collection's default or overriding it.
+
+On other plans both controls carry a **Scale** badge, and switching one on does not make anything
+private: the team owner is offered an upgrade, and anyone else is told to ask the owner.
 
 ## What a visitor actually sees
 
@@ -32,7 +40,8 @@ customer or subcontractor is meant to reach.
 
 The privacy check runs *before* the Destination is resolved. A private Item that is set to Direct
 Mode therefore still demands a sign-in first, and only redirects afterwards. Privacy is a gate on
-the scan, not a property of the page layout.
+the scan, not a property of the page layout — which is why the Collection's **Private pages** switch
+is there whether or not the Collection shows pages.
 
 ## What it does not protect
 
@@ -59,15 +68,25 @@ to follow its links. Nothing about the real Item leaks into a search result or a
 preview. Public pages get the Item's own name, description and image instead — see [Page Metadata
 & Social Previews](/pages/page-metadata).
 
-## A note on Collection-wide privacy
+## The Collection default and Item exceptions
 
-There is a Collection-wide private flag in the underlying data, which would gate every Item's page
-at once, but nothing in the app sets it today. In practice, privacy is a per-Item decision — there
-is no single switch that makes an entire Collection sign-in-only, and no bulk privacy action.
-Setting it on many Items means setting it on each of them.
+The Collection setting is a default, not a lock. Items that have not been set differently follow
+it, so switching **Private pages** on makes all of them sign-in-only at once, and switching it off
+makes them public again. An Item set differently keeps its own setting either way — a public Item
+can sit in a private Collection, and a private Item in a public one.
+
+One catch when adding Items to a private Collection: the new-Item form starts with **Private
+Page** unticked, and saving it that way makes the new Item public — including an Item set to
+**Destination**, where the checkbox is not shown. For a new Item that should be private, tick
+**Private Page** before you save; the line under it then reads "Following this collection's default
+(private)."
+
+There is no bulk action for changing privacy on a selection of Items; between the Collection
+default and the per-Item checkbox, those are the two controls.
 
 ## Related
 
 - [Direct Mode vs. Page Mode](/pages/direct-mode-vs-page-mode)
 - [Page Metadata & Social Previews](/pages/page-metadata)
 - [AdminToolbar](/pages/admin-toolbar)
+- [Plans Overview](/billing/plans-overview)

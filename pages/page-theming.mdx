@@ -26,8 +26,10 @@ every Item in the Collection changes with it.
 
 **Choosing a preset replaces the entire theme rather than merging with your current settings** —
 accent, radius, shadows, spacing, typography, light/dark, and any custom colors you had entered.
-So pick the preset first and adjust afterwards. Once you change anything by hand the dropdown reads
-"Custom / No Preset", which is normal and not an error state.
+So pick the preset first and adjust afterwards. Changing a value by hand does not change the
+dropdown: it keeps showing the last preset you chose, so read it as where the theme started, not as
+a description of it now. "Custom / No Preset" shows only on a page that has never had a preset, and
+picking it does nothing.
 
 ## The individual controls
 
@@ -41,9 +43,9 @@ So pick the preset first and adjust afterwards. Once you change anything by hand
 | **Typography Scale** | Small, Medium, Large — base font size and line height |
 
 **Custom Colors (Optional)** goes underneath, with seven slots you can override individually:
-Background, Surface, Surface Accent, Border, Text Primary, Text Secondary, and Text on Accent. They
-take six-digit hex values only (`#1A2B3C`); a shorthand like `#ABC` will not be accepted. Each slot
-has a clear control to hand the color back to the theme.
+Background, Surface, Surface Accent, Border, Text Primary, Text Secondary, and Text on Accent. A
+slot takes a six-digit hex value such as `#1A2B3C`: type it, or pick it with the color swatch beside
+the slot. Each slot has a clear control to hand the color back to the theme.
 
 **Switching Appearance clears your custom colors.** Toggling between Light and Dark discards
 everything in the Custom Colors block so the light or dark defaults can take over. Decide light or
@@ -60,17 +62,17 @@ The **Layout** group sets the container the whole page renders in:
 
 ## Reading theme values in a binding
 
-Two theme values are readable as bindings inside the page: `{{theme.accent}}` and
-`{{theme.radius}}`. They return the *token name* rather than a color or a pixel value — `sky`,
-`xl` — so they are useful in a Custom Styles expression that needs to follow the theme, and not
+The **Data** tab does not offer theme values: shown as text, they read as a token name rather than
+a color. A `{{theme.accent}}` or `{{theme.radius}}` binding still resolves if you type it, or if an
+older page already has one. It returns the *token name* rather than a color or a pixel value —
+`sky`, `xl` — so it is useful in a Custom Styles expression that needs to follow the theme, and not
 useful as a color you can display.
-
-The rest of the theme is not exposed as bindings.
 
 ## What the theme does not cover
 
 - **There is no logo or brand image setting in the theme.** Put a logo on the page as an
-  ImageSection or in a TubInfo section instead.
+  ImageSection or in a TubInfo section instead. An ImageSection bound to `{{team.logo}}` shows
+  the **Team logo** from your team settings.
 - **There is no per-Item theme by design**, but an Item override can carry one. When it does, the
   Item stores the entire theme rather than the one value you changed — so later changes to the
   Collection's theme will not reach that Item at all. See [Per-Item Page

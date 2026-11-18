@@ -10,15 +10,15 @@ works on a Draft batch. If a batch has moved past Draft, archiving is your only 
 
 ## Archiving a batch
 
-Open the batch and choose **Archive** in the footer, or use the row menu in the Print Batches
-table. Archived batches:
+Open the batch and choose **Archive** in the footer, or use **Archive batch** in the row menu of
+the Tags & Labels table. Archived batches:
 
 - drop out of the default batch list
-- come back with the **Show archived** toggle on the Print Batches page, or the **Archived** filter
-  chip in the Print History panel
-- still appear in a link's own print history, so the record of what a code was printed in is
-  never hidden
-- keep their CSV, photo, notes, tags and every per-code installation status
+- come back with the **Show archived** toggle on the Tags & Labels page, or the **Archived** filter
+  chip in the Production History panel
+- still appear in a link's own production history, so the record of what a code was produced in
+  is never hidden
+- keep their CSV, photo, notes, keywords and every per-code installation status
 
 **Unarchive** is the same button, and it restores the batch to the default view immediately.
 Archiving works at any status — including Installed — which makes it the normal way to retire a
@@ -27,34 +27,36 @@ completed run.
 ## Deleting a batch
 
 Deleting is only available while the batch is in **Draft**. In the batch panel the **Delete**
-button appears in the footer; in the batch list a delete icon appears on hover. Either way you
-get a confirmation prompt, because there is no undo.
+button appears in the footer, and in the Production History list a delete icon appears on hover —
+both only on a Draft. The Tags & Labels table offers **Delete batch** in every row menu, and
+**Delete selected batches** for a selection, but a batch past Draft is refused (below). Either way
+you get a confirmation prompt first, because there is no undo.
 
 Deleting a Draft batch removes:
 
 - the batch record
 - its stored CSV file
 - its cover photo
-- every per-code print event belonging to it
+- every per-code record belonging to it, installation statuses included
 
 The links themselves are untouched. Deleting a batch never deletes a Link, an Item, or anything
 those codes point at — it only discards the record of the run.
 
 ## Why deletion stops at Draft
 
-Attempt to delete a batch that has reached Printing, Printed or Installed and QRtub refuses with
+Attempt to delete a batch that has reached In Production, Ready or Installed and QRtub refuses with
 **"Cannot delete a batch that is past draft. Archive it instead."** This is deliberate. Once a
 batch has been sent to a supplier, its codes may be physically on equipment, and the batch is the
-only record of what was produced. Losing it would leave stickers in the field with no trace of
+only record of what was produced. Losing it would leave Tags in the field with no trace of
 where they came from.
 
 The same protection extends to the links inside the batch: a link that appears in any batch past
 Draft cannot be hard-deleted. Unassigning it from its Item is still fine — see
 [Deleting, Unassigning, and Releasing Links](/links/deleting-and-releasing-links).
 
-Bulk-deleting several batches at once processes them one at a time and stops at the first batch
-that is past Draft, showing that error. Batches earlier in the selection are already gone by
-then, so check the statuses before you confirm a bulk delete.
+Deleting several batches at once with **Delete selected batches** processes them one at a time
+and stops at the first batch that is past Draft, showing that error. Batches earlier in the
+selection are already gone by then, so check the statuses before you confirm a bulk delete.
 
 If you prepared a run you never sent, leave it as a Draft. That is the only state you can
 discard cleanly.
@@ -63,4 +65,4 @@ discard cleanly.
 
 - [Batch Status: Draft to Installed](/print-batches/batch-status)
 - [Finding and Filtering Your Batches](/print-batches/finding-batches)
-- [Viewing a Link's Print History](/print-batches/link-print-history)
+- [Viewing a Link's Production History](/print-batches/link-print-history)

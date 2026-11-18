@@ -13,11 +13,11 @@ The tag on the machine cannot change. What it does can.
 
 ## How it works
 
-Add one Yes/No field to the Item, then let two groups of buttons watch it.
+Add one Yes/No field to the Collection, then let two groups of buttons watch it.
 
 | The field | |
 |---|---|
-| Label | **On hire** |
+| Display Label | **On hire** |
 | Type | **Yes/No** — a tick box, made for flags |
 | Field key | `on_hire`, which gives you `{{item.on_hire}}` |
 
@@ -62,14 +62,17 @@ crew can complete a pre-start check without you setting up a single account for 
 ## Set a default, or existing Items will surprise you
 
 Add a Yes/No field to a Collection that already has Items and those Items have no value for it —
-not `false`, nothing. A condition testing `== false` would then hide your internal buttons on every
-machine you already own.
+not `false`, nothing. Saving an Item with the box left unticked stores nothing either; only clicking
+the box does. A condition that reads a field the Item has no value for counts as false whatever it
+tests, so on those machines `item.on_hire != true` and `item.on_hire == true` are both false and
+neither container shows.
 
 Two things avoid it:
 
-- Give the field a **[Field Default](/fields/field-defaults)** so no Item is ever unset.
-- Write the internal condition as `item.on_hire != true` rather than `== false`, so anything that
-  is not explicitly ticked counts as in the yard.
+- Give the field a **[Field Default](/fields/field-defaults)** of `false`. A default fills the field
+  only on Items created after it is set.
+- Give every Item you already have a value: tick and untick the box on each, or set the column to
+  `false` with a [CSV import](/import-export/importing-items).
 
 Check it before you rely on it. The Visibility field shows a **Visible** or **Hidden** badge against
 whichever Item you have selected, so switch to a real machine rather than trusting the base
@@ -77,7 +80,7 @@ template — see [Conditional Visibility](/destinations/conditional-visibility).
 
 ## What it needs
 
-- One Yes/No field on the Collection, with a default
+- One Yes/No field on the Collection, with a default and a value on every existing Item
 - Two Containers on the Page, one condition each
 - A form the hirer can open without an account
 - Somebody to tick the box. This is the real cost: it is a step in your hire-out process, and a

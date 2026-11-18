@@ -11,25 +11,22 @@ Two things can happen when someone scans a QR code, and one setting decides whic
 - **Page Mode** — the scan opens the Item's Page, where the visitor picks from the Destinations
   you put there.
 
-You can switch between them at any time without reprinting. The printed code encodes the Link,
-never the Destination, so changing mode changes behavior on codes already stuck to equipment.
+You can switch between them at any time without producing new QR tags. The QR code encodes the
+Link, never the Destination, so changing mode changes behavior on codes already stuck to equipment.
 
 ## Where each is set
 
-**The Collection sets the default.** In the Collection's settings, the **Scan behavior** tab has
-one toggle, **Show a profile page**: on means new Items start in Page Mode, off means they start
-in Direct Mode. Turning it on also reveals the Collection's page tab and the Page Editor; turning
-it off surfaces a **Default destination** builder instead, because a pass-through Item needs
-somewhere to send the scan.
+**The Collection sets the default.** In the Collection's settings, the **Scan behaviour** tab has
+a **Show a profile page** toggle: on means new Items start in Page Mode, off means they start
+in Direct Mode. Turning it on also reveals the Collection's **Profile page** tab and the Page
+Editor; turning it off surfaces a **Default destination** builder instead, because a pass-through
+Item needs somewhere to send the scan.
 
 **The Item can override it.** Open an Item, go to its **Destination** tab, and pick one of two
 radio buttons:
 
-- **Destination Link** — redirect to a URL when scanned. This is Direct Mode.
-- **Landing Page** — show the Item's page. This is Page Mode.
-
-(The radio is labeled "Landing Page" in the current app. The canonical name for the thing it
-produces is a Page.)
+- **Destination** — redirect to a URL when scanned. This is Direct Mode.
+- **Page** — show the Item's page. This is Page Mode.
 
 ## The inheritance rule
 
@@ -59,7 +56,7 @@ single-purpose codes want.
 
 Page Mode is right when one code has to serve more than one purpose or more than one audience:
 the inspection app for the operator, the manual for the technician, a support form for the
-customer. One code, several Destinations, no second sticker.
+customer. One code, several Destinations, no second Tag.
 
 A Direct-Mode Item with no resolvable Destination does not fall back to a Page. It shows a "this
 link isn't ready yet" screen instead, which tells a signed-in owner how to fix it and tells

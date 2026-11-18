@@ -32,13 +32,13 @@ do. Nothing is derived from a Collection's name, so renaming costs nothing.
 
 ## This is how you duplicate a Collection
 
-There is no **Duplicate** button anywhere in QRtub. This flow is the equivalent, in two steps:
+There is no **Duplicate** button for a Collection. This flow is the equivalent, in two steps:
 
 1. Export a backup of the Collection you want to copy.
 2. Import that file here.
 
 The copy arrives with the same field schema, the same details, the same link-generation and scan
-settings, and the same page design as the original.
+settings, and the same page design as the original — with the one exception below.
 
 **It does not arrive with the original's Items** — Collection backups never contain Items. If you
 want the Items too, export them as CSV from the source Collection's grid and import that CSV into
@@ -46,12 +46,16 @@ the copy.
 
 ## One thing to check on the copy
 
-If the source Collection built ID-based Links from a *free-form* Item ID mask (a prefix and suffix
-with no digit count), the copy is created carrying the same affixes — and a free-form mask can only
-belong to one Collection per team. Creating the copy does not complain, but the first time you save
-its link-generation settings you will be asked to pick different affixes. Reserved numbered
-patterns are exempt: several Collections can share one. See [Building an Item ID
+If the source Collection built Links from Item IDs, the copy claims the same numbered pattern for
+your team (several of your Collections can share one). When it cannot, because the backup has a
+mask with no digit count, another team holds the pattern, or your plan has no numbered patterns
+to spare, the copy is created with **Don't create a link** instead, and no message says so. Check
+**Settings → Link generation** on the copy. See [Building an Item ID
 Mask](/collections/item-id-mask).
+
+A backup taken from a Collection with **Private pages** turned on can only be imported by a team
+on the Scale plan. On other plans it is refused with *"Private scanning is not included in this
+plan."* and no Collection is created.
 
 ## Related
 
