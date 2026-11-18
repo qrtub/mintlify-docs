@@ -43,13 +43,15 @@ https://app.example.com/inspect?id={{item.serial_number}}&site={{tub.name}}
 
 In a Destination URL the Collection is still read as `tub`, its older name; `{{collection.name}}` works only on a Page and resolves to nothing here.
 
-**There is no automatic URL encoding.** The stored value is inserted character for character. A field containing a space, an `&`, or a `?` will break the link. Keep values that feed a URL simple, or use a field that holds an ID rather than a description.
+**There is no automatic URL encoding.** The stored value is inserted character for character. A field containing an `&` or a `#` will break the link, and a space or a `?` can too. Keep values that feed a URL simple, or use a field that holds an ID rather than a description.
 
 Full syntax and the available namespaces are in [Field Bindings & URL Templates](/destinations/field-bindings).
 
 ## "This link isn't ready yet"
 
 When a scan resolves to an Item that is explicitly set to **Destination** but has no usable Destination, QRtub shows a plain page headed "This link isn't ready yet". It displays the Link's own public URL and nothing else — never an internal Item, Collection, or team ID — plus an **Open in QRTub** button.
+
+![The public page headed This link isn't ready yet, showing the Link's address and an Open in QRTub button](/images/screens/destinations/link-not-ready.png)
 
 Who sees what:
 

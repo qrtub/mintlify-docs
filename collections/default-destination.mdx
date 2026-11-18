@@ -28,8 +28,8 @@ that actually resolves; if no Item has all of them, it uses the first one.
 
 Two rules to keep in mind, because neither stops you saving:
 
-- **Values are inserted exactly as stored, with no URL encoding.** A field containing a space,
-  `&`, `?` or `#` produces a broken link. Keep the fields you use inside URLs free of those
+- **Values are inserted exactly as stored, with no URL encoding.** A field containing `&` or `#`
+  produces a broken link, and a space or `?` can too. Keep the fields you use inside URLs free of those
   characters.
 - **A missing or empty field leaves the URL unresolved.** QRtub will not open a half-built link:
   when a scan finds a token with no value, it does not redirect, and the person scanning sees a
@@ -37,8 +37,10 @@ Two rules to keep in mind, because neither stops you saving:
 
 ## The missing-value warning
 
+![The Default destination builder with a URL template, its live preview, and an amber warning that some items have no value for a field the template uses, with a Review items link](/images/screens/collections/scan-behaviour-tab.png)
+
 If the template references a field that some Items have left blank, a warning appears naming the
-field and counting them: *"Uses Serial, but 12 of 40 items don't have a value yet — their codes
+field and counting them: *"Uses Serial number, but 12 of 40 items don't have a value yet — their codes
 won't resolve until filled,"* with a link straight to the Item grid.
 
 Take it seriously before you produce Tags. Until the field is filled, scanning those Items' codes

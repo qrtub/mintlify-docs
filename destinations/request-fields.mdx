@@ -40,7 +40,7 @@ Combined with the missing-value rule, that has teeth: **a Destination URL contai
 `{{request.city}}` resolves to nothing whenever the header is absent, and QRtub skips that
 Destination rather than opening a half-built URL.** If you route on location, always pair the rule
 with an unconditional fallback so a visitor the CDN could not place still lands somewhere. And
-because bindings are inserted with no URL encoding, a city name containing a space will break the
+because bindings are inserted with no URL encoding, a city name containing a space can break the
 URL it is inserted into.
 
 ## What binding this data discloses

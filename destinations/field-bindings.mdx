@@ -62,10 +62,11 @@ not exist resolves to nothing, with no error.
 ## Values are inserted exactly as stored
 
 There is **no automatic URL encoding**. Whatever is in the field is dropped into the URL
-character for character. A field value containing a space, an ampersand, a question mark or a
-slash will produce a URL that the receiving system reads differently from what you intended — an
+character for character. A field value containing an ampersand, a `#`, a question mark or a
+slash can produce a URL that the receiving system reads differently from what you intended — an
 `&` in a value, for example, looks to the receiving system like the start of a new query
-parameter.
+parameter, and everything after a `#` never reaches it. A space usually arrives intact, because
+the browser encodes it when it follows the link, but do not rely on every scanning app doing so.
 
 Either confirm the receiving system tolerates those characters, or keep bound fields to plain
 identifiers — serial numbers, asset numbers, Item IDs — which is what most templates use anyway.

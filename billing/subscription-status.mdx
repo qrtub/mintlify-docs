@@ -44,9 +44,11 @@ QRtub does not poll Stripe. It updates a team's status when Stripe notifies it o
 
 ## A team without an active subscription is read-only
 
-When a team's status is anything other than `active`, `trialing` or `past_due`, or it has never been subscribed, nobody on it can create or edit Collections, Items, Links or Pages, change a Print Batch, or invite anyone. Its Links keep resolving, so codes already out in the world keep working, and you can still view and export everything, including production lists (each export still records its Print Batch). Membership stays open too: accepting or rejecting an invitation, leaving, removing a member and revoking an invitation all still work.
+When a team's status is anything other than `active`, `trialing` or `past_due`, or it has never been subscribed, nobody on it can create or edit Collections, Items, Links or Pages, change a Print Batch, or invite anyone. Its Links keep resolving, so codes already out in the world keep working, and you can still view and export everything, including production lists (each export still records its Print Batch). Membership stays open too: accepting an invitation, leaving, removing a member and revoking an invitation all still work.
 
 Every member sees a banner across the top of the app: **This team is read-only.** for a team that had a subscription, or **This team is not active yet.** for one that never did. The owner gets a **Choose a plan** link in it; other members are told "Ask the team owner to set one up."
+
+![A team whose subscription has ended: the read-only banner across the top, the Upgrade button in the top bar, and the Subscription card showing Starter (cancelled) with Manage subscription and Choose a plan](/images/screens/billing/read-only-cancelled.png)
 
 For the owner, the **Upgrade** button also appears in the top bar. For a team that was never subscribed, or whose subscription is `canceled` or `incomplete_expired`, it opens the plan picker; for `unpaid`, `incomplete` or `paused` it opens the billing portal instead, because that subscription can still be brought back. A new subscription, or a recovered one, makes the team editable again as soon as Stripe reports it.
 

@@ -7,6 +7,8 @@ description: "Acting on many Links at once: ticked rows versus 'select all' acro
 
 Select Links in the list, then open the **⋮** menu in the list's header row. It holds **Production List**, **Add to batch...**, **Download QR codes**, **Assign to Item**, **Unassign from Items** and **Delete Selected**, plus **Remove from active batch** while the list is filtered to one batch. This page covers assigning, unassigning and deleting. Changing a destination or fallbacks is a per-Link edit, or a job for the CSV import.
 
+![The actions menu above the Links list with Production List, Add to batch, Download QR codes, Assign to Item, Unassign from Items and Delete Selected](/images/screens/links/bulk-menu.png)
+
 ## Two ways to select, and the difference matters
 
 **Ticking rows** operates on exactly the Links you ticked, including ones you ticked on other pages of the list.
@@ -25,7 +27,7 @@ A Link points at no more than one Item, so assigning replaces any existing assig
 
 ## Unassigning many Links
 
-**Unassign from Items** detaches every selected Link and returns it to the unassigned pool. The Links stay alive and the printed codes keep resolving — a scan lands on the neutral "not connected yet" page instead of the Item's Page, or on a Link's own destination URL if it still has one from before it was assigned.
+**Unassign from Items** detaches every selected Link and returns it to the unassigned pool. The Links stay alive and the codes already on Tags keep resolving — a scan lands on the neutral "not connected yet" page instead of the Item's Page, or on a Link's own destination URL if it still has one from before it was assigned.
 
 There is no print-status restriction on this. Detaching a code that is already installed is a normal, expected thing to do when the equipment behind it changes.
 
@@ -35,7 +37,7 @@ There is no print-status restriction on this. Detaching a code that is already i
 
 The important rule is that a bulk delete is **all or nothing**. Before deleting anything, QRtub checks whether any Link in the selection belongs to a print batch that has moved past Draft. If even one does, the whole operation is rejected and nothing is deleted. You never end up with a partially deleted selection and no clear record of which rows went.
 
-That check makes a large bulk delete a slightly awkward instrument: one printed code in a selection of two thousand blocks the lot. Narrow the selection, step the batch back to Draft if it never reached a Supplier, or unassign rather than delete.
+That check makes a large bulk delete a slightly awkward instrument: one code in a batch past Draft in a selection of two thousand blocks the lot. Narrow the selection, step the batch back to Draft if it never reached a Supplier, or unassign rather than delete.
 
 ## Working at real scale
 

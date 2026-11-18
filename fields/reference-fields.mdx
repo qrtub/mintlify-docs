@@ -29,6 +29,8 @@ Pick what the field points at:
 | **Another Item** | Items in this Collection, or Items in any Collection on the team |
 | **A Collection** | Any Collection on the team |
 
+![The Create Custom Field panel with Field Type UUID and the Reference Field Configuration panel set to Item (Other Items), scope Any collection in team, with the Searchable Dropdown checkbox unticked](/images/screens/fields/reference-config.png)
+
 For an Item reference, that second choice is the **Scope** setting: same Collection only, or
 any Collection in the team. Member and Collection references are always team-wide.
 
@@ -56,7 +58,7 @@ stale.
 resolves to the stored record ID, and the `ref` bindings described below do not exist in a
 Destination URL or rule. If you need a human-readable value in a URL, put it in a Text field.
 And remember that values are inserted into a URL exactly as stored, with no URL-encoding — a
-value containing a space or an `&` will break the link.
+value containing an `&` or a `#` will break the link, and a space can too.
 
 If what you actually want in the URL is the Collection the Item belongs to, that is a
 Collection binding rather than a reference field. In a Destination URL it is written
@@ -89,6 +91,8 @@ The Page Editor offers these on the **Data** tab under **Linked Records**, which
 when the Collection has a reference field. Only records on the Item's own team are looked up;
 an ID from anywhere else shows as the ID. Like other Page bindings, a `ref` binding keeps
 working when you [rename the field](/fields/renaming-a-field).
+
+![The Page Editor's Data tab with the Linked Records group open, listing the Custodian reference field and its name, image, id and email bindings](/images/screens/pages/editor-data-tab.png)
 
 ## Related
 

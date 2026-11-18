@@ -19,6 +19,9 @@ Every Collection has these four, always, and they cannot be removed:
 | Description | `description` | Text |
 | Keywords | `tags` | List |
 
+These are the default labels. A [starter template](/collections/starter-templates) can label a
+core field differently (Name as "Equipment name", Description as "Notes"); the key stays the same.
+
 Each one has its own dedicated column in the database, which is why their keys are fixed
 forever. In the Fields tab, a core field's label and key are both locked — you can mark it
 required, and you can disable it to hide it from forms and tables, but you can never rename
@@ -50,6 +53,8 @@ change, the storage ID does not, so no data has to move. See
 Open the Collection, go to its settings, and choose the **Fields** tab. Fields appear as a
 row of chips under **Item fields**: click a chip to edit that field, drag it to reorder,
 and use the icon on the chip to disable a core field or delete a custom one.
+
+![The Fields tab of a Collection's settings: the Item fields chip strip with the core and custom fields, the Add More Fields row, and the Create Custom Field button](/images/screens/fields/chip-strip.png)
 
 Nothing on this tab takes effect until you press **Save changes**. That includes adding a
 field, renaming one, editing its allowed values, and deleting one.

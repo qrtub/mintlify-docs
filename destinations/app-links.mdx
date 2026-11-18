@@ -37,7 +37,7 @@ QRtub detects when a Destination URL is an app link (any scheme other than `http
 
 If no Fallback URL is set, QRtub shows a message instead — either your custom message, or a default "App not available" notice — with **Try Again** and **Go Back** buttons.
 
-A button on a Page (an ActionLink, Button or Link section) behaves the same way when tapped, using its own **Fallback URL** and **Fallback Message** properties from the **Behavior** group in the Page Editor. On a Page the message appears as a browser alert, and a button with neither set shows nothing more.
+A button on a Page (an ActionLink, Button or Link section) behaves the same way when tapped, using its own **Fallback URL** and **Fallback Message** properties from the **Behavior** group in the Page Editor (on an ActionLink, the **Fallback URL** and **Custom Message** fields that appear under **Link URL**). On a Page the message appears as a browser alert, and a button with neither set shows nothing more.
 
 ## Setting a Fallback URL
 
@@ -47,6 +47,8 @@ When you add or edit a Destination with an app link URL, QRtub automatically sho
 
 1. Enter your app link URL (e.g. `iauditor://template/new_audit/template_abc123`)
 2. An amber panel appears, headed with the scheme in capitals — **IAUDITOR Link Detected** — and the note "App links may not work if the app isn't installed. Add a web fallback URL or a custom message."
+
+   ![The Default URL field holding an iauditor app link, with the amber IAUDITOR Link Detected panel and its Fallback URL and Custom Message fields](/images/screens/destinations/app-link-fallback-panel.png)
 3. Enter a **Fallback URL** — the web page to open if the app isn't available
 
 **Example (Mitti):**

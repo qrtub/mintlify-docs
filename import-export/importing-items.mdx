@@ -25,7 +25,7 @@ partially imported.
 
 Column headers are matched to the Collection's fields case-insensitively, by either the field's
 key (`serial_number`) or its label ("Serial Number"). **A column that matches nothing is an
-error**, and the rows carrying it are rejected, so the easiest way to build a valid file is to
+error**, and every row in the file is rejected because of it, so the easiest way to build a valid file is to
 [export the Collection first](/import-export/exporting-items) and edit what comes back.
 
 ## Each row creates or updates — nothing is deleted
@@ -51,6 +51,8 @@ Two related behaviors follow from that:
   over a column it omitted.
 
 ## The preview step
+
+![The Review import dialog showing counts to create, to update and rejected, a list of rejected rows with their reasons, a Download errors button and an Import button](/images/screens/import-export/import-review.png)
 
 Uploading runs a dry run first. Nothing is written. You get three counts — to create, to update,
 rejected — and a list of every rejected row with the reason and the column at fault.

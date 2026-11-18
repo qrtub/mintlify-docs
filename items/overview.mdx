@@ -12,6 +12,8 @@ has. Add a "Service Hours" field to the Collection and every Item in it gains th
 
 ## What every Item is made of
 
+![The Item panel for an excavator, with tabs for Item details, Links, Destination and Page above the field form](/images/screens/items/item-detail.png)
+
 Four **core fields** ship on every Item and cannot be removed: **Name**, **Item ID**,
 **Description** and **Keywords**. They live in fixed database columns. You can mark them required
 or turn them off in the Collection's Fields tab, but their labels and keys are locked — the keys
@@ -46,8 +48,8 @@ When a Link pointing at this Item is scanned, the Collection's page template ren
 this Item's values — `{{item.name}}`, `{{item.status}}`, and so on. Two things to know about
 those bindings:
 
-- Values are inserted **exactly as stored**, with no URL encoding. A field containing a space,
-  `&`, `?` or `#` will break a Destination URL built from it.
+- Values are inserted **exactly as stored**, with no URL encoding. A field containing `&` or `#`
+  will break a Destination URL built from it, and a space or `?` can too.
 - Collection fields use the `collection.` prefix on a Page — `{{collection.name}}` returns the
   Collection's name. In a Destination URL the Collection is still read as `tub.`
   (`{{tub.name}}`); see [Collection Details](/collections/collection-details).

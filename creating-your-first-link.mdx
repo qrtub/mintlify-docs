@@ -18,6 +18,8 @@ In the sidebar, click the **+** next to **Collections**. The **New collection** 
 offers two cards — *Connects to one destination* and *Connects to several* — plus a row of
 starter templates.
 
+![The New collection screen with the cards Connects to one destination and Connects to several, and a row of starter templates below](/images/screens/collections/create-screen.png)
+
 Picking any of them creates the Collection immediately. There is no form: the Collection gets
 an automatic sequential name (`Collection1`, `Collection2`, and so on) and you land on its grid,
 empty if you picked a card and holding three sample Items if you picked a template. Click the
@@ -34,6 +36,8 @@ it with a message naming the new slug.
 To see it, open the Item and switch to its **Links** tab — the full URL is listed there,
 in the form `qrtub.com/bepjov`. An Item can hold more than one Link.
 
+![An Item's Links tab showing its attached Link's full address and the Unassigned Links Pool of spare Links](/images/screens/links/item-links-tab.png)
+
 If a Collection is set to **Don't create a link** — the default for older Collections — saving
 an Item mints no Link, and you attach one yourself as below.
 
@@ -47,7 +51,7 @@ Link.
 To connect one, use the row menu on any Link and choose **Assign to Item**; the picker searches
 the whole team, so the Item can live in any Collection. An Item's **Links** tab works from the
 other direction: its **Unassigned Links Pool** lists the team's unassigned Links so you can
-attach a pre-printed code there.
+attach a code produced in advance there.
 
 ## Download the QR code
 
@@ -58,6 +62,8 @@ straight off the screen, and **Download** saves a single SVG named after the slu
 To get several at once, tick them and choose **Download QR codes** from the **⋮** menu in the
 list's header row; they arrive as one zip. See [Downloading QR Codes](/bulk-links/downloading-qr-codes).
 
+![The QR code dialog for one Link, with its address, a copy button, a scannable preview, the summary SVG · Q · white background, and Close and Download buttons](/images/screens/links/qr-dialog-single.png)
+
 ## Point the Link at something
 
 Open the Item and use the **Destination** tab to set where a scan goes, or the **Page** tab to
@@ -66,7 +72,7 @@ touching the printed code.
 
 A Destination can be a fixed URL or a template that inserts this Item's own field values, so
 one template serves every Item in the Collection. Values are inserted exactly as stored — no
-URL-encoding — so a field containing a space or an `&` breaks the resulting link.
+URL-encoding — so a field containing an `&` or a `#` breaks the resulting link, and a space can too.
 
 ## Related
 

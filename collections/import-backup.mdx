@@ -11,6 +11,8 @@ confirmation step lists what will happen before anything is written.
 There are two modes and they are not variations on a theme — one is additive, the other deletes
 data.
 
+![The Export/Import Collection Data dialog, with a Download Backup button, the Merge (Safe) and Replace (Destructive) import modes, and a Choose Backup File button](/images/screens/collections/backup-dialog.png)
+
 ## Merge — additive
 
 Merge compares the backup's fields against the Collection's and **adds only the fields that are
@@ -24,7 +26,7 @@ If you only want the fields, export a backup of the current page design first so
 back.
 
 Merge also applies the backup's per-Item page overrides to Items in this Collection with a
-matching Item ID (or name), replacing whatever override those Items had.
+matching Item Number (or name), replacing whatever override those Items had.
 
 Collection details — name, description, cover image, Items label — are untouched by Merge, and so
 are its other settings.
@@ -36,7 +38,7 @@ behavior default, the **Private pages** setting, the default destination and the
 You have to type `REPLACE` and choose **Replace collection** to confirm it, and it cannot be undone.
 
 It also removes every per-Item page override in the Collection, then restores the ones the backup
-carries onto Items with a matching Item ID (or name). An override the backup does not carry is
+carries onto Items with a matching Item Number (or name). An override the backup does not carry is
 gone.
 
 Two things Replace keeps:
@@ -66,7 +68,7 @@ rather than silently — the ones worth reading are:
 - **Items kept** (Replace), with the count, as above.
 - **Link settings kept** (Replace): *"This collection kept its own link settings; the backup's were
   not applied."*
-- **Overrides that found no matching Item.** Per-Item page overrides are matched by Item ID, or
+- **Overrides that found no matching Item.** Per-Item page overrides are matched by Item Number, or
   name, so an override whose Item does not exist in the target is skipped and named.
 - **Skipped rows**, in the rare case a hand-edited backup carries an `items` array and one of
   those Items collides with an existing Item ID. The rest still import.

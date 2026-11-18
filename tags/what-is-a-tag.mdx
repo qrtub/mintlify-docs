@@ -4,7 +4,7 @@ icon: "sticker"
 description: "A Tag is the physical material a QR code is displayed on — a third entity alongside the Item and the Link, and the one QRtub tracks least"
 ---
 
-A **Tag**, or QR tag, is the physical thing a QR code sits on: a vinyl sticker, an engraved metal plaque, a rigid sign, a billboard, a real-estate sign, a printed ad, an NFC inlay. Most tools stop at generating the digital pattern. QRtub treats the material that pattern gets printed on as its own thing, because it has its own cost and its own lifespan — usually a longer one than the equipment it is attached to.
+A **Tag**, or QR tag, is the physical thing a QR code sits on: a vinyl sticker, an engraved metal plaque, a rigid sign, a billboard, a real-estate sign, a printed ad, an NFC inlay. Most tools stop at generating the digital pattern. QRtub treats the material that pattern is produced on as its own thing, because it has its own cost and its own lifespan — usually a longer one than the equipment it is attached to.
 
 ## The three entities
 
@@ -22,11 +22,13 @@ Keeping them separate is what makes the rest of QRtub work. The Link is not bake
 
 **Production runs, not individual pieces.** Exporting a production list with **Create draft batch**, from a Collection or the **Links** page, creates a **Batch** — a record of exactly which Links went to the supplier, what stage the run is at (Draft → In Production → Ready → Installed), and a per-code Ready / Installed / Retired status so you can find the sixty stickers out of five hundred that never left the box. A Batch carries a name, keywords, notes and an image, such as a photo of the finished Tags, keeps the CSV that was sent, and can be archived when the run is done.
 
+![An Installed Batch in the Production History panel, showing its name, 8 links and 8 items, keywords, notes, batch image upload, and an installation status bar of 2 ready and 6 installed](/images/screens/print-batches/batch-detail.png)
+
 That is the whole of what is recorded about the physical layer. See [Print Batches](/print-batches/overview).
 
 ## What is not tracked
 
-There is no record of what an individual QR code is printed *on*. No material type, no cost, no durability rating, no installation location, and no per-piece inventory. None of these exist in QRtub today:
+There is no record of what an individual QR code is produced *on*. No material type, no cost, no durability rating, no installation location, and no per-piece inventory. None of these exist in QRtub today:
 
 - Tags as a stored entity, with a type and material per piece
 - Tag Templates — reusable design templates for production

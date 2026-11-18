@@ -10,6 +10,8 @@ When you are already signed in, you subscribe a team from inside the app rather 
 
 The picker is titled **Upgrade** followed by the team's name. It shows the three self-serve tiers side by side with a monthly / annual toggle, opens with annual selected and Professional marked as the popular choice, and has a **Need more than Scale?** panel at the bottom whose **Contact us** button leads to a contact form for Enterprise.
 
+![The Upgrade plan picker showing Starter, Professional and Scale with annual billing selected and a Need more than Scale panel at the bottom](/images/screens/billing/upgrade-plan-picker.png)
+
 Pressing **Choose this plan** on a tier sends you to Stripe's hosted payment page with the team recorded against the transaction, billed to the email address you sign in with. After payment, QRtub attaches the subscription to that existing team — it does not create another one, which is the difference between this path and [public checkout](/billing/subscribe).
 
 You land on a confirmation page afterwards. Activation is automatic, but Stripe's confirmation reaching QRtub takes a few seconds, so if the team page still shows the old state immediately after paying, reload it.

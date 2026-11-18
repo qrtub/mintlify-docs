@@ -13,6 +13,10 @@ This is a routing decision — which of several URLs a single code opens. It is 
 
 Open the Item, go to its **Destination** tab, and select **Destination**. Below the **Default URL** field is a checkbox labeled **Enable conditional routing**. Checking it reveals a **Routing Rules** list, badged **First match wins**.
 
+![An Item's Destination tab with a Default URL, a Preview reading Matched rule 2, and two routing rules marked No Match and Match](/images/screens/destinations/routing-rules-editor.png)
+
+**Known issue: the first rules on an Item are not saved.** On an Item that has no routing rules yet, rules you add here are dropped when you click **Save Item**, with no error: the editor and its preview still show them, but after a reload **Enable conditional routing** is unticked and scans use the Default URL. Rules an Item already has can be edited and saved normally. After saving, reload the Item to check its rules are still there.
+
 Each rule is a numbered card (Rule 1, Rule 2, …) with two fields:
 
 - **When** — a CEL condition, such as `item.status == "active"`. Leave it empty and the rule always matches.

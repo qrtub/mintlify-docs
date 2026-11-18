@@ -43,6 +43,8 @@ On an update, **columns absent from the file are left alone**, so a two-column f
 
 Choosing **Import** and picking a file runs the preview automatically. It classifies every row the same way the real thing does and runs most of the same checks — pattern matching, reserved-by-pattern, the random-slug rule, and duplicate detection — without writing anything. Some checks on custom slugs run only when you confirm: the character and reserved-word rules, whether the slug is already in use anywhere in QRtub, and whether it falls inside another team's numbered pattern. A custom row the preview counted can still fail there.
 
+![The CSV import preview for Links, counting the rows that will be created and updated and listing one rejected row with its reason](/images/screens/bulk-links/csv-import-preview.png)
+
 If the new Links would take your team past its plan's Link allowance, or close to it, the preview also shows a note saying how many Links are left.
 
 Two rows creating the same new slug are caught here too: the first is counted, the second is rejected as a duplicate. Without that, the preview would promise two Links and the commit would deliver one plus an error.

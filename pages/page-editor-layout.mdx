@@ -7,11 +7,15 @@ description: "Opening the editor, the three-tab left panel, the Properties panel
 The Page Editor is where you decide what someone sees when they scan. The page sits in the middle;
 a panel on each side does the work.
 
+![The Page Editor: the Components palette on the left, the page in the middle, and Page Settings on the right](/images/screens/pages/editor-overview.png)
+
 ## Opening the editor
 
 From the Collection's settings, open the **Profile page** tab and choose **Edit profile page**. The
 editor opens in a new browser tab. (That tab only appears when pages are switched on for the
 Collection — see [Pages Overview](/pages/pages-overview).)
+
+![A Collection's Profile page tab with a phone-sized preview of the page and the Edit profile page button](/images/screens/pages/collection-profile-page-tab.png)
 
 You can also open it against one specific Item: from the Item's **Page** tab, press **Edit Page**.
 That matters, because opening from an Item puts you in override mode — see [Per-Item Page
@@ -68,6 +72,8 @@ a namespace:
 Rather than typing them, open the **Data** tab and drag a field straight onto the setting you want
 it in.
 
+![The Data tab listing the binding groups a page can use, from Item Properties to User & Session](/images/screens/pages/editor-data-tab.png)
+
 The tab offers only the namespaces a page is rendered with. The trap is copying a binding between a
 page and a Destination rule: rules use older names for two of them — `tub.*` for the Collection
 and `accessUrl.*` for the Link — and a page has no `accessUrl`, so `{{accessUrl.slug}}` in a
@@ -78,7 +84,7 @@ error, and many sections hide themselves when their content is empty. The canvas
 combination: a section whose every binding comes up empty for the Item you are viewing carries a
 **No data** badge, because sections such as KeyValue, SpecGrid and Tags will then not appear on the
 published page at all. Values are also inserted exactly as stored, with no URL encoding — so a
-field containing a space or an `&` will break a URL you build from it. The full syntax reference is
+field containing an `&` or a `#` will break a URL you build from it, and a space can too. The full syntax reference is
 [Field Bindings & URL Templates](/destinations/field-bindings).
 
 ## Undo, redo, and the history gotcha

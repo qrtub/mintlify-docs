@@ -18,8 +18,8 @@ Add one Yes/No field to the Collection, then let two groups of buttons watch it.
 | The field | |
 |---|---|
 | Display Label | **On hire** |
-| Type | **Yes/No** — a tick box, made for flags |
-| Field key | `on_hire`, which gives you `{{item.on_hire}}` |
+| Field Type | **Yes/No** — a tick box, made for flags |
+| Field Key | `on_hire`, which gives you `{{item.on_hire}}` |
 
 Then, in the [Page Editor](/pages/page-editor-layout), put your internal buttons inside one
 **Container** and the hire buttons inside another, and give each container a condition in the
@@ -32,6 +32,8 @@ Hire container        Show When:  item.on_hire == true
 
 A Container hides its children with it, so that is two conditions for the whole page rather than
 one per button.
+
+![The Page Editor with the hire Container selected: Show When is set to item.on_hire == true and the Preview badge reads Visible](/images/screens/how/on-hire-container-visibility.png)
 
 Now the tag reads differently depending on one tick box:
 

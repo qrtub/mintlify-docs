@@ -51,8 +51,8 @@ Two consequences worth planning for:
 
 ## Values are inserted exactly as stored
 
-There is no automatic URL encoding. A field value containing a space, an `&` or a `?` is dropped
-into the URL as-is and will break the link — the button appears, it just goes somewhere wrong. If
+There is no automatic URL encoding. A field value containing an `&` or a `#` is dropped
+into the URL as-is and will break the link, and a space or a `?` can too — the button appears, it just goes somewhere wrong. If
 you are building a query string from free-text fields, keep the values URL-safe at the source. The
 full rules are in [Field Bindings & URL Templates](/destinations/field-bindings).
 
