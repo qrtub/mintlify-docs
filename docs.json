@@ -215,7 +215,6 @@
                   "links/numbered-links",
                   "links/custom-links",
                   "links/unallocated-links",
-                  "links/claim-on-scan",
                   "links/deleting-and-releasing-links"
                 ]
               },
@@ -282,7 +281,7 @@
                 ]
               },
               {
-                "group": "Print Batches",
+                "group": "Tags & Labels",
                 "expanded": false,
                 "pages": [
                   "print-batches/overview",
@@ -303,8 +302,6 @@
                 "expanded": false,
                 "pages": [
                   "print-first/overview",
-                  "print-first/scanner",
-                  "print-first/adopting-a-code",
                   "print-first/tips"
                 ]
               },

@@ -35,7 +35,7 @@ There is no print-status restriction on this. Detaching a code that is already i
 
 **Delete Selected** is permanent and there is no undo — the slugs stop resolving and anyone scanning those codes gets "Page not found". QRtub asks for confirmation with the count first.
 
-The important rule is that a bulk delete is **all or nothing**. Before deleting anything, QRtub checks whether any Link in the selection belongs to a print batch that has moved past Draft. If even one does, the whole operation is rejected and nothing is deleted. You never end up with a partially deleted selection and no clear record of which rows went.
+The important rule is that a bulk delete is **all or nothing**. Before deleting anything, QRtub checks whether any Link in the selection belongs to a Batch that has moved past Draft. If even one does, the whole operation is rejected and nothing is deleted. You never end up with a partially deleted selection and no clear record of which rows went.
 
 That check makes a large bulk delete a slightly awkward instrument: one code in a batch past Draft in a selection of two thousand blocks the lot. Narrow the selection, step the batch back to Draft if it never reached a Supplier, or unassign rather than delete.
 
@@ -43,7 +43,7 @@ That check makes a large bulk delete a slightly awkward instrument: one code in 
 
 - Bulk actions run in chunks behind the scenes, so thousands of Links at once is a supported size rather than a stress test
 - Selection resets after each action completes, and the list refreshes
-- When QRtub refuses an operation, such as a delete blocked by a print batch, it refuses before changing anything, with a message
+- When QRtub refuses an operation, such as a delete blocked by a Batch, it refuses before changing anything, with a message
 
 ## Related
 

@@ -79,6 +79,9 @@ leftovers from another system and should not be added to new pages.
 - Language tags on all code blocks
 - Alt text on all images
 - Relative paths for internal links
+- "Print" and "produce" are interchangeable in prose; do not sweep one to the other. The thing
+  is always a **Batch** (never "print batch") and its section is **Tags & Labels** (Martin,
+  19 Nov 2026)
 
 ## Git workflow
 
@@ -133,23 +136,33 @@ Conditions use CEL (Common Expression Language). What is available in an express
 - **Time fields** — `time.hour`, `time.dayOfWeek`, `time.dayOfMonth`, `time.month`,
   `time.year`, `time.isWeekend`
 
-**There is no current-date value and no date arithmetic.** `time` exposes the parts listed
-above but not a full date, so "show when the inspection is overdue" cannot be expressed
-today. Use a status field the user maintains (`item.testStatus == "expired"`) instead of
-comparing dates.
+**There is no `today` and no date arithmetic.** `time` exposes the parts listed above but not
+a full date. The one current date an expression can read is `request.timestamp`, the moment of
+the scan as UTC ISO text (`2026-11-18T09:30:00.000Z`). A Date field is stored as `YYYY-MM-DD`
+text, so `request.timestamp > item.inspection_due` works as a text comparison that gives the
+same answer as comparing the dates (in UTC), for a Date field or text written exactly as
+`YYYY-MM-DD`. Nothing can add days or subtract one date from another. A status field the user
+maintains (`item.test_status == "expired"`) is the other route. The published wording is in
+`destinations/time-fields.mdx`.
 
 An undefined identifier makes the whole condition evaluate to `false` silently — which is
 why an invented value like `today` produces a rule that never fires and no error message.
 
-Source: `../qrtub/src/lib/page/bindings.ts`, `../qrtub/src/lib/page/context.ts`
+Source: `../qrtub/src/lib/page/bindings.ts`, `../qrtub/src/lib/page/context.ts`,
+`../qrtub/src/lib/page/destination-resolver.ts` (`buildRequestInfo`)
 
 ### Link URL structures
 
 | Type | Format | Example |
 |------|--------|---------|
-| Random | `qrtub.com/r/{5-char}` | `qrtub.com/r/x5fgd` |
-| ID-based | `qrtub.com/{id}` | `qrtub.com/cra001` |
-| Custom | `qrtub.com/{custom}` | `qrtub.com/mylink` |
+| Random | `qrtub.com/{6 letters a–z}` | `qrtub.com/bepjov` |
+| Numbered or ID-based | `qrtub.com/{prefix}{zero-padded number}{suffix}` | `qrtub.com/cra0042tl` |
+| Custom | `qrtub.com/{custom}` | `qrtub.com/boardroom` |
+
+Every type is `qrtub.com/{slug}`, with no prefix. The old `qrtub.com/r/{slug}` form is retired:
+it permanently redirects to `qrtub.com/{slug}` so codes printed before 15 Sep 2026 keep working,
+but never write it in a page. Source: `../qrtub/src/lib/utils/access-links.ts`
+(`getAccessLinkPath`), `../qrtub/src/lib/access-identity/format.ts`, `../qrtub/src/app/r/[id]/page.tsx`.
 
 The domain is always lowercase `qrtub.com`. The product name is `QRtub` — see
 `../qrtub/GLOSSARY.md`.
@@ -499,9 +512,11 @@ represent.
 
 Be precise about what exists, because this page has been wrong in both directions:
 
-- **Print batches are shipped.** Exporting a print list creates a tracked batch with a name,
-  notes, tags and a photo, a Draft → Printing → Printed → Deployed lifecycle, per-code
-  deployment status, the stored CSV, and archiving. See `help/print-batches.mdx`.
+- **Batches are shipped.** Exporting a production list with **Create draft batch** creates a
+  tracked Batch with a name, notes, keywords and a cover photo, a Draft → In Production →
+  Ready → Installed stage, per-code installation status (Ready, Installed, Retired), the
+  stored CSV, and archiving. Batches live under **Tags & Labels**. See
+  `print-batches/overview.mdx`.
 - **Per-item Media is not.** There is no record of what an individual code is printed on —
   no material type, cost, durability or installation location, and no inventory.
 

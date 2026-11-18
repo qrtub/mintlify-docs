@@ -44,7 +44,7 @@ QRtub does not poll Stripe. It updates a team's status when Stripe notifies it o
 
 ## A team without an active subscription is read-only
 
-When a team's status is anything other than `active`, `trialing` or `past_due`, or it has never been subscribed, nobody on it can create or edit Collections, Items, Links or Pages, change a Print Batch, or invite anyone. Its Links keep resolving, so codes already out in the world keep working, and you can still view and export everything, including production lists (each export still records its Print Batch). Membership stays open too: accepting an invitation, leaving, removing a member and revoking an invitation all still work.
+When a team's status is anything other than `active`, `trialing` or `past_due`, or it has never been subscribed, nobody on it can create or edit Collections, Items, Links or Pages, change a Batch, or invite anyone. Its Links keep resolving, so codes already out in the world keep working, and you can still view and export everything, including production lists (each export still records its Batch). Membership stays open too: accepting an invitation, leaving, removing a member and revoking an invitation all still work.
 
 Every member sees a banner across the top of the app: **This team is read-only.** for a team that had a subscription, or **This team is not active yet.** for one that never did. The owner gets a **Choose a plan** link in it; other members are told "Ask the team owner to set one up."
 
